@@ -4,7 +4,7 @@ title:      Hello MWeb
 subtitle:   论第一次使用MWeb
 date:       2020-01-04
 author:     Xiaohan
-header-img: img/post-bg-BJJ.jpg
+header-img: img/post-bg-2015.jpg
 catalog: true
 tags:
     - Hello world
