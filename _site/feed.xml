@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 04 Jan 2020 15:13:14 -0500</pubDate>
-    <lastBuildDate>Sat, 04 Jan 2020 15:13:14 -0500</lastBuildDate>
+    <pubDate>Sat, 04 Jan 2020 21:33:56 -0500</pubDate>
+    <lastBuildDate>Sat, 04 Jan 2020 21:33:56 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -16,6 +16,45 @@
         <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
         <link>http://localhost:4000/2020/01/04/Hello-github/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/01/04/Hello-github/</guid>
+        
+        <category>Hello world</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hello Ulysses</title>
+        <description>&lt;h2 id=&quot;welcome-to-ulysses--overview&quot;&gt;Welcome to Ulysses – Overview&lt;/h2&gt;
+
+&lt;p&gt;Nice to have you here! If you want to learn more about Ulysses’ philosophy and features, you’ve come to the right place.&lt;/p&gt;
+
+&lt;p&gt;If you have used the app on iPad or iPhone before, you can probably skip this introduction and head straight to the Details and Tips section. This is Ulysses after all, you should get around easily.&lt;/p&gt;
+
+&lt;p&gt;If you’re entirely new to this, welcome aboard! Let’s cover some basic concepts to get you started.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;We believe that writing is about content, about what you want to say – not about fancy formatting. This is why writing in Ulysses means writing plain text, but at the same time more than plain text. We call it “plain text enhanced”. We will come back to this later.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ulysses is a single-library app, and all your texts live in this single library. There is no “Open”, no “Save”, no Finder access — it all happens right inside this window.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ulysses fully utilizes iCloud for storing your texts, if you allow it to do so. You can then access your texts from all of your Macs, iPads and iPhones, at home or on the go. They’ll sync automatically as soon (or as long) as you’re connected to the web.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ulysses does not offer WYSIWYG (What You See Is What You Get) styles and formats. Instead, your text will be automatically formatted once you export it, be it as a PDF, a web page, or an ebook.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Most importantly, Ulysses is built to grow and adapt. You can use it as a sophisticated notepad, you can create your next Great American Novel. You can feed your blog, keep everything neatly organized, or mess around at will.&lt;/p&gt;
+
+&lt;p&gt;There is no “right” way to do things here, so make yourself comfortable, and make it your own.&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/01/04/Hello-Ulysses/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Hello-Ulysses/</guid>
         
         <category>Hello world</category>
         
