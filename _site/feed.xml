@@ -5,17 +5,59 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 05 Jan 2020 20:46:22 -0500</pubDate>
-    <lastBuildDate>Sun, 05 Jan 2020 20:46:22 -0500</lastBuildDate>
+    <pubDate>Mon, 06 Jan 2020 17:04:27 -0500</pubDate>
+    <lastBuildDate>Mon, 06 Jan 2020 17:04:27 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>Unbiased Look at Dataset Bias</title>
-        <description>
+        <description>&lt;h3 id=&quot;promise-and-perils-of-visual-dataset&quot;&gt;Promise and Perils of Visual Dataset&lt;/h3&gt;
+&lt;h4 id=&quot;promise&quot;&gt;Promise&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Dataset是CV取得progress的重要因素（甚至超过算法的影响）&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;让CV更像一门实验科学（rather than a black art）&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;perils&quot;&gt;Perils&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;(good finetune + bad approach) 表现好于 (bad finetune + good approach) =&amp;gt; 难以决定new approach的真正表现&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;pay too much attention on “winning” a competition, 但其实提高可能很微小 =&amp;gt; 我们应该将performance number作为一个check，而不是competiton，从而给new approach留出发展的机会&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;the-rise-of-modern-dataset&quot;&gt;The rise of modern dataset&lt;/h3&gt;
+&lt;p&gt;repeat: one dataset -&amp;gt; being rejected due to its perceived biases -&amp;gt; new dataset -&amp;gt; being rejected due to its perceived biases -&amp;gt; …&lt;/p&gt;
+
+&lt;h3 id=&quot;dataset-biases&quot;&gt;Dataset Biases&lt;/h3&gt;
+&lt;p&gt;Instead of representing the visual world, datasets have become closed world onto themselves.&lt;/p&gt;
+&lt;h4 id=&quot;selection-bias&quot;&gt;selection bias&lt;/h4&gt;
+&lt;p&gt;datasets often prefer particular kinds of images (e.g. street scenes, or nature scenes, or images retrieved via Internet keyword searches)&lt;/p&gt;
+&lt;h4 id=&quot;capture-bias&quot;&gt;capture bias&lt;/h4&gt;
+&lt;p&gt;photographers tending to take pictures of objects in similar ways (although this bias might be similar across the different datasets)&lt;/p&gt;
+&lt;h4 id=&quot;category-or-label-bias&quot;&gt;category or label bias&lt;/h4&gt;
+&lt;p&gt;This comes from the fact that semantic categories are often poorly defined, and different labellers may assign differing labels to the same type of object2.&lt;/p&gt;
+&lt;h4 id=&quot;negative-set-bias&quot;&gt;&lt;font color=&quot;#0000dd&quot;&gt;negative set bias&lt;/font&gt;&lt;/h4&gt;
+&lt;p&gt;Datasets define a visual phenomenon (e.g. object, scene, event) not just by what it is (positive instances), but also by what it is not (negative instances). The negative set defines what the dataset considers to be “the rest of the world”. If that set is not representative, or unbalanced, that could produce classifiers that are overconfident and not very discriminative.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;font size=&quot;3&quot;&gt;This is particularly important for classification tasks, where the number of negatives is only a few orders of magnitude larger than the number of positives for each class. For example, if we want to find all images of “boats” in a PASCAL VOC-like classification task setting, how can we make sure that the classifier focuses on the boat itself, and not on the water below, or shore in the distance (after all, all boats are depicted in water)? This is where a large negative set (including rivers, lakes, sea, etc, without boats) is imperative to “push” the lazy classifier into doing the right thing.&lt;/font&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;dataset-value&quot;&gt;Dataset value&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15783472481154.jpg&quot; alt=&quot;-w842&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;ways-to-avoid-biases-during-dataset-construction&quot;&gt;Ways to avoid biases during dataset construction&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=5995347&amp;amp;tag=1&quot;&gt;paper link&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/04/Unbiased-Look-at-Dataset-Bias/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Unbiased-Look-at-Dataset-Bias/</guid>
+        <pubDate>Sun, 05 Jan 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/01/05/Unbiased-Look-at-Dataset-Bias/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/05/Unbiased-Look-at-Dataset-Bias/</guid>
         
         <category>Domain Adaptation</category>
         
@@ -60,11 +102,11 @@
         <description>&lt;center&gt;**Domain Adapatation Paper List**&lt;/center&gt;
 &lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=5995347&quot;&gt;Unbiased look at dataset bias&lt;/a&gt; (CVPR 2011) &lt;a href=&quot;&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=5995347&quot;&gt;Unbiased look at dataset bias&lt;/a&gt; (CVPR 2011) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/04/Unbiased-Look-at-Dataset-Bias/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;domain-adaptation-approaches&quot;&gt;Domain adaptation approaches&lt;/h3&gt;
+&lt;h3 id=&quot;da-approaches&quot;&gt;DA Approaches&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1607.01719.pdf&quot;&gt;Deep CORAL: Correlation Alignment for Deep Domain Adaptation&lt;/a&gt;（Computer Vision – ECCV 2016 Workshops）
     &lt;ul&gt;

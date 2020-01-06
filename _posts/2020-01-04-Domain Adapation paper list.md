@@ -15,7 +15,7 @@ tags:
 1. [Unbiased look at dataset bias](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5995347) (CVPR 2011) [_link_](https://xiaohan-wang.github.io/2020/01/04/Unbiased-Look-at-Dataset-Bias/)
 2. 
 
-### Domain adaptation approaches
+### DA Approaches
 1. [Deep CORAL: Correlation Alignment for Deep Domain Adaptation](https://arxiv.org/pdf/1607.01719.pdf)（Computer Vision – ECCV 2016 Workshops） 
     * classification loss + coral loss  
     * minimize the difference in second-order statistics between the source and target feature activations (CORAL loss)
