@@ -5,9 +5,52 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 06 Jan 2020 17:04:27 -0500</pubDate>
-    <lastBuildDate>Mon, 06 Jan 2020 17:04:27 -0500</lastBuildDate>
+    <pubDate>Tue, 07 Jan 2020 22:55:19 -0500</pubDate>
+    <lastBuildDate>Tue, 07 Jan 2020 22:55:19 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Pixel-Level Domain Transfer</title>
+        <description>&lt;h3 id=&quot;idea&quot;&gt;Idea&lt;/h3&gt;
+&lt;p&gt;transfer images in one domain into another domain&lt;/p&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15784545847019.jpg&quot; alt=&quot;-w744&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;real/fake discriminator: 判断图像是否来自target domain
+&lt;img src=&quot;/img/15784548684906.jpg&quot; alt=&quot;-w727&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;domain (semantic) discriminator: 判断是否和source domain图像具有相同semantic information
+&lt;img src=&quot;/img/15784548946537.jpg&quot; alt=&quot;-w729&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;converter
+ &lt;img src=&quot;/img/15784556404369.jpg&quot; alt=&quot;-w709&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;algorithm&quot;&gt;Algorithm&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15784549145475.jpg&quot; alt=&quot;-w771&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;reflect&quot;&gt;Reflect&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此很难直接使用&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;MSE和discriminator：&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;MSE容易产生blurry images, 因为其假设pixels服从Gaussian distribution&lt;/li&gt;
+      &lt;li&gt;MSE never allow a small geometric miss-alignment&lt;/li&gt;
+      &lt;li&gt;当有关联，但又不容易用公式描述时，可以尝试discriminator&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 07 Jan 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/01/07/Pixel-Level-Domain-Transfer/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/07/Pixel-Level-Domain-Transfer/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
     
       <item>
         <title>Unbiased Look at Dataset Bias</title>
@@ -99,24 +142,28 @@
     
       <item>
         <title>Domain Adaptation Paper List</title>
-        <description>&lt;center&gt;**Domain Adapatation Paper List**&lt;/center&gt;
-&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
+        <description>&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=5995347&quot;&gt;Unbiased look at dataset bias&lt;/a&gt; (CVPR 2011) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/04/Unbiased-Look-at-Dataset-Bias/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=5995347&quot;&gt;Unbiased look at dataset bias&lt;/a&gt; (CVPR 2011) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;da-approaches&quot;&gt;DA Approaches&lt;/h3&gt;
+&lt;h4 id=&quot;imagesfeature-transformation&quot;&gt;images/feature transformation&lt;/h4&gt;
 &lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.07442.pdf&quot;&gt;Pixel-Level Domain Transfer&lt;/a&gt; (ECCV 2016) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;invariant-representation&quot;&gt;invariant representation&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1412.3474.pdf&quot;&gt;Deep Domain Confusion: Maximizing for Domain Invariance&lt;/a&gt; (arXiv 2014)
+    &lt;ul&gt;
+      &lt;li&gt;classification loss + MMD loss&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1607.01719.pdf&quot;&gt;Deep CORAL: Correlation Alignment for Deep Domain Adaptation&lt;/a&gt;（Computer Vision – ECCV 2016 Workshops）
     &lt;ul&gt;
       &lt;li&gt;classification loss + coral loss&lt;/li&gt;
       &lt;li&gt;minimize the difference in second-order statistics between the source and target feature activations (CORAL loss)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1412.3474.pdf&quot;&gt;Deep Domain Confusion: Maximizing for Domain Invariance&lt;/a&gt; (arXiv 2014)
-    &lt;ul&gt;
-      &lt;li&gt;classification loss + MMD loss&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ol&gt;

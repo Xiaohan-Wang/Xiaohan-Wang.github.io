@@ -1,0 +1,28 @@
+I"l<h3 id="idea">Idea</h3>
+<p>transfer images in one domain into another domain</p>
+
+<h3 id="model">Model</h3>
+<p><img src="/img/15784545847019.jpg" alt="-w744" /></p>
+<ul>
+  <li>real/fake discriminator: 判断图像是否来自target domain
+<img src="/img/15784548684906.jpg" alt="-w727" /></li>
+  <li>domain (semantic) discriminator: 判断是否和source domain图像具有相同semantic information
+<img src="/img/15784548946537.jpg" alt="-w729" /></li>
+  <li>converter</li>
+</ul>
+
+<h3 id="algorithm">Algorithm</h3>
+<p><img src="/img/15784549145475.jpg" alt="-w771" /></p>
+
+<h3 id="reflect">Reflect</h3>
+<ol>
+  <li>作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此不能直接使用。</li>
+  <li>MSE和discriminator：
+    <ul>
+      <li>MSE容易产生blurry images, 因为其假设pixels服从Gaussian distribution</li>
+      <li>MSE never allow a small geometric miss-alignment</li>
+      <li>当有关联，但又不容易用公式描述时，可以尝试discriminator</li>
+    </ul>
+  </li>
+</ol>
+:ET

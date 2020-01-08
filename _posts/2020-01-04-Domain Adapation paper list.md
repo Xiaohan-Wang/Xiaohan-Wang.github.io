@@ -18,8 +18,8 @@ tags:
 1. [Pixel-Level Domain Transfer](https://arxiv.org/pdf/1603.07442.pdf) (ECCV 2016) [*link*](https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/)
 
 #### invariant representation
-1. [Deep CORAL: Correlation Alignment for Deep Domain Adaptation](https://arxiv.org/pdf/1607.01719.pdf)（Computer Vision – ECCV 2016 Workshops） 
-    * classification loss + coral loss  
-    * minimize the difference in second-order statistics between the source and target feature activations (CORAL loss)
 1. [Deep Domain Confusion: Maximizing for Domain Invariance](https://arxiv.org/pdf/1412.3474.pdf) (arXiv 2014)  
     * classification loss + MMD loss
+2. [Deep CORAL: Correlation Alignment for Deep Domain Adaptation](https://arxiv.org/pdf/1607.01719.pdf)（Computer Vision – ECCV 2016 Workshops） 
+    * classification loss + coral loss  
+    * minimize the difference in second-order statistics between the source and target feature activations (CORAL loss)
