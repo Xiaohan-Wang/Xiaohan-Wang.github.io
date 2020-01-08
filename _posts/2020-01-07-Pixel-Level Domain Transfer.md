@@ -25,7 +25,7 @@ transfer images in one domain into another domain
 ![-w771](/img/15784549145475.jpg)
 
 
-### Reflect
+### Reflection
 1. 作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此很难直接使用  
 
 2. MSE和discriminator：

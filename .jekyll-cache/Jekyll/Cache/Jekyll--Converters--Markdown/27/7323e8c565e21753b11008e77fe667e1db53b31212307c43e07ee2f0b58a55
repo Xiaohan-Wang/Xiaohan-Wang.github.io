@@ -1,4 +1,4 @@
-I"ß<h3 id="dataset">Dataset</h3>
+I"<h3 id="dataset">Dataset</h3>
 <ol>
   <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5995347">Unbiased look at dataset bias</a> (CVPR 2011) <a href="https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/"><em>link</em></a></li>
 </ol>
@@ -6,7 +6,17 @@
 <h3 id="da-approaches">DA Approaches</h3>
 <h4 id="imagesfeature-transformation">images/feature transformation</h4>
 <ol>
-  <li><a href="https://arxiv.org/pdf/1603.07442.pdf">Pixel-Level Domain Transfer</a> (ECCV 2016) <a href="https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/"><em>link</em></a></li>
+  <li><a href="https://arxiv.org/pdf/1603.07442.pdf">Pixel-Level Domain Transfer</a> (ECCV 2016) <a href="https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/"><em>link</em></a>
+    <ul>
+      <li>need corresponding pairs between two domains</li>
+    </ul>
+  </li>
+  <li><a href="https://arxiv.org/pdf/1612.05424.pdf">Unsupervised Pixelâ€“Level Domain Adaptation
+with Generative Adversarial Networks</a> <a href="https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/"><em>link</em></a>
+    <ul>
+      <li>assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)</li>
+    </ul>
+  </li>
 </ol>
 
 <h4 id="invariant-representation">invariant representation</h4>

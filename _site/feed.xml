@@ -5,9 +5,44 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 07 Jan 2020 22:55:19 -0500</pubDate>
-    <lastBuildDate>Tue, 07 Jan 2020 22:55:19 -0500</lastBuildDate>
+    <pubDate>Wed, 08 Jan 2020 15:09:57 -0500</pubDate>
+    <lastBuildDate>Wed, 08 Jan 2020 15:09:57 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks</title>
+        <description>&lt;h3 id=&quot;idea&quot;&gt;Idea&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;适用于domain间存在low-level difference的domain adaptation&lt;/li&gt;
+  &lt;li&gt;不需要domain间的corresponding pairs&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15785106924617.jpg&quot; alt=&quot;-w857&quot; /&gt;
+&lt;img src=&quot;/img/15785107411179.jpg&quot; alt=&quot;-w50&quot; height=&quot;100px&quot; width=&quot;400px&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;主要由discriminator(D)来学习，classifier(T: task)和content-similarity loss主要用来 stabalize GAN的训练&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;context-similarity loss: PMSE (pairwise mean squared error)
+    &lt;blockquote&gt;
+      &lt;p&gt;This loss allows the model to learn to reproduce the overall shape of the objects being modeled without wasting modeling power on the absolute color or intensity of the inputs, while allowing our adversarial training to change the object in a consistent way.&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;reflection&quot;&gt;Reflection&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;T的参与感觉让domain adaptation变成了迎合任务的domain adaptation, 而不是单纯的pixel-level domain adaptation. (也有优势，在对应任务上应该有更好的表现)&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 08 Jan 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
     
       <item>
         <title>Pixel-Level Domain Transfer</title>
@@ -28,7 +63,7 @@
 &lt;h3 id=&quot;algorithm&quot;&gt;Algorithm&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&quot;/img/15784549145475.jpg&quot; alt=&quot;-w771&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;reflect&quot;&gt;Reflect&lt;/h3&gt;
+&lt;h3 id=&quot;reflection&quot;&gt;Reflection&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;
     &lt;p&gt;作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此很难直接使用&lt;/p&gt;
@@ -150,7 +185,17 @@
 &lt;h3 id=&quot;da-approaches&quot;&gt;DA Approaches&lt;/h3&gt;
 &lt;h4 id=&quot;imagesfeature-transformation&quot;&gt;images/feature transformation&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.07442.pdf&quot;&gt;Pixel-Level Domain Transfer&lt;/a&gt; (ECCV 2016) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.07442.pdf&quot;&gt;Pixel-Level Domain Transfer&lt;/a&gt; (ECCV 2016) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;need corresponding pairs between two domains&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.05424.pdf&quot;&gt;Unsupervised Pixel–Level Domain Adaptation
+with Generative Adversarial Networks&lt;/a&gt; &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h4 id=&quot;invariant-representation&quot;&gt;invariant representation&lt;/h4&gt;

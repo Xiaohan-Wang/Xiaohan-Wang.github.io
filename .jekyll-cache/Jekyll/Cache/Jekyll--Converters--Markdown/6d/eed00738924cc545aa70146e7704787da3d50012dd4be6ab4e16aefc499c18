@@ -1,4 +1,4 @@
-I"�<h3 id="idea">Idea</h3>
+I"�<h3 id="idea">Idea</h3>
 <p>transfer images in one domain into another domain</p>
 
 <h3 id="model">Model</h3>
@@ -15,10 +15,13 @@
 <h3 id="algorithm">Algorithm</h3>
 <p><img src="/img/15784549145475.jpg" alt="-w771" /></p>
 
-<h3 id="reflect">Reflect</h3>
+<h3 id="reflection">Reflection</h3>
 <ol>
-  <li>作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此很难直接使用</li>
-  <li>MSE和discriminator：
+  <li>
+    <p>作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此很难直接使用</p>
+  </li>
+  <li>
+    <p>MSE和discriminator：</p>
     <ul>
       <li>MSE容易产生blurry images, 因为其假设pixels服从Gaussian distribution</li>
       <li>MSE never allow a small geometric miss-alignment</li>

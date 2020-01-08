@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Domain Adaptation Paper List - Xiaohan's Blog</title>
+    <title>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/04/Domain-Adapation-paper-list/">
+    <link rel="canonical" href="http://localhost:4000/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -175,15 +175,13 @@
                         
                         <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
                         
-                        <a class="tag" href="/tags/#Paper List" title="Paper List">Paper List</a>
-                        
                     </div>
-                    <h1>Domain Adaptation Paper List</h1>
+                    <h1>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks</h1>
                     
                     
-                    <h2 class="subheading">持续更新中</h2>
+                    <h2 class="subheading">CVPR 2017</h2>
                     
-                    <span class="meta">Posted by Xiaohan on January 4, 2020</span>
+                    <span class="meta">Posted by Xiaohan on January 8, 2020</span>
                 </div>
             </div>
         </div>
@@ -201,40 +199,28 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="dataset">Dataset</h3>
-<ol>
-  <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5995347">Unbiased look at dataset bias</a> (CVPR 2011) <a href="https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/"><em>link</em></a></li>
-</ol>
+				<h3 id="idea">Idea</h3>
+<ul>
+  <li>适用于domain间存在low-level difference的domain adaptation</li>
+  <li>不需要domain间的corresponding pairs</li>
+</ul>
 
-<h3 id="da-approaches">DA Approaches</h3>
-<h4 id="imagesfeature-transformation">images/feature transformation</h4>
-<ol>
-  <li><a href="https://arxiv.org/pdf/1603.07442.pdf">Pixel-Level Domain Transfer</a> (ECCV 2016) <a href="https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/"><em>link</em></a>
-    <ul>
-      <li>need corresponding pairs between two domains</li>
-    </ul>
-  </li>
-  <li><a href="https://arxiv.org/pdf/1612.05424.pdf">Unsupervised Pixel–Level Domain Adaptation
-with Generative Adversarial Networks</a> <a href="https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/"><em>link</em></a>
-    <ul>
-      <li>assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)</li>
-    </ul>
-  </li>
-</ol>
+<h3 id="model">Model</h3>
+<p><img src="/img/15785106924617.jpg" alt="-w857" />
+<img src="/img/15785107411179.jpg" alt="-w50" height="100px" width="400px" /></p>
 
-<h4 id="invariant-representation">invariant representation</h4>
+<p>主要由discriminator(D)来学习，classifier(T: task)和content-similarity loss主要用来 stabalize GAN的训练</p>
+<ul>
+  <li>context-similarity loss: PMSE (pairwise mean squared error)
+    <blockquote>
+      <p>This loss allows the model to learn to reproduce the overall shape of the objects being modeled without wasting modeling power on the absolute color or intensity of the inputs, while allowing our adversarial training to change the object in a consistent way.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="reflection">Reflection</h3>
 <ol>
-  <li><a href="https://arxiv.org/pdf/1412.3474.pdf">Deep Domain Confusion: Maximizing for Domain Invariance</a> (arXiv 2014)
-    <ul>
-      <li>classification loss + MMD loss</li>
-    </ul>
-  </li>
-  <li><a href="https://arxiv.org/pdf/1607.01719.pdf">Deep CORAL: Correlation Alignment for Deep Domain Adaptation</a>（Computer Vision – ECCV 2016 Workshops）
-    <ul>
-      <li>classification loss + coral loss</li>
-      <li>minimize the difference in second-order statistics between the source and target feature activations (CORAL loss)</li>
-    </ul>
-  </li>
+  <li>T的参与感觉让domain adaptation变成了迎合任务的domain adaptation, 而不是单纯的pixel-level domain adaptation. (也有优势，在对应任务上应该有更好的表现)</li>
 </ol>
 
 
@@ -242,13 +228,13 @@ with Generative Adversarial Networks</a> <a href="https://xiaohan-wang.github.io
 
 <!--                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/04/Hello-MWeb/" data-toggle="tooltip" data-placement="top" title="Hello MWeb">
-                        Next<br>
-                        <span>Hello MWeb</span>
-                        </a>previous
+                    <li class="previous">
+                        <a href="/2020/01/07/Pixel-Level-Domain-Transfer/" data-toggle="tooltip" data-placement="top" title="Pixel-Level Domain Transfer">
+                        Previous<br>
+                        <span>Pixel-Level Domain Transfer</span>
+                        </a>
                     </li>
+                    
                     
                 </ul> -->
 
