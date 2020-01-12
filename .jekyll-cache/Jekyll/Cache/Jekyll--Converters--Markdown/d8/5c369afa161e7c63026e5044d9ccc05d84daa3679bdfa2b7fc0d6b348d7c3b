@@ -1,4 +1,4 @@
-I"<h3 id="dataset">Dataset</h3>
+I")<h3 id="dataset">Dataset</h3>
 <ol>
   <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5995347">Unbiased look at dataset bias</a> (CVPR 2011) <a href="https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/"><em>link</em></a></li>
 </ol>
@@ -12,7 +12,7 @@
     </ul>
   </li>
   <li><a href="https://arxiv.org/pdf/1612.05424.pdf">Unsupervised Pixel–Level Domain Adaptation
-with Generative Adversarial Networks</a> <a href="https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/"><em>link</em></a>
+with Generative Adversarial Networks</a> (CVPR 2017) <a href="https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/"><em>link</em></a>
     <ul>
       <li>assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)</li>
     </ul>

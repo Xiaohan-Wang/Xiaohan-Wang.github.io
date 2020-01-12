@@ -5,9 +5,156 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 08 Jan 2020 15:09:57 -0500</pubDate>
-    <lastBuildDate>Wed, 08 Jan 2020 15:09:57 -0500</lastBuildDate>
+    <pubDate>Sat, 11 Jan 2020 20:58:56 -0500</pubDate>
+    <lastBuildDate>Sat, 11 Jan 2020 20:58:56 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>python各类图像库</title>
+        <description>&lt;h3 id=&quot;short-version&quot;&gt;short version&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;类型&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;顺序&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;size&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;scale&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;cv2&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;numpy&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;BGR&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;(h,w,c)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;255(uint8)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;PIL&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;Image/numpy&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;RGB&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;(w,h) / (h,w,c)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;- / 255(uint8)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;skimage&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;numpy&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;RGB&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;(h,w,c)&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;rgb:255(uint8) / gray:1(float)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;cv2&quot;&gt;cv2&lt;/h3&gt;
+&lt;h4 id=&quot;ioshow&quot;&gt;i/o/show&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#读入图像  
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+  
+&lt;span class=&quot;c1&quot;&gt;#显示图像  
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitkey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
+
+&lt;span class=&quot;c1&quot;&gt;#保存图像  
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imwrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'test.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
+
+&lt;span class=&quot;c1&quot;&gt;#归一化
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;font size=&quot;3&quot;&gt;`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)&lt;/font&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;attribute&quot;&gt;attribute&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;numpy array&lt;/li&gt;
+  &lt;li&gt;默认读入彩色图像
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gray = cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;channel顺序：BGR
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;im2 = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;img.shape: (h,w,c)&lt;/li&gt;
+  &lt;li&gt;img.dtype: uint8(255)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;pil&quot;&gt;PIL&lt;/h3&gt;
+&lt;h4 id=&quot;ioshow-1&quot;&gt;i/o/show&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;PIL&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#读入图像
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#显示图像
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#保存图像
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'2.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;image对象&quot;&gt;Image对象&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;PIL读入图片后生成Image对象&lt;/li&gt;
+  &lt;li&gt;img.size: (w, h)&lt;/li&gt;
+  &lt;li&gt;img.mode: 灰度L / 真彩色RGB&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;image转numpy矩阵&quot;&gt;Image转numpy矩阵&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;arr = np.array(img) &lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;channel顺序：RGB&lt;/li&gt;
+  &lt;li&gt;arr.shape: (h,w,c)&lt;/li&gt;
+  &lt;li&gt;arr.dtype: uint8 (255)&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new_img = Image.fromarray(arr)&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;skimage&quot;&gt;skimage&lt;/h3&gt;
+&lt;h4 id=&quot;ioshow-2&quot;&gt;i/o/show&lt;/h4&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;skimage&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#读入图像
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#显示图像
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;#保存图像
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imsave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h4 id=&quot;attribute-1&quot;&gt;attribute&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;numpy array&lt;/li&gt;
+  &lt;li&gt;channel顺序：RGB&lt;/li&gt;
+  &lt;li&gt;img.shape: (h,w,c)&lt;/li&gt;
+  &lt;li&gt;img.dtype: RGB uint8 (255) / gray float (1)&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 08 Jan 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/01/08/python%E5%90%84%E7%B1%BB%E5%9B%BE%E5%83%8F%E5%BA%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/08/python%E5%90%84%E7%B1%BB%E5%9B%BE%E5%83%8F%E5%BA%93/</guid>
+        
+        <category>python</category>
+        
+        
+      </item>
     
       <item>
         <title>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks</title>
@@ -143,39 +290,6 @@
       </item>
     
       <item>
-        <title>Hello github.io</title>
-        <description>&lt;p&gt;Hello github.io!&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/04/Hello-github_page/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Hello-github_page/</guid>
-        
-        <category>Hello world</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Hello MWeb</title>
-        <description>&lt;h2 id=&quot;welcome-to-mweb&quot;&gt;Welcome to MWeb&lt;/h2&gt;
-&lt;h3 id=&quot;hi-this-is-mweb&quot;&gt;Hi, this is MWeb&lt;/h3&gt;
-&lt;p&gt;here to test saving image!
-&lt;img src=&quot;/img/15781962662495.jpg&quot; alt=&quot;-w1440&quot; /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;here-to-test-category&quot;&gt;here to test category&lt;/h4&gt;
-&lt;p&gt;how does category work?&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/04/Hello-MWeb/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Hello-MWeb/</guid>
-        
-        <category>Hello world</category>
-        
-        
-      </item>
-    
-      <item>
         <title>Domain Adaptation Paper List</title>
         <description>&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
 &lt;ol&gt;
@@ -191,7 +305,7 @@
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.05424.pdf&quot;&gt;Unsupervised Pixel–Level Domain Adaptation
-with Generative Adversarial Networks&lt;/a&gt; &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
+with Generative Adversarial Networks&lt;/a&gt; (CVPR 2017) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
     &lt;ul&gt;
       &lt;li&gt;assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)&lt;/li&gt;
     &lt;/ul&gt;

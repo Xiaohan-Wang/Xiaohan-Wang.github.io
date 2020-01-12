@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Hello github.io - Xiaohan's Blog</title>
+    <title>python各类图像库 - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/04/Hello-github_page/">
+    <link rel="canonical" href="http://localhost:4000/2020/01/08/python%E5%90%84%E7%B1%BB%E5%9B%BE%E5%83%8F%E5%BA%93/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -173,15 +173,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Hello world" title="Hello world">Hello world</a>
+                        <a class="tag" href="/tags/#python" title="python">python</a>
                         
                     </div>
-                    <h1>Hello github.io</h1>
+                    <h1>python各类图像库</h1>
                     
                     
-                    <h2 class="subheading">论第一次使用github.io</h2>
+                    <h2 class="subheading">cv2-PIL-skimage-matplotlib</h2>
                     
-                    <span class="meta">Posted by Xiaohan on January 4, 2020</span>
+                    <span class="meta">Posted by Xiaohan on January 8, 2020</span>
                 </div>
             </div>
         </div>
@@ -199,7 +199,140 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>Hello github.io!</p>
+				<h3 id="short-version">short version</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">类型</th>
+      <th style="text-align: right">顺序</th>
+      <th style="text-align: right">size</th>
+      <th style="text-align: right">scale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">cv2</td>
+      <td style="text-align: right">numpy</td>
+      <td style="text-align: right">BGR</td>
+      <td style="text-align: right">(h,w,c)</td>
+      <td style="text-align: right">255(uint8)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">PIL</td>
+      <td style="text-align: right">Image/numpy</td>
+      <td style="text-align: right">RGB</td>
+      <td style="text-align: right">(w,h) / (h,w,c)</td>
+      <td style="text-align: right">- / 255(uint8)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">skimage</td>
+      <td style="text-align: right">numpy</td>
+      <td style="text-align: right">RGB</td>
+      <td style="text-align: right">(h,w,c)</td>
+      <td style="text-align: right">rgb:255(uint8) / gray:1(float)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="cv2">cv2</h3>
+<h4 id="ioshow">i/o/show</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c1">#读入图像  
+</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span> 
+  
+<span class="c1">#显示图像  
+</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">'src'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitkey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+
+<span class="c1">#保存图像  
+</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">'test.jpg'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
+
+<span class="c1">#归一化
+</span>
+<span class="n">img3</span> <span class="o">=</span> <span class="n">img3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
+</code></pre></div></div>
+<blockquote>
+  <font size="3">`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)</font>
+</blockquote>
+
+<h4 id="attribute">attribute</h4>
+<ul>
+  <li>numpy array</li>
+  <li>默认读入彩色图像
+    <ul>
+      <li><code class="highlighter-rouge">gray = cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE)</code></li>
+    </ul>
+  </li>
+  <li>channel顺序：BGR
+    <ul>
+      <li><code class="highlighter-rouge">im2 = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)</code></li>
+    </ul>
+  </li>
+  <li>img.shape: (h,w,c)</li>
+  <li>img.dtype: uint8(255)</li>
+</ul>
+
+<h3 id="pil">PIL</h3>
+<h4 id="ioshow-1">i/o/show</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1">#读入图像
+</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span>
+
+<span class="c1">#显示图像
+</span>
+<span class="n">img</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#保存图像
+</span>
+<span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'2.jpg'</span><span class="p">)</span>
+</code></pre></div></div>
+<h4 id="image对象">Image对象</h4>
+<ul>
+  <li>PIL读入图片后生成Image对象</li>
+  <li>img.size: (w, h)</li>
+  <li>img.mode: 灰度L / 真彩色RGB</li>
+</ul>
+
+<h4 id="image转numpy矩阵">Image转numpy矩阵</h4>
+<ul>
+  <li><code class="highlighter-rouge">arr = np.array(img) </code></li>
+  <li>channel顺序：RGB</li>
+  <li>arr.shape: (h,w,c)</li>
+  <li>arr.dtype: uint8 (255)</li>
+  <li><code class="highlighter-rouge">new_img = Image.fromarray(arr)</code></li>
+</ul>
+
+<h3 id="skimage">skimage</h3>
+<h4 id="ioshow-2">i/o/show</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+
+<span class="c1">#读入图像
+</span>
+<span class="n">im</span><span class="o">=</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span>
+
+<span class="c1">#显示图像
+</span>
+<span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="c1">#保存图像
+</span>
+<span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+</code></pre></div></div>
+<h4 id="attribute-1">attribute</h4>
+<ul>
+  <li>numpy array</li>
+  <li>channel顺序：RGB</li>
+  <li>img.shape: (h,w,c)</li>
+  <li>img.dtype: RGB uint8 (255) / gray float (1)</li>
+</ul>
 
 
 
@@ -208,19 +341,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/04/Hello-MWeb/" data-toggle="tooltip" data-placement="top" title="Hello MWeb">
+                        <a href="/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/" data-toggle="tooltip" data-placement="top" title="Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks">
                         Previous<br>
-                        <span>Hello MWeb</span>
+                        <span>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/05/Unbiased-Look-at-Dataset-Bias/" data-toggle="tooltip" data-placement="top" title="Unbiased Look at Dataset Bias">
-                        Next<br>
-                        <span>Unbiased Look at Dataset Bias</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
