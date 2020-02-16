@@ -5,9 +5,105 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 11 Jan 2020 20:58:56 -0500</pubDate>
-    <lastBuildDate>Sat, 11 Jan 2020 20:58:56 -0500</lastBuildDate>
+    <pubDate>Sun, 16 Feb 2020 01:52:12 -0500</pubDate>
+    <lastBuildDate>Sun, 16 Feb 2020 01:52:12 -0500</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>A Few Useful Things to Know About Machine Learning</title>
+        <description>&lt;h2 id=&quot;12-trick-lessons-in-ml&quot;&gt;12 trick lessons in ML&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-learning-algorithm--representation--evaluation--optimization&quot;&gt;1. learning algorithm = representation + evaluation + optimization&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;representation&lt;/strong&gt;:  choosing a representation for a learner is tantamount to choosing the hypothesis space&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;evaluation&lt;/strong&gt;: evaluation function&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;optimization&lt;/strong&gt;: the method to search among the hypothesis space&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15817081275431.jpg&quot; alt=&quot;-w801&quot; /&gt;
+三者同样重要&lt;/p&gt;
+
+&lt;h3 id=&quot;2-generalization-counts&quot;&gt;2. generalization counts&lt;/h3&gt;
+&lt;p&gt;strict separation between training and test set.&lt;/p&gt;
+
+&lt;h3 id=&quot;3-data-alone-is-not-enough&quot;&gt;3. data alone is not enough&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;data alone is not enough, no matter how much of it you have. (e.g. Consider learning a Boolean function of (say) 100 variables from a million examples. There are 2^100 − 10^6 examples whose classes you don’t know.)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;every learner must embody some &lt;strong&gt;knowledge or assumption&lt;/strong&gt; beyond the data it’s given in order to generalize beyond it.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;learners are like lever: less knowledge/assumption + (data) -&amp;gt; useful results. But it still need more than zero input knowledge to work.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;corollary: one of the key criteria for choosing a representation is which kinds of knowledge are easily expressed in it.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;4-overfitting&quot;&gt;4. overfitting&lt;/h3&gt;
+&lt;p&gt;if the knowledge and data we have are not sufficient to completely determine the correct classifier -&amp;gt; risk of overfitting&lt;/p&gt;
+
+&lt;p&gt;Note: A common misconception about overfitting is that it is caused by noise, but severe overfitting can occur even in the absence of noise.&lt;/p&gt;
+
+&lt;h3 id=&quot;5-high-dimensions&quot;&gt;5. high dimensions&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;curse of dimensionality:  our intuition, which come from a three-dimensional world, often do not apply in high-dimensional ones. Naively, one might think that gathering more features never hurts, since at worst they provide no new information about the class. But in fact their benefits may be outweighed by the curse of dimensionality.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;blessing of non-uniformity: In most applications examples are not spread uniformly throughout the instance space, but are concentrated on or near a lower-dimensional manifold.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;6-theoretical-guarantees&quot;&gt;6. theoretical guarantees&lt;/h3&gt;
+&lt;p&gt;The main role of theoretical guarantees in machine learning
+is not as a criterion for practical decisions, but as a source of
+understanding and driving force for algorithm design. In this
+capacity, they are quite useful; indeed, the close interplay
+of theory and practice is one of the main reasons machine
+learning has made so much progress over the years. But
+caveat emptor: learning is a complex phenomenon, and just
+because a learner has a theoretical justification and works in
+practice doesn’t mean the former is the reason for the latter.&lt;/p&gt;
+
+&lt;h3 id=&quot;7-feature-engineering&quot;&gt;7. feature engineering&lt;/h3&gt;
+&lt;p&gt;Often, the raw data is not in a form that is amenable to learning, but you can construct features from it that are.&lt;/p&gt;
+
+&lt;p&gt;Note: features that look irrelevant in isolation may be relevant in combination. For example, if the class is an XOR of k input features, each of them by itself carries no information about the class.&lt;/p&gt;
+
+&lt;h3 id=&quot;8-more-data-beats-a-cleverer-algorithm&quot;&gt;8. MORE DATA BEATS A CLEVERER ALGORITHM&lt;/h3&gt;
+&lt;p&gt;As a rule of thumb, a dumb algorithm with lots and lots of data beats a clever one with modest amounts of it.&lt;/p&gt;
+
+&lt;h3 id=&quot;9-learn-many-models-not-just-one&quot;&gt;9. LEARN MANY MODELS, NOT JUST ONE&lt;/h3&gt;
+&lt;p&gt;model ensembles (researchers noticed that, if instead
+of selecting the best variation found, we combine many variations, the results are better—often much better—and at
+little extra effort for the user)&lt;/p&gt;
+
+&lt;h3 id=&quot;10--simplicity-does-not-imply-accuracy&quot;&gt;10.  SIMPLICITY DOES NOT IMPLY ACCURACY&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;contrary to intuition, there is no necessary connection between the number of parameters of a model and its tendency to overfit.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;the size of the hypothesis space is only a rough guide to what really matters for relating training and test error: the procedure by which a hypothesis is chosen.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;11-representable-does-not-imply-learnable&quot;&gt;11. REPRESENTABLE DOES NOT IMPLY LEARNABLE&lt;/h3&gt;
+&lt;p&gt;Just because a function can be represented does not mean it can be learned (e.g.  if the hypothesis space has many local optima of the evaluation function, as is often the case, the learner may not find the true function even if it is representable.). Therefore the key question is not “Can it be represented?”, to which the answer is often trivial, but “Can it be learned?”&lt;/p&gt;
+
+&lt;h3 id=&quot;12-correlation-does-not-imply-causation&quot;&gt;12. CORRELATION DOES NOT IMPLY CAUSATION&lt;/h3&gt;
+</description>
+        <pubDate>Tue, 11 Feb 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/02/11/A-Few-Useful-Things-to-Know-About-Machine-Learning/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/02/11/A-Few-Useful-Things-to-Know-About-Machine-Learning/</guid>
+        
+        <category>ML</category>
+        
+        
+      </item>
     
       <item>
         <title>python各类图像库</title>
@@ -52,22 +148,21 @@
 &lt;h4 id=&quot;ioshow&quot;&gt;i/o/show&lt;/h4&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
 
-&lt;span class=&quot;c1&quot;&gt;#读入图像  
+&lt;span class=&quot;c1&quot;&gt;#读入图像
 &lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
   
-&lt;span class=&quot;c1&quot;&gt;#显示图像  
+&lt;span class=&quot;c1&quot;&gt;#显示图像    
 &lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
 &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitkey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
 
-&lt;span class=&quot;c1&quot;&gt;#保存图像  
-&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#保存图像   
+&lt;/span&gt; 
 &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imwrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'test.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
 
-&lt;span class=&quot;c1&quot;&gt;#归一化
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#归一化  
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;blockquote&gt;
   &lt;font size=&quot;3&quot;&gt;`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)&lt;/font&gt;
@@ -290,6 +385,29 @@
       </item>
     
       <item>
+        <title>Distribution Model</title>
+        <description>&lt;h3 id=&quot;beta-distribution&quot;&gt;Beta Distribution&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15788880752662.jpg&quot; alt=&quot;-w837&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15798135759496.jpg&quot; alt=&quot;-w914&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;gamma-distribution&quot;&gt;Gamma Distribution&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15798134381076.jpg&quot; alt=&quot;-w911&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;double-exponential-distribution&quot;&gt;Double exponential distribution&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15789341430238.jpg&quot; alt=&quot;-w396&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2020/01/04/Beta-distribution/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Beta-distribution/</guid>
+        
+        <category>Statistics</category>
+        
+        
+      </item>
+    
+      <item>
         <title>Domain Adaptation Paper List</title>
         <description>&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
 &lt;ol&gt;
@@ -297,20 +415,30 @@
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;da-approaches&quot;&gt;DA Approaches&lt;/h3&gt;
-&lt;h4 id=&quot;imagesfeature-transformation&quot;&gt;images/feature transformation&lt;/h4&gt;
+&lt;h4 id=&quot;images-mapping&quot;&gt;images mapping&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.07442.pdf&quot;&gt;Pixel-Level Domain Transfer&lt;/a&gt; (ECCV 2016) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
     &lt;ul&gt;
-      &lt;li&gt;need corresponding pairs between two domains&lt;/li&gt;
+      &lt;li&gt;need corresponding pairs between two domains (essentially supervised)&lt;/li&gt;
+      &lt;li&gt;但认为MSE never allow a small geometric miss-alignment，因此使用discriminator来利用supervised information&lt;/li&gt;
+      &lt;li&gt;未提及gt的变化&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.05424.pdf&quot;&gt;Unsupervised Pixel–Level Domain Adaptation
 with Generative Adversarial Networks&lt;/a&gt; (CVPR 2017) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
     &lt;ul&gt;
       &lt;li&gt;assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)&lt;/li&gt;
+      &lt;li&gt;未提及gt的变化&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.07828.pdf&quot;&gt;Learning from Simulated and Unsupervised Images through Adversarial Training&lt;/a&gt; （CVPR 2017）
+    &lt;ul&gt;
+      &lt;li&gt;gt不变&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h4 id=&quot;feature-mapping&quot;&gt;feature mapping&lt;/h4&gt;
 
 &lt;h4 id=&quot;invariant-representation&quot;&gt;invariant representation&lt;/h4&gt;
 &lt;ol&gt;

@@ -1,23 +1,33 @@
-I")<h3 id="dataset">Dataset</h3>
+I"�<h3 id="dataset">Dataset</h3>
 <ol>
   <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5995347">Unbiased look at dataset bias</a> (CVPR 2011) <a href="https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/"><em>link</em></a></li>
 </ol>
 
 <h3 id="da-approaches">DA Approaches</h3>
-<h4 id="imagesfeature-transformation">images/feature transformation</h4>
+<h4 id="images-mapping">images mapping</h4>
 <ol>
   <li><a href="https://arxiv.org/pdf/1603.07442.pdf">Pixel-Level Domain Transfer</a> (ECCV 2016) <a href="https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/"><em>link</em></a>
     <ul>
-      <li>need corresponding pairs between two domains</li>
+      <li>need corresponding pairs between two domains (essentially supervised)</li>
+      <li>但认为MSE never allow a small geometric miss-alignment，因此使用discriminator来利用supervised information</li>
+      <li>未提及gt的变化</li>
     </ul>
   </li>
   <li><a href="https://arxiv.org/pdf/1612.05424.pdf">Unsupervised Pixel–Level Domain Adaptation
 with Generative Adversarial Networks</a> (CVPR 2017) <a href="https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/"><em>link</em></a>
     <ul>
       <li>assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)</li>
+      <li>未提及gt的变化</li>
+    </ul>
+  </li>
+  <li><a href="https://arxiv.org/pdf/1612.07828.pdf">Learning from Simulated and Unsupervised Images through Adversarial Training</a> （CVPR 2017）
+    <ul>
+      <li>gt不变</li>
     </ul>
   </li>
 </ol>
+
+<h4 id="feature-mapping">feature mapping</h4>
 
 <h4 id="invariant-representation">invariant representation</h4>
 <ol>

@@ -1,0 +1,85 @@
+I"x<h2 id="12-trick-lessons-in-ml">12 trick lessons in ML</h2>
+
+<h3 id="1-learning-algorithm--representation--evaluation--optimization">1. learning algorithm = representation + evaluation + optimization</h3>
+<p><strong>representation</strong>:  choosing a representation for a learner is tantamount to choosing the hypothesis space</p>
+
+<p><strong>evaluation</strong>: evaluation function</p>
+
+<p><strong>optimization</strong>: the method to search among the hypothesis space</p>
+
+<p><img src="/img/15817081275431.jpg" alt="-w801" />
+三者同样重要</p>
+
+<h3 id="2-generalization-counts">2. generalization counts</h3>
+<p>strict separation between training and test set.</p>
+
+<h3 id="3-data-alone-is-not-enough">3. data alone is not enough</h3>
+<ol>
+  <li>
+    <p>data alone is not enough, no matter how much of it you have. (e.g. Consider learning a Boolean function of (say) 100 variables from a million examples. There are 2^100 − 10^6 examples whose classes you don’t know.)</p>
+  </li>
+  <li>
+    <p>every learner must embody some <strong>knowledge or assumption</strong> beyond the data it’s given in order to generalize beyond it.</p>
+  </li>
+  <li>
+    <p>learners are like lever: less knowledge/assumption + (data) -&gt; useful results. But it still need more than zero input knowledge to work.</p>
+  </li>
+  <li>
+    <p>corollary: one of the key criteria for choosing a representation is which kinds of knowledge are easily expressed in it.</p>
+  </li>
+</ol>
+
+<h3 id="4-overfitting">4. overfitting</h3>
+<p>if the knowledge and data we have are not sufficient to completely determine the correct classifier -&gt; risk of overfitting</p>
+
+<p>Note: A common misconception about overfitting is that it is caused by noise, but severe overfitting can occur even in the absence of noise.</p>
+
+<h3 id="5-high-dimensions">5. high dimensions</h3>
+<ol>
+  <li>
+    <p>curse of dimensionality:  our intuition, which come from a three-dimensional world, often do not apply in high-dimensional ones. Naively, one might think that gathering more features never hurts, since at worst they provide no new information about the class. But in fact their benefits may be outweighed by the curse of dimensionality.</p>
+  </li>
+  <li>
+    <p>blessing of non-uniformity: In most applications examples are not spread uniformly throughout the instance space, but are concentrated on or near a lower-dimensional manifold.</p>
+  </li>
+</ol>
+
+<h3 id="6-theoretical-guarantees">6. theoretical guarantees</h3>
+<p>The main role of theoretical guarantees in machine learning
+is not as a criterion for practical decisions, but as a source of
+understanding and driving force for algorithm design. In this
+capacity, they are quite useful; indeed, the close interplay
+of theory and practice is one of the main reasons machine
+learning has made so much progress over the years. But
+caveat emptor: learning is a complex phenomenon, and just
+because a learner has a theoretical justification and works in
+practice doesn’t mean the former is the reason for the latter.</p>
+
+<h3 id="7-feature-engineering">7. feature engineering</h3>
+<p>Often, the raw data is not in a form that is amenable to learning, but you can construct features from it that are.</p>
+
+<p>Note: features that look irrelevant in isolation may be relevant in combination. For example, if the class is an XOR of k input features, each of them by itself carries no information about the class.</p>
+
+<h3 id="8-more-data-beats-a-cleverer-algorithm">8. MORE DATA BEATS A CLEVERER ALGORITHM</h3>
+<p>As a rule of thumb, a dumb algorithm with lots and lots of data beats a clever one with modest amounts of it.</p>
+
+<h3 id="9-learn-many-models-not-just-one">9. LEARN MANY MODELS, NOT JUST ONE</h3>
+<p>model ensembles (researchers noticed that, if instead
+of selecting the best variation found, we combine many variations, the results are better—often much better—and at
+little extra effort for the user)</p>
+
+<h3 id="10--simplicity-does-not-imply-accuracy">10.  SIMPLICITY DOES NOT IMPLY ACCURACY</h3>
+<ol>
+  <li>
+    <p>contrary to intuition, there is no necessary connection between the number of parameters of a model and its tendency to overfit.</p>
+  </li>
+  <li>
+    <p>the size of the hypothesis space is only a rough guide to what really matters for relating training and test error: the procedure by which a hypothesis is chosen.</p>
+  </li>
+</ol>
+
+<h3 id="11-representable-does-not-imply-learnable">11. REPRESENTABLE DOES NOT IMPLY LEARNABLE</h3>
+<p>Just because a function can be represented does not mean it can be learned (e.g.  if the hypothesis space has many local optima of the evaluation function, as is often the case, the learner may not find the true function even if it is representable.). Therefore the key question is not “Can it be represented?”, to which the answer is often trivial, but “Can it be learned?”</p>
+
+<h3 id="12-correlation-does-not-imply-causation">12. CORRELATION DOES NOT IMPLY CAUSATION</h3>
+:ET

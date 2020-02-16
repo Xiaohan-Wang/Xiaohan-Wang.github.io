@@ -1,4 +1,4 @@
-I"�<h3 id="short-version">short version</h3>
+I"�<h3 id="short-version">short version</h3>
 
 <table>
   <thead>
@@ -39,22 +39,21 @@
 <h4 id="ioshow">i/o/show</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
 
-<span class="c1">#读入图像  
+<span class="c1">#读入图像
 </span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span> 
   
-<span class="c1">#显示图像  
+<span class="c1">#显示图像    
 </span>
 <span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">'src'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
 <span class="n">cv2</span><span class="o">.</span><span class="n">waitkey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
 
-<span class="c1">#保存图像  
-</span>
+<span class="c1">#保存图像   
+</span> 
 <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">'test.jpg'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
 
-<span class="c1">#归一化
-</span>
-<span class="n">img3</span> <span class="o">=</span> <span class="n">img3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
+<span class="c1">#归一化  
+</span><span class="n">img3</span> <span class="o">=</span> <span class="n">img3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
 </code></pre></div></div>
 <blockquote>
   <font size="3">`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)</font>
