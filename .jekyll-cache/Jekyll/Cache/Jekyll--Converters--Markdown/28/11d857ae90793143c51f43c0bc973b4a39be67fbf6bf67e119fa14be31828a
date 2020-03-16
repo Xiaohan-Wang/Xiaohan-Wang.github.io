@@ -1,0 +1,43 @@
+I"F<h3 id="take-away-message">Take Away Message</h3>
+<ol>
+  <li>Domain alignment layers which implement feature whitening for the purpose of matching source and target feature distributions and increases the smoothness of the loss landscape.</li>
+  <li>Min-Entropy Consensus loss regularizes training while avoiding the adoption of many user-defined hyper-parameters</li>
+</ol>
+
+<h3 id="model">Model</h3>
+<p><img src="/img/15843077382687.jpg" alt="-w752" /></p>
+
+<p>DA的四种方法：</p>
+<ol>
+  <li>Correlation Alignment paradigm</li>
+  <li>domain-specific alignment layers</li>
+  <li>entropy minimization distribution</li>
+  <li>consistency-enforcing paradigm</li>
+</ol>
+
+<p>由 12 -&gt; DWTL layer<br />
+由 34 -&gt; MEC loss</p>
+
+<p>source: cross-entropy loss
+<img src="/img/15843177084504.jpg" alt="-w200" />
+target: MEC loss
+<img src="/img/15843177196984.jpg" alt="-w300" />
+final loss:
+<img src="/img/15843177315198.jpg" alt="-w300" /></p>
+<ol>
+  <li>要求在source上表现好</li>
+  <li>要求在target上对perturbation具有robustness，同时对结果high confidence</li>
+</ol>
+
+<h3 id="result">Result</h3>
+<ol>
+  <li>digit classification</li>
+  <li>object recognition</li>
+</ol>
+
+<h3 id="potential-improvement">Potential Improvement</h3>
+<ol>
+  <li>try full “coloring”</li>
+  <li>MEC loss中pseudo label的选择方式？</li>
+</ol>
+:ET

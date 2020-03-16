@@ -14,6 +14,8 @@ tags:
 1. [Unbiased look at dataset bias](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=5995347) (CVPR 2011) [*link*](https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/)
 
 ### DA Approaches
+![-w870](/img/15842344918937.jpg)
+
 #### images mapping
 1. [Pixel-Level Domain Transfer](https://arxiv.org/pdf/1603.07442.pdf) (ECCV 2016) [*link*](https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/)
     * need corresponding pairs between two domains (essentially supervised)
@@ -28,9 +30,9 @@ with Generative Adversarial Networks](https://arxiv.org/pdf/1612.05424.pdf) (CVP
 1. [Learning from Simulated and Unsupervised Images through Adversarial Training](https://arxiv.org/pdf/1612.07828.pdf) （CVPR 2017）
     * gt不变
  
-#### feature mapping
+#### domain specific network
 
-#### invariant representation
+#### domain-invariant representation
 1. [Deep Domain Confusion: Maximizing for Domain Invariance](https://arxiv.org/pdf/1412.3474.pdf) (arXiv 2014)  
     * classification loss + MMD loss
 2. [Deep CORAL: Correlation Alignment for Deep Domain Adaptation](https://arxiv.org/pdf/1607.01719.pdf)（Computer Vision – ECCV 2016 Workshops） 

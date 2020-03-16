@@ -1,0 +1,27 @@
+I"�<h3 id="transfer-learning">Transfer learning</h3>
+<h4 id="domain-and-task">domain and task</h4>
+<ol>
+  <li>domain = feature space + marginal distribution</li>
+  <li>task = label space + conditional distribution (predictive function)</li>
+</ol>
+
+<h4 id="transfer-learning定义">transfer learning定义</h4>
+<p><img src="/img/15842471547628.jpg" alt="-w914" /></p>
+<ol>
+  <li>正常的machine learning: 只有一个domain，通过自己的X、Y学习predictive function</li>
+  <li>transfer learning：利用source的知识提高target的predictive function的表现
+    <ul>
+      <li>source和target是不同的
+        <ul>
+          <li>feature space不同</li>
+          <li>marginal distribution不同</li>
+          <li>label space不同</li>
+          <li>conditional distribution不同  （？？）</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><em>domain adaptation</em>: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同</li>
+</ol>
+
+:ET

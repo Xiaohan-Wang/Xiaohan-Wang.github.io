@@ -1,9 +1,11 @@
-I"é<h3 id="dataset">Dataset</h3>
+I"A	<h3 id="dataset">Dataset</h3>
 <ol>
   <li><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5995347">Unbiased look at dataset bias</a> (CVPR 2011) <a href="https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/"><em>link</em></a></li>
 </ol>
 
 <h3 id="da-approaches">DA Approaches</h3>
+<p><img src="/img/15842344918937.jpg" alt="-w870" /></p>
+
 <h4 id="images-mapping">images mapping</h4>
 <ol>
   <li><a href="https://arxiv.org/pdf/1603.07442.pdf">Pixel-Level Domain Transfer</a> (ECCV 2016) <a href="https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/"><em>link</em></a>
@@ -27,9 +29,9 @@ with Generative Adversarial Networks</a> (CVPR 2017) <a href="https://xiaohan-wa
   </li>
 </ol>
 
-<h4 id="feature-mapping">feature mapping</h4>
+<h4 id="domain-specific-network">domain specific network</h4>
 
-<h4 id="invariant-representation">invariant representation</h4>
+<h4 id="domain-invariant-representation">domain-invariant representation</h4>
 <ol>
   <li><a href="https://arxiv.org/pdf/1412.3474.pdf">Deep Domain Confusion: Maximizing for Domain Invariance</a> (arXiv 2014)
     <ul>

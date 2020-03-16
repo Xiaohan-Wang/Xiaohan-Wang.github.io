@@ -5,9 +5,103 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 16 Feb 2020 01:52:12 -0500</pubDate>
-    <lastBuildDate>Sun, 16 Feb 2020 01:52:12 -0500</lastBuildDate>
+    <pubDate>Sun, 15 Mar 2020 21:28:43 -0400</pubDate>
+    <lastBuildDate>Sun, 15 Mar 2020 21:28:43 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</title>
+        <description>&lt;h3 id=&quot;take-away-message&quot;&gt;Take Away Message&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;Domain alignment layers which implement feature whitening for the purpose of matching source and target feature distributions and increases the smoothness of the loss landscape.&lt;/li&gt;
+  &lt;li&gt;Min-Entropy Consensus loss regularizes training while avoiding the adoption of many user-defined hyper-parameters&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;model&quot;&gt;Model&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15843077382687.jpg&quot; alt=&quot;-w752&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;DA的四种方法：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Correlation Alignment paradigm&lt;/li&gt;
+  &lt;li&gt;domain-specific alignment layers&lt;/li&gt;
+  &lt;li&gt;entropy minimization distribution&lt;/li&gt;
+  &lt;li&gt;consistency-enforcing paradigm&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;由 12 -&amp;gt; DWTL layer&lt;br /&gt;
+由 34 -&amp;gt; MEC loss&lt;/p&gt;
+
+&lt;p&gt;source: cross-entropy loss
+&lt;img src=&quot;/img/15843177084504.jpg&quot; alt=&quot;-w200&quot; /&gt;
+target: MEC loss
+&lt;img src=&quot;/img/15843177196984.jpg&quot; alt=&quot;-w300&quot; /&gt;
+final loss:
+&lt;img src=&quot;/img/15843177315198.jpg&quot; alt=&quot;-w300&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;要求在source上表现好&lt;/li&gt;
+  &lt;li&gt;要求在target上对perturbation具有robustness，同时对结果high confidence&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;result&quot;&gt;Result&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;digit classification&lt;/li&gt;
+  &lt;li&gt;object recognition&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;potential-improvement&quot;&gt;Potential Improvement&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;try full “coloring”&lt;/li&gt;
+  &lt;li&gt;MEC loss中pseudo label的选择方式？&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sat, 14 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Domain Adaptation Concept Summary</title>
+        <description>&lt;h3 id=&quot;transfer-learning&quot;&gt;Transfer learning&lt;/h3&gt;
+&lt;h4 id=&quot;domain-and-task&quot;&gt;domain and task&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;domain = feature space + marginal distribution&lt;/li&gt;
+  &lt;li&gt;task = label space + conditional distribution (predictive function)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;transfer-learning定义&quot;&gt;transfer learning定义&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15842471547628.jpg&quot; alt=&quot;-w914&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;正常的machine learning: 只有一个domain，通过自己的X、Y学习predictive function&lt;/li&gt;
+  &lt;li&gt;transfer learning：利用source的知识提高target的predictive function的表现
+    &lt;ul&gt;
+      &lt;li&gt;source和target是不同的
+        &lt;ul&gt;
+          &lt;li&gt;feature space不同&lt;/li&gt;
+          &lt;li&gt;marginal distribution不同&lt;/li&gt;
+          &lt;li&gt;label space不同&lt;/li&gt;
+          &lt;li&gt;conditional distribution不同  （？？）&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;em&gt;domain adaptation&lt;/em&gt;: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sat, 14 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/14/Domain-Adaptation-Concept-Summary/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/14/Domain-Adaptation-Concept-Summary/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        <category>Concept</category>
+        
+        
+      </item>
     
       <item>
         <title>A Few Useful Things to Know About Machine Learning</title>
@@ -385,29 +479,6 @@ little extra effort for the user)&lt;/p&gt;
       </item>
     
       <item>
-        <title>Distribution Model</title>
-        <description>&lt;h3 id=&quot;beta-distribution&quot;&gt;Beta Distribution&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15788880752662.jpg&quot; alt=&quot;-w837&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15798135759496.jpg&quot; alt=&quot;-w914&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;gamma-distribution&quot;&gt;Gamma Distribution&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15798134381076.jpg&quot; alt=&quot;-w911&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;double-exponential-distribution&quot;&gt;Double exponential distribution&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15789341430238.jpg&quot; alt=&quot;-w396&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/04/Beta-distribution/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Beta-distribution/</guid>
-        
-        <category>Statistics</category>
-        
-        
-      </item>
-    
-      <item>
         <title>Domain Adaptation Paper List</title>
         <description>&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
 &lt;ol&gt;
@@ -415,6 +486,8 @@ little extra effort for the user)&lt;/p&gt;
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;da-approaches&quot;&gt;DA Approaches&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15842344918937.jpg&quot; alt=&quot;-w870&quot; /&gt;&lt;/p&gt;
+
 &lt;h4 id=&quot;images-mapping&quot;&gt;images mapping&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.07442.pdf&quot;&gt;Pixel-Level Domain Transfer&lt;/a&gt; (ECCV 2016) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
@@ -438,9 +511,9 @@ with Generative Adversarial Networks&lt;/a&gt; (CVPR 2017) &lt;a href=&quot;http
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h4 id=&quot;feature-mapping&quot;&gt;feature mapping&lt;/h4&gt;
+&lt;h4 id=&quot;domain-specific-network&quot;&gt;domain specific network&lt;/h4&gt;
 
-&lt;h4 id=&quot;invariant-representation&quot;&gt;invariant representation&lt;/h4&gt;
+&lt;h4 id=&quot;domain-invariant-representation&quot;&gt;domain-invariant representation&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1412.3474.pdf&quot;&gt;Deep Domain Confusion: Maximizing for Domain Invariance&lt;/a&gt; (arXiv 2014)
     &lt;ul&gt;

@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Distribution Model - Xiaohan's Blog</title>
+    <title>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/04/Beta-distribution/">
+    <link rel="canonical" href="http://localhost:4000/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -173,15 +173,15 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Statistics" title="Statistics">Statistics</a>
+                        <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
                         
                     </div>
-                    <h1>Distribution Model</h1>
+                    <h1>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</h1>
                     
                     
-                    <h2 class="subheading"></h2>
+                    <h2 class="subheading">CVPR 2019</h2>
                     
-                    <span class="meta">Posted by Xiaohan on January 4, 2020</span>
+                    <span class="meta">Posted by Xiaohan on March 14, 2020</span>
                 </div>
             </div>
         </div>
@@ -199,17 +199,48 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="beta-distribution">Beta Distribution</h3>
-<p><img src="/img/15788880752662.jpg" alt="-w837" /></p>
+				<h3 id="take-away-message">Take Away Message</h3>
+<ol>
+  <li>Domain alignment layers which implement feature whitening for the purpose of matching source and target feature distributions and increases the smoothness of the loss landscape.</li>
+  <li>Min-Entropy Consensus loss regularizes training while avoiding the adoption of many user-defined hyper-parameters</li>
+</ol>
 
-<p><img src="/img/15798135759496.jpg" alt="-w914" /></p>
+<h3 id="model">Model</h3>
+<p><img src="/img/15843077382687.jpg" alt="-w752" /></p>
 
-<h3 id="gamma-distribution">Gamma Distribution</h3>
-<p><img src="/img/15798134381076.jpg" alt="-w911" /></p>
+<p>DA的四种方法：</p>
+<ol>
+  <li>Correlation Alignment paradigm</li>
+  <li>domain-specific alignment layers</li>
+  <li>entropy minimization distribution</li>
+  <li>consistency-enforcing paradigm</li>
+</ol>
 
-<h3 id="double-exponential-distribution">Double exponential distribution</h3>
-<p><img src="/img/15789341430238.jpg" alt="-w396" /></p>
+<p>由 12 -&gt; DWTL layer<br />
+由 34 -&gt; MEC loss</p>
 
+<p>source: cross-entropy loss
+<img src="/img/15843177084504.jpg" alt="-w200" />
+target: MEC loss
+<img src="/img/15843177196984.jpg" alt="-w300" />
+final loss:
+<img src="/img/15843177315198.jpg" alt="-w300" /></p>
+<ol>
+  <li>要求在source上表现好</li>
+  <li>要求在target上对perturbation具有robustness，同时对结果high confidence</li>
+</ol>
+
+<h3 id="result">Result</h3>
+<ol>
+  <li>digit classification</li>
+  <li>object recognition</li>
+</ol>
+
+<h3 id="potential-improvement">Potential Improvement</h3>
+<ol>
+  <li>try full “coloring”</li>
+  <li>MEC loss中pseudo label的选择方式？</li>
+</ol>
 
 
                 <hr style="visibility: hidden;">
@@ -217,19 +248,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/04/Domain-Adapation-paper-list/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation Paper List">
+                        <a href="/2020/03/14/Domain-Adaptation-Concept-Summary/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation Concept Summary">
                         Previous<br>
-                        <span>Domain Adaptation Paper List</span>
+                        <span>Domain Adaptation Concept Summary</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/05/Unbiased-Look-at-Dataset-Bias/" data-toggle="tooltip" data-placement="top" title="Unbiased Look at Dataset Bias">
-                        Next<br>
-                        <span>Unbiased Look at Dataset Bias</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
@@ -292,6 +316,10 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
         				
+                            
+                				<a href="/tags/#Domain Adaptation" title="Domain Adaptation" rel="6">
+                                    Domain Adaptation
+                                </a>
                             
         				
                             

@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Unbiased Look at Dataset Bias - Xiaohan's Blog</title>
+    <title>Domain Adaptation Concept Summary - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/05/Unbiased-Look-at-Dataset-Bias/">
+    <link rel="canonical" href="http://localhost:4000/2020/03/14/Domain-Adaptation-Concept-Summary/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -175,13 +175,15 @@
                         
                         <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
                         
+                        <a class="tag" href="/tags/#Concept" title="Concept">Concept</a>
+                        
                     </div>
-                    <h1>Unbiased Look at Dataset Bias</h1>
+                    <h1>Domain Adaptation Concept Summary</h1>
                     
                     
-                    <h2 class="subheading">CVPR 2011</h2>
+                    <h2 class="subheading"></h2>
                     
-                    <span class="meta">Posted by Xiaohan on January 5, 2020</span>
+                    <span class="meta">Posted by Xiaohan on March 14, 2020</span>
                 </div>
             </div>
         </div>
@@ -199,49 +201,32 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="promise-and-perils-of-visual-dataset">Promise and Perils of Visual Dataset</h3>
-<h4 id="promise">Promise</h4>
+				<h3 id="transfer-learning">Transfer learning</h3>
+<h4 id="domain-and-task">domain and task</h4>
 <ol>
-  <li>
-    <p>Dataset是CV取得progress的重要因素（甚至超过算法的影响）</p>
-  </li>
-  <li>
-    <p>让CV更像一门实验科学（rather than a black art）</p>
-  </li>
+  <li>domain = feature space + marginal distribution</li>
+  <li>task = label space + conditional distribution (predictive function)</li>
 </ol>
 
-<h4 id="perils">Perils</h4>
+<h4 id="transfer-learning定义">transfer learning定义</h4>
+<p><img src="/img/15842471547628.jpg" alt="-w914" /></p>
 <ol>
-  <li>
-    <p>(good finetune + bad approach) 表现好于 (bad finetune + good approach) =&gt; 难以决定new approach的真正表现</p>
+  <li>正常的machine learning: 只有一个domain，通过自己的X、Y学习predictive function</li>
+  <li>transfer learning：利用source的知识提高target的predictive function的表现
+    <ul>
+      <li>source和target是不同的
+        <ul>
+          <li>feature space不同</li>
+          <li>marginal distribution不同</li>
+          <li>label space不同</li>
+          <li>conditional distribution不同  （？？）</li>
+        </ul>
+      </li>
+    </ul>
   </li>
-  <li>
-    <p>pay too much attention on “winning” a competition, 但其实提高可能很微小 =&gt; 我们应该将performance number作为一个check，而不是competiton，从而给new approach留出发展的机会</p>
-  </li>
+  <li><em>domain adaptation</em>: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同</li>
 </ol>
 
-<h3 id="the-rise-of-modern-dataset">The rise of modern dataset</h3>
-<p>repeat: one dataset -&gt; being rejected due to its perceived biases -&gt; new dataset -&gt; being rejected due to its perceived biases -&gt; …</p>
-
-<h3 id="dataset-biases">Dataset Biases</h3>
-<p>Instead of representing the visual world, datasets have become closed world onto themselves.</p>
-<h4 id="selection-bias">selection bias</h4>
-<p>datasets often prefer particular kinds of images (e.g. street scenes, or nature scenes, or images retrieved via Internet keyword searches)</p>
-<h4 id="capture-bias">capture bias</h4>
-<p>photographers tending to take pictures of objects in similar ways (although this bias might be similar across the different datasets)</p>
-<h4 id="category-or-label-bias">category or label bias</h4>
-<p>This comes from the fact that semantic categories are often poorly defined, and different labellers may assign differing labels to the same type of object2.</p>
-<h4 id="negative-set-bias"><font color="#0000dd">negative set bias</font></h4>
-<p>Datasets define a visual phenomenon (e.g. object, scene, event) not just by what it is (positive instances), but also by what it is not (negative instances). The negative set defines what the dataset considers to be “the rest of the world”. If that set is not representative, or unbalanced, that could produce classifiers that are overconfident and not very discriminative.</p>
-<blockquote>
-  <font size="3">This is particularly important for classification tasks, where the number of negatives is only a few orders of magnitude larger than the number of positives for each class. For example, if we want to find all images of “boats” in a PASCAL VOC-like classification task setting, how can we make sure that the classifier focuses on the boat itself, and not on the water below, or shore in the distance (after all, all boats are depicted in water)? This is where a large negative set (including rivers, lakes, sea, etc, without boats) is imperative to “push” the lazy classifier into doing the right thing.</font>
-</blockquote>
-
-<h3 id="dataset-value">Dataset value</h3>
-<p><img src="/img/15783472481154.jpg" alt="-w842" /></p>
-
-<h3 id="ways-to-avoid-biases-during-dataset-construction">Ways to avoid biases during dataset construction</h3>
-<p><a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=5995347&amp;tag=1">paper link</a></p>
 
 
                 <hr style="visibility: hidden;">
@@ -249,17 +234,17 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/04/Domain-Adapation-paper-list/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation Paper List">
+                        <a href="/2020/02/11/A-Few-Useful-Things-to-Know-About-Machine-Learning/" data-toggle="tooltip" data-placement="top" title="A Few Useful Things to Know About Machine Learning">
                         Previous<br>
-                        <span>Domain Adaptation Paper List</span>
+                        <span>A Few Useful Things to Know About Machine Learning</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/01/07/Pixel-Level-Domain-Transfer/" data-toggle="tooltip" data-placement="top" title="Pixel-Level Domain Transfer">
+                        <a href="/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/" data-toggle="tooltip" data-placement="top" title="Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss">
                         Next<br>
-                        <span>Pixel-Level Domain Transfer</span>
+                        <span>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</span>
                         </a>previous
                     </li>
                     
