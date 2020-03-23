@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 22 Mar 2020 23:11:40 -0400</pubDate>
-    <lastBuildDate>Sun, 22 Mar 2020 23:11:40 -0400</lastBuildDate>
+    <pubDate>Mon, 23 Mar 2020 00:21:53 -0400</pubDate>
+    <lastBuildDate>Mon, 23 Mar 2020 00:21:53 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -535,6 +535,38 @@ with Generative Adversarial Networks&lt;/a&gt; (CVPR 2017) &lt;a href=&quot;http
         <category>Domain Adaptation</category>
         
         <category>Paper List</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>SPP-Net (spatial pyramid pooling)</title>
+        <description>&lt;h4 id=&quot;goal&quot;&gt;Goal&lt;/h4&gt;
+&lt;p&gt;消除CNN对图片size/scale的限制&lt;/p&gt;
+
+&lt;h4 id=&quot;motivation&quot;&gt;Motivation&lt;/h4&gt;
+&lt;p&gt;CNN = convolutional layers + fully-connected layers&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;convolutional layers不要求图片size&lt;/li&gt;
+  &lt;li&gt;fully-connected layers对size有要求&lt;br /&gt;
+思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在image detection上的应用
+&lt;img src=&quot;/img/15849366399167.jpg&quot; width=&quot;60%&quot; height=&quot;60%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15849365194047.jpg&quot; width=&quot;60%&quot; height=&quot;60%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In each spatial bin, pool (max pooling in the paper) the response of each filter. &lt;br /&gt;
+The output of SPP: k*M (M: number  of bins, e.g. 16+4+1; k: number of channels, e.g. 256)&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 02 Dec 2019 00:00:00 -0500</pubDate>
+        <link>http://localhost:4000/2019/12/02/SPP-Net/</link>
+        <guid isPermaLink="true">http://localhost:4000/2019/12/02/SPP-Net/</guid>
+        
+        <category>CV paperlist</category>
         
         
       </item>

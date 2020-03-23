@@ -1,0 +1,22 @@
+I"<h3 id="goal">Goal</h3>
+<p>消除CNN对图片size/scale的限制</p>
+
+<h3 id="motivation">Motivation</h3>
+<p>CNN = convolutional layers + fully-connected layers</p>
+<ol>
+  <li>convolutional layers不要求图片size</li>
+  <li>fully-connected layers对size有要求</li>
+</ol>
+
+<p>思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers</p>
+
+<p>在image detection上的应用
+<img src="/img/15849366399167.jpg" width="50%" height="50%" /></p>
+
+<h3 id="model">Model</h3>
+<p><img src="/img/15849365194047.jpg" alt="" /></p>
+
+<p>In each spatial bin, pool (max pooling in the paper) the response of each filter. 
+The output of SPP: k*M (M: number  of bins, e.g. 16+4+1; k: number of channels, e.g. 256)</p>
+
+:ET
