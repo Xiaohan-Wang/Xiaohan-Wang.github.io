@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 23 Mar 2020 00:21:53 -0400</pubDate>
-    <lastBuildDate>Mon, 23 Mar 2020 00:21:53 -0400</lastBuildDate>
+    <pubDate>Mon, 23 Mar 2020 01:54:19 -0400</pubDate>
+    <lastBuildDate>Mon, 23 Mar 2020 01:54:19 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -548,9 +548,10 @@ with Generative Adversarial Networks&lt;/a&gt; (CVPR 2017) &lt;a href=&quot;http
 &lt;p&gt;CNN = convolutional layers + fully-connected layers&lt;/p&gt;
 &lt;ol&gt;
   &lt;li&gt;convolutional layers不要求图片size&lt;/li&gt;
-  &lt;li&gt;fully-connected layers对size有要求&lt;br /&gt;
-思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers&lt;/li&gt;
+  &lt;li&gt;fully-connected layers对size有要求&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers&lt;/p&gt;
 
 &lt;p&gt;在image detection上的应用
 &lt;img src=&quot;/img/15849366399167.jpg&quot; width=&quot;60%&quot; height=&quot;60%&quot; /&gt;&lt;/p&gt;

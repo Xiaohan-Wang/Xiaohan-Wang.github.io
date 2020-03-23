@@ -154,13 +154,13 @@
 
     <!-- Image to hack wechat -->
 <!-- <img src="/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="/img/post-bg-2015.jpg" width="0" height="0"> -->
+<!-- <img src="/img/ice.jpg" width="0" height="0"> -->
 
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: url('/img/post-bg-2015.jpg')
+        background-image: url('/img/ice.jpg')
     }
 
     
@@ -179,7 +179,7 @@
                     <h2>SPP-Net (spatial pyramid pooling)</h2>
                     
                     
-                    <span class="meta">CVPR 2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on December 2, 2019</span>
+                    <span class="meta">ECCV 2014&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on December 2, 2019</span>
                 </div>
             </div>
         </div>
@@ -204,9 +204,10 @@
 <p>CNN = convolutional layers + fully-connected layers</p>
 <ol>
   <li>convolutional layers不要求图片size</li>
-  <li>fully-connected layers对size有要求<br />
-思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers</li>
+  <li>fully-connected layers对size有要求</li>
 </ol>
+
+<p>思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers</p>
 
 <p>在image detection上的应用
 <img src="/img/15849366399167.jpg" width="60%" height="60%" /></p>
