@@ -33,14 +33,12 @@ layout: default
                         <a class="tag" href="{{ site.baseurl }}/tags/#{{ tag }}" title="{{ tag }}">{{ tag }}</a>
                         {% endfor %}
                     </div>
-                    <h1>{{ page.title }}</h1>
+                    <h2>{{ page.title }}</h2>
                     {% comment %}
                         always create a h2 for keeping the margin , Hux
                     {% endcomment %}
                     {% comment %} if page.subtitle {% endcomment %}
-                    <h2 class="subheading">{{ page.subtitle }}</h2>
-                    {% comment %} endif {% endcomment %}
-                    <span class="meta">Posted by {% if page.author %}{{ page.author }}{% else %}{{ site.title }}{% endif %} on {{ page.date | date: "%B %-d, %Y" }}</span>
+                    <span class="meta">{% if page.subtitle %}{{page.subtitle}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{% endif %} Posted on {{ page.date | date: "%B %-d, %Y" }}</span>
                 </div>
             </div>
         </div>
@@ -212,7 +210,7 @@ layout: default
         //   placement: 'right',
         //   icon: '#'
         // };
-        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+        anchors.add().remove('.intro-header h2').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
 <style>

@@ -4,7 +4,7 @@ title:      Domain Adaptation Concept Summary
 subtitle:   
 date:       2020-03-14
 author:     Xiaohan
-header-img: img/post-bg-2015.jpg
+header-img: img/ice.jpg
 catalog: true
 tags:
     - Domain Adaptation

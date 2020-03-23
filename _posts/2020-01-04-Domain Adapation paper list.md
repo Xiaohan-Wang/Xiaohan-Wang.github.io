@@ -4,7 +4,7 @@ title:      Domain Adaptation Paper List
 subtitle:   持续更新中
 date:       2020-01-04
 author:     Xiaohan
-header-img: img/post-bg-2015.jpg
+header-img: img/ice.jpg
 catalog: true
 tags:
     - Domain Adaptation

@@ -4,7 +4,7 @@ title:      Unsupervised Domain Adaptation using Feature-Whitening and Consensus
 subtitle:   CVPR 2019
 date:       2020-03-14
 author:     Xiaohan
-header-img: img/post-bg-2015.jpg
+header-img: img/ice.jpg
 catalog: true
 tags:
     - Domain Adaptation

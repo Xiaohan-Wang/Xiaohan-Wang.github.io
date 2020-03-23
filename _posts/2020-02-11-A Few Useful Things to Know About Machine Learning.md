@@ -4,7 +4,7 @@ title:      A Few Useful Things to Know About Machine Learning
 subtitle:   2012 (Communications of the ACM)
 date:       2020-02-11
 author:     Xiaohan
-header-img: img/post-bg-2015.jpg
+header-img: img/ice.jpg
 catalog: true
 tags:
     - ML

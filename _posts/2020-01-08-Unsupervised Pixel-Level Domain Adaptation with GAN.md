@@ -4,7 +4,7 @@ title:      Unsupervised Pixel-Level Domain Adaptation with Generative Adversari
 subtitle:   CVPR 2017
 date:       2020-01-08
 author:     Xiaohan
-header-img: img/post-bg-2015.jpg
+header-img: img/ice.jpg
 catalog: true
 tags:
     - Domain Adaptation
