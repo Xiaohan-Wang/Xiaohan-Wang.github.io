@@ -5,9 +5,57 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 23 Mar 2020 01:54:19 -0400</pubDate>
-    <lastBuildDate>Mon, 23 Mar 2020 01:54:19 -0400</lastBuildDate>
+    <pubDate>Tue, 24 Mar 2020 02:52:49 -0400</pubDate>
+    <lastBuildDate>Tue, 24 Mar 2020 02:52:49 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title></title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1811.12833.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/valeoai/ADVENT&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;观察到source domain prediction是over-confident / low entropy，而target domain prediction是under-confident / high entropy&lt;/li&gt;
+  &lt;li&gt;direct entropy minimization&lt;/li&gt;
+  &lt;li&gt;structure adaptation: adversarial learning&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15850310997747.jpg&quot; alt=&quot;-w930&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;class ratio prior:&lt;br /&gt;
+Entropy minimization can get biased towards some easy classes. Therefore, sometimes it is beneficial to guide the learning with some prior. 此处根据class ratio prior设计了另一个Loss来guide learning.&lt;/p&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;In general, AdvEnt works better than MinEnt. By combining results of the two models MinEnt and AdvEnt, we observe a decent boost in performance, compared to results of single models. 
+&lt;img src=&quot;/img/15850315105452.jpg&quot; alt=&quot;-w923&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;oracle performance (trained on source and target)
+&lt;img src=&quot;/img/15850315456104.jpg&quot; alt=&quot;-w180&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Training on specific entropy ranges.&lt;/li&gt;
+  &lt;li&gt;Using class-ratio prior.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;insight&quot;&gt;Insight&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;找source domain结果/中间feature map具备、而target domain不具备的性质，用adversarial learning (e.g. cross entropy)&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 24 Mar 2020 02:52:49 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/24/2020-03-23-ADVENT/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/24/2020-03-23-ADVENT/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</title>
@@ -474,67 +522,6 @@ little extra effort for the user)&lt;/p&gt;
         <guid isPermaLink="true">http://localhost:4000/2020/01/05/Unbiased-Look-at-Dataset-Bias/</guid>
         
         <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Domain Adaptation Paper List</title>
-        <description>&lt;h3 id=&quot;dataset&quot;&gt;Dataset&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;amp;arnumber=5995347&quot;&gt;Unbiased look at dataset bias&lt;/a&gt; (CVPR 2011) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/05/Unbiased-Look-at-Dataset-Bias/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;da-approaches&quot;&gt;DA Approaches&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15842344918937.jpg&quot; alt=&quot;-w870&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;images-mapping&quot;&gt;images mapping&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.07442.pdf&quot;&gt;Pixel-Level Domain Transfer&lt;/a&gt; (ECCV 2016) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/07/Pixel-Level-Domain-Transfer/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;need corresponding pairs between two domains (essentially supervised)&lt;/li&gt;
-      &lt;li&gt;但认为MSE never allow a small geometric miss-alignment，因此使用discriminator来利用supervised information&lt;/li&gt;
-      &lt;li&gt;未提及gt的变化&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.05424.pdf&quot;&gt;Unsupervised Pixel–Level Domain Adaptation
-with Generative Adversarial Networks&lt;/a&gt; (CVPR 2017) &lt;a href=&quot;https://xiaohan-wang.github.io/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/&quot;&gt;&lt;em&gt;link&lt;/em&gt;&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;assume that the difference between the domains are primarily low-level (due to noise, resolution, illumination, color) rather than high-level (types of objects, geometric variations, etc)&lt;/li&gt;
-      &lt;li&gt;未提及gt的变化&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.07828.pdf&quot;&gt;Learning from Simulated and Unsupervised Images through Adversarial Training&lt;/a&gt; （CVPR 2017）
-    &lt;ul&gt;
-      &lt;li&gt;gt不变&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;domain-specific-network&quot;&gt;domain specific network&lt;/h4&gt;
-
-&lt;h4 id=&quot;domain-invariant-representation&quot;&gt;domain-invariant representation&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1412.3474.pdf&quot;&gt;Deep Domain Confusion: Maximizing for Domain Invariance&lt;/a&gt; (arXiv 2014)
-    &lt;ul&gt;
-      &lt;li&gt;classification loss + MMD loss&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1607.01719.pdf&quot;&gt;Deep CORAL: Correlation Alignment for Deep Domain Adaptation&lt;/a&gt;（Computer Vision – ECCV 2016 Workshops）
-    &lt;ul&gt;
-      &lt;li&gt;classification loss + coral loss&lt;/li&gt;
-      &lt;li&gt;minimize the difference in second-order statistics between the source and target feature activations (CORAL loss)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sat, 04 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/04/Domain-Adapation-paper-list/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/04/Domain-Adapation-paper-list/</guid>
-        
-        <category>Domain Adaptation</category>
-        
-        <category>Paper List</category>
         
         
       </item>

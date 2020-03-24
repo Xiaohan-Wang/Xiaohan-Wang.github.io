@@ -1,0 +1,39 @@
+I"�<p><a href="https://arxiv.org/pdf/1811.12833.pdf">Paper link</a> and <a href="https://github.com/valeoai/ADVENT">code</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>观察到source domain prediction是over-confident / low entropy，而target domain prediction是under-confident / high entropy</li>
+  <li>direct entropy minimization</li>
+  <li>structure adaptation: adversarial learning</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15850310997747.jpg" alt="-w930" /></p>
+
+<p>class ratio prior:<br />
+Entropy minimization can get biased towards some easy classes. Therefore, sometimes it is beneficial to guide the learning with some prior. 此处根据class ratio prior设计了另一个Loss来guide learning.</p>
+
+<h4 id="result">Result</h4>
+<ol>
+  <li>
+    <p>In general, AdvEnt works better than MinEnt. By combining results of the two models MinEnt and AdvEnt, we observe a decent boost in performance, compared to results of single models. 
+<img src="/img/15850315105452.jpg" alt="-w923" /></p>
+  </li>
+  <li>
+    <p>oracle performance (trained on source and target)
+<img src="/img/15850315456104.jpg" alt="-w180" /></p>
+  </li>
+</ol>
+
+<h4 id="tricks">Tricks</h4>
+<ol>
+  <li>Training on specific entropy ranges.</li>
+  <li>Using class-ratio prior.</li>
+</ol>
+
+<h4 id="insight">Insight</h4>
+<ol>
+  <li>找source domain结果/中间feature map具备、而target domain不具备的性质，用adversarial learning (e.g. cross entropy)</li>
+</ol>
+
+:ET
