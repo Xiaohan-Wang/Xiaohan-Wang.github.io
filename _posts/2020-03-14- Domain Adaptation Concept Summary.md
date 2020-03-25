@@ -27,3 +27,7 @@ tags:
         * conditional distribution不同  （？？）
 3. _domain adaptation_: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同
 
+#### Domain adaptation
+![](/img/15850826248103.jpg)
+from https://en.wikipedia.org/wiki/Domain_adaptation
+

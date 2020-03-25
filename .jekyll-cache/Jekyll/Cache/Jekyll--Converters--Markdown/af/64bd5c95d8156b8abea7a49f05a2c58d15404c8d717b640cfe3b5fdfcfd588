@@ -1,4 +1,4 @@
-I"�<p><a href="https://arxiv.org/pdf/1811.12833.pdf">Paper link</a> and <a href="https://github.com/valeoai/ADVENT">code</a></p>
+I"�<p><a href="https://arxiv.org/pdf/1811.12833.pdf">Paper link</a> and <a href="https://github.com/valeoai/ADVENT">code</a></p>
 
 <h4 id="take-away-message">Take away message</h4>
 <ol>
@@ -13,6 +13,14 @@
 <p>class ratio prior:<br />
 Entropy minimization can get biased towards some easy classes. Therefore, sometimes it is beneficial to guide the learning with some prior. 此处根据class ratio prior设计了另一个Loss来guide learning.</p>
 
+<ol>
+  <li>entropy map and $L_{ent}$<br />
+<img src="/img/15850758404417.jpg" width="40%" height="40%" /><br />
+<img src="/img/15850759324138.jpg" width="25%" height="40%" /><br />
+a soft-assignment version of the pseudo-label cross-entropy loss</li>
+  <li>Adversarial learning loss</li>
+</ol>
+
 <h4 id="result">Result</h4>
 <ol>
   <li>
@@ -21,7 +29,7 @@ Entropy minimization can get biased towards some easy classes. Therefore, someti
   </li>
   <li>
     <p>oracle performance (trained on source and target)
-<img src="/img/15850315456104.jpg" alt="-w180" /></p>
+<img src="/img/15850315456104.jpg" width="40%" height="40%" /></p>
   </li>
 </ol>
 

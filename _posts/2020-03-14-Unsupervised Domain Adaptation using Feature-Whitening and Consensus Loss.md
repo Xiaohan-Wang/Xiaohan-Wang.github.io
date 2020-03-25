@@ -10,6 +10,7 @@ tags:
     - Domain Adaptation
 ---
 
+[paper](https://arxiv.org/pdf/1903.03215.pdf) and [code](https://github.com/roysubhankar/dwt-domain-adaptation)
 ### Take Away Message
 1. Domain alignment layers which implement feature whitening for the purpose of matching source and target feature distributions and increases the smoothness of the loss landscape.
 2. Min-Entropy Consensus loss regularizes training while avoiding the adoption of many user-defined hyper-parameters

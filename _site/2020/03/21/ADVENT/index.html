@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss - Xiaohan's Blog</title>
+    <title>ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/">
+    <link rel="canonical" href="http://localhost:4000/2020/03/21/ADVENT/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -176,10 +176,10 @@
                         <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
                         
                     </div>
-                    <h2>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</h2>
+                    <h2>ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation</h2>
                     
                     
-                    <span class="meta">CVPR 2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on March 14, 2020</span>
+                    <span class="meta">CVPR 2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on March 21, 2020</span>
                 </div>
             </div>
         </div>
@@ -197,49 +197,52 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="https://arxiv.org/pdf/1903.03215.pdf">paper</a> and <a href="https://github.com/roysubhankar/dwt-domain-adaptation">code</a></p>
-<h3 id="take-away-message">Take Away Message</h3>
+				<p><a href="https://arxiv.org/pdf/1811.12833.pdf">Paper link</a> and <a href="https://github.com/valeoai/ADVENT">code</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
 <ol>
-  <li>Domain alignment layers which implement feature whitening for the purpose of matching source and target feature distributions and increases the smoothness of the loss landscape.</li>
-  <li>Min-Entropy Consensus loss regularizes training while avoiding the adoption of many user-defined hyper-parameters</li>
+  <li>观察到source domain prediction是over-confident / low entropy，而target domain prediction是under-confident / high entropy</li>
+  <li>direct entropy minimization</li>
+  <li>structure adaptation: adversarial learning</li>
 </ol>
 
-<h3 id="model">Model</h3>
-<p><img src="/img/15843077382687.jpg" alt="-w752" /></p>
+<h4 id="model">Model</h4>
+<p><img src="/img/15850310997747.jpg" alt="-w930" /></p>
 
-<p>DA的四种方法：</p>
+<p>class ratio prior:<br />
+Entropy minimization can get biased towards some easy classes. Therefore, sometimes it is beneficial to guide the learning with some prior. 此处根据class ratio prior设计了另一个Loss来guide learning.</p>
+
 <ol>
-  <li>Correlation Alignment paradigm</li>
-  <li>domain-specific alignment layers</li>
-  <li>entropy minimization distribution</li>
-  <li>consistency-enforcing paradigm</li>
+  <li>entropy map and $L_{ent}$<br />
+<img src="/img/15850758404417.jpg" width="40%" height="40%" /><br />
+<img src="/img/15850759324138.jpg" width="25%" height="40%" /><br />
+a soft-assignment version of the pseudo-label cross-entropy loss</li>
+  <li>Adversarial learning loss</li>
 </ol>
 
-<p>由 12 -&gt; DWTL layer<br />
-由 34 -&gt; MEC loss</p>
-
-<p>source: cross-entropy loss
-<img src="/img/15843177084504.jpg" alt="-w200" />
-target: MEC loss
-<img src="/img/15843177196984.jpg" alt="-w300" />
-final loss:
-<img src="/img/15843177315198.jpg" alt="-w300" /></p>
+<h4 id="result">Result</h4>
 <ol>
-  <li>要求在source上表现好</li>
-  <li>要求在target上对perturbation具有robustness，同时对结果high confidence</li>
+  <li>
+    <p>In general, AdvEnt works better than MinEnt. By combining results of the two models MinEnt and AdvEnt, we observe a decent boost in performance, compared to results of single models. 
+<img src="/img/15850315105452.jpg" alt="-w923" /></p>
+  </li>
+  <li>
+    <p>oracle performance (trained on source and target)
+<img src="/img/15850315456104.jpg" width="40%" height="40%" /></p>
+  </li>
 </ol>
 
-<h3 id="result">Result</h3>
+<h4 id="tricks">Tricks</h4>
 <ol>
-  <li>digit classification</li>
-  <li>object recognition</li>
+  <li>Training on specific entropy ranges.</li>
+  <li>Using class-ratio prior.</li>
 </ol>
 
-<h3 id="potential-improvement">Potential Improvement</h3>
+<h4 id="insight">Insight</h4>
 <ol>
-  <li>try full “coloring”</li>
-  <li>MEC loss中pseudo label的选择方式？</li>
+  <li>找source domain结果/中间feature map具备、而target domain不具备的性质，用adversarial learning (e.g. cross entropy)</li>
 </ol>
+
 
 
                 <hr style="visibility: hidden;">
@@ -247,17 +250,17 @@ final loss:
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/03/14/Domain-Adaptation-Concept-Summary/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation Concept Summary">
+                        <a href="/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/" data-toggle="tooltip" data-placement="top" title="Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss">
                         Previous<br>
-                        <span>Domain Adaptation Concept Summary</span>
+                        <span>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/03/21/ADVENT/" data-toggle="tooltip" data-placement="top" title="ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation">
+                        <a href="/2020/03/24/Maximum-Squares-Loss/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation for Semantic Segmentation with Maximum Squares Loss">
                         Next<br>
-                        <span>ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation</span>
+                        <span>Domain Adaptation for Semantic Segmentation with Maximum Squares Loss</span>
                         </a>previous
                     </li>
                     

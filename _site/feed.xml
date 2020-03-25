@@ -5,12 +5,58 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 24 Mar 2020 02:52:49 -0400</pubDate>
-    <lastBuildDate>Tue, 24 Mar 2020 02:52:49 -0400</lastBuildDate>
+    <pubDate>Wed, 25 Mar 2020 14:33:16 -0400</pubDate>
+    <lastBuildDate>Wed, 25 Mar 2020 14:33:16 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title></title>
+        <title>Domain Adaptation for Semantic Segmentation with Maximum Squares Loss</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://openaccess.thecvf.com/content_ICCV_2019/papers/Chen_Domain_Adaptation_for_Semantic_Segmentation_With_Maximum_Squares_Loss_ICCV_2019_paper.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/ZJULearning/MaxSquareLoss&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;p&gt;Probability imbalance problem -&amp;gt; maximum square loss&lt;/p&gt;
+
+&lt;h4 id=&quot;probability-imbalance-problem&quot;&gt;Probability imbalance problem&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15851597726007.jpg&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;
+Note that uncertain area has prediction probability around 0.5, while prediction probability around 1 corresponds to areas with good accuracy.&lt;/p&gt;
+
+&lt;p&gt;Shannon entropy:
+&lt;img style=&quot;text-align: center&quot; src=&quot;/img/15851603980105.jpg&quot; width=&quot;50%&quot; height=&quot;50%&quot; /&gt;
+Maximum squares loss:
+&lt;img style=&quot;text-align: center&quot; src=&quot;/img/15851604671115.jpg&quot; width=&quot;45%&quot; height=&quot;45%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Classes with high accuracy always have higher prediction probabilities. If Shannon entropy is deployed, as shown in the above figure, the simple class will produce a much larger gradient on each pixel than the difficult class, causing each gradient descent step is basically computed from those simple classes, and difficult classes is still not trained sufficiently. By using MSL, areas with higher confidence still have larger gradients, but their dominant effects have been reduced, allowing other difficult classes to obtain training gradients.&lt;/p&gt;
+
+&lt;h4 id=&quot;class-imbalance-problem&quot;&gt;Class imbalance problem&lt;/h4&gt;
+&lt;p&gt;Classes with higher accuracy always have more pixels on the label map, which leads to an imbalance in quantity.&lt;/p&gt;
+
+&lt;p&gt;regular method: introduce weighting factor αc, which is usually set as the inverse class frequency.&lt;/p&gt;
+
+&lt;p&gt;paper: Image-wise Class-balanced Weighting Factor&lt;/p&gt;
+
+&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;fix class imbalance
+    &lt;ul&gt;
+      &lt;li&gt;regular way: introduce weighting factor αc, which is usually set as the inverse class frequency.&lt;/li&gt;
+      &lt;li&gt;image-wise weighting ratio (this paper)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;multi-level self-produced guidance&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 24 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/24/Maximum-Squares-Loss/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/24/Maximum-Squares-Loss/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1811.12833.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/valeoai/ADVENT&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
@@ -26,6 +72,14 @@
 &lt;p&gt;class ratio prior:&lt;br /&gt;
 Entropy minimization can get biased towards some easy classes. Therefore, sometimes it is beneficial to guide the learning with some prior. 此处根据class ratio prior设计了另一个Loss来guide learning.&lt;/p&gt;
 
+&lt;ol&gt;
+  &lt;li&gt;entropy map and $L_{ent}$&lt;br /&gt;
+&lt;img src=&quot;/img/15850758404417.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;&lt;br /&gt;
+&lt;img src=&quot;/img/15850759324138.jpg&quot; width=&quot;25%&quot; height=&quot;40%&quot; /&gt;&lt;br /&gt;
+a soft-assignment version of the pseudo-label cross-entropy loss&lt;/li&gt;
+  &lt;li&gt;Adversarial learning loss&lt;/li&gt;
+&lt;/ol&gt;
+
 &lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;
@@ -34,7 +88,7 @@ Entropy minimization can get biased towards some easy classes. Therefore, someti
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;oracle performance (trained on source and target)
-&lt;img src=&quot;/img/15850315456104.jpg&quot; alt=&quot;-w180&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/img/15850315456104.jpg&quot; width=&quot;40%&quot; height=&quot;40%&quot; /&gt;&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
 
@@ -50,16 +104,19 @@ Entropy minimization can get biased towards some easy classes. Therefore, someti
 &lt;/ol&gt;
 
 </description>
-        <pubDate>Tue, 24 Mar 2020 02:52:49 -0400</pubDate>
-        <link>http://localhost:4000/2020/03/24/2020-03-23-ADVENT/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/03/24/2020-03-23-ADVENT/</guid>
+        <pubDate>Sat, 21 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/21/ADVENT/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/21/ADVENT/</guid>
+        
+        <category>Domain Adaptation</category>
         
         
       </item>
     
       <item>
         <title>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</title>
-        <description>&lt;h3 id=&quot;take-away-message&quot;&gt;Take Away Message&lt;/h3&gt;
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1903.03215.pdf&quot;&gt;paper&lt;/a&gt; and &lt;a href=&quot;https://github.com/roysubhankar/dwt-domain-adaptation&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;take-away-message&quot;&gt;Take Away Message&lt;/h3&gt;
 &lt;ol&gt;
   &lt;li&gt;Domain alignment layers which implement feature whitening for the purpose of matching source and target feature distributions and increases the smoothness of the loss landscape.&lt;/li&gt;
   &lt;li&gt;Min-Entropy Consensus loss regularizes training while avoiding the adoption of many user-defined hyper-parameters&lt;/li&gt;
@@ -138,6 +195,10 @@ final loss:
   &lt;/li&gt;
   &lt;li&gt;&lt;em&gt;domain adaptation&lt;/em&gt;: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;h4 id=&quot;domain-adaptation&quot;&gt;Domain adaptation&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15850826248103.jpg&quot; alt=&quot;&quot; /&gt;
+from https://en.wikipedia.org/wiki/Domain_adaptation&lt;/p&gt;
 
 </description>
         <pubDate>Sat, 14 Mar 2020 00:00:00 -0400</pubDate>

@@ -1,4 +1,4 @@
-I"�<h3 id="transfer-learning">Transfer learning</h3>
+I"�<h3 id="transfer-learning">Transfer learning</h3>
 <h4 id="domain-and-task">domain and task</h4>
 <ol>
   <li>domain = feature space + marginal distribution</li>
@@ -23,5 +23,9 @@
   </li>
   <li><em>domain adaptation</em>: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同</li>
 </ol>
+
+<h4 id="domain-adaptation">Domain adaptation</h4>
+<p><img src="/img/15850826248103.jpg" alt="" />
+from https://en.wikipedia.org/wiki/Domain_adaptation</p>
 
 :ET
