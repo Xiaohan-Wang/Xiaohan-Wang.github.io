@@ -5,9 +5,81 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 25 Mar 2020 14:33:16 -0400</pubDate>
-    <lastBuildDate>Wed, 25 Mar 2020 14:33:16 -0400</lastBuildDate>
+    <pubDate>Thu, 26 Mar 2020 23:42:10 -0400</pubDate>
+    <lastBuildDate>Thu, 26 Mar 2020 23:42:10 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Reshaping Visual Datasets for Domain Adaptation</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://papers.nips.cc/paper/5210-reshaping-visual-datasets-for-domain-adaptation.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15852773040000.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;p&gt;图像的domain由多种因素交织影响决定，比如说pose、illumination、camera resolution、background等等。因此图像往往不是按照“clearly identifiable domain”收集的，也就是说，一个数据集可以包含多个不同的domain。发现这些source和target dataset中的latent domain有助于进行domain adaptation.&lt;/p&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Note that the total domain distinctiveness TDD(K) increases as K increases — presumably, in the extreme case, each domain has only a few instances and their distributions would be maximally different from each other. However, such tiny domains would offer insufficient data to separate the categories of interest reliably.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;maximum distinctiveness: 希望不同domain之间的差异尽量大 (domain划分尽量细)&lt;/p&gt;
+
+    &lt;p&gt;采用non-parameter方式:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;the empirical distribution of each domain:
+ &lt;img src=&quot;/img/15852779640661.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;the difference between the means of two empirical distributions
+ &lt;img src=&quot;/img/15852781025087.jpg&quot; alt=&quot;-w837&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;maximize the total domain distinctiveness
+ &lt;img src=&quot;/img/15852781836513.jpg&quot; width=&quot;30%&quot; height=&quot;30%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;maximum learnability: 每个domain包含足够数量的instances用于学习 (domain划分不能过细)&lt;/p&gt;
+
+    &lt;p&gt;从K=2开始遍历寻找最好的K&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;对K个domain分别构建classfier，并计算cross-validation accuracy，并求weighted average
+ &lt;img src=&quot;/img/15852795347553.jpg&quot; alt=&quot;-w699&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;选择具有最高的cross-validation accuracy的K&lt;/p&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;domain adaptaion的几种方式&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;合并全部source domain&lt;/li&gt;
+  &lt;li&gt;emsemble各个source domain的classfier的结果&lt;/li&gt;
+  &lt;li&gt;选择和target domain最接近的一个source domain&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;reshape target domain conditioning on the identified domains from the training datasets — the goal is to discover latent domains in the test datasets that match the domains in the training datasets as much as possible.
+&lt;img src=&quot;/img/15852803974334.jpg&quot; alt=&quot;-w752&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/img/15852803845757.jpg&quot; width=&quot;93%&quot; height=&quot;93%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;J. Hoffman, B. Kulis, T. Darrell, and K. Saenko. Discovering latent domains for multisource domain adaptation. In ECCV. 2012. (aim at discovering the latent domains from datasets, by modeling the data with a hierarchical distribution consisting of Gaussian mixtures)&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Thu, 26 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
     
       <item>
         <title>Domain Adaptation for Semantic Segmentation with Maximum Squares Loss</title>
@@ -583,39 +655,6 @@ little extra effort for the user)&lt;/p&gt;
         <guid isPermaLink="true">http://localhost:4000/2020/01/05/Unbiased-Look-at-Dataset-Bias/</guid>
         
         <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>SPP-Net (spatial pyramid pooling)</title>
-        <description>&lt;h4 id=&quot;goal&quot;&gt;Goal&lt;/h4&gt;
-&lt;p&gt;消除CNN对图片size/scale的限制&lt;/p&gt;
-
-&lt;h4 id=&quot;motivation&quot;&gt;Motivation&lt;/h4&gt;
-&lt;p&gt;CNN = convolutional layers + fully-connected layers&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;convolutional layers不要求图片size&lt;/li&gt;
-  &lt;li&gt;fully-connected layers对size有要求&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers&lt;/p&gt;
-
-&lt;p&gt;在image detection上的应用
-&lt;img src=&quot;/img/15849366399167.jpg&quot; width=&quot;60%&quot; height=&quot;60%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15849365194047.jpg&quot; width=&quot;60%&quot; height=&quot;60%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In each spatial bin, pool (max pooling in the paper) the response of each filter. &lt;br /&gt;
-The output of SPP: k*M (M: number  of bins, e.g. 16+4+1; k: number of channels, e.g. 256)&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 02 Dec 2019 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2019/12/02/SPP-Net/</link>
-        <guid isPermaLink="true">http://localhost:4000/2019/12/02/SPP-Net/</guid>
-        
-        <category>CV paperlist</category>
         
         
       </item>
