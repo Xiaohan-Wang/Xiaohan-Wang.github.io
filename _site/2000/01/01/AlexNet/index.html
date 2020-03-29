@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>SPP-Net (spatial pyramid pooling) - Xiaohan's Blog</title>
+    <title>AlexNet - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2019/12/02/SPP-Net/">
+    <link rel="canonical" href="http://localhost:4000/2000/01/01/AlexNet/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -176,10 +176,10 @@
                         <a class="tag" href="/tags/#CV paperlist" title="CV paperlist">CV paperlist</a>
                         
                     </div>
-                    <h2>SPP-Net (spatial pyramid pooling)</h2>
+                    <h2>AlexNet</h2>
                     
                     
-                    <span class="meta">ECCV 2014&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on December 2, 2019</span>
+                    <span class="meta">NIPS 2012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on January 1, 2000</span>
                 </div>
             </div>
         </div>
@@ -197,26 +197,71 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h4 id="goal">Goal</h4>
-<p>消除CNN对图片size/scale的限制</p>
+				<p><a href="https://cvpaperlist.blogspot.com/2019/12/imagenet-classification-with-deep.html">Paper link</a></p>
 
-<h4 id="motivation">Motivation</h4>
-<p>CNN = convolutional layers + fully-connected layers</p>
+<p>60 million parameters; 650,000 neurons</p>
+
+<h4 id="why-works">Why works</h4>
 <ol>
-  <li>convolutional layers不要求图片size</li>
-  <li>fully-connected layers对size有要求</li>
+  <li>数据集的改变：
+    <ul>
+      <li>以前， on the order of tens of thousands of images</li>
+      <li>最近，Imagenet；LabelMe</li>
+    </ul>
+  </li>
+  <li>CNN
+    <ul>
+      <li>enough learning capacity</li>
+      <li>prior knowledge (assumptions): stationarity of statistics and locality of pixel dependencies</li>
+      <li>compared to NN, CNN has fewer parameters: easier to train</li>
+      <li>GPU and large dataset</li>
+    </ul>
+  </li>
 </ol>
 
-<p>思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers</p>
+<h4 id="alexnet">AlexNet</h4>
+<ol>
+  <li>Input:
+    <ul>
+      <li>256*256, 首先reshape将短边变成256，然后center crop</li>
+      <li>预处理：减去training set的mean，将输入数据变为centered raw RGB value</li>
+    </ul>
+  </li>
+  <li>network
+    <ul>
+      <li>采用ReLU：sigmoid/tanh梯度下降所需的训练时间比ReLU慢很多倍</li>
+      <li>多GPU训练：GTX 580 GPU只有3GB momory，限制了网络size。为了能扩大网络size，采用多GPU训练</li>
+      <li>local response normalization: a form of lateral inhibition inspired by the type found in real neurons</li>
+      <li>creating competition  for big activities amongst neuron outputs computed using different kernels</li>
+      <li>overlapping pooling: slightly more difficult to overfit</li>
+    </ul>
+  </li>
+  <li>Architecture
+<img src="/img/15854655847916.jpg" alt="" />
+<img src="/img/15854656864364.jpg" width="100%" height="100%" /></li>
+  <li>减少过拟合
+    <ul>
+      <li>Data augmentation
+        <ul>
+          <li>train：random crop (224*224) + horizontal reflections (increase the size of training set by a factor of 2048)</li>
+          <li>test：predict with 10 224*224 patches (4 corners + center and horizontal reflection), then average</li>
+          <li>PCA color augmentation: 相当于改变了the intensity and color of the illumination</li>
+        </ul>
+      </li>
+      <li>Dropout</li>
+    </ul>
+  </li>
+</ol>
 
-<p>在image detection上的应用
-<img src="/img/15849366399167.jpg" width="60%" height="60%" /></p>
-
-<h4 id="model">Model</h4>
-<p><img src="/img/15849365194047.jpg" width="60%" height="60%" /></p>
-
-<p>In each spatial bin, pool (max pooling in the paper) the response of each filter. <br />
-The output of SPP: k*M (M: number  of bins, e.g. 16+4+1; k: number of channels, e.g. 256)</p>
+<h4 id="result">Result</h4>
+<ol>
+  <li>quantitative evaluation<br />
+<img src="/img/15854658726746.jpg" width="50%" height="30%" />
+<img src="/img/15854658948549.jpg" width="60%" height="40%" /></li>
+  <li>qualitative evaluation
+<img src="/img/15854660821423.jpg" alt="" />
+kernels learned on the first layer: frequency- and orientation-selective kernels, and various colored blobs</li>
+</ol>
 
 
 

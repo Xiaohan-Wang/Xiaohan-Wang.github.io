@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Template - Xiaohan's Blog</title>
+    <title>SPP-Net (spatial pyramid pooling) - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2000/01/01/template/">
+    <link rel="canonical" href="http://localhost:4000/2020/03/25/SPP-Net/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -173,11 +173,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/#CV paperlist" title="CV paperlist">CV paperlist</a>
+                        
                     </div>
-                    <h2>Template</h2>
+                    <h2>SPP-Net (spatial pyramid pooling)</h2>
                     
                     
-                    <span class="meta"> Posted on January 1, 2000</span>
+                    <span class="meta">ECCV 2014&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on March 25, 2020</span>
                 </div>
             </div>
         </div>
@@ -195,17 +197,26 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="">Paper link</a> and <a href="">code</a></p>
+				<h4 id="goal">Goal</h4>
+<p>消除CNN对图片size/scale的限制</p>
 
-<h4 id="take-away-message">Take away message</h4>
+<h4 id="motivation">Motivation</h4>
+<p>CNN = convolutional layers + fully-connected layers</p>
+<ol>
+  <li>convolutional layers不要求图片size</li>
+  <li>fully-connected layers对size有要求</li>
+</ol>
+
+<p>思路：在fully-connected layers前面加入SPP layer, 其能对不同size的feature产生fixed-length output，然后送入fully-connected layers</p>
+
+<p>在image detection上的应用
+<img src="/img/15849366399167.jpg" width="60%" height="60%" /></p>
 
 <h4 id="model">Model</h4>
+<p><img src="/img/15849365194047.jpg" width="60%" height="60%" /></p>
 
-<h4 id="result">Result</h4>
-
-<h4 id="tricks">Tricks</h4>
-
-<h4 id="insight">Insight</h4>
+<p>In each spatial bin, pool (max pooling in the paper) the response of each filter. <br />
+The output of SPP: k*M (M: number  of bins, e.g. 16+4+1; k: number of channels, e.g. 256)</p>
 
 
 
@@ -213,11 +224,18 @@
 
 <!--                 <ul class="pager">
                     
+                    <li class="previous">
+                        <a href="/2020/03/24/Maximum-Squares-Loss/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation for Semantic Segmentation with Maximum Squares Loss">
+                        Previous<br>
+                        <span>Domain Adaptation for Semantic Segmentation with Maximum Squares Loss</span>
+                        </a>
+                    </li>
+                    
                     
                     <li class="next">
-                        <a href="/2000/01/01/AlexNet/" data-toggle="tooltip" data-placement="top" title="AlexNet">
+                        <a href="/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/" data-toggle="tooltip" data-placement="top" title="Reshaping Visual Datasets for Domain Adaptation">
                         Next<br>
-                        <span>AlexNet</span>
+                        <span>Reshaping Visual Datasets for Domain Adaptation</span>
                         </a>previous
                     </li>
                     
