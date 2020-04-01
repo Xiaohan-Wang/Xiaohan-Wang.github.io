@@ -1,4 +1,4 @@
-I"Í	<p><a href="https://cvpaperlist.blogspot.com/2019/12/imagenet-classification-with-deep.html">Paper link</a></p>
+I"ã	<p><a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">Paper link</a></p>
 
 <p>60 million parameters; 650,000 neurons</p>
 
@@ -57,8 +57,8 @@
 <h4 id="result">Result</h4>
 <ol>
   <li>quantitative evaluation<br />
-<img src="/img/15854658726746.jpg" width="30%" height="30%" />
-<img src="/img/15854658948549.jpg" width="40%" height="40%" /></li>
+<img src="/img/15854658726746.jpg" width="50%" height="30%" />
+<img src="/img/15854658948549.jpg" width="60%" height="40%" /></li>
   <li>qualitative evaluation
 <img src="/img/15854660821423.jpg" alt="" />
 kernels learned on the first layer: frequency- and orientation-selective kernels, and various colored blobs</li>

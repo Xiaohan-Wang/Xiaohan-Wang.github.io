@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>AlexNet - Xiaohan's Blog</title>
+    <title>Moment Matching for Multi-Source Domain Adaptation - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2000/01/01/AlexNet/">
+    <link rel="canonical" href="http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -173,13 +173,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#CV paperlist" title="CV paperlist">CV paperlist</a>
+                        <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
                         
                     </div>
-                    <h2>AlexNet</h2>
+                    <h2>Moment Matching for Multi-Source Domain Adaptation</h2>
                     
                     
-                    <span class="meta">NIPS 2012&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on January 1, 2000</span>
+                    <span class="meta">ICCV 2019&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on March 31, 2020</span>
                 </div>
             </div>
         </div>
@@ -197,71 +197,46 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="https://cvpaperlist.blogspot.com/2019/12/imagenet-classification-with-deep.html">Paper link</a></p>
+				<p><a href="http://openaccess.thecvf.com/content_ICCV_2019/papers/Peng_Moment_Matching_for_Multi-Source_Domain_Adaptation_ICCV_2019_paper.pdf">Paper link</a> and <a href="http://ai.bu.edu/M3SDA/">code</a></p>
 
-<p>60 million parameters; 650,000 neurons</p>
-
-<h4 id="why-works">Why works</h4>
+<h4 id="take-away-message">Take away message</h4>
 <ol>
-  <li>数据集的改变：
-    <ul>
-      <li>以前， on the order of tens of thousands of images</li>
-      <li>最近，Imagenet；LabelMe</li>
-    </ul>
-  </li>
-  <li>CNN
-    <ul>
-      <li>enough learning capacity</li>
-      <li>prior knowledge (assumptions): stationarity of statistics and locality of pixel dependencies</li>
-      <li>compared to NN, CNN has fewer parameters: easier to train</li>
-      <li>GPU and large dataset</li>
-    </ul>
-  </li>
+  <li>the upper bound on the target error of the learned hypothesis depends on the pairwise moment divergence $d_{CM^k}(D_S, D_T)$ between the target domain and each source domain. (This provides a direct motivation for moment matching approaches)</li>
+  <li>The last term target error is lower bounded by the pairwise divergences between source domains (implies we might also need to minimize divergence between source domains)</li>
+  <li>DomainNet: multi-souce domain adaptation dataset</li>
 </ol>
 
-<h4 id="alexnet">AlexNet</h4>
+<h4 id="model">Model</h4>
+<p><img src="/img/15857182767863.jpg" alt="-w909" /></p>
+
 <ol>
-  <li>Input:
-    <ul>
-      <li>256*256, 首先reshape将短边变成256，然后center crop</li>
-      <li>预处理：减去training set的mean，将输入数据变为centered raw RGB value</li>
-    </ul>
-  </li>
-  <li>network
-    <ul>
-      <li>采用ReLU：sigmoid/tanh梯度下降所需的训练时间比ReLU慢很多倍</li>
-      <li>多GPU训练：GTX 580 GPU只有3GB momory，限制了网络size。为了能扩大网络size，采用多GPU训练</li>
-      <li>local response normalization: a form of lateral inhibition inspired by the type found in real neurons</li>
-      <li>creating competition  for big activities amongst neuron outputs computed using different kernels</li>
-      <li>overlapping pooling: slightly more difficult to overfit</li>
-    </ul>
-  </li>
-  <li>Architecture
-<img src="/img/15854655847916.jpg" alt="" />
-<img src="/img/15854656864364.jpg" width="100%" height="100%" /></li>
-  <li>减少过拟合
-    <ul>
-      <li>Data augmentation
-        <ul>
-          <li>train：random crop (224*224) + horizontal reflections (increase the size of training set by a factor of 2048)</li>
-          <li>test：predict with 10 224*224 patches (4 corners + center and horizontal reflection), then average</li>
-          <li>PCA color augmentation: 相当于改变了the intensity and color of the illumination</li>
-        </ul>
-      </li>
-      <li>Dropout</li>
-    </ul>
+  <li>moment distance based loss:<br />
+<img src="/img/15857184320957.jpg" width="60%" height="100%" /></li>
+  <li>overall training objective:<br />
+<img src="/img/15857185193833.jpg" width="50%" height="100%" /></li>
+  <li>In order to align $p(y;x)$ and $p(x)$ at the same time, they follow the training paradigm proposed in [1]. They leverage two classifiers per domain to form N pairs of classifiers $C′ = {(C1, C1′), (C2, C2′), …, (CN, CN ′)}$. The training procedure includes three steps.
+    <ol>
+      <li>train $G$ and $C′$ to classify the multi-source samples correctly based on the overall training objective.</li>
+      <li>train the classifier pairs for a fixed $G$. The goal is to make the discrepancy of each pair of classifiers as large as possible on the target domain.</li>
+      <li>fix $C′$ and train $G$ to minimize the discrepancy of each classifier pair on the target domain.</li>
+    </ol>
   </li>
 </ol>
 
 <h4 id="result">Result</h4>
+<p><img src="/img/15857191596055.jpg" alt="-w781" /></p>
+
+<p><img src="/img/15857190392968.jpg" alt="-w851" />个人感觉主要是$M^3SDA-\beta$中的training paradigm在发挥作用。</p>
+
+<h4 id="further-reference">Further reference</h4>
 <ol>
-  <li>quantitative evaluation<br />
-<img src="/img/15854658726746.jpg" width="50%" height="30%" />
-<img src="/img/15854658948549.jpg" width="60%" height="40%" /></li>
-  <li>qualitative evaluation
-<img src="/img/15854660821423.jpg" alt="" />
-kernels learned on the first layer: frequency- and orientation-selective kernels, and various colored blobs</li>
+  <li>Kuniaki Saito, Kohei Watanabe, Yoshitaka Ushiku, and Tat- suya Harada. Maximum classifier discrepancy for unsuper- vised domain adaptation. In The IEEE Conference on Com- puter Vision and Pattern Recognition (CVPR), June 2018.</li>
+  <li>Chun-Liang Li, Wei-Cheng Chang, Yu Cheng, Yiming Yang, and Barnab´as P´oczos. Mmd gan: Towards deeper understanding of moment matching network. In Advances in Neural Information Processing Systems, pages 2203–2213, 2017.</li>
+  <li>Yujia Li, Kevin Swersky, and Rich Zemel. Generative mo- ment matching networks. In International Conference on Machine Learning, pages 1718–1727, 2015.</li>
+  <li>Youssef Mroueh, Tom Sercu, and Vaibhava Goel. McGan: Mean and covariance feature matching GAN. In Doina Pre- cup and Yee Whye Teh, editors, Proceedings ofthe 34th In- ternational Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 2527– 2535, International Convention Centre, Sydney, Australia, 06–11 Aug 2017. PMLR.</li>
 </ol>
+
+<p>2，3，4是Gan based moment matching</p>
 
 
 
@@ -270,19 +245,12 @@ kernels learned on the first layer: frequency- and orientation-selective kernels
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2000/01/01/template/" data-toggle="tooltip" data-placement="top" title="Template">
+                        <a href="/2020/03/30/week-summary/" data-toggle="tooltip" data-placement="top" title="Short Summay for Some Papers 1">
                         Previous<br>
-                        <span>Template</span>
+                        <span>Short Summay for Some Papers 1</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/05/Unbiased-Look-at-Dataset-Bias/" data-toggle="tooltip" data-placement="top" title="Unbiased Look at Dataset Bias">
-                        Next<br>
-                        <span>Unbiased Look at Dataset Bias</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
@@ -348,9 +316,11 @@ kernels learned on the first layer: frequency- and orientation-selective kernels
                             
         				
                             
-                				<a href="/tags/#Domain Adaptation" title="Domain Adaptation" rel="8">
+                				<a href="/tags/#Domain Adaptation" title="Domain Adaptation" rel="11">
                                     Domain Adaptation
                                 </a>
+                            
+        				
                             
         				
                             

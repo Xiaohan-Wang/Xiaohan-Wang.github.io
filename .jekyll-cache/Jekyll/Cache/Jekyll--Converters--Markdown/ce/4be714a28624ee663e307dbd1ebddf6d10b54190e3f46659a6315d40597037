@@ -1,0 +1,62 @@
+I"i<p><a href="https://research.mapillary.com/img/publications/CVPR18b.pdf">Paper link</a> and <a href="https://github.com/mancinimassimiliano/latent_domains_DA">code</a></p>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15854715937974.jpg" width="60%" height="60%" />
+第一篇针对classification task的deep learning based multi-source domain adaptation. 本质上是multi-source的AdaBN.</p>
+
+<p><img src="/img/15857203223787.jpg" alt="-w763" /></p>
+<ol>
+  <li>a side-output branch is empolyed to predict domain assignment probabilities for each input sample.</li>
+  <li>mDA-layer to renormalize the multi-modal feature distributions</li>
+</ol>
+
+<h5 id="domain-discovery">domain discovery</h5>
+<ol>
+  <li>domain prediction branch: sample points at different mDA-layers corresponding to a single input element to the network should share the same probabilities</li>
+  <li>split the network into a domain prediction branch and classification branch at some low level layer: features tend to become increasingly more domain invariant going deeper into the network, meaning that it becomes increasingly harder to compute a sample’s domain as a function of deeper features.</li>
+</ol>
+
+<h5 id="multi-source-domain-adaptation-layer">multi-source domain adaptation layer</h5>
+<blockquote>
+  <p>Domain Alignment layers: aim to reduce internal domain shift at different levels within the network by re-normalizing features in a domain-dependent way, matching their distributions to a pre-determined one.</p>
+</blockquote>
+
+<p>$q_{d|x}(d | x_i)$ is the conditional probability of $x_i$ belonging to $d$, given $x_i$</p>
+<ol>
+  <li>compute $\mu$ and $\sigma^2$<br />
+ <img src="/img/15857223593758.jpg" width="30%" height="40%" /><br />
+ <img src="/img/15857224509940.jpg" width="45%" height="40%" /></li>
+  <li>normalize each sample<br />
+By substituting $w_{i,d}$ for $q_{d|x}(d | x_i)$<br />
+<img src="/img/15857225154947.jpg" width="45%" height="40%" /></li>
+</ol>
+
+<h5 id="overall-training-objective">overall training objective</h5>
+<p>only use source dataset now
+<img src="/img/15857216573544.jpg" width="45%" height="40%" /></p>
+<ol>
+  <li>labeled data的分类loss (cross entropy)</li>
+  <li>data with known domain的预测loss (cross entropy)</li>
+  <li>unlabeled data的分类 (minimizing uncertainty)</li>
+  <li>data without domain label的预测loss (minimizing uncertainty)</li>
+</ol>
+
+<h4 id="result">Result</h4>
+<p><img src="/img/15857232316372.jpg" width="50%" height="60%" />
+<img src="/img/15857232406316.jpg" width="50%" height="60%" />
+在latent domain明显的时候(digit和PACS), model表现更好。但对于office-31, 可能因为很难直接发现latent domain，所以基本没有提高。</p>
+
+<h4 id="reflection">Reflection</h4>
+<ol>
+  <li>multi-source DA可以地方可以借鉴single-source的思想，比如说本文用的domain-alignment layer</li>
+  <li>难点在于 好的latent domain discovery</li>
+</ol>
+
+<h4 id="further-reference-for-latent-domain-discovery">Further reference (for latent domain discovery)</h4>
+<ol>
+  <li>J. Hoffman, B. Kulis, T. Darrell, and K. Saenko. Discovering latent domains for multisource domain adaptation. In ECCV, 2012.</li>
+  <li>B. Gong, K. Grauman, and F. Sha. Reshaping visual datasets for domain adaptation. In NIPS, 2013.</li>
+  <li>C. Xiong, S. McCloskey, S.-H. Hsieh, and J. J. Corso. Latent domains modeling for visual domain adaptation. In AAAI, 2014.</li>
+</ol>
+
+:ET

@@ -1,0 +1,34 @@
+def find_smallest_ab_diff(list1, list2):
+	value = Inf
+	for a in list1:
+		for b in list2:
+			diff = abs(a-b)
+			if diff < value:
+				value = diff
+	return value
+
+
+
+def func2(list1, list2):
+	value = Inf
+	last_small = Inf
+	last_list = 3
+	if len(list1)!=0 and len(list2)!=0:
+		a = list1.pop()
+		b = list2.pop()
+		if a < b :
+			small = a
+			list2.push(b)
+			list = 1
+		if b < a and:
+			small = b
+			list1.push(a)
+			list = 2
+		if list != last_list:
+			diff = abs(small - last_small)
+			if diff < value:
+				value = diff
+		last_small = small
+		last_list = list
+	return value
+

@@ -5,9 +5,234 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 29 Mar 2020 03:17:13 -0400</pubDate>
-    <lastBuildDate>Sun, 29 Mar 2020 03:17:13 -0400</lastBuildDate>
+    <pubDate>Wed, 01 Apr 2020 03:16:54 -0400</pubDate>
+    <lastBuildDate>Wed, 01 Apr 2020 03:16:54 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Moment Matching for Multi-Source Domain Adaptation</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://openaccess.thecvf.com/content_ICCV_2019/papers/Peng_Moment_Matching_for_Multi-Source_Domain_Adaptation_ICCV_2019_paper.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;http://ai.bu.edu/M3SDA/&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;the upper bound on the target error of the learned hypothesis depends on the pairwise moment divergence $d_{CM^k}(D_S, D_T)$ between the target domain and each source domain. (This provides a direct motivation for moment matching approaches)&lt;/li&gt;
+  &lt;li&gt;The last term target error is lower bounded by the pairwise divergences between source domains (implies we might also need to minimize divergence between source domains)&lt;/li&gt;
+  &lt;li&gt;DomainNet: multi-souce domain adaptation dataset&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15857182767863.jpg&quot; alt=&quot;-w909&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;moment distance based loss:&lt;br /&gt;
+&lt;img src=&quot;/img/15857184320957.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;overall training objective:&lt;br /&gt;
+&lt;img src=&quot;/img/15857185193833.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;In order to align $p(y;x)$ and $p(x)$ at the same time, they follow the training paradigm proposed in [1]. They leverage two classifiers per domain to form N pairs of classifiers $C′ = {(C1, C1′), (C2, C2′), …, (CN, CN ′)}$. The training procedure includes three steps.
+    &lt;ol&gt;
+      &lt;li&gt;train $G$ and $C′$ to classify the multi-source samples correctly based on the overall training objective.&lt;/li&gt;
+      &lt;li&gt;train the classifier pairs for a fixed $G$. The goal is to make the discrepancy of each pair of classifiers as large as possible on the target domain.&lt;/li&gt;
+      &lt;li&gt;fix $C′$ and train $G$ to minimize the discrepancy of each classifier pair on the target domain.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15857191596055.jpg&quot; alt=&quot;-w781&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15857190392968.jpg&quot; alt=&quot;-w851&quot; /&gt;个人感觉主要是$M^3SDA-\beta$中的training paradigm在发挥作用。&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Kuniaki Saito, Kohei Watanabe, Yoshitaka Ushiku, and Tat- suya Harada. Maximum classifier discrepancy for unsuper- vised domain adaptation. In The IEEE Conference on Com- puter Vision and Pattern Recognition (CVPR), June 2018.&lt;/li&gt;
+  &lt;li&gt;Chun-Liang Li, Wei-Cheng Chang, Yu Cheng, Yiming Yang, and Barnab´as P´oczos. Mmd gan: Towards deeper understanding of moment matching network. In Advances in Neural Information Processing Systems, pages 2203–2213, 2017.&lt;/li&gt;
+  &lt;li&gt;Yujia Li, Kevin Swersky, and Rich Zemel. Generative mo- ment matching networks. In International Conference on Machine Learning, pages 1718–1727, 2015.&lt;/li&gt;
+  &lt;li&gt;Youssef Mroueh, Tom Sercu, and Vaibhava Goel. McGan: Mean and covariance feature matching GAN. In Doina Pre- cup and Yee Whye Teh, editors, Proceedings ofthe 34th In- ternational Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 2527– 2535, International Convention Centre, Sydney, Australia, 06–11 Aug 2017. PMLR.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;2，3，4是Gan based moment matching&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 31 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Short Summay for Some Papers 1</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Unsupervised Domain Adaptation with Similarity Learning (CVPR 2018)&lt;/strong&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/img/15857245561079.jpg&quot; width=&quot;60%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;a similarity-based classifier in which each image (from either the source or target domain) is compared to a set of prototypes (or centroides). The label associated to the prototype that best matches the query image is given to it.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 30 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/30/week-summary/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/30/week-summary/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Boosting Domain Adaptation by Discovering Latent Domains</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://research.mapillary.com/img/publications/CVPR18b.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/mancinimassimiliano/latent_domains_DA&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15854715937974.jpg&quot; width=&quot;40%&quot; height=&quot;60%&quot; /&gt;
+第一篇针对classification task的deep learning based multi-source domain adaptation. 本质上是multi-source的AdaBN.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15857203223787.jpg&quot; alt=&quot;-w763&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;a side-output branch is empolyed to predict domain assignment probabilities for each input sample.&lt;/li&gt;
+  &lt;li&gt;mDA-layer to renormalize the multi-modal feature distributions&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;domain-discovery&quot;&gt;domain discovery&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;domain prediction branch: sample points at different mDA-layers corresponding to a single input element to the network should share the same probabilities&lt;/li&gt;
+  &lt;li&gt;split the network into a domain prediction branch and classification branch at some low level layer: features tend to become increasingly more domain invariant going deeper into the network, meaning that it becomes increasingly harder to compute a sample’s domain as a function of deeper features.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;multi-source-domain-adaptation-layer&quot;&gt;multi-source domain adaptation layer&lt;/h5&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Domain Alignment layers: aim to reduce internal domain shift at different levels within the network by re-normalizing features in a domain-dependent way, matching their distributions to a pre-determined one.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;$q_{d|x}(d | x_i)$ is the conditional probability of $x_i$ belonging to $d$, given $x_i$&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;compute $\mu$ and $\sigma^2$&lt;br /&gt;
+ &lt;img src=&quot;/img/15857223593758.jpg&quot; width=&quot;30%&quot; height=&quot;40%&quot; /&gt;&lt;br /&gt;
+ &lt;img src=&quot;/img/15857224509940.jpg&quot; width=&quot;45%&quot; height=&quot;40%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;normalize each sample&lt;br /&gt;
+By substituting $w_{i,d}$ for $q_{d|x}(d | x_i)$&lt;br /&gt;
+&lt;img src=&quot;/img/15857225154947.jpg&quot; width=&quot;45%&quot; height=&quot;40%&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;overall-training-objective&quot;&gt;overall training objective&lt;/h5&gt;
+&lt;p&gt;only use source dataset now
+&lt;img src=&quot;/img/15857216573544.jpg&quot; width=&quot;45%&quot; height=&quot;40%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;labeled data的分类loss (cross entropy)&lt;/li&gt;
+  &lt;li&gt;data with known domain的预测loss (cross entropy)&lt;/li&gt;
+  &lt;li&gt;unlabeled data的分类 (minimizing uncertainty)&lt;/li&gt;
+  &lt;li&gt;data without domain label的预测loss (minimizing uncertainty)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15857232316372.jpg&quot; width=&quot;50%&quot; height=&quot;60%&quot; /&gt;
+&lt;img src=&quot;/img/15857232406316.jpg&quot; width=&quot;50%&quot; height=&quot;60%&quot; /&gt;
+在latent domain明显的时候(digit和PACS), model表现更好。但对于office-31, 可能因为很难直接发现latent domain，所以基本没有提高。&lt;/p&gt;
+
+&lt;h4 id=&quot;reflection&quot;&gt;Reflection&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;multi-source DA可以地方可以借鉴single-source的思想，比如说本文用的domain-alignment layer&lt;/li&gt;
+  &lt;li&gt;难点在于 好的latent domain discovery&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;further-reference-for-latent-domain-discovery&quot;&gt;Further reference (for latent domain discovery)&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;J. Hoffman, B. Kulis, T. Darrell, and K. Saenko. Discovering latent domains for multisource domain adaptation. In ECCV, 2012.&lt;/li&gt;
+  &lt;li&gt;B. Gong, K. Grauman, and F. Sha. Reshaping visual datasets for domain adaptation. In NIPS, 2013.&lt;/li&gt;
+  &lt;li&gt;C. Xiong, S. McCloskey, S.-H. Hsieh, and J. J. Corso. Latent domains modeling for visual domain adaptation. In AAAI, 2014.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Sun, 29 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>AlexNet</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;60 million parameters; 650,000 neurons&lt;/p&gt;
+
+&lt;h4 id=&quot;why-works&quot;&gt;Why works&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;数据集的改变：
+    &lt;ul&gt;
+      &lt;li&gt;以前， on the order of tens of thousands of images&lt;/li&gt;
+      &lt;li&gt;最近，Imagenet；LabelMe&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;CNN
+    &lt;ul&gt;
+      &lt;li&gt;enough learning capacity&lt;/li&gt;
+      &lt;li&gt;prior knowledge (assumptions): stationarity of statistics and locality of pixel dependencies&lt;/li&gt;
+      &lt;li&gt;compared to NN, CNN has fewer parameters: easier to train&lt;/li&gt;
+      &lt;li&gt;GPU and large dataset&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;alexnet&quot;&gt;AlexNet&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Input:
+    &lt;ul&gt;
+      &lt;li&gt;256*256, 首先reshape将短边变成256，然后center crop&lt;/li&gt;
+      &lt;li&gt;预处理：减去training set的mean，将输入数据变为centered raw RGB value&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;network
+    &lt;ul&gt;
+      &lt;li&gt;采用ReLU：sigmoid/tanh梯度下降所需的训练时间比ReLU慢很多倍&lt;/li&gt;
+      &lt;li&gt;多GPU训练：GTX 580 GPU只有3GB momory，限制了网络size。为了能扩大网络size，采用多GPU训练&lt;/li&gt;
+      &lt;li&gt;local response normalization: a form of lateral inhibition inspired by the type found in real neurons&lt;/li&gt;
+      &lt;li&gt;creating competition  for big activities amongst neuron outputs computed using different kernels&lt;/li&gt;
+      &lt;li&gt;overlapping pooling: slightly more difficult to overfit&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Architecture
+&lt;img src=&quot;/img/15854655847916.jpg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;/img/15854656864364.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;减少过拟合
+    &lt;ul&gt;
+      &lt;li&gt;Data augmentation
+        &lt;ul&gt;
+          &lt;li&gt;train：random crop (224*224) + horizontal reflections (increase the size of training set by a factor of 2048)&lt;/li&gt;
+          &lt;li&gt;test：predict with 10 224*224 patches (4 corners + center and horizontal reflection), then average&lt;/li&gt;
+          &lt;li&gt;PCA color augmentation: 相当于改变了the intensity and color of the illumination&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Dropout&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;quantitative evaluation&lt;br /&gt;
+&lt;img src=&quot;/img/15854658726746.jpg&quot; width=&quot;50%&quot; height=&quot;30%&quot; /&gt;
+&lt;img src=&quot;/img/15854658948549.jpg&quot; width=&quot;60%&quot; height=&quot;40%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;qualitative evaluation
+&lt;img src=&quot;/img/15854660821423.jpg&quot; alt=&quot;&quot; /&gt;
+kernels learned on the first layer: frequency- and orientation-selective kernels, and various colored blobs&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Fri, 27 Mar 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/03/27/AlexNet/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/03/27/AlexNet/</guid>
+        
+        <category>CV paperlist</category>
+        
+        
+      </item>
     
       <item>
         <title>Reshaping Visual Datasets for Domain Adaptation</title>
@@ -313,326 +538,6 @@ from https://en.wikipedia.org/wiki/Domain_adaptation&lt;/p&gt;
         <category>Domain Adaptation</category>
         
         <category>Concept</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>A Few Useful Things to Know About Machine Learning</title>
-        <description>&lt;h2 id=&quot;12-trick-lessons-in-ml&quot;&gt;12 trick lessons in ML&lt;/h2&gt;
-
-&lt;h3 id=&quot;1-learning-algorithm--representation--evaluation--optimization&quot;&gt;1. learning algorithm = representation + evaluation + optimization&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;representation&lt;/strong&gt;:  choosing a representation for a learner is tantamount to choosing the hypothesis space&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;evaluation&lt;/strong&gt;: evaluation function&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;optimization&lt;/strong&gt;: the method to search among the hypothesis space&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15817081275431.jpg&quot; alt=&quot;-w801&quot; /&gt;
-三者同样重要&lt;/p&gt;
-
-&lt;h3 id=&quot;2-generalization-counts&quot;&gt;2. generalization counts&lt;/h3&gt;
-&lt;p&gt;strict separation between training and test set.&lt;/p&gt;
-
-&lt;h3 id=&quot;3-data-alone-is-not-enough&quot;&gt;3. data alone is not enough&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;data alone is not enough, no matter how much of it you have. (e.g. Consider learning a Boolean function of (say) 100 variables from a million examples. There are 2^100 − 10^6 examples whose classes you don’t know.)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;every learner must embody some &lt;strong&gt;knowledge or assumption&lt;/strong&gt; beyond the data it’s given in order to generalize beyond it.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;learners are like lever: less knowledge/assumption + (data) -&amp;gt; useful results. But it still need more than zero input knowledge to work.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;corollary: one of the key criteria for choosing a representation is which kinds of knowledge are easily expressed in it.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;4-overfitting&quot;&gt;4. overfitting&lt;/h3&gt;
-&lt;p&gt;if the knowledge and data we have are not sufficient to completely determine the correct classifier -&amp;gt; risk of overfitting&lt;/p&gt;
-
-&lt;p&gt;Note: A common misconception about overfitting is that it is caused by noise, but severe overfitting can occur even in the absence of noise.&lt;/p&gt;
-
-&lt;h3 id=&quot;5-high-dimensions&quot;&gt;5. high dimensions&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;curse of dimensionality:  our intuition, which come from a three-dimensional world, often do not apply in high-dimensional ones. Naively, one might think that gathering more features never hurts, since at worst they provide no new information about the class. But in fact their benefits may be outweighed by the curse of dimensionality.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;blessing of non-uniformity: In most applications examples are not spread uniformly throughout the instance space, but are concentrated on or near a lower-dimensional manifold.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;6-theoretical-guarantees&quot;&gt;6. theoretical guarantees&lt;/h3&gt;
-&lt;p&gt;The main role of theoretical guarantees in machine learning
-is not as a criterion for practical decisions, but as a source of
-understanding and driving force for algorithm design. In this
-capacity, they are quite useful; indeed, the close interplay
-of theory and practice is one of the main reasons machine
-learning has made so much progress over the years. But
-caveat emptor: learning is a complex phenomenon, and just
-because a learner has a theoretical justification and works in
-practice doesn’t mean the former is the reason for the latter.&lt;/p&gt;
-
-&lt;h3 id=&quot;7-feature-engineering&quot;&gt;7. feature engineering&lt;/h3&gt;
-&lt;p&gt;Often, the raw data is not in a form that is amenable to learning, but you can construct features from it that are.&lt;/p&gt;
-
-&lt;p&gt;Note: features that look irrelevant in isolation may be relevant in combination. For example, if the class is an XOR of k input features, each of them by itself carries no information about the class.&lt;/p&gt;
-
-&lt;h3 id=&quot;8-more-data-beats-a-cleverer-algorithm&quot;&gt;8. MORE DATA BEATS A CLEVERER ALGORITHM&lt;/h3&gt;
-&lt;p&gt;As a rule of thumb, a dumb algorithm with lots and lots of data beats a clever one with modest amounts of it.&lt;/p&gt;
-
-&lt;h3 id=&quot;9-learn-many-models-not-just-one&quot;&gt;9. LEARN MANY MODELS, NOT JUST ONE&lt;/h3&gt;
-&lt;p&gt;model ensembles (researchers noticed that, if instead
-of selecting the best variation found, we combine many variations, the results are better—often much better—and at
-little extra effort for the user)&lt;/p&gt;
-
-&lt;h3 id=&quot;10--simplicity-does-not-imply-accuracy&quot;&gt;10.  SIMPLICITY DOES NOT IMPLY ACCURACY&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;contrary to intuition, there is no necessary connection between the number of parameters of a model and its tendency to overfit.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;the size of the hypothesis space is only a rough guide to what really matters for relating training and test error: the procedure by which a hypothesis is chosen.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;11-representable-does-not-imply-learnable&quot;&gt;11. REPRESENTABLE DOES NOT IMPLY LEARNABLE&lt;/h3&gt;
-&lt;p&gt;Just because a function can be represented does not mean it can be learned (e.g.  if the hypothesis space has many local optima of the evaluation function, as is often the case, the learner may not find the true function even if it is representable.). Therefore the key question is not “Can it be represented?”, to which the answer is often trivial, but “Can it be learned?”&lt;/p&gt;
-
-&lt;h3 id=&quot;12-correlation-does-not-imply-causation&quot;&gt;12. CORRELATION DOES NOT IMPLY CAUSATION&lt;/h3&gt;
-</description>
-        <pubDate>Tue, 11 Feb 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/02/11/A-Few-Useful-Things-to-Know-About-Machine-Learning/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/02/11/A-Few-Useful-Things-to-Know-About-Machine-Learning/</guid>
-        
-        <category>ML</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>python各类图像库</title>
-        <description>&lt;h3 id=&quot;short-version&quot;&gt;short version&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt; &lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;类型&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;顺序&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;size&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;scale&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;cv2&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;numpy&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;BGR&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;(h,w,c)&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;255(uint8)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;PIL&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;Image/numpy&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;RGB&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;(w,h) / (h,w,c)&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;- / 255(uint8)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;skimage&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;numpy&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;RGB&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;(h,w,c)&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;rgb:255(uint8) / gray:1(float)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;cv2&quot;&gt;cv2&lt;/h3&gt;
-&lt;h4 id=&quot;ioshow&quot;&gt;i/o/show&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;cv2&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#读入图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-  
-&lt;span class=&quot;c1&quot;&gt;#显示图像    
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'src'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
-&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitkey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-
-&lt;span class=&quot;c1&quot;&gt;#保存图像   
-&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;cv2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imwrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'test.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;  
-
-&lt;span class=&quot;c1&quot;&gt;#归一化  
-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;astype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;float&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;255.0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;blockquote&gt;
-  &lt;font size=&quot;3&quot;&gt;`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)&lt;/font&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;attribute&quot;&gt;attribute&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;numpy array&lt;/li&gt;
-  &lt;li&gt;默认读入彩色图像
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gray = cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE)&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;channel顺序：BGR
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;im2 = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;img.shape: (h,w,c)&lt;/li&gt;
-  &lt;li&gt;img.dtype: uint8(255)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pil&quot;&gt;PIL&lt;/h3&gt;
-&lt;h4 id=&quot;ioshow-1&quot;&gt;i/o/show&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;PIL&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#读入图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Image&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#显示图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;show&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#保存图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'2.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h4 id=&quot;image对象&quot;&gt;Image对象&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;PIL读入图片后生成Image对象&lt;/li&gt;
-  &lt;li&gt;img.size: (w, h)&lt;/li&gt;
-  &lt;li&gt;img.mode: 灰度L / 真彩色RGB&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;image转numpy矩阵&quot;&gt;Image转numpy矩阵&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;arr = np.array(img) &lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;channel顺序：RGB&lt;/li&gt;
-  &lt;li&gt;arr.shape: (h,w,c)&lt;/li&gt;
-  &lt;li&gt;arr.dtype: uint8 (255)&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;new_img = Image.fromarray(arr)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;skimage&quot;&gt;skimage&lt;/h3&gt;
-&lt;h4 id=&quot;ioshow-2&quot;&gt;i/o/show&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kn&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;skimage&lt;/span&gt; &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#读入图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imread&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#显示图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-
-&lt;span class=&quot;c1&quot;&gt;#保存图像
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;io&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imsave&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1.jpg'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;im&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;h4 id=&quot;attribute-1&quot;&gt;attribute&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;numpy array&lt;/li&gt;
-  &lt;li&gt;channel顺序：RGB&lt;/li&gt;
-  &lt;li&gt;img.shape: (h,w,c)&lt;/li&gt;
-  &lt;li&gt;img.dtype: RGB uint8 (255) / gray float (1)&lt;/li&gt;
-&lt;/ul&gt;
-
-</description>
-        <pubDate>Wed, 08 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/08/python%E5%90%84%E7%B1%BB%E5%9B%BE%E5%83%8F%E5%BA%93/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/08/python%E5%90%84%E7%B1%BB%E5%9B%BE%E5%83%8F%E5%BA%93/</guid>
-        
-        <category>python</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks</title>
-        <description>&lt;h3 id=&quot;idea&quot;&gt;Idea&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;适用于domain间存在low-level difference的domain adaptation&lt;/li&gt;
-  &lt;li&gt;不需要domain间的corresponding pairs&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;model&quot;&gt;Model&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15785106924617.jpg&quot; alt=&quot;-w857&quot; /&gt;
-&lt;img src=&quot;/img/15785107411179.jpg&quot; alt=&quot;-w50&quot; height=&quot;100px&quot; width=&quot;400px&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;主要由discriminator(D)来学习，classifier(T: task)和content-similarity loss主要用来 stabalize GAN的训练&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;context-similarity loss: PMSE (pairwise mean squared error)
-    &lt;blockquote&gt;
-      &lt;p&gt;This loss allows the model to learn to reproduce the overall shape of the objects being modeled without wasting modeling power on the absolute color or intensity of the inputs, while allowing our adversarial training to change the object in a consistent way.&lt;/p&gt;
-    &lt;/blockquote&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;reflection&quot;&gt;Reflection&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;T的参与感觉让domain adaptation变成了迎合任务的domain adaptation, 而不是单纯的pixel-level domain adaptation. (也有优势，在对应任务上应该有更好的表现)&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 08 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/</guid>
-        
-        <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Pixel-Level Domain Transfer</title>
-        <description>&lt;h3 id=&quot;idea&quot;&gt;Idea&lt;/h3&gt;
-&lt;p&gt;transfer images in one domain into another domain&lt;/p&gt;
-
-&lt;h3 id=&quot;model&quot;&gt;Model&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15784545847019.jpg&quot; alt=&quot;-w744&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;real/fake discriminator: 判断图像是否来自target domain
-&lt;img src=&quot;/img/15784548684906.jpg&quot; alt=&quot;-w727&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;domain (semantic) discriminator: 判断是否和source domain图像具有相同semantic information
-&lt;img src=&quot;/img/15784548946537.jpg&quot; alt=&quot;-w729&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;converter
- &lt;img src=&quot;/img/15784556404369.jpg&quot; alt=&quot;-w709&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;algorithm&quot;&gt;Algorithm&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15784549145475.jpg&quot; alt=&quot;-w771&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;reflection&quot;&gt;Reflection&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;作者构建的dataset将source domain和target domain中的图像make pair，从而学习image transfer。但general的DA任务并不会有source和target的image pair，因此很难直接使用&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;MSE和discriminator：&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;MSE容易产生blurry images, 因为其假设pixels服从Gaussian distribution&lt;/li&gt;
-      &lt;li&gt;MSE never allow a small geometric miss-alignment&lt;/li&gt;
-      &lt;li&gt;当有关联，但又不容易用公式描述时，可以尝试discriminator&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Tue, 07 Jan 2020 00:00:00 -0500</pubDate>
-        <link>http://localhost:4000/2020/01/07/Pixel-Level-Domain-Transfer/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/01/07/Pixel-Level-Domain-Transfer/</guid>
-        
-        <category>Domain Adaptation</category>
         
         
       </item>

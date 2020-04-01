@@ -12,7 +12,7 @@ tags:
 
 [Paper link]() and [code]()
 
-[//]: #(<img src="" width="40%" height="40%">)
+[//]: #(<img src="" width="100%" height="100%">)
 
 #### Take away message
 
@@ -22,6 +22,8 @@ tags:
 
 #### Tricks
 
-#### Insight
+#### Reflection
+
+#### Further reference 
 
 
