@@ -1,0 +1,10 @@
+I"><p><a href="http://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf">paper</a></p>
+
+<p>t-SNE was proposed in 2008, which is s a very powerful and state-of-the-art dimension reduction algorithm, and is especially good at data visualization.</p>
+
+<p>PCA: perseve global structure (principle component)
+t-SNE: preverse local structure or global structure</p>
+
+<p>https://www.appliedaicourse.com/lecture/11/applied-machine-learning-online-course/2899/neighborhood-of-a-point-embedding/2/module-2-data-science-exploratory-data-analysis-and-data-visualization</p>
+
+:ET

@@ -1,0 +1,35 @@
+I"<table>
+  <thead>
+    <tr>
+      <th>name</th>
+      <th>paper</th>
+      <th>code</th>
+      <th>comment</th>
+      <th>experiment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AlexNet</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Inception-BN</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>VGG-16</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+:ET

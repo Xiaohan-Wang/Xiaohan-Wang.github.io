@@ -1,0 +1,42 @@
+I"�<p><a href="https://arxiv.org/pdf/1712.02560.pdf">Paper link</a> and <a href="https://github.com/mil-tokyo/MCD_DA">code</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>if only consider distribution matching (based on statistics), a trained generator can generate ambiguous features near class boundaries (在class boundary附近，由于缺少训练数据，相当于随机分类)
+<img src="/img/15873584186697.jpg" width="80%" height="80%" /></li>
+</ol>
+
+<p>For better distribution alignment:</p>
+<ol>
+  <li>maximize the discrepancy between two classifiers’ outputs to detect target samples that are far from the support of the source.</li>
+  <li>A feature generator learns to generate target features near the support to minimize the discrepancy, in order to avoid generating target features near class boundaries.</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15873586517441.jpg" alt="-w775" /></p>
+
+<h5 id="discrepancy-loss">discrepancy loss</h5>
+<p>use the absolute values of the difference between the two classifiers’ probabilistic outputs as discrepancy loss.
+<img src="/img/15873624804347.jpg" width="30%" height="100%" /></p>
+
+<h5 id="training-step">Training step</h5>
+<ol>
+  <li>
+    <p>task-specific loss<br />
+train both classifiers and generator to
+classify the source samples correctly. In order to make classifiers and generator obtain task-specific discriminative features, this step is crucial.<br />
+<img src="/img/15873636378997.jpg" width="25%" height="100%" />
+<img src="/img/15873636851548.jpg" width="55%" height="100%" /></p>
+  </li>
+  <li>
+    <p>train classifier<br />
+A classification loss on the source samples is added here. Without this loss, the authors experimentally found that our algorithm’s performance drops significantly.
+<img src="/img/15873638777096.jpg" width="50%" height="100%" /></p>
+  </li>
+  <li>
+    <p>train generator
+<img src="/img/15873639472583.jpg" width="30%" height="100%" /></p>
+  </li>
+</ol>
+
+:ET

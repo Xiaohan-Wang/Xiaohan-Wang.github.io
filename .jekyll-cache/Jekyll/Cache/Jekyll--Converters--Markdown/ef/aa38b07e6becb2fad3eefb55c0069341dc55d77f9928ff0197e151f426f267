@@ -1,2 +1,0 @@
-I"ï<p>a similarity-based classifier in which each image (from either the source or target domain) is compared to a set of prototypes (or centroides). The label associated to the prototype that best matches the query image is given to it.</p>
-:ET

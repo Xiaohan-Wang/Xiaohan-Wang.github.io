@@ -1,0 +1,49 @@
+I"�<p><a href="https://arxiv.org/pdf/1704.08082.pdf">Paper link</a> and <a href="https://github.com/ducksoup/autodial">code</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>limitation of AdaBN: the target samples have no influence on the network parameters, as they are not observed during training.</li>
+  <li>对训练过程描述的很详细，可以参考</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15873547625687.jpg" alt="-w821" /></p>
+
+<p><img src="/img/15873551722703.jpg" width="25%" height="100%" /><img src="/img/15873552325041.jpg" width="25%" height="100%" /><img src="/img/15873552520236.jpg" width="50%" height="100%" /><br />
+其中， $\alpha$ 在[0.5, 1]中：1对应AdaBN (full degree of DA)；0.5对应没有DA，因为此时$q_\alpha^{st}$和$q_\alpha^{ts}$相同，即source和target domain会做相同的transformation。通过让网络自己学习参数$\alpha$，实现了automatically learn the degree of alignment that should be pursued at different levels of the network.</p>
+
+<h4 id="tricks">Tricks</h4>
+<p>Bayes based training process:</p>
+<ol>
+  <li>objective:<br />
+<img src="/img/15873556873967.jpg" width="45%" height="100%" /><img src="/img/15873557363954.jpg" width="30%" height="100%" /></li>
+  <li>sampling distribution<br />
+<img src="/img/15873558553822.jpg" width="35%" height="100%" /></li>
+  <li>
+    <p>prior
+<img src="/img/15873559027282.jpg" width="45%" height="100%" /><br />
+<img src="/img/15873559171140.jpg" width="45%" height="100%" /></p>
+  </li>
+  <li>转化为training objective：
+<img src="/img/15873559673684.jpg" width="45%" height="100%" />  <br />
+source domain用standard cross entropy loss， target domain用entropy minimization.</li>
+</ol>
+
+<h4 id="result">Result</h4>
+<ol>
+  <li>$\alpha$ 大部分接近1.<br />
+<img src="/img/15873565357251.jpg" alt="-w907" /></li>
+</ol>
+
+<p>others:</p>
+<ol>
+  <li>the entropy regularization term is especially beneficial when source and target data representations are aligned. (?)</li>
+  <li>lower layers in a network are subject to domain shift even more than the very last layers.</li>
+</ol>
+
+<h4 id="reflection">Reflection</h4>
+<ol>
+  <li>同时结合了AdaBN和entropy minimization， 不确定结果的提高是否来源于提出的DA layer.</li>
+</ol>
+
+:ET
