@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>AutoDIAL:Automatic DomaIn Alignment Layers - Xiaohan's Blog</title>
+    <title>semantic segmentation dataset summary - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/">
+    <link rel="canonical" href="http://localhost:4000/2020/04/21/semantic-segmentation-datasets/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -173,13 +173,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
+                        <a class="tag" href="/tags/#Datasets" title="Datasets">Datasets</a>
                         
                     </div>
-                    <h2>AutoDIAL:Automatic DomaIn Alignment Layers</h2>
+                    <h2>semantic segmentation dataset summary</h2>
                     
                     
-                    <span class="meta">ICCV 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on April 15, 2020</span>
+                    <span class="meta"> Posted on April 21, 2020</span>
                 </div>
             </div>
         </div>
@@ -197,53 +197,56 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="https://arxiv.org/pdf/1704.08082.pdf">Paper link</a> and <a href="https://github.com/ducksoup/autodial">code</a></p>
+				<p>部分内容来自于 https://blog.csdn.net/MOU_IT/article/details/82225505</p>
 
-<h4 id="take-away-message">Take away message</h4>
+<h4 id="总述">总述</h4>
+<p>目前学术界主要有三个benchmark（数据集）用于模型训练和测试。</p>
 <ol>
-  <li>limitation of AdaBN: the target samples have no influence on the network parameters, as they are not observed during training.</li>
-  <li>对训练过程描述的很详细，可以参考</li>
-</ol>
-
-<h4 id="model">Model</h4>
-<p><img src="/img/15873547625687.jpg" alt="-w821" /></p>
-
-<p><img src="/img/15873551722703.jpg" width="25%" height="100%" /><img src="/img/15873552325041.jpg" width="25%" height="100%" /><img src="/img/15873552520236.jpg" width="50%" height="100%" /><br />
-其中， $\alpha$ 在[0.5, 1]中：1对应AdaBN (full degree of DA)；0.5对应没有DA，因为此时$q_\alpha^{st}$和$q_\alpha^{ts}$相同，即source和target domain会做相同的transformation。通过让网络自己学习参数$\alpha$，实现了automatically learn the degree of alignment that should be pursued at different levels of the network.</p>
-
-<h4 id="tricks">Tricks</h4>
-<p>Bayes based training process:</p>
-<ol>
-  <li>objective:<br />
-<img src="/img/15873556873967.jpg" width="45%" height="100%" /><img src="/img/15873557363954.jpg" width="30%" height="100%" /></li>
-  <li>sampling distribution<br />
-<img src="/img/15873558553822.jpg" width="35%" height="100%" /></li>
-  <li>
-    <p>prior
-<img src="/img/15873559027282.jpg" width="45%" height="100%" /><br />
-<img src="/img/15873559171140.jpg" width="45%" height="100%" /></p>
+  <li>Pascal VOC系列
+    <ul>
+      <li>VOC 2012 (最常见)</li>
+      <li>Pascal Context (偶尔)</li>
+    </ul>
   </li>
-  <li>转化为training objective：
-<img src="/img/15873559673684.jpg" width="45%" height="100%" />  <br />
-source domain用standard cross entropy loss， target domain用entropy minimization.</li>
+  <li>
+    <p>Microsoft COCO<br />
+ COCO一共有80个类别。虽然有很详细的像素级别的标注，但由于官方没有专门对语义分割的测评，因此COCO数据集往往被当成是额外的训练数据集用于模型的训练（预训练？）。</p>
+  </li>
+  <li>Cityscapes
+    <ul>
+      <li>辅助驾驶（自动驾驶）环境</li>
+      <li>使用比较常见的19个类别用于评测</li>
+    </ul>
+  </li>
 </ol>
 
-<h4 id="result">Result</h4>
+<h4 id="voc-2012">VOC 2012</h4>
+
+<p>标准的VOC2012数据集有21个类别(包括背景)，包含:{ 0=background，1=aeroplane, 2=bicycle, 3=bird, 4=boat, 5=bottle, 6=bus, 7=car , 8=cat, 9=chair, 10=cow, 11=diningtable, 12=dog, 13=horse, 14=motorbike, 15=person, 16=potted plant, 17=sheep, 18=sofa, 19=train, 20=tv/monitor，255= ’void’ or unlabelled }这些比较常见的类别。</p>
+
+<p>对于分割任务：</p>
 <ol>
-  <li>$\alpha$ 大部分接近1.<br />
-<img src="/img/15873565357251.jpg" alt="-w907" /></li>
+  <li>VOC 2012用于分割的数据中train+val包含 2007-2011年间的所有数据，test包含2008-2011年间的数据，没有包含07年的是因为07年的test数据已经公开了。</li>
+  <li>trainval：2913张图片，共6929个物体</li>
 </ol>
 
-<p>others:</p>
+<p>补充：<a href="https://arleyzhang.github.io/articles/1dc20586/">PASCAL VOC详细介绍</a></p>
+
+<h4 id="ms-coco">MS COCO</h4>
 <ol>
-  <li>the entropy regularization term is especially beneficial when source and target data representations are aligned. (?)</li>
-  <li>lower layers in a network are subject to domain shift even more than the very last layers.</li>
+  <li>官方没有semantic segmentation测评，因此该数据集常常只用于预训练</li>
+  <li>数据集大小？</li>
 </ol>
 
-<h4 id="reflection">Reflection</h4>
+<h4 id="cityscapes">Cityscapes</h4>
 <ol>
-  <li>同时结合了AdaBN和entropy minimization， 不确定结果的提高是否来源于提出的DA layer.</li>
+  <li>由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。</li>
+  <li>主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张coarse annotated images来训练）</li>
+  <li>分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
+<img src="/img/15875266001958.jpg" alt="-w721" /></li>
 </ol>
+
+<p>补充: <a href="https://niecongchong.github.io/2019/08/10/CityScapes%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%92%8C%E7%B2%BE%E5%BA%A6%E6%8C%87%E6%A0%87/">Cityscapes详细介绍</a></p>
 
 
 
@@ -252,19 +255,12 @@ source domain用standard cross entropy loss， target domain用entropy minimizat
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/" data-toggle="tooltip" data-placement="top" title="Maximum Classifier Discrepancy for Unsupervised Domain Adaptation">
+                        <a href="/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/" data-toggle="tooltip" data-placement="top" title="AutoDIAL:Automatic DomaIn Alignment Layers">
                         Previous<br>
-                        <span>Maximum Classifier Discrepancy for Unsupervised Domain Adaptation</span>
+                        <span>AutoDIAL:Automatic DomaIn Alignment Layers</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/04/21/semantic-segmentation-datasets/" data-toggle="tooltip" data-placement="top" title="semantic segmentation dataset summary">
-                        Next<br>
-                        <span>semantic segmentation dataset summary</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 

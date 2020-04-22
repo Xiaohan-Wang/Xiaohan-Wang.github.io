@@ -5,9 +5,72 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 20 Apr 2020 02:56:26 -0400</pubDate>
-    <lastBuildDate>Mon, 20 Apr 2020 02:56:26 -0400</lastBuildDate>
+    <pubDate>Tue, 21 Apr 2020 23:42:46 -0400</pubDate>
+    <lastBuildDate>Tue, 21 Apr 2020 23:42:46 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>semantic segmentation dataset summary</title>
+        <description>&lt;p&gt;部分内容来自于 https://blog.csdn.net/MOU_IT/article/details/82225505&lt;/p&gt;
+
+&lt;h4 id=&quot;总述&quot;&gt;总述&lt;/h4&gt;
+&lt;p&gt;目前学术界主要有三个benchmark（数据集）用于模型训练和测试。&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Pascal VOC系列
+    &lt;ul&gt;
+      &lt;li&gt;VOC 2012 (最常见)&lt;/li&gt;
+      &lt;li&gt;Pascal Context (偶尔)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Microsoft COCO&lt;br /&gt;
+ COCO一共有80个类别。虽然有很详细的像素级别的标注，但由于官方没有专门对语义分割的测评，因此COCO数据集往往被当成是额外的训练数据集用于模型的训练（预训练？）。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cityscapes
+    &lt;ul&gt;
+      &lt;li&gt;辅助驾驶（自动驾驶）环境&lt;/li&gt;
+      &lt;li&gt;使用比较常见的19个类别用于评测&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;voc-2012&quot;&gt;VOC 2012&lt;/h4&gt;
+
+&lt;p&gt;标准的VOC2012数据集有21个类别(包括背景)，包含:{ 0=background，1=aeroplane, 2=bicycle, 3=bird, 4=boat, 5=bottle, 6=bus, 7=car , 8=cat, 9=chair, 10=cow, 11=diningtable, 12=dog, 13=horse, 14=motorbike, 15=person, 16=potted plant, 17=sheep, 18=sofa, 19=train, 20=tv/monitor，255= ’void’ or unlabelled }这些比较常见的类别。&lt;/p&gt;
+
+&lt;p&gt;对于分割任务：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;VOC 2012用于分割的数据中train+val包含 2007-2011年间的所有数据，test包含2008-2011年间的数据，没有包含07年的是因为07年的test数据已经公开了。&lt;/li&gt;
+  &lt;li&gt;trainval：2913张图片，共6929个物体&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;补充：&lt;a href=&quot;https://arleyzhang.github.io/articles/1dc20586/&quot;&gt;PASCAL VOC详细介绍&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;ms-coco&quot;&gt;MS COCO&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;官方没有semantic segmentation测评，因此该数据集常常只用于预训练&lt;/li&gt;
+  &lt;li&gt;数据集大小？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;cityscapes&quot;&gt;Cityscapes&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。&lt;/li&gt;
+  &lt;li&gt;主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张coarse annotated images来训练）&lt;/li&gt;
+  &lt;li&gt;分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
+&lt;img src=&quot;/img/15875266001958.jpg&quot; alt=&quot;-w721&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;补充: &lt;a href=&quot;https://niecongchong.github.io/2019/08/10/CityScapes%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%92%8C%E7%B2%BE%E5%BA%A6%E6%8C%87%E6%A0%87/&quot;&gt;Cityscapes详细介绍&lt;/a&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 21 Apr 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/04/21/semantic-segmentation-datasets/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/21/semantic-segmentation-datasets/</guid>
+        
+        <category>Datasets</category>
+        
+        
+      </item>
     
       <item>
         <title>AutoDIAL:Automatic DomaIn Alignment Layers</title>
@@ -454,78 +517,6 @@ kernels learned on the first layer: frequency- and orientation-selective kernels
         <guid isPermaLink="true">http://localhost:4000/2020/03/27/AlexNet/</guid>
         
         <category>CV paperlist</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Reshaping Visual Datasets for Domain Adaptation</title>
-        <description>&lt;p&gt;&lt;a href=&quot;http://papers.nips.cc/paper/5210-reshaping-visual-datasets-for-domain-adaptation.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15852773040000.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;p&gt;图像的domain由多种因素交织影响决定，比如说pose、illumination、camera resolution、background等等。因此图像往往不是按照“clearly identifiable domain”收集的，也就是说，一个数据集可以包含多个不同的domain。发现这些source和target dataset中的latent domain有助于进行domain adaptation.&lt;/p&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Note that the total domain distinctiveness TDD(K) increases as K increases — presumably, in the extreme case, each domain has only a few instances and their distributions would be maximally different from each other. However, such tiny domains would offer insufficient data to separate the categories of interest reliably.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;maximum distinctiveness: 希望不同domain之间的差异尽量大 (domain划分尽量细)&lt;/p&gt;
-
-    &lt;p&gt;采用non-parameter方式:&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;the empirical distribution of each domain:
- &lt;img src=&quot;/img/15852779640661.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;the difference between the means of two empirical distributions
- &lt;img src=&quot;/img/15852781025087.jpg&quot; alt=&quot;-w837&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;maximize the total domain distinctiveness
- &lt;img src=&quot;/img/15852781836513.jpg&quot; width=&quot;30%&quot; height=&quot;30%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;maximum learnability: 每个domain包含足够数量的instances用于学习 (domain划分不能过细)&lt;/p&gt;
-
-    &lt;p&gt;从K=2开始遍历寻找最好的K&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;对K个domain分别构建classfier，并计算cross-validation accuracy，并求weighted average
- &lt;img src=&quot;/img/15852795347553.jpg&quot; alt=&quot;-w699&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;选择具有最高的cross-validation accuracy的K&lt;/p&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;p&gt;domain adaptaion的几种方式&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;合并全部source domain&lt;/li&gt;
-  &lt;li&gt;emsemble各个source domain的classfier的结果&lt;/li&gt;
-  &lt;li&gt;选择和target domain最接近的一个source domain&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;reshape target domain conditioning on the identified domains from the training datasets — the goal is to discover latent domains in the test datasets that match the domains in the training datasets as much as possible.
-&lt;img src=&quot;/img/15852803974334.jpg&quot; alt=&quot;-w752&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/img/15852803845757.jpg&quot; width=&quot;93%&quot; height=&quot;93%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;J. Hoffman, B. Kulis, T. Darrell, and K. Saenko. Discovering latent domains for multisource domain adaptation. In ECCV. 2012. (aim at discovering the latent domains from datasets, by modeling the data with a hierarchical distribution consisting of Gaussian mixtures)&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Thu, 26 Mar 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/</guid>
-        
-        <category>Domain Adaptation</category>
         
         
       </item>
