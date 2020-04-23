@@ -1,4 +1,4 @@
-I"<table>
+I"�<table>
   <thead>
     <tr>
       <th>name</th>
@@ -11,9 +11,9 @@
   <tbody>
     <tr>
       <td>AlexNet</td>
+      <td><a href="https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf">link</a></td>
       <td> </td>
-      <td> </td>
-      <td> </td>
+      <td><a href="https://xiaohan-wang.github.io/2020/03/27/AlexNet/">link</a></td>
       <td> </td>
     </tr>
     <tr>

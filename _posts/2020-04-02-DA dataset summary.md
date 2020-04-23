@@ -1,7 +1,7 @@
 ---
 layout:     post
 title: DA dataset summary
-subtitle:   datasets and performance 
+subtitle:   
 date:       2020-04-02
 author:     Xiaohan
 header-img: img/ice.jpg
