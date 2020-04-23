@@ -5,9 +5,59 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 23 Apr 2020 01:10:30 -0400</pubDate>
-    <lastBuildDate>Thu, 23 Apr 2020 01:10:30 -0400</lastBuildDate>
+    <pubDate>Thu, 23 Apr 2020 01:15:42 -0400</pubDate>
+    <lastBuildDate>Thu, 23 Apr 2020 01:15:42 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Fully Convolutional Networks for Semantic Segmentation</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1411.4038.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/wkentaro/pytorch-fcn&quot;&gt;code (pytorch)&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;p&gt;将分类网络中的全连接层变为对应的卷积层，从而得到全卷积网络。全卷积网络可用于实现如语义分割的稠密预测任务。添加skip-connecting结合deep, coarse, semantic information和shallow, fine, appearance information。&lt;/p&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;全连接层变为卷积层
+&lt;img src=&quot;/img/15876140745604.jpg&quot; width=&quot;70%&quot; height=&quot;70%&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;view fully connected layers as convolutions with kernels that cover their entire input regions.&lt;/li&gt;
+      &lt;li&gt;优点：When receptive fields overlap significantly, both feedforward computation and back propagation are much more efficient when computed layer-by-layer over an entire image instead of independently patch-by-patch. （receptive field: locations in the image that locations in higher layers are path-connected to.）&lt;/li&gt;
+      &lt;li&gt;问题：由于subsampling, output的分辨率远低于input&lt;br /&gt;
+ &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;通过转置卷积+skip connection增大output的分辨率
+&lt;img src=&quot;/img/15876162869041.jpg&quot; alt=&quot;-w870&quot; /&gt;
+    &lt;ul&gt;
+      &lt;li&gt;转置卷积能实现最好的上采样效果，通过learning可以实现非线性的上采样&lt;/li&gt;
+      &lt;li&gt;skip-connection可以结合deep, coarse, semantic information和shallow, fine, appearance information （combine what and where）&lt;/li&gt;
+      &lt;li&gt;使用转置卷积实现结合低层信息的上采样（Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;h5 id=&quot;评价指标&quot;&gt;评价指标&lt;/h5&gt;
+&lt;p&gt;Let $n_{ij}$ be the number of pixels of class $i$ predicted to belong to class $j$, where there are $n_{cl}$ different classes, and let $t_i=\sum_jn_{ij}$ be the total number of pixels of class $i$.
+&lt;img src=&quot;/img/15876175187934.jpg&quot; width=&quot;40%&quot; height=&quot;50%&quot; /&gt;&lt;/p&gt;
+&lt;h5 id=&quot;结果&quot;&gt;结果&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15876184066437.jpg&quot; width=&quot;50%&quot; height=&quot;70%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;使用classification的网络参数作为预训练模型，在此基础上fine-tune网络以用于semantic segmentation任务。&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Wed, 22 Apr 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>semantic segmentation dataset summary</title>
@@ -441,84 +491,6 @@ By substituting $w_{i,d}$ for $q_{d|x}(d | x_i)$&lt;br /&gt;
         <guid isPermaLink="true">http://localhost:4000/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/</guid>
         
         <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>AlexNet</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;60 million parameters; 650,000 neurons&lt;/p&gt;
-
-&lt;h4 id=&quot;why-works&quot;&gt;Why works&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;数据集的改变：
-    &lt;ul&gt;
-      &lt;li&gt;以前， on the order of tens of thousands of images&lt;/li&gt;
-      &lt;li&gt;最近，Imagenet；LabelMe&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;CNN
-    &lt;ul&gt;
-      &lt;li&gt;enough learning capacity&lt;/li&gt;
-      &lt;li&gt;prior knowledge (assumptions): stationarity of statistics and locality of pixel dependencies&lt;/li&gt;
-      &lt;li&gt;compared to NN, CNN has fewer parameters: easier to train&lt;/li&gt;
-      &lt;li&gt;GPU and large dataset&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;alexnet&quot;&gt;AlexNet&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;Input:
-    &lt;ul&gt;
-      &lt;li&gt;256*256, 首先reshape将短边变成256，然后center crop&lt;/li&gt;
-      &lt;li&gt;预处理：减去training set的mean，将输入数据变为centered raw RGB value&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;network
-    &lt;ul&gt;
-      &lt;li&gt;采用ReLU：sigmoid/tanh梯度下降所需的训练时间比ReLU慢很多倍&lt;/li&gt;
-      &lt;li&gt;多GPU训练：GTX 580 GPU只有3GB momory，限制了网络size。为了能扩大网络size，采用多GPU训练&lt;/li&gt;
-      &lt;li&gt;local response normalization: a form of lateral inhibition inspired by the type found in real neurons&lt;/li&gt;
-      &lt;li&gt;creating competition  for big activities amongst neuron outputs computed using different kernels&lt;/li&gt;
-      &lt;li&gt;overlapping pooling: slightly more difficult to overfit&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Architecture
-&lt;img src=&quot;/img/15854655847916.jpg&quot; alt=&quot;&quot; /&gt;
-&lt;img src=&quot;/img/15854656864364.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;减少过拟合
-    &lt;ul&gt;
-      &lt;li&gt;Data augmentation
-        &lt;ul&gt;
-          &lt;li&gt;train：random crop (224*224) + horizontal reflections (increase the size of training set by a factor of 2048)&lt;/li&gt;
-          &lt;li&gt;test：predict with 10 224*224 patches (4 corners + center and horizontal reflection), then average&lt;/li&gt;
-          &lt;li&gt;PCA color augmentation: 相当于改变了the intensity and color of the illumination&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Dropout&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;quantitative evaluation&lt;br /&gt;
-&lt;img src=&quot;/img/15854658726746.jpg&quot; width=&quot;50%&quot; height=&quot;30%&quot; /&gt;
-&lt;img src=&quot;/img/15854658948549.jpg&quot; width=&quot;60%&quot; height=&quot;40%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;qualitative evaluation
-&lt;img src=&quot;/img/15854660821423.jpg&quot; alt=&quot;&quot; /&gt;
-kernels learned on the first layer: frequency- and orientation-selective kernels, and various colored blobs&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Fri, 27 Mar 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/03/27/AlexNet/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/03/27/AlexNet/</guid>
-        
-        <category>CV paperlist</category>
         
         
       </item>

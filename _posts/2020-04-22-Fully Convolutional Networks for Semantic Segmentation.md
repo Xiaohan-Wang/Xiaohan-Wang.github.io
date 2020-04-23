@@ -22,9 +22,10 @@ tags:
 <img src="/img/15876140745604.jpg" width="70%" height="70%">
     * view fully connected layers as convolutions with kernels that cover their entire input regions.
     * 优点：When receptive fields overlap significantly, both feedforward computation and back propagation are much more efficient when computed layer-by-layer over an entire image instead of independently patch-by-patch. （receptive field: locations in the image that locations in higher layers are path-connected to.）
-    * 问题：由于subsampling, output的分辨率远低于input
-    
-1. 通过转置卷积+skip connection增大output的分辨率
+    * 问题：由于subsampling, output的分辨率远低于input  
+&nbsp;    
+
+2. 通过转置卷积+skip connection增大output的分辨率
 ![-w870](/img/15876162869041.jpg)
     * 转置卷积能实现最好的上采样效果，通过learning可以实现非线性的上采样
     * skip-connection可以结合deep, coarse, semantic information和shallow, fine, appearance information （combine what and where）
@@ -33,9 +34,9 @@ tags:
 #### Result
 ##### 评价指标
 Let $n_{ij}$ be the number of pixels of class $i$ predicted to belong to class $j$, where there are $n_{cl}$ different classes, and let $t_i=\sum_jn_{ij}$ be the total number of pixels of class $i$.
-<img src="/img/15876175187934.jpg" width="50%" height="50%">
+<img src="/img/15876175187934.jpg" width="40%" height="50%">
 ##### 结果
-<img src="/img/15876184066437.jpg" width="70%" height="70%">
+<img src="/img/15876184066437.jpg" width="50%" height="70%">
 
 #### Tricks
 1. 使用classification的网络参数作为预训练模型，在此基础上fine-tune网络以用于semantic segmentation任务。
