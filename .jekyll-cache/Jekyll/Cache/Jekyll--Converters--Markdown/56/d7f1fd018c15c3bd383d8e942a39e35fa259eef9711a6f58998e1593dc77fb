@@ -1,4 +1,4 @@
-I"�	<p><a href="https://arxiv.org/pdf/1411.4038.pdf">Paper link</a> and <a href="https://github.com/wkentaro/pytorch-fcn">code (pytorch)</a></p>
+I"�	<p><a href="https://arxiv.org/pdf/1411.4038.pdf">Paper link</a> and <a href="https://github.com/wkentaro/pytorch-fcn">code (pytorch)</a></p>
 
 <h4 id="take-away-message">Take away message</h4>
 <p>将分类网络中的全连接层变为对应的卷积层，从而得到全卷积网络。全卷积网络可用于实现如语义分割的稠密预测任务。添加skip-connecting结合deep, coarse, semantic information和shallow, fine, appearance information。</p>
@@ -14,12 +14,12 @@
  </li>
     </ul>
   </li>
-  <li>通过转置卷积+skip connection增大output的分辨率
+  <li>转置卷积增大分辨率(what)+skip connection结合低层位置信息(where)
 <img src="/img/15876162869041.jpg" alt="-w870" />
     <ul>
       <li>转置卷积能实现最好的上采样效果，通过learning可以实现非线性的上采样</li>
-      <li>skip-connection可以结合deep, coarse, semantic information和shallow, fine, appearance information （combine what and where）</li>
-      <li>使用转置卷积实现结合低层信息的上采样（Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。</li>
+      <li>将upsampled结果 (deep, coarse, semantic information) 和skip connection结果 (shallow, fine, appearance information) 加起来，得到combine what and where的结果</li>
+      <li>Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。</li>
     </ul>
   </li>
 </ol>

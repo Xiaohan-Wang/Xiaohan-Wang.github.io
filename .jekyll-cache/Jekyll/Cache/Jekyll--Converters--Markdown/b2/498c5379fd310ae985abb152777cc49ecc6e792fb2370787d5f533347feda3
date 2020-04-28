@@ -1,0 +1,30 @@
+I"ç<p><a href="https://arxiv.org/pdf/1511.00561.pdf">Paper link</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>In practice, we have to consider the cost of memory and computational time.</li>
+  <li>Most recent deep architectures for segmentation have identical encoder networks, i.e VGG16, but differ in the form of the decoder network, training and inference.</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15880309668474.jpg" alt="-w901" /></p>
+
+<p>Encoder:</p>
+<ol>
+  <li>The encoder network consists of 13 convolutional layers which correspond to the first 13 convolutional layers in the VGG16 network.</li>
+  <li>Initialize the training process from weights trained for classification on large datasets.</li>
+  <li>Benifit: Removing the fully connected layers of VGG16 makes the SegNet encoder network significantly smaller [reduces the number of parameters in the SegNet encoder network significantly (from 134M to 14.7M)] and easier to train.</li>
+</ol>
+
+<p>Decoder:
+<img src="/img/15880312579950.jpg" width="60%" height="100%" /></p>
+<ol>
+  <li>The appropriate decoder in the decoder network upsamples its input feature map(s) using the memorized max-pooling indices from the corresponding encoder feature map(s). This step produces sparse feature map(s).</li>
+  <li>These feature maps are then convolved with a trainable decoder filter bank to produce dense feature maps.</li>
+  <li>Except for the last decoder (which corresponds to the first encoder), the other decoders in the network produce feature maps with the same number of size and channels as their encoder inputs.</li>
+</ol>
+
+<h4 id="tricks">Tricks</h4>
+<p>class balancing</p>
+
+:ET

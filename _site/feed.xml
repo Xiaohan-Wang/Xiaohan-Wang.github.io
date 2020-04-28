@@ -5,9 +5,50 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 23 Apr 2020 01:15:42 -0400</pubDate>
-    <lastBuildDate>Thu, 23 Apr 2020 01:15:42 -0400</lastBuildDate>
+    <pubDate>Mon, 27 Apr 2020 20:25:34 -0400</pubDate>
+    <lastBuildDate>Mon, 27 Apr 2020 20:25:34 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>SegNet:_A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1511.00561.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;In practice, we have to consider the cost of memory and computational time.&lt;/li&gt;
+  &lt;li&gt;Most recent deep architectures for segmentation have identical encoder networks, i.e VGG16, but differ in the form of the decoder network, training and inference.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15880309668474.jpg&quot; alt=&quot;-w901&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Encoder:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The encoder network consists of 13 convolutional layers which correspond to the first 13 convolutional layers in the VGG16 network.&lt;/li&gt;
+  &lt;li&gt;Initialize the training process from weights trained for classification on large datasets.&lt;/li&gt;
+  &lt;li&gt;Benifit: Removing the fully connected layers of VGG16 makes the SegNet encoder network significantly smaller [reduces the number of parameters in the SegNet encoder network significantly (from 134M to 14.7M)] and easier to train.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Decoder:
+&lt;img src=&quot;/img/15880312579950.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The appropriate decoder in the decoder network upsamples its input feature map(s) using the memorized max-pooling indices from the corresponding encoder feature map(s). This step produces sparse feature map(s).&lt;/li&gt;
+  &lt;li&gt;These feature maps are then convolved with a trainable decoder filter bank to produce dense feature maps.&lt;/li&gt;
+  &lt;li&gt;Except for the last decoder (which corresponds to the first encoder), the other decoders in the network produce feature maps with the same number of size and channels as their encoder inputs.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
+&lt;p&gt;class balancing&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 27 Apr 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>Fully Convolutional Networks for Semantic Segmentation</title>
@@ -27,12 +68,12 @@
  &lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;通过转置卷积+skip connection增大output的分辨率
+  &lt;li&gt;转置卷积增大分辨率(what)+skip connection结合低层位置信息(where)
 &lt;img src=&quot;/img/15876162869041.jpg&quot; alt=&quot;-w870&quot; /&gt;
     &lt;ul&gt;
       &lt;li&gt;转置卷积能实现最好的上采样效果，通过learning可以实现非线性的上采样&lt;/li&gt;
-      &lt;li&gt;skip-connection可以结合deep, coarse, semantic information和shallow, fine, appearance information （combine what and where）&lt;/li&gt;
-      &lt;li&gt;使用转置卷积实现结合低层信息的上采样（Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。&lt;/li&gt;
+      &lt;li&gt;将upsampled结果 (deep, coarse, semantic information) 和skip connection结果 (shallow, fine, appearance information) 加起来，得到combine what and where的结果&lt;/li&gt;
+      &lt;li&gt;Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
@@ -416,79 +457,6 @@ t-SNE: preverse local structure or global structure&lt;/p&gt;
         <pubDate>Mon, 30 Mar 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/03/30/week-summary/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/03/30/week-summary/</guid>
-        
-        <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Boosting Domain Adaptation by Discovering Latent Domains</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://research.mapillary.com/img/publications/CVPR18b.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/mancinimassimiliano/latent_domains_DA&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15854715937974.jpg&quot; width=&quot;40%&quot; height=&quot;60%&quot; /&gt;
-第一篇针对classification task的deep learning based multi-source domain adaptation. 本质上是multi-source的AdaBN.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15857203223787.jpg&quot; alt=&quot;-w763&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;a side-output branch is empolyed to predict domain assignment probabilities for each input sample.&lt;/li&gt;
-  &lt;li&gt;mDA-layer to renormalize the multi-modal feature distributions&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;domain-discovery&quot;&gt;domain discovery&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;domain prediction branch: sample points at different mDA-layers corresponding to a single input element to the network should share the same probabilities&lt;/li&gt;
-  &lt;li&gt;split the network into a domain prediction branch and classification branch at some low level layer: features tend to become increasingly more domain invariant going deeper into the network, meaning that it becomes increasingly harder to compute a sample’s domain as a function of deeper features.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;multi-source-domain-adaptation-layer&quot;&gt;multi-source domain adaptation layer&lt;/h5&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Domain Alignment layers: aim to reduce internal domain shift at different levels within the network by re-normalizing features in a domain-dependent way, matching their distributions to a pre-determined one.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;$q_{d|x}(d | x_i)$ is the conditional probability of $x_i$ belonging to $d$, given $x_i$&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;compute $\mu$ and $\sigma^2$&lt;br /&gt;
- &lt;img src=&quot;/img/15857223593758.jpg&quot; width=&quot;30%&quot; height=&quot;40%&quot; /&gt;&lt;br /&gt;
- &lt;img src=&quot;/img/15857224509940.jpg&quot; width=&quot;45%&quot; height=&quot;40%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;normalize each sample&lt;br /&gt;
-By substituting $w_{i,d}$ for $q_{d|x}(d | x_i)$&lt;br /&gt;
-&lt;img src=&quot;/img/15857225154947.jpg&quot; width=&quot;45%&quot; height=&quot;40%&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;overall-training-objective&quot;&gt;overall training objective&lt;/h5&gt;
-&lt;p&gt;only use source dataset now
-&lt;img src=&quot;/img/15857216573544.jpg&quot; width=&quot;45%&quot; height=&quot;40%&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;labeled data的分类loss (cross entropy)&lt;/li&gt;
-  &lt;li&gt;data with known domain的预测loss (cross entropy)&lt;/li&gt;
-  &lt;li&gt;unlabeled data的分类 (minimizing uncertainty)&lt;/li&gt;
-  &lt;li&gt;data without domain label的预测loss (minimizing uncertainty)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15857232316372.jpg&quot; width=&quot;50%&quot; height=&quot;60%&quot; /&gt;
-&lt;img src=&quot;/img/15857232406316.jpg&quot; width=&quot;50%&quot; height=&quot;60%&quot; /&gt;
-在latent domain明显的时候(digit和PACS), model表现更好。但对于office-31, 可能因为很难直接发现latent domain，所以基本没有提高。&lt;/p&gt;
-
-&lt;h4 id=&quot;reflection&quot;&gt;Reflection&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;multi-source DA可以地方可以借鉴single-source的思想，比如说本文用的domain-alignment layer&lt;/li&gt;
-  &lt;li&gt;难点在于 好的latent domain discovery&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;further-reference-for-latent-domain-discovery&quot;&gt;Further reference (for latent domain discovery)&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;J. Hoffman, B. Kulis, T. Darrell, and K. Saenko. Discovering latent domains for multisource domain adaptation. In ECCV, 2012.&lt;/li&gt;
-  &lt;li&gt;B. Gong, K. Grauman, and F. Sha. Reshaping visual datasets for domain adaptation. In NIPS, 2013.&lt;/li&gt;
-  &lt;li&gt;C. Xiong, S. McCloskey, S.-H. Hsieh, and J. J. Corso. Latent domains modeling for visual domain adaptation. In AAAI, 2014.&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Sun, 29 Mar 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/</guid>
         
         <category>Domain Adaptation</category>
         

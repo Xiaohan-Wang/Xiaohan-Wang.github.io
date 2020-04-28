@@ -25,11 +25,11 @@ tags:
     * 问题：由于subsampling, output的分辨率远低于input  
 &nbsp;    
 
-2. 通过转置卷积+skip connection增大output的分辨率
+1. 转置卷积增大分辨率(what)+skip connection结合低层位置信息(where)
 ![-w870](/img/15876162869041.jpg)
     * 转置卷积能实现最好的上采样效果，通过learning可以实现非线性的上采样
-    * skip-connection可以结合deep, coarse, semantic information和shallow, fine, appearance information （combine what and where）
-    * 使用转置卷积实现结合低层信息的上采样（Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。
+    * 将upsampled结果 (deep, coarse, semantic information) 和skip connection结果 (shallow, fine, appearance information) 加起来，得到combine what and where的结果
+    * Initialize the 2× upsampling to bilinear interpolation, but allow the parameters to be learned）。 但是，在FCN-8s后，继续融合低层信息取得的结果基本不变。因此，最后几层直接使用bilinear interpolation。
 
 #### Result
 ##### 评价指标
