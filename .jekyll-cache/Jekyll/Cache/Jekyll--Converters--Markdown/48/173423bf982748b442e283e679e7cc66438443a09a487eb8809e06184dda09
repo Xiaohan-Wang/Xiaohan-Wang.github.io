@@ -1,0 +1,41 @@
+I"Ö<h3 id="image-classification">Image classification</h3>
+<h4 id="numbers">Numbers</h4>
+<h5 id="mnist">Mnist</h5>
+<h5 id="usps">USPS</h5>
+<h5 id="svhn-street-view-house-numbers">SVHN (street view house numbers)</h5>
+
+<h4 id="office">Office</h4>
+<h4 id="office-31">Office-31</h4>
+<p>It contains 4652 images organized in 31 classes from three different domains: Amazon (A), DSRL (D) and Webcam (W).</p>
+<h4 id="office-caltech">Office-Caltech</h4>
+<p>It selects the subset of 10 common categories in the Office31 and the Caltech256 datasets. It contains 2533 images of which about half belong to Caltech256. Each of Amazon (A), DSLR (D), Webcam (W) and Caltech256 (C) are regarded as separate domains.</p>
+
+<h3 id="image-segmentation">Image segmentation</h3>
+
+<h4 id="gta5-synthetic-dataset">GTA5 (synthetic dataset)</h4>
+<p><a href="https://download.visinf.tu-darmstadt.de/data/from_games/">homepage</a>
+GTA is a synthetic, vehicle-egocentric image
+dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.</p>
+
+<h4 id="synthia-synthetic-data">synthia (synthetic data)</h4>
+<p><a href="http://synthia-dataset.net/">homepage</a></p>
+
+<p>SYNTHIA  is a large dataset of synthetic images and provides a particular subset, called SYNTHIA-RANDCITYSCAPES, to pair with Cityscapes. This subset contains 9,400 images that are automatically annotated with 12 object categories, one void class, and some unnamed classes. Note that the virtual city used to generate the synthetic images does not correspond to any of the real cities covered by Cityscapes.</p>
+
+<p>Note: usually consider the 16 common classes shared with Cityscapes: sky, building, road, sidewalk, fence, vegetation, pole, car, traffic sign, person, bicycle, motorcycle, traffic light, bus, wall, and rider.</p>
+
+<h4 id="cityscapes">Cityscapes</h4>
+<p><a href="https://www.cityscapes-dataset.com/">homepage</a></p>
+
+<p>a real-world, vehicle-egocentric image dataset collected in 50 cities in Germany and nearby countries. It provides four disjoint subsets: 2,993 training images, 503 validation image, 1,531 test images, and 20,021 auxiliary images. All the training, validation, and test images are accurately annotated with per pixel category labels, while the auxiliary set is coarsely labeled. There are 34 distinct categories in the dataset.</p>
+
+<p>Note: usually consider the 19 common classes shared with Cityscapes: bike, fence, wall, traffic sign, pole, motorcycle, traffic light, sky, bus, rider, vegetation, <strong>terrain</strong>, <strong>train</strong>, building, car, person, <strong>truck</strong>, sidewalk and road.</p>
+
+<h3 id="multi-source-domain-adaptation">multi-source domain adaptation</h3>
+<h4 id="domainnet">DomainNet</h4>
+<ol>
+  <li><a href="http://ai.bu.edu/M3SDA/">homepage</a></li>
+  <li>Challenge: <a href="http://ai.bu.edu/visda-2019/">VisDA-2019</a></li>
+</ol>
+
+:ET

@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Reshaping Visual Datasets for Domain Adaptation - Xiaohan's Blog</title>
+    <title>Conditional Generative Adversarial Network for Structured Domain Adaptation - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/">
+    <link rel="canonical" href="http://localhost:4000/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -187,10 +187,10 @@
                         <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
                         
                     </div>
-                    <h2>Reshaping Visual Datasets for Domain Adaptation</h2>
+                    <h2>Conditional Generative Adversarial Network for Structured Domain Adaptation</h2>
                     
                     
-                    <span class="meta">NIPS 2013&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on March 26, 2020</span>
+                    <span class="meta">CVPR 2018&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on April 28, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,64 +208,58 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="http://papers.nips.cc/paper/5210-reshaping-visual-datasets-for-domain-adaptation.pdf">Paper link</a></p>
+				<p><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Hong_Conditional_Generative_Adversarial_CVPR_2018_paper.pdf">Paper link</a></p>
 
-<p><img src="/img/15852773040000.jpg" width="100%" height="100%" /></p>
 <h4 id="take-away-message">Take away message</h4>
-<p>图像的domain由多种因素交织影响决定，比如说pose、illumination、camera resolution、background等等。因此图像往往不是按照“clearly identifiable domain”收集的，也就是说，一个数据集可以包含多个不同的domain。发现这些source和target dataset中的latent domain有助于进行domain adaptation.</p>
+<ol>
+  <li>We shouldn’t assume that the source and target domains share same intermediate feature space(s), i.e. using loss to obtain domain-invariant features.</li>
+  <li>Use a conditional generator to transform source feature maps into target-like, and trained on the target-like feature maps and original labels (和pixel level domain adaptation类似，但pixel level DA将source images转化为target-like，而本文将source features转化为target-like).</li>
+  <li>文章中提到 without relying on the assumption that the source and target domains share a same prediction function in a domain-invariant feature space。 实际只完成了not in a domain-invariant feature space， 本质上还是same prediction function (source和target domain的encoder和decoder都相同)</li>
+</ol>
 
 <h4 id="model">Model</h4>
-<blockquote>
-  <p>Note that the total domain distinctiveness TDD(K) increases as K increases — presumably, in the extreme case, each domain has only a few instances and their distributions would be maximally different from each other. However, such tiny domains would offer insufficient data to separate the categories of interest reliably.</p>
-</blockquote>
-
+<p><img src="/img/15881099962969.jpg" alt="-w913" /></p>
 <ol>
-  <li>
-    <p>maximum distinctiveness: 希望不同domain之间的差异尽量大 (domain划分尽量细)</p>
-
-    <p>采用non-parameter方式:</p>
+  <li>a conditional generator to generate residual features, to transform features of synthetic images to real-image like features.
     <ul>
-      <li>the empirical distribution of each domain:
- <img src="/img/15852779640661.jpg" width="100%" height="100%" /></li>
-      <li>the difference between the means of two empirical distributions
- <img src="/img/15852781025087.jpg" alt="-w837" /></li>
-      <li>maximize the total domain distinctiveness
- <img src="/img/15852781836513.jpg" width="30%" height="30%" /></li>
+      <li>a noise map $z$ is addd for randomness to create an unlimited number of training samples.</li>
+      <li>expect that $x_f$ preserves the semantic of the source feature map $x_s$, meanwhile appears as if it were extracted from a target domain image, i.e., a real image.</li>
     </ul>
   </li>
-  <li>
-    <p>maximum learnability: 每个domain包含足够数量的instances用于学习 (domain划分不能过细)</p>
-
-    <p>从K=2开始遍历寻找最好的K</p>
+  <li>a discriminator to distinguish adapted source features and real target features.</li>
+  <li>task-specific loss (decoder part)
     <ul>
-      <li>
-        <p>对K个domain分别构建classfier，并计算cross-validation accuracy，并求weighted average
- <img src="/img/15852795347553.jpg" alt="-w699" /></p>
-      </li>
-      <li>
-        <p>选择具有最高的cross-validation accuracy的K</p>
-      </li>
+      <li>train T with both adapted and non-adapted source feature maps (Training T solely on adapted feature maps leads to similar performance, but requires many runs with different initializations and learning rates due to the instability of the GAN).</li>
     </ul>
   </li>
+  <li>overall minimax objective:<br />
+<img src="/img/15881108285954.jpg" width="50%" height="100%" /></li>
 </ol>
 
 <h4 id="result">Result</h4>
-<p>domain adaptaion的几种方式</p>
 <ol>
-  <li>合并全部source domain</li>
-  <li>emsemble各个source domain的classfier的结果</li>
-  <li>选择和target domain最接近的一个source domain</li>
   <li>
-    <p>reshape target domain conditioning on the identified domains from the training datasets — the goal is to discover latent domains in the test datasets that match the domains in the training datasets as much as possible.
-<img src="/img/15852803974334.jpg" alt="-w752" /></p>
-
-    <p><img src="/img/15852803845757.jpg" width="93%" height="93%" /></p>
+    <p>overall performance: 涨幅非常大<br />
+<img src="/img/15881108796823.jpg" alt="-w905" /></p>
   </li>
-</ol>
-
-<h4 id="further-reference">Further reference</h4>
-<ol>
-  <li>J. Hoffman, B. Kulis, T. Darrell, and K. Saenko. Discovering latent domains for multisource domain adaptation. In ECCV. 2012. (aim at discovering the latent domains from datasets, by modeling the data with a hierarchical distribution consisting of Gaussian mixtures)</li>
+  <li>
+    <p>amount of synthetic data
+ <img src="/img/15881109617007.jpg" width="50%" height="100%" /></p>
+  </li>
+  <li>
+    <p>Ablation Studies</p>
+    <ul>
+      <li>
+        <p>The effectiveness of conditional generator<br />
+ <img src="/img/15881110275006.jpg" width="50%" height="100%" /></p>
+      </li>
+      <li>Different lower layers for learning generator
+ <img src="/img/15881111038400.jpg" width="60%" height="100%" /></li>
+      <li>On the number of residual blocks （上图）</li>
+      <li>How much does the noise channel contribute?
+ <img src="/img/15881111498987.jpg" width="50%" height="100%" /></li>
+    </ul>
+  </li>
 </ol>
 
 
@@ -275,19 +269,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/03/25/SPP-Net/" data-toggle="tooltip" data-placement="top" title="SPP-Net (spatial pyramid pooling)">
+                        <a href="/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/" data-toggle="tooltip" data-placement="top" title="SegNet:_A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation">
                         Previous<br>
-                        <span>SPP-Net (spatial pyramid pooling)</span>
+                        <span>SegNet:_A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/03/27/AlexNet/" data-toggle="tooltip" data-placement="top" title="AlexNet">
-                        Next<br>
-                        <span>AlexNet</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 

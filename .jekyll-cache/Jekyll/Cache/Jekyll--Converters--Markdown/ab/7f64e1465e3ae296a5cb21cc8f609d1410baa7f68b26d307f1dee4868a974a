@@ -1,0 +1,55 @@
+I"-<p><a href="http://openaccess.thecvf.com/content_cvpr_2018/papers/Hong_Conditional_Generative_Adversarial_CVPR_2018_paper.pdf">Paper link</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>We shouldn’t assume that the source and target domains share same intermediate feature space(s), i.e. using loss to obtain domain-invariant features.</li>
+  <li>Use a conditional generator to transform source feature maps into target-like, and trained on the target-like feature maps and original labels (和pixel level domain adaptation类似，但pixel level DA将source images转化为target-like，而本文将source features转化为target-like).</li>
+  <li>文章中提到 without relying on the assumption that the source and target domains share a same prediction function in a domain-invariant feature space。 实际只完成了not in a domain-invariant feature space， 本质上还是same prediction function (source和target domain的encoder和decoder都相同)</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15881099962969.jpg" alt="-w913" /></p>
+<ol>
+  <li>a conditional generator to generate residual features, to transform features of synthetic images to real-image like features.
+    <ul>
+      <li>a noise map $z$ is addd for randomness to create an unlimited number of training samples.</li>
+      <li>expect that $x_f$ preserves the semantic of the source feature map $x_s$, meanwhile appears as if it were extracted from a target domain image, i.e., a real image.</li>
+    </ul>
+  </li>
+  <li>a discriminator to distinguish adapted source features and real target features.</li>
+  <li>task-specific loss (decoder part)
+    <ul>
+      <li>train T with both adapted and non-adapted source feature maps (Training T solely on adapted feature maps leads to similar performance, but requires many runs with different initializations and learning rates due to the instability of the GAN).</li>
+    </ul>
+  </li>
+  <li>overall minimax objective:<br />
+<img src="/img/15881108285954.jpg" width="50%" height="100%" /></li>
+</ol>
+
+<h4 id="result">Result</h4>
+<ol>
+  <li>
+    <p>overall performance: 涨幅非常大<br />
+<img src="/img/15881108796823.jpg" alt="-w905" /></p>
+  </li>
+  <li>
+    <p>amount of synthetic data
+ <img src="/img/15881109617007.jpg" width="50%" height="100%" /></p>
+  </li>
+  <li>
+    <p>Ablation Studies</p>
+    <ul>
+      <li>
+        <p>The effectiveness of conditional generator<br />
+ <img src="/img/15881110275006.jpg" width="50%" height="100%" /></p>
+      </li>
+      <li>Different lower layers for learning generator
+ <img src="/img/15881111038400.jpg" width="60%" height="100%" /></li>
+      <li>On the number of residual blocks （上图）</li>
+      <li>How much does the noise channel contribute?
+ <img src="/img/15881111498987.jpg" width="50%" height="100%" /></li>
+    </ul>
+  </li>
+</ol>
+
+:ET

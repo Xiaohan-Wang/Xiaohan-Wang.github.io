@@ -5,9 +5,75 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 27 Apr 2020 20:31:30 -0400</pubDate>
-    <lastBuildDate>Mon, 27 Apr 2020 20:31:30 -0400</lastBuildDate>
+    <pubDate>Tue, 28 Apr 2020 18:01:01 -0400</pubDate>
+    <lastBuildDate>Tue, 28 Apr 2020 18:01:01 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Conditional Generative Adversarial Network for Structured Domain Adaptation</title>
+        <description>&lt;p&gt;&lt;a href=&quot;http://openaccess.thecvf.com/content_cvpr_2018/papers/Hong_Conditional_Generative_Adversarial_CVPR_2018_paper.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;We shouldn’t assume that the source and target domains share same intermediate feature space(s), i.e. using loss to obtain domain-invariant features.&lt;/li&gt;
+  &lt;li&gt;Use a conditional generator to transform source feature maps into target-like, and trained on the target-like feature maps and original labels (和pixel level domain adaptation类似，但pixel level DA将source images转化为target-like，而本文将source features转化为target-like).&lt;/li&gt;
+  &lt;li&gt;文章中提到 without relying on the assumption that the source and target domains share a same prediction function in a domain-invariant feature space。 实际只完成了not in a domain-invariant feature space， 本质上还是same prediction function (source和target domain的encoder和decoder都相同)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15881099962969.jpg&quot; alt=&quot;-w913&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;a conditional generator to generate residual features, to transform features of synthetic images to real-image like features.
+    &lt;ul&gt;
+      &lt;li&gt;a noise map $z$ is addd for randomness to create an unlimited number of training samples.&lt;/li&gt;
+      &lt;li&gt;expect that $x_f$ preserves the semantic of the source feature map $x_s$, meanwhile appears as if it were extracted from a target domain image, i.e., a real image.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;a discriminator to distinguish adapted source features and real target features.&lt;/li&gt;
+  &lt;li&gt;task-specific loss (decoder part)
+    &lt;ul&gt;
+      &lt;li&gt;train T with both adapted and non-adapted source feature maps (Training T solely on adapted feature maps leads to similar performance, but requires many runs with different initializations and learning rates due to the instability of the GAN).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;overall minimax objective:&lt;br /&gt;
+&lt;img src=&quot;/img/15881108285954.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;overall performance: 涨幅非常大&lt;br /&gt;
+&lt;img src=&quot;/img/15881108796823.jpg&quot; alt=&quot;-w905&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;amount of synthetic data
+ &lt;img src=&quot;/img/15881109617007.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ablation Studies&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;The effectiveness of conditional generator&lt;br /&gt;
+ &lt;img src=&quot;/img/15881110275006.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Different lower layers for learning generator
+ &lt;img src=&quot;/img/15881111038400.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;On the number of residual blocks （上图）&lt;/li&gt;
+      &lt;li&gt;How much does the noise channel contribute?
+ &lt;img src=&quot;/img/15881111498987.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Tue, 28 Apr 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/</guid>
+        
+        <category>Domain Adaptation</category>
+        
+        
+      </item>
     
       <item>
         <title>SegNet:_A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</title>
@@ -146,7 +212,7 @@
 &lt;h4 id=&quot;cityscapes&quot;&gt;Cityscapes&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。&lt;/li&gt;
-  &lt;li&gt;主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张coarse annotated images来训练）&lt;/li&gt;
+  &lt;li&gt;主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张fine annotated images来训练）&lt;/li&gt;
   &lt;li&gt;分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
 &lt;img src=&quot;/img/15875266001958.jpg&quot; alt=&quot;-w721&quot; /&gt;&lt;/li&gt;
 &lt;/ol&gt;
@@ -365,12 +431,25 @@ t-SNE: preverse local structure or global structure&lt;/p&gt;
 &lt;p&gt;It selects the subset of 10 common categories in the Office31 and the Caltech256 datasets. It contains 2533 images of which about half belong to Caltech256. Each of Amazon (A), DSLR (D), Webcam (W) and Caltech256 (C) are regarded as separate domains.&lt;/p&gt;
 
 &lt;h3 id=&quot;image-segmentation&quot;&gt;Image segmentation&lt;/h3&gt;
+
 &lt;h4 id=&quot;gta5-synthetic-dataset&quot;&gt;GTA5 (synthetic dataset)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://download.visinf.tu-darmstadt.de/data/from_games/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://download.visinf.tu-darmstadt.de/data/from_games/&quot;&gt;homepage&lt;/a&gt;
+GTA is a synthetic, vehicle-egocentric image
+dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.&lt;/p&gt;
+
 &lt;h4 id=&quot;synthia-synthetic-data&quot;&gt;synthia (synthetic data)&lt;/h4&gt;
 &lt;p&gt;&lt;a href=&quot;http://synthia-dataset.net/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;SYNTHIA  is a large dataset of synthetic images and provides a particular subset, called SYNTHIA-RANDCITYSCAPES, to pair with Cityscapes. This subset contains 9,400 images that are automatically annotated with 12 object categories, one void class, and some unnamed classes. Note that the virtual city used to generate the synthetic images does not correspond to any of the real cities covered by Cityscapes.&lt;/p&gt;
+
+&lt;p&gt;Note: usually consider the 16 common classes shared with Cityscapes: sky, building, road, sidewalk, fence, vegetation, pole, car, traffic sign, person, bicycle, motorcycle, traffic light, bus, wall, and rider.&lt;/p&gt;
+
 &lt;h4 id=&quot;cityscapes&quot;&gt;Cityscapes&lt;/h4&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.cityscapes-dataset.com/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;a real-world, vehicle-egocentric image dataset collected in 50 cities in Germany and nearby countries. It provides four disjoint subsets: 2,993 training images, 503 validation image, 1,531 test images, and 20,021 auxiliary images. All the training, validation, and test images are accurately annotated with per pixel category labels, while the auxiliary set is coarsely labeled. There are 34 distinct categories in the dataset.&lt;/p&gt;
+
+&lt;p&gt;Note: usually consider the 19 common classes shared with Cityscapes: bike, fence, wall, traffic sign, pole, motorcycle, traffic light, sky, bus, rider, vegetation, &lt;strong&gt;terrain&lt;/strong&gt;, &lt;strong&gt;train&lt;/strong&gt;, building, car, person, &lt;strong&gt;truck&lt;/strong&gt;, sidewalk and road.&lt;/p&gt;
 
 &lt;h3 id=&quot;multi-source-domain-adaptation&quot;&gt;multi-source domain adaptation&lt;/h3&gt;
 &lt;h4 id=&quot;domainnet&quot;&gt;DomainNet&lt;/h4&gt;
@@ -436,27 +515,6 @@ t-SNE: preverse local structure or global structure&lt;/p&gt;
         <pubDate>Tue, 31 Mar 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/</guid>
-        
-        <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Short Summay for Some Papers 1</title>
-        <description>&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Unsupervised Domain Adaptation with Similarity Learning (CVPR 2018)&lt;/strong&gt;&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/img/15857245561079.jpg&quot; width=&quot;60%&quot; height=&quot;80%&quot; /&gt;&lt;/p&gt;
-
-    &lt;p&gt;a similarity-based classifier in which each image (from either the source or target domain) is compared to a set of prototypes (or centroides). The label associated to the prototype that best matches the query image is given to it.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 30 Mar 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/03/30/week-summary/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/03/30/week-summary/</guid>
         
         <category>Domain Adaptation</category>
         

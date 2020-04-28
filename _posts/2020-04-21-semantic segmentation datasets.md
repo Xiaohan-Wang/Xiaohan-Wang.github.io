@@ -41,7 +41,7 @@ tags:
 
 #### Cityscapes
 1. 由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。
-2. 主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张coarse annotated images来训练）
+2. 主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张fine annotated images来训练）
 3. 分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
 ![-w721](/img/15875266001958.jpg)
 

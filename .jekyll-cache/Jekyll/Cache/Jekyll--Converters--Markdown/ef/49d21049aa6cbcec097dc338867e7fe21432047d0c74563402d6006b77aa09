@@ -1,4 +1,4 @@
-I"Š<h3 id="domain-adaptation">Domain Adaptation</h3>
+I"	<h3 id="domain-adaptation">Domain Adaptation</h3>
 
 <table>
   <thead>
@@ -58,6 +58,12 @@
       <td>AutoDIAL: Automatic Domain Alignment Layers</td>
       <td><a href="https://xiaohan-wang.github.io/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/">link</a></td>
     </tr>
+    <tr>
+      <td>20.4.28</td>
+      <td>CVPR 2018</td>
+      <td>AutoDIAL: Automatic Domain Alignment Layers</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/">link</a></td>
+    </tr>
   </tbody>
 </table>
 
@@ -83,7 +89,7 @@
       <td>20.4.27</td>
       <td>TPAMI 17 (Arxiv 15)</td>
       <td>SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</td>
-      <td>TODO</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/">link</a></td>
     </tr>
   </tbody>
 </table>
