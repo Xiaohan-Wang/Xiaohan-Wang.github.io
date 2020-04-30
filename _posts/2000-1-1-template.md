@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: 
+title: U-Net
 subtitle:   
 date:       2000-1-1
 author:     Xiaohan
@@ -25,5 +25,3 @@ tags:
 #### Reflection
 
 #### Further reference 
-
-

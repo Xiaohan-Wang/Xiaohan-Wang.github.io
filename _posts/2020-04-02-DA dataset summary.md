@@ -27,6 +27,7 @@ It selects the subset of 10 common categories in the Office31 and the Caltech256
 
 #### GTA5 (synthetic dataset)
 [homepage](https://download.visinf.tu-darmstadt.de/data/from_games/)
+
 GTA is a synthetic, vehicle-egocentric image
 dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.
 

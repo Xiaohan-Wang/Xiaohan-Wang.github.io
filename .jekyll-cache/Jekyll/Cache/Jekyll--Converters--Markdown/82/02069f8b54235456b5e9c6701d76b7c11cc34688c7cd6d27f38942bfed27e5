@@ -1,4 +1,4 @@
-I"Ö<h3 id="image-classification">Image classification</h3>
+I"Þ<h3 id="image-classification">Image classification</h3>
 <h4 id="numbers">Numbers</h4>
 <h5 id="mnist">Mnist</h5>
 <h5 id="usps">USPS</h5>
@@ -13,8 +13,9 @@
 <h3 id="image-segmentation">Image segmentation</h3>
 
 <h4 id="gta5-synthetic-dataset">GTA5 (synthetic dataset)</h4>
-<p><a href="https://download.visinf.tu-darmstadt.de/data/from_games/">homepage</a>
-GTA is a synthetic, vehicle-egocentric image
+<p><a href="https://download.visinf.tu-darmstadt.de/data/from_games/">homepage</a></p>
+
+<p>GTA is a synthetic, vehicle-egocentric image
 dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.</p>
 
 <h4 id="synthia-synthetic-data">synthia (synthetic data)</h4>

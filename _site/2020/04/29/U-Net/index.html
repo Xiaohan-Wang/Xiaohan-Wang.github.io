@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2000/01/01/template/">
+    <link rel="canonical" href="http://localhost:4000/2020/04/29/U-Net/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,11 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                        <a class="tag" href="/tags/#Semantic Segmentation" title="Semantic Segmentation">Semantic Segmentation</a>
+                        
                     </div>
                     <h2>U-Net</h2>
                     
                     
-                    <span class="meta"> Posted on January 1, 2000</span>
+                    <span class="meta">MICCAI 2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on April 29, 2020</span>
                 </div>
             </div>
         </div>
@@ -206,32 +208,73 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="">Paper link</a> and <a href="">code</a></p>
+				<p><a href="https://arxiv.org/pdf/1505.04597.pdf">Paper link</a> and <a href="https://github.com/milesial/Pytorch-UNet">code</a></p>
 
 <h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>contracting path + expending path + skip connection</li>
+  <li>strong data augmentation, works well for very few images (it was designed for biomedical images)</li>
+</ol>
 
 <h4 id="model">Model</h4>
+<p><img src="/img/15882170880287.jpg" width="80%" height="100%" />
+<img src="/img/15882176961707.jpg" width="80%" height="100%" /></p>
 
-<h4 id="result">Result</h4>
+<ul>
+  <li>It use valid convolution, thus the resolution gets lower and lower in the contracting path and expending path.</li>
+  <li>Because of the high resolution of biomedical images, overlap-tile strategy is used.</li>
+  <li>To predict the pixels in the border region of the image, the missing context is extrapolated by mirroring the input image.</li>
+</ul>
+
+<p>contracting path:</p>
+<ol>
+  <li>repeated application of two 3x3 convolutions (unpadded convolutions), each followed by a rectified linear unit (ReLU) and a 2x2 max pooling operation with stride 2 for downsampling. At each downsampling step we double the number of feature channels.</li>
+  <li>an upsampling of the feature map by a 2x2 convolution (“up-convolution”) that halves the number of feature channels, a concatenation with the correspondingly cropped feature map from the contracting path, and two 3x3 convolutions, each followed by a ReLU.</li>
+  <li>At the final layer a 1x1 convolution is used to map each 64- component feature vector to the desired number of classes.</li>
+</ol>
+
+<p>Training objective:</p>
+<ol>
+  <li>softmax + cross entropy</li>
+  <li>class balancing (it’s important because of the large background)</li>
+</ol>
+
+<h4 id="data-augmentation">Data augmentation</h4>
+<p>Teach the network the desired invariance and robustness properties, when only few training samples are available:</p>
+<ol>
+  <li>shift</li>
+  <li>rotation</li>
+  <li>gray value deformations</li>
+  <li>random elastic deformation</li>
+</ol>
 
 <h4 id="tricks">Tricks</h4>
+<ol>
+  <li>select the input tile size such that all 2x2 max-pooling operations are applied to a layer with an even x- and y-size.</li>
+  <li>favor large input tiles over a large batch size and hence reduce the batch to a single image.</li>
+  <li>use a high momentum (0.99) such that a large number of the previously seen training samples determine the update in the current optimization step.</li>
+  <li>Xavier initialization.</li>
+</ol>
 
-<h4 id="reflection">Reflection</h4>
+<h4 id="time">Time</h4>
+<ol>
+  <li>Training time: 10 hours on a NVidia Titan GPU (6 GB)</li>
+  <li>Inference time: Segmentation of a 512x512 image takes less than a second on a recent GPU</li>
+</ol>
 
-<h4 id="further-reference">Further reference</h4>
 
 
                 <hr style="visibility: hidden;">
 
 <!--                 <ul class="pager">
                     
-                    
-                    <li class="next">
-                        <a href="/2000/01/01/papers/" data-toggle="tooltip" data-placement="top" title="Reading list">
-                        Next<br>
-                        <span>Reading list</span>
-                        </a>previous
+                    <li class="previous">
+                        <a href="/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/" data-toggle="tooltip" data-placement="top" title="Conditional Generative Adversarial Network for Structured Domain Adaptation">
+                        Previous<br>
+                        <span>Conditional Generative Adversarial Network for Structured Domain Adaptation</span>
+                        </a>
                     </li>
+                    
                     
                 </ul> -->
 

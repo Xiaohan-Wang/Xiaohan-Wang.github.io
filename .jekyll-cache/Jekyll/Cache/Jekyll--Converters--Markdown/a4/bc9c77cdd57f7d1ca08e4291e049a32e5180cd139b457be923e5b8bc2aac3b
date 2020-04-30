@@ -1,4 +1,4 @@
-I"	<h3 id="domain-adaptation">Domain Adaptation</h3>
+I"J<h3 id="domain-adaptation">Domain Adaptation</h3>
 
 <table>
   <thead>
@@ -61,8 +61,8 @@
     <tr>
       <td>20.4.28</td>
       <td>CVPR 2018</td>
-      <td>AutoDIAL: Automatic Domain Alignment Layers</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/">link</a></td>
+      <td>Conditional Generative Adversarial Network for Structured Domain Adaptation</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/">link</a></td>
     </tr>
   </tbody>
 </table>
@@ -90,6 +90,18 @@
       <td>TPAMI 17 (Arxiv 15)</td>
       <td>SegNet: A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</td>
       <td><a href="https://xiaohan-wang.github.io/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/">link</a></td>
+    </tr>
+    <tr>
+      <td>20.4.29</td>
+      <td>MICCAI 2015</td>
+      <td>U-Net: Convolutional Networks for Biomedical</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Image Segmentation</td>
+      <td>TODO</td>
+      <td> </td>
+      <td> </td>
     </tr>
   </tbody>
 </table>

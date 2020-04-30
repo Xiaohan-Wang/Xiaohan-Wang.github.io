@@ -5,9 +5,75 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 28 Apr 2020 18:01:01 -0400</pubDate>
-    <lastBuildDate>Tue, 28 Apr 2020 18:01:01 -0400</lastBuildDate>
+    <pubDate>Wed, 29 Apr 2020 23:49:57 -0400</pubDate>
+    <lastBuildDate>Wed, 29 Apr 2020 23:49:57 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>U-Net</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1505.04597.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/milesial/Pytorch-UNet&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;contracting path + expending path + skip connection&lt;/li&gt;
+  &lt;li&gt;strong data augmentation, works well for very few images (it was designed for biomedical images)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15882170880287.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15882176961707.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;It use valid convolution, thus the resolution gets lower and lower in the contracting path and expending path.&lt;/li&gt;
+  &lt;li&gt;Because of the high resolution of biomedical images, overlap-tile strategy is used.&lt;/li&gt;
+  &lt;li&gt;To predict the pixels in the border region of the image, the missing context is extrapolated by mirroring the input image.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;contracting path:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;repeated application of two 3x3 convolutions (unpadded convolutions), each followed by a rectified linear unit (ReLU) and a 2x2 max pooling operation with stride 2 for downsampling. At each downsampling step we double the number of feature channels.&lt;/li&gt;
+  &lt;li&gt;an upsampling of the feature map by a 2x2 convolution (“up-convolution”) that halves the number of feature channels, a concatenation with the correspondingly cropped feature map from the contracting path, and two 3x3 convolutions, each followed by a ReLU.&lt;/li&gt;
+  &lt;li&gt;At the final layer a 1x1 convolution is used to map each 64- component feature vector to the desired number of classes.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Training objective:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;softmax + cross entropy&lt;/li&gt;
+  &lt;li&gt;class balancing (it’s important because of the large background)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;data-augmentation&quot;&gt;Data augmentation&lt;/h4&gt;
+&lt;p&gt;Teach the network the desired invariance and robustness properties, when only few training samples are available:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;shift&lt;/li&gt;
+  &lt;li&gt;rotation&lt;/li&gt;
+  &lt;li&gt;gray value deformations&lt;/li&gt;
+  &lt;li&gt;random elastic deformation&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;select the input tile size such that all 2x2 max-pooling operations are applied to a layer with an even x- and y-size.&lt;/li&gt;
+  &lt;li&gt;favor large input tiles over a large batch size and hence reduce the batch to a single image.&lt;/li&gt;
+  &lt;li&gt;use a high momentum (0.99) such that a large number of the previously seen training samples determine the update in the current optimization step.&lt;/li&gt;
+  &lt;li&gt;Xavier initialization.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;time&quot;&gt;Time&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Training time: 10 hours on a NVidia Titan GPU (6 GB)&lt;/li&gt;
+  &lt;li&gt;Inference time: Segmentation of a 512x512 image takes less than a second on a recent GPU&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Wed, 29 Apr 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/04/29/U-Net/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/04/29/U-Net/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>Conditional Generative Adversarial Network for Structured Domain Adaptation</title>
@@ -433,8 +499,9 @@ t-SNE: preverse local structure or global structure&lt;/p&gt;
 &lt;h3 id=&quot;image-segmentation&quot;&gt;Image segmentation&lt;/h3&gt;
 
 &lt;h4 id=&quot;gta5-synthetic-dataset&quot;&gt;GTA5 (synthetic dataset)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://download.visinf.tu-darmstadt.de/data/from_games/&quot;&gt;homepage&lt;/a&gt;
-GTA is a synthetic, vehicle-egocentric image
+&lt;p&gt;&lt;a href=&quot;https://download.visinf.tu-darmstadt.de/data/from_games/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;GTA is a synthetic, vehicle-egocentric image
 dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.&lt;/p&gt;
 
 &lt;h4 id=&quot;synthia-synthetic-data&quot;&gt;synthia (synthetic data)&lt;/h4&gt;
@@ -464,59 +531,6 @@ dataset collected from the open world in the realistically rendered computer gam
         <guid isPermaLink="true">http://localhost:4000/2020/04/02/DA-dataset-summary/</guid>
         
         <category>Datasets</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Moment Matching for Multi-Source Domain Adaptation</title>
-        <description>&lt;p&gt;&lt;a href=&quot;http://openaccess.thecvf.com/content_ICCV_2019/papers/Peng_Moment_Matching_for_Multi-Source_Domain_Adaptation_ICCV_2019_paper.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;http://ai.bu.edu/M3SDA/&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;the upper bound on the target error of the learned hypothesis depends on the pairwise moment divergence $d_{CM^k}(D_S, D_T)$ between the target domain and each source domain. (This provides a direct motivation for moment matching approaches)&lt;/li&gt;
-  &lt;li&gt;The last term target error is lower bounded by the pairwise divergences between source domains (implies we might also need to minimize divergence between source domains)&lt;/li&gt;
-  &lt;li&gt;DomainNet: multi-souce domain adaptation dataset&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15857182767863.jpg&quot; alt=&quot;-w909&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;moment distance based loss:&lt;br /&gt;
-&lt;img src=&quot;/img/15857184320957.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;overall training objective:&lt;br /&gt;
-&lt;img src=&quot;/img/15857185193833.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;In order to align $p(y;x)$ and $p(x)$ at the same time, they follow the training paradigm proposed in [1]. They leverage two classifiers per domain to form N pairs of classifiers $C′ = {(C1, C1′), (C2, C2′), …, (CN, CN ′)}$. The training procedure includes three steps.
-    &lt;ol&gt;
-      &lt;li&gt;train $G$ and $C′$ to classify the multi-source samples correctly based on the overall training objective.&lt;/li&gt;
-      &lt;li&gt;train the classifier pairs for a fixed $G$. The goal is to make the discrepancy of each pair of classifiers as large as possible on the target domain.&lt;/li&gt;
-      &lt;li&gt;fix $C′$ and train $G$ to minimize the discrepancy of each classifier pair on the target domain.&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15857191596055.jpg&quot; alt=&quot;-w781&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15857190392968.jpg&quot; alt=&quot;-w851&quot; /&gt;个人感觉主要是$M^3SDA-\beta$中的training paradigm在发挥作用。&lt;/p&gt;
-
-&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;Kuniaki Saito, Kohei Watanabe, Yoshitaka Ushiku, and Tat- suya Harada. Maximum classifier discrepancy for unsuper- vised domain adaptation. In The IEEE Conference on Com- puter Vision and Pattern Recognition (CVPR), June 2018.&lt;/li&gt;
-  &lt;li&gt;Chun-Liang Li, Wei-Cheng Chang, Yu Cheng, Yiming Yang, and Barnab´as P´oczos. Mmd gan: Towards deeper understanding of moment matching network. In Advances in Neural Information Processing Systems, pages 2203–2213, 2017.&lt;/li&gt;
-  &lt;li&gt;Yujia Li, Kevin Swersky, and Rich Zemel. Generative mo- ment matching networks. In International Conference on Machine Learning, pages 1718–1727, 2015.&lt;/li&gt;
-  &lt;li&gt;Youssef Mroueh, Tom Sercu, and Vaibhava Goel. McGan: Mean and covariance feature matching GAN. In Doina Pre- cup and Yee Whye Teh, editors, Proceedings ofthe 34th In- ternational Conference on Machine Learning, volume 70 of Proceedings of Machine Learning Research, pages 2527– 2535, International Convention Centre, Sydney, Australia, 06–11 Aug 2017. PMLR.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;2，3，4是Gan based moment matching&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 31 Mar 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/</guid>
-        
-        <category>Domain Adaptation</category>
         
         
       </item>
