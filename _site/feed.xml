@@ -5,9 +5,88 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 29 Apr 2020 23:49:57 -0400</pubDate>
-    <lastBuildDate>Wed, 29 Apr 2020 23:49:57 -0400</lastBuildDate>
+    <pubDate>Tue, 05 May 2020 23:22:48 -0400</pubDate>
+    <lastBuildDate>Tue, 05 May 2020 23:22:48 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Dilated convolutions</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1511.07122.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Dilated convolution operator, which can expend the receptive field without losing resolution or coverage, is very suitable for dense prediction task.&lt;/li&gt;
+  &lt;li&gt;multi-scale context module, can reliably increases accuracy when plugged into existing semantic segmentation systems.&lt;/li&gt;
+  &lt;li&gt;Replace pooling layer (designed for classification task) with dilated convolution (designed for segmentation task) can increase accuracy.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;dilated convolutions
+    &lt;ul&gt;
+      &lt;li&gt;$l$-dilated convolution: The familiar discrete convolution is simply the 1-dilated convolution.&lt;br /&gt;
+ &lt;img src=&quot;/img/15887283730533.jpg&quot; width=&quot;35%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+ use $∗_l$ to represent an $l$-dilated convolution&lt;/li&gt;
+      &lt;li&gt;Let $F_0, F_1, \cdots , F_{n−1} : Z^2 \rightarrow R$ be discrete functions and let $k_0, k_1, \cdots, k_{n−2} : Ω_1 \rightarrow R$ ($Ω_r = [−r, r]^2 ∩ Z^2$) be discrete 3×3 filter. Consider applying the filters with exponentially increasing dilation: 
+  &lt;script type=&quot;math/tex&quot;&gt;F_{i+1} = F_i ∗_{2^i}k_i\text{   for   } i = 0, 1, \cdots , n − 2&lt;/script&gt;, then the size of the receptive field of each element in $F_{i+1}$ is $(2^{i+2} − 1)×(2^{i+2} − 1)$.
+&lt;img src=&quot;/img/15887296456656.jpg&quot; alt=&quot;-w709&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;context module
+    &lt;blockquote&gt;
+      &lt;p&gt;The context module is designed to increase the performance of dense prediction architectures by aggregating multi-scale contextual information. The module takes C feature maps as input and produces C feature maps as output. The input and output have the same form, thus the module can be plugged into existing dense prediction architectures.&lt;/p&gt;
+    &lt;/blockquote&gt;
+
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;p&gt;module architecture&lt;/p&gt;
+
+        &lt;p&gt;here truncation is a ReLU function $f(\cdot)=max(\cdot, 0)$.&lt;br /&gt;
+&lt;img src=&quot;/img/15887338289922.jpg&quot; alt=&quot;-w656&quot; /&gt;&lt;/p&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;p&gt;initialization&lt;/p&gt;
+
+        &lt;p&gt;Experiments revealed that standard initialization procedures (random initialization) do not readily support the training of the module.&lt;/p&gt;
+        &lt;ul&gt;
+          &lt;li&gt;Basic: identity initialization&lt;br /&gt;
+  &lt;img src=&quot;/img/15887343089814.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+          &lt;li&gt;Large:&lt;br /&gt;
+  &lt;img src=&quot;/img/15887343601296.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;front end
+    &lt;ul&gt;
+      &lt;li&gt;adapted the VGG-16 network for dense prediction and removed the last two pooling and striding layers. Specifically, each of these pooling and striding layers was removed and convolutions in all subsequent layers were dilated by a factor of 2 for each pooling layer that was ablated.&lt;/li&gt;
+      &lt;li&gt;use reflection padding: the buffer zone is filled by reflecting the image about each edge.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Front end
+&lt;img src=&quot;/img/15887346292420.jpg&quot; alt=&quot;-w599&quot; /&gt;
+&lt;img src=&quot;/img/15887346668224.jpg&quot; alt=&quot;-w609&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;context module
+&lt;img src=&quot;/img/15887347716594.jpg&quot; alt=&quot;-w599&quot; /&gt;
+&lt;img src=&quot;/img/15887348908756.jpg&quot; alt=&quot;-w606&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 05 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/05/Dilated-convolutions/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/05/Dilated-convolutions/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>U-Net</title>
@@ -478,59 +557,6 @@ t-SNE: preverse local structure or global structure&lt;/p&gt;
         <category>Backbones</category>
         
         <category>CV paperlist</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>DA dataset summary</title>
-        <description>&lt;h3 id=&quot;image-classification&quot;&gt;Image classification&lt;/h3&gt;
-&lt;h4 id=&quot;numbers&quot;&gt;Numbers&lt;/h4&gt;
-&lt;h5 id=&quot;mnist&quot;&gt;Mnist&lt;/h5&gt;
-&lt;h5 id=&quot;usps&quot;&gt;USPS&lt;/h5&gt;
-&lt;h5 id=&quot;svhn-street-view-house-numbers&quot;&gt;SVHN (street view house numbers)&lt;/h5&gt;
-
-&lt;h4 id=&quot;office&quot;&gt;Office&lt;/h4&gt;
-&lt;h4 id=&quot;office-31&quot;&gt;Office-31&lt;/h4&gt;
-&lt;p&gt;It contains 4652 images organized in 31 classes from three different domains: Amazon (A), DSRL (D) and Webcam (W).&lt;/p&gt;
-&lt;h4 id=&quot;office-caltech&quot;&gt;Office-Caltech&lt;/h4&gt;
-&lt;p&gt;It selects the subset of 10 common categories in the Office31 and the Caltech256 datasets. It contains 2533 images of which about half belong to Caltech256. Each of Amazon (A), DSLR (D), Webcam (W) and Caltech256 (C) are regarded as separate domains.&lt;/p&gt;
-
-&lt;h3 id=&quot;image-segmentation&quot;&gt;Image segmentation&lt;/h3&gt;
-
-&lt;h4 id=&quot;gta5-synthetic-dataset&quot;&gt;GTA5 (synthetic dataset)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://download.visinf.tu-darmstadt.de/data/from_games/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;GTA is a synthetic, vehicle-egocentric image
-dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.&lt;/p&gt;
-
-&lt;h4 id=&quot;synthia-synthetic-data&quot;&gt;synthia (synthetic data)&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;http://synthia-dataset.net/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;SYNTHIA  is a large dataset of synthetic images and provides a particular subset, called SYNTHIA-RANDCITYSCAPES, to pair with Cityscapes. This subset contains 9,400 images that are automatically annotated with 12 object categories, one void class, and some unnamed classes. Note that the virtual city used to generate the synthetic images does not correspond to any of the real cities covered by Cityscapes.&lt;/p&gt;
-
-&lt;p&gt;Note: usually consider the 16 common classes shared with Cityscapes: sky, building, road, sidewalk, fence, vegetation, pole, car, traffic sign, person, bicycle, motorcycle, traffic light, bus, wall, and rider.&lt;/p&gt;
-
-&lt;h4 id=&quot;cityscapes&quot;&gt;Cityscapes&lt;/h4&gt;
-&lt;p&gt;&lt;a href=&quot;https://www.cityscapes-dataset.com/&quot;&gt;homepage&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;a real-world, vehicle-egocentric image dataset collected in 50 cities in Germany and nearby countries. It provides four disjoint subsets: 2,993 training images, 503 validation image, 1,531 test images, and 20,021 auxiliary images. All the training, validation, and test images are accurately annotated with per pixel category labels, while the auxiliary set is coarsely labeled. There are 34 distinct categories in the dataset.&lt;/p&gt;
-
-&lt;p&gt;Note: usually consider the 19 common classes shared with Cityscapes: bike, fence, wall, traffic sign, pole, motorcycle, traffic light, sky, bus, rider, vegetation, &lt;strong&gt;terrain&lt;/strong&gt;, &lt;strong&gt;train&lt;/strong&gt;, building, car, person, &lt;strong&gt;truck&lt;/strong&gt;, sidewalk and road.&lt;/p&gt;
-
-&lt;h3 id=&quot;multi-source-domain-adaptation&quot;&gt;multi-source domain adaptation&lt;/h3&gt;
-&lt;h4 id=&quot;domainnet&quot;&gt;DomainNet&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ai.bu.edu/M3SDA/&quot;&gt;homepage&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Challenge: &lt;a href=&quot;http://ai.bu.edu/visda-2019/&quot;&gt;VisDA-2019&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Thu, 02 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/02/DA-dataset-summary/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/02/DA-dataset-summary/</guid>
-        
-        <category>Datasets</category>
         
         
       </item>

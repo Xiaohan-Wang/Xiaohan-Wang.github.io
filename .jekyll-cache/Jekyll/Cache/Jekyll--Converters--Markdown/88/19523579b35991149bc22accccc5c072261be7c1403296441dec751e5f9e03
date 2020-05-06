@@ -1,4 +1,4 @@
-I"J<h3 id="domain-adaptation">Domain Adaptation</h3>
+I"&<h3 id="domain-adaptation">Domain Adaptation</h3>
 
 <table>
   <thead>
@@ -99,9 +99,15 @@
     </tr>
     <tr>
       <td>Image Segmentation</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/04/29/U-Net/">link</a></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>20.5.5</td>
+      <td>ICLR 2016</td>
+      <td>MULTI-SCALE CONTEXT AGGREGATION BY DILATED CONVOLUTIONS</td>
       <td>TODO</td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
