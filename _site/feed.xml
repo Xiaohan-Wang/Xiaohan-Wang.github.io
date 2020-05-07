@@ -5,9 +5,86 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 05 May 2020 23:22:48 -0400</pubDate>
-    <lastBuildDate>Tue, 05 May 2020 23:22:48 -0400</lastBuildDate>
+    <pubDate>Thu, 07 May 2020 16:24:55 -0400</pubDate>
+    <lastBuildDate>Thu, 07 May 2020 16:24:55 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>DeepLab v1</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1412.7062.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;two technical hurdles in the application of DCNNs to image labeling tasks: signal downsampling, and spatial ‘insensitivity’ (invariance).&lt;/li&gt;
+  &lt;li&gt;signal downsampling: reduction of signal resolution incurred by the repeated max-pooling -&amp;gt; employ the atrous algorithm (其实就是空洞卷积)&lt;/li&gt;
+  &lt;li&gt;spatial insensitivity: object-centric decisions from a classifier requires invariance to spatial transformations, inherently limiting the spatial accuracy of the DCNN model -&amp;gt; capture fine details by employing a fully-connected Conditional Random Field (CRF) + multi-scale prediction&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;依然修改自VGG-16
+&lt;img src=&quot;/img/15888811976149.jpg&quot; alt=&quot;-w724&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;efficient-feature-extraction-atrous-algorithm--reducing-model&quot;&gt;efficient feature extraction: atrous algorithm + reducing model&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;To compute scores more densely at target stride of 8 pixels:&lt;br /&gt;
+ &lt;img src=&quot;/img/15888799732428.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;
+    &lt;ol&gt;
+      &lt;li&gt;convert the fully-connected layers of VGG-16 into convolutional ones and run the network in a convolutional fashion on the image at its original resolution&lt;/li&gt;
+      &lt;li&gt;instead of subsampling after the last two max-pooling layers in the network, use the convolutional filters with an input stride of 2 or 4 pixels, respectively.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;After converting the network to a fully convolutional one, the first fully connected layer has 4,096 filters of large 7×7 spatial size and becomes the computational bottleneck.
+    &lt;ol&gt;
+      &lt;li&gt;Use filters with 4×4 (or 3×3) spatial size but with the same receptive fields.&lt;/li&gt;
+      &lt;li&gt;reducing the number of channels at the fully connected layers from 4,096 down to 1,024.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;detail-boundary-recovery-fully-connected-crf--multi-scale-prediction&quot;&gt;detail boundary recovery: fully-connected CRF + multi-scale prediction&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;fully-connected CRF 
+ &lt;img src=&quot;/img/15888811265917.jpg&quot; alt=&quot;-w723&quot; /&gt;&lt;/p&gt;
+
+    &lt;ol&gt;
+      &lt;li&gt;Energy function:&lt;br /&gt;
+ &lt;img src=&quot;/img/15888817215422.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;first term:&lt;br /&gt;
+ &lt;img src=&quot;/img/15888818741237.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;second term:&lt;br /&gt;
+ &lt;img src=&quot;/img/15888819146749.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+ &lt;img src=&quot;/img/15888820310003.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+ the kernels are:&lt;br /&gt;
+ &lt;img src=&quot;/img/15888821802918.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;multi-scale prediction
+ attach to the input image and the output of each of the first four max pooling layers a two-layer MLP (first layer: 128 3x3 convolutional filters, second layer: 128 1x1 convolutional fil- ters) whose feature map is concatenated to the main network’s last layer feature map. The aggregate feature map fed into the softmax layer is thus enhanced by 5 * 128 = 640 channels.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15888828891435.jpg&quot; alt=&quot;-w794&quot; /&gt;
+&lt;img src=&quot;/img/15888829216375.jpg&quot; alt=&quot;-w739&quot; /&gt;
+&lt;img src=&quot;/img/15888829687129.jpg&quot; alt=&quot;-w702&quot; /&gt;
+&lt;img src=&quot;/img/15888830739237.jpg&quot; alt=&quot;-w725&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;http://hellodfan.com/2018/01/22/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E8%AE%BA%E6%96%87-DeepLab%E7%B3%BB%E5%88%97/&lt;/li&gt;
+  &lt;li&gt;Krahenbuhl, P. and Koltun, V. Efficient inference in fully connected crfs with gaussian edge poten- tials. In NIPS, 2011.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/07/Deeplab-v1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/07/Deeplab-v1/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>Dilated convolutions</title>
@@ -509,54 +586,6 @@ t-SNE: preverse local structure or global structure&lt;/p&gt;
         <guid isPermaLink="true">http://localhost:4000/2020/04/03/t-SNE%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/</guid>
         
         <category>ML</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Backbones</title>
-        <description>&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;name&lt;/th&gt;
-      &lt;th&gt;paper&lt;/th&gt;
-      &lt;th&gt;code&lt;/th&gt;
-      &lt;th&gt;comment&lt;/th&gt;
-      &lt;th&gt;experiment&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AlexNet&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.pdf&quot;&gt;link&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://xiaohan-wang.github.io/2020/03/27/AlexNet/&quot;&gt;link&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Inception-BN&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;VGG-16&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-</description>
-        <pubDate>Thu, 02 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/02/Backbones/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/02/Backbones/</guid>
-        
-        <category>Backbones</category>
-        
-        <category>CV paperlist</category>
         
         
       </item>

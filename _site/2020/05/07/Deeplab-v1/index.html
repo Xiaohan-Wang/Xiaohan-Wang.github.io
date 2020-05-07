@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Dilated convolutions - Xiaohan's Blog</title>
+    <title>DeepLab v1 - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/05/05/Dilated-convolutions/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/07/Deeplab-v1/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -187,10 +187,10 @@
                         <a class="tag" href="/tags/#Semantic Segmentation" title="Semantic Segmentation">Semantic Segmentation</a>
                         
                     </div>
-                    <h2>Dilated convolutions</h2>
+                    <h2>DeepLab v1</h2>
                     
                     
-                    <span class="meta">ICLR 2016&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 5, 2020</span>
+                    <span class="meta">ICLR 2015&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 7, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,72 +208,70 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="https://arxiv.org/pdf/1511.07122.pdf">Paper link</a></p>
+				<p><a href="https://arxiv.org/pdf/1412.7062.pdf">Paper link</a></p>
 
 <h4 id="take-away-message">Take away message</h4>
 <ol>
-  <li>Dilated convolution operator, which can expend the receptive field without losing resolution or coverage, is very suitable for dense prediction task.</li>
-  <li>multi-scale context module, can reliably increases accuracy when plugged into existing semantic segmentation systems.</li>
-  <li>Replace pooling layer (designed for classification task) with dilated convolution (designed for segmentation task) can increase accuracy.</li>
+  <li>two technical hurdles in the application of DCNNs to image labeling tasks: signal downsampling, and spatial ‘insensitivity’ (invariance).</li>
+  <li>signal downsampling: reduction of signal resolution incurred by the repeated max-pooling -&gt; employ the atrous algorithm (其实就是空洞卷积)</li>
+  <li>spatial insensitivity: object-centric decisions from a classifier requires invariance to spatial transformations, inherently limiting the spatial accuracy of the DCNN model -&gt; capture fine details by employing a fully-connected Conditional Random Field (CRF) + multi-scale prediction</li>
 </ol>
 
 <h4 id="model">Model</h4>
+<p>依然修改自VGG-16
+<img src="/img/15888811976149.jpg" alt="-w724" /></p>
+
+<h5 id="efficient-feature-extraction-atrous-algorithm--reducing-model">efficient feature extraction: atrous algorithm + reducing model</h5>
 <ol>
-  <li>dilated convolutions
-    <ul>
-      <li>$l$-dilated convolution: The familiar discrete convolution is simply the 1-dilated convolution.<br />
- <img src="/img/15887283730533.jpg" width="35%" height="100%" /><br />
- use $∗_l$ to represent an $l$-dilated convolution</li>
-      <li>Let $F_0, F_1, \cdots , F_{n−1} : Z^2 \rightarrow R$ be discrete functions and let $k_0, k_1, \cdots, k_{n−2} : Ω_1 \rightarrow R$ ($Ω_r = [−r, r]^2 ∩ Z^2$) be discrete 3×3 filter. Consider applying the filters with exponentially increasing dilation: 
-  <script type="math/tex">F_{i+1} = F_i ∗_{2^i}k_i\text{   for   } i = 0, 1, \cdots , n − 2</script>, then the size of the receptive field of each element in $F_{i+1}$ is $(2^{i+2} − 1)×(2^{i+2} − 1)$.
-<img src="/img/15887296456656.jpg" alt="-w709" /></li>
-    </ul>
+  <li>To compute scores more densely at target stride of 8 pixels:<br />
+ <img src="/img/15888799732428.jpg" width="70%" height="100%" />
+    <ol>
+      <li>convert the fully-connected layers of VGG-16 into convolutional ones and run the network in a convolutional fashion on the image at its original resolution</li>
+      <li>instead of subsampling after the last two max-pooling layers in the network, use the convolutional filters with an input stride of 2 or 4 pixels, respectively.</li>
+    </ol>
   </li>
-  <li>context module
-    <blockquote>
-      <p>The context module is designed to increase the performance of dense prediction architectures by aggregating multi-scale contextual information. The module takes C feature maps as input and produces C feature maps as output. The input and output have the same form, thus the module can be plugged into existing dense prediction architectures.</p>
-    </blockquote>
-
-    <ul>
-      <li>
-        <p>module architecture</p>
-
-        <p>here truncation is a ReLU function $f(\cdot)=max(\cdot, 0)$.<br />
-<img src="/img/15887338289922.jpg" alt="-w656" /></p>
-      </li>
-      <li>
-        <p>initialization</p>
-
-        <p>Experiments revealed that standard initialization procedures (random initialization) do not readily support the training of the module.</p>
-        <ul>
-          <li>Basic: identity initialization<br />
-  <img src="/img/15887343089814.jpg" width="30%" height="100%" /></li>
-          <li>Large:<br />
-  <img src="/img/15887343601296.jpg" width="55%" height="100%" /></li>
-        </ul>
-      </li>
-    </ul>
+  <li>After converting the network to a fully convolutional one, the first fully connected layer has 4,096 filters of large 7×7 spatial size and becomes the computational bottleneck.
+    <ol>
+      <li>Use filters with 4×4 (or 3×3) spatial size but with the same receptive fields.</li>
+      <li>reducing the number of channels at the fully connected layers from 4,096 down to 1,024.</li>
+    </ol>
   </li>
-  <li>front end
-    <ul>
-      <li>adapted the VGG-16 network for dense prediction and removed the last two pooling and striding layers. Specifically, each of these pooling and striding layers was removed and convolutions in all subsequent layers were dilated by a factor of 2 for each pooling layer that was ablated.</li>
-      <li>use reflection padding: the buffer zone is filled by reflecting the image about each edge.</li>
-    </ul>
+</ol>
+
+<h5 id="detail-boundary-recovery-fully-connected-crf--multi-scale-prediction">detail boundary recovery: fully-connected CRF + multi-scale prediction</h5>
+<ol>
+  <li>
+    <p>fully-connected CRF 
+ <img src="/img/15888811265917.jpg" alt="-w723" /></p>
+
+    <ol>
+      <li>Energy function:<br />
+ <img src="/img/15888817215422.jpg" width="40%" height="100%" /></li>
+      <li>first term:<br />
+ <img src="/img/15888818741237.jpg" width="25%" height="100%" /></li>
+      <li>second term:<br />
+ <img src="/img/15888819146749.jpg" width="55%" height="100%" /><br />
+ <img src="/img/15888820310003.jpg" width="25%" height="100%" /><br />
+ the kernels are:<br />
+ <img src="/img/15888821802918.jpg" width="55%" height="100%" /></li>
+    </ol>
+  </li>
+  <li>
+    <p>multi-scale prediction
+ attach to the input image and the output of each of the first four max pooling layers a two-layer MLP (first layer: 128 3x3 convolutional filters, second layer: 128 1x1 convolutional fil- ters) whose feature map is concatenated to the main network’s last layer feature map. The aggregate feature map fed into the softmax layer is thus enhanced by 5 * 128 = 640 channels.</p>
   </li>
 </ol>
 
 <h4 id="result">Result</h4>
+<p><img src="/img/15888828891435.jpg" alt="-w794" />
+<img src="/img/15888829216375.jpg" alt="-w739" />
+<img src="/img/15888829687129.jpg" alt="-w702" />
+<img src="/img/15888830739237.jpg" alt="-w725" /></p>
+
+<h4 id="further-reference">Further reference</h4>
 <ol>
-  <li>
-    <p>Front end
-<img src="/img/15887346292420.jpg" alt="-w599" />
-<img src="/img/15887346668224.jpg" alt="-w609" /></p>
-  </li>
-  <li>
-    <p>context module
-<img src="/img/15887347716594.jpg" alt="-w599" />
-<img src="/img/15887348908756.jpg" alt="-w606" /></p>
-  </li>
+  <li>http://hellodfan.com/2018/01/22/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E8%AE%BA%E6%96%87-DeepLab%E7%B3%BB%E5%88%97/</li>
+  <li>Krahenbuhl, P. and Koltun, V. Efficient inference in fully connected crfs with gaussian edge poten- tials. In NIPS, 2011.</li>
 </ol>
 
 
@@ -282,19 +280,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/04/29/U-Net/" data-toggle="tooltip" data-placement="top" title="U-Net">
+                        <a href="/2020/05/05/Dilated-convolutions/" data-toggle="tooltip" data-placement="top" title="Dilated convolutions">
                         Previous<br>
-                        <span>U-Net</span>
+                        <span>Dilated convolutions</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/05/07/Deeplab-v1/" data-toggle="tooltip" data-placement="top" title="DeepLab v1">
-                        Next<br>
-                        <span>DeepLab v1</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
