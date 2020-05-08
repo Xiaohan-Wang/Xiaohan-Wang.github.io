@@ -1,15 +1,19 @@
-I"B<p><a href="https://arxiv.org/pdf/1412.7062.pdf">Paper link</a></p>
+I"�<p><a href="https://arxiv.org/pdf/1412.7062.pdf">Paper link</a></p>
 
 <h4 id="take-away-message">Take away message</h4>
 <ol>
   <li>two technical hurdles in the application of DCNNs to image labeling tasks: signal downsampling, and spatial ‘insensitivity’ (invariance).</li>
-  <li>signal downsampling: reduction of signal resolution incurred by the repeated max-pooling -&gt; employ the atrous algorithm (其实就是空洞卷积)</li>
+  <li>signal downsampling: reduction of signal resolution incurred by the repeated max-pooling -&gt; employ the atrous algorithm (就是dilated convolution)</li>
   <li>spatial insensitivity: object-centric decisions from a classifier requires invariance to spatial transformations, inherently limiting the spatial accuracy of the DCNN model -&gt; capture fine details by employing a fully-connected Conditional Random Field (CRF) + multi-scale prediction</li>
 </ol>
 
 <h4 id="model">Model</h4>
-<p>依然修改自VGG-16
-<img src="/img/15888811976149.jpg" alt="-w724" /></p>
+<ol>
+  <li>修改自VGG-16</li>
+  <li>decouple the DCNN and CRF training stages, assuming the DCNN unary terms are fixed when setting the CRF parameters</li>
+</ol>
+
+<p><img src="/img/15888811976149.jpg" alt="-w724" /></p>
 
 <h5 id="efficient-feature-extraction-atrous-algorithm--reducing-model">efficient feature extraction: atrous algorithm + reducing model</h5>
 <ol>
@@ -43,7 +47,8 @@
  <img src="/img/15888819146749.jpg" width="55%" height="100%" /><br />
  <img src="/img/15888820310003.jpg" width="25%" height="100%" /><br />
  the kernels are:<br />
- <img src="/img/15888821802918.jpg" width="55%" height="100%" /></li>
+ <img src="/img/15888821802918.jpg" width="55%" height="100%" /><br />
+ The first kernel forces pixels with similar color and position to have similar labels, while the second kernel only considers spatial proximity when enforcing smoothness.</li>
     </ol>
   </li>
   <li>
@@ -60,7 +65,7 @@
 
 <h4 id="further-reference">Further reference</h4>
 <ol>
-  <li>http://hellodfan.com/2018/01/22/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E8%AE%BA%E6%96%87-DeepLab%E7%B3%BB%E5%88%97/</li>
+  <li><a href="http://hellodfan.com/2018/01/22/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E8%AE%BA%E6%96%87-DeepLab%E7%B3%BB%E5%88%97/">部分翻译</a></li>
   <li>Krahenbuhl, P. and Koltun, V. Efficient inference in fully connected crfs with gaussian edge poten- tials. In NIPS, 2011.</li>
 </ol>
 :ET

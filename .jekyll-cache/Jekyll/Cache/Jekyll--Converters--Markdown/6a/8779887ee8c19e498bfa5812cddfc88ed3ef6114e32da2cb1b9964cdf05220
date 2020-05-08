@@ -1,0 +1,77 @@
+I"<p><a href="https://arxiv.org/pdf/1606.00915.pdf">Paper link</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<p>相比于DeepLab v1:</p>
+<ol>
+  <li>atrous spatial pyramid pooling (ASPP) to deal with multiscale context and objects.</li>
+  <li>deeper convolutional neural networks (from VGG-16 to ResNet-101).</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<h5 id="atrous-convolution-for-dense-feature-extraction">atrous convolution for dense feature extraction</h5>
+<p><img src="/img/15889713549783.jpg" width="50%" height="100%" /></p>
+<ol>
+  <li>the number of filter parameters and the number of operations per position stay constant, but the effective filter size increases.</li>
+  <li>Pushing this approach all the way through the network could allow us to compute feature responses at the original image resolution, but this ends up being too costly. Thus the authors have adopted instead a hybrid approach that strikes a good efficiency/accuracy trade-off, using atrous convolution to increase by a factor of 4 the density of computed feature maps, followed by fast bilinear interpolation by an additional factor of 8 to recover feature maps at the original image resolution. Bilinear interpolation is sufficient in this setting because the class score maps are quite smooth.</li>
+</ol>
+
+<h5 id="multiscale-image-representation">multiscale image representation</h5>
+<ol>
+  <li>standard multiscale processing
+    <ul>
+      <li>extract DCNN score maps from multiplerescaled versions of the original image using parallel DCNN branches that share the same parameters. To produce the final result, the authors bilinearly interpolate the feature maps from the parallel DCNN branches to the original image resolution and fuse them, by taking at each position the maximum response across the different scales.</li>
+      <li>do this both during training and testing.</li>
+      <li>Multiscale processing significantly improves performance, but at the cost of computing feature responses at all DCNN layers for multiple scales of input.</li>
+    </ul>
+  </li>
+  <li>
+    <p>ASPP
+<img src="/img/15889716579187.jpg" width="50%" height="100%" />
+<img src="/img/15889716791787.jpg" width="50%" height="100%" /></p>
+  </li>
+  <li>fully-connected CRF</li>
+</ol>
+
+<h4 id="result">Result</h4>
+<p>three main improvements compared to DeepLab v1:</p>
+<ul>
+  <li>different learning policy during training</li>
+  <li>atrous spatial pyramid pooling</li>
+  <li>multi-scale processing and other factors</li>
+  <li>employment of deeper networks</li>
+</ul>
+
+<ol>
+  <li>
+    <p>different learning policy during training<br />
+employing a “poly” learning rate iter policy (the learning rate is multiplied by $(1−
+\frac{\text{iter}}{\text{max_iter}} )^{\text{power}}$) is more effective than “step” learning rate (reduce the learning rate at a fixed step size).<br />
+ <img src="/img/15889722172052.jpg" width="60%" height="100%" /></p>
+  </li>
+  <li>
+    <p>ASPP
+<img src="/img/15889726217656.jpg" width="60%" height="100%" />
+<img src="/img/15889726447069.jpg" width="50%" height="100%" /></p>
+  </li>
+  <li>
+    <p>multi-scale processing and other factors (on ResNet 101)
+<img src="/img/15889728730154.jpg" width="70%" height="100%" /></p>
+  </li>
+  <li>
+    <p>VGG-16 vs. ResNet-101</p>
+    <ul>
+      <li>DeepLab based on ResNet-101 delivers better segmentation results along object boundaries than employing VGG- 16. <br />
+ <img src="/img/15889733334375.jpg" width="70%" height="100%" />
+ <img src="/img/15889732341678.jpg" width="70%" height="100%" /></li>
+      <li>Post-processing the ResNet-101 result with a CRF further improves the segmentation result. (有提高，但不大)<br />
+ <img src="/img/15889730892561.jpg" width="70%" height="100%" /></li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="further-reference">Further reference</h4>
+<ol>
+  <li>VGG-16. K. Simonyan and A. Zisserman, “Very deep convolutional net- works for large-scale image recognition,” in ICLR, 2015.</li>
+  <li>ResNet. K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” arXiv:1512.03385, 2015.</li>
+</ol>
+:ET

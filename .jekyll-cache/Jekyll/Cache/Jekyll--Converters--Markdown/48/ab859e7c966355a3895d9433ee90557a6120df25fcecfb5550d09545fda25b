@@ -1,4 +1,4 @@
-I"�<table>
+I"�<table>
   <thead>
     <tr>
       <th>name</th>
@@ -17,14 +17,14 @@
       <td> </td>
     </tr>
     <tr>
-      <td>Inception-BN</td>
+      <td>VGG-16</td>
       <td> </td>
       <td> </td>
       <td> </td>
       <td> </td>
     </tr>
     <tr>
-      <td>VGG-16</td>
+      <td>ResNet 101</td>
       <td> </td>
       <td> </td>
       <td> </td>

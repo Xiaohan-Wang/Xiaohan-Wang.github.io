@@ -5,9 +5,97 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 07 May 2020 16:24:55 -0400</pubDate>
-    <lastBuildDate>Thu, 07 May 2020 16:24:55 -0400</lastBuildDate>
+    <pubDate>Fri, 08 May 2020 17:39:09 -0400</pubDate>
+    <lastBuildDate>Fri, 08 May 2020 17:39:09 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>DeepLab v2</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1606.00915.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;p&gt;相比于DeepLab v1:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;atrous spatial pyramid pooling (ASPP) to deal with multiscale context and objects.&lt;/li&gt;
+  &lt;li&gt;deeper convolutional neural networks (from VGG-16 to ResNet-101).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;h5 id=&quot;atrous-convolution-for-dense-feature-extraction&quot;&gt;atrous convolution for dense feature extraction&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15889713549783.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;the number of filter parameters and the number of operations per position stay constant, but the effective filter size increases.&lt;/li&gt;
+  &lt;li&gt;Pushing this approach all the way through the network could allow us to compute feature responses at the original image resolution, but this ends up being too costly. Thus the authors have adopted instead a hybrid approach that strikes a good efficiency/accuracy trade-off, using atrous convolution to increase by a factor of 4 the density of computed feature maps, followed by fast bilinear interpolation by an additional factor of 8 to recover feature maps at the original image resolution. Bilinear interpolation is sufficient in this setting because the class score maps are quite smooth.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;multiscale-image-representation&quot;&gt;multiscale image representation&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;standard multiscale processing
+    &lt;ul&gt;
+      &lt;li&gt;extract DCNN score maps from multiplerescaled versions of the original image using parallel DCNN branches that share the same parameters. To produce the final result, the authors bilinearly interpolate the feature maps from the parallel DCNN branches to the original image resolution and fuse them, by taking at each position the maximum response across the different scales.&lt;/li&gt;
+      &lt;li&gt;do this both during training and testing.&lt;/li&gt;
+      &lt;li&gt;Multiscale processing significantly improves performance, but at the cost of computing feature responses at all DCNN layers for multiple scales of input.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ASPP
+&lt;img src=&quot;/img/15889716579187.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15889716791787.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;fully-connected CRF&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;three main improvements compared to DeepLab v1:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;different learning policy during training&lt;/li&gt;
+  &lt;li&gt;atrous spatial pyramid pooling&lt;/li&gt;
+  &lt;li&gt;multi-scale processing and other factors&lt;/li&gt;
+  &lt;li&gt;employment of deeper networks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;different learning policy during training&lt;br /&gt;
+employing a “poly” learning rate iter policy (the learning rate is multiplied by $(1−
+\frac{\text{iter}}{\text{max_iter}} )^{\text{power}}$) is more effective than “step” learning rate (reduce the learning rate at a fixed step size).&lt;br /&gt;
+ &lt;img src=&quot;/img/15889722172052.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;ASPP
+&lt;img src=&quot;/img/15889726217656.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15889726447069.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;multi-scale processing and other factors (on ResNet 101)
+&lt;img src=&quot;/img/15889728730154.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;VGG-16 vs. ResNet-101&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;DeepLab based on ResNet-101 delivers better segmentation results along object boundaries than employing VGG- 16. &lt;br /&gt;
+ &lt;img src=&quot;/img/15889733334375.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
+ &lt;img src=&quot;/img/15889732341678.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;Post-processing the ResNet-101 result with a CRF further improves the segmentation result. (有提高，但不大)&lt;br /&gt;
+ &lt;img src=&quot;/img/15889730892561.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;VGG-16. K. Simonyan and A. Zisserman, “Very deep convolutional net- works for large-scale image recognition,” in ICLR, 2015.&lt;/li&gt;
+  &lt;li&gt;ResNet. K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” arXiv:1512.03385, 2015.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 08 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/08/DeepLab-v2/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/08/DeepLab-v2/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>DeepLab v1</title>
@@ -16,13 +104,17 @@
 &lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;two technical hurdles in the application of DCNNs to image labeling tasks: signal downsampling, and spatial ‘insensitivity’ (invariance).&lt;/li&gt;
-  &lt;li&gt;signal downsampling: reduction of signal resolution incurred by the repeated max-pooling -&amp;gt; employ the atrous algorithm (其实就是空洞卷积)&lt;/li&gt;
+  &lt;li&gt;signal downsampling: reduction of signal resolution incurred by the repeated max-pooling -&amp;gt; employ the atrous algorithm (就是dilated convolution)&lt;/li&gt;
   &lt;li&gt;spatial insensitivity: object-centric decisions from a classifier requires invariance to spatial transformations, inherently limiting the spatial accuracy of the DCNN model -&amp;gt; capture fine details by employing a fully-connected Conditional Random Field (CRF) + multi-scale prediction&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;依然修改自VGG-16
-&lt;img src=&quot;/img/15888811976149.jpg&quot; alt=&quot;-w724&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;修改自VGG-16&lt;/li&gt;
+  &lt;li&gt;decouple the DCNN and CRF training stages, assuming the DCNN unary terms are fixed when setting the CRF parameters&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15888811976149.jpg&quot; alt=&quot;-w724&quot; /&gt;&lt;/p&gt;
 
 &lt;h5 id=&quot;efficient-feature-extraction-atrous-algorithm--reducing-model&quot;&gt;efficient feature extraction: atrous algorithm + reducing model&lt;/h5&gt;
 &lt;ol&gt;
@@ -56,7 +148,8 @@
  &lt;img src=&quot;/img/15888819146749.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
  &lt;img src=&quot;/img/15888820310003.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
  the kernels are:&lt;br /&gt;
- &lt;img src=&quot;/img/15888821802918.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+ &lt;img src=&quot;/img/15888821802918.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+ The first kernel forces pixels with similar color and position to have similar labels, while the second kernel only considers spatial proximity when enforcing smoothness.&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;
@@ -73,7 +166,7 @@
 
 &lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;http://hellodfan.com/2018/01/22/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E8%AE%BA%E6%96%87-DeepLab%E7%B3%BB%E5%88%97/&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hellodfan.com/2018/01/22/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E8%AE%BA%E6%96%87-DeepLab%E7%B3%BB%E5%88%97/&quot;&gt;部分翻译&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Krahenbuhl, P. and Koltun, V. Efficient inference in fully connected crfs with gaussian edge poten- tials. In NIPS, 2011.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
@@ -565,27 +658,6 @@ A classification loss on the source samples is added here. Without this loss, th
         <guid isPermaLink="true">http://localhost:4000/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/</guid>
         
         <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>t-SNE dimension reduction</title>
-        <description>&lt;p&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf&quot;&gt;paper&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;t-SNE was proposed in 2008, which is s a very powerful and state-of-the-art dimension reduction algorithm, and is especially good at data visualization.&lt;/p&gt;
-
-&lt;p&gt;PCA: perseve global structure (principle component)
-t-SNE: preverse local structure or global structure&lt;/p&gt;
-
-&lt;p&gt;https://www.appliedaicourse.com/lecture/11/applied-machine-learning-online-course/2899/neighborhood-of-a-point-embedding/2/module-2-data-science-exploratory-data-analysis-and-data-visualization&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 03 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/03/t-SNE%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/03/t-SNE%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/</guid>
-        
-        <category>ML</category>
         
         
       </item>
