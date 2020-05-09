@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>DA dataset summary - Xiaohan's Blog</title>
+    <title>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/04/02/DA-dataset-summary/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Datasets" title="Datasets">Datasets</a>
+                        <a class="tag" href="/tags/#Semantic Segmentation" title="Semantic Segmentation">Semantic Segmentation</a>
                         
                     </div>
-                    <h2>DA dataset summary</h2>
+                    <h2>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation</h2>
                     
                     
-                    <span class="meta"> Posted on April 2, 2020</span>
+                    <span class="meta">CVPR 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 9, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,47 +208,35 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="image-classification">Image classification</h3>
-<h4 id="numbers">Numbers</h4>
-<h5 id="mnist">Mnist</h5>
-<h5 id="usps">USPS</h5>
-<h5 id="svhn-street-view-house-numbers">SVHN (street view house numbers)</h5>
+				<p><a href="https://arxiv.org/pdf/1611.06612.pdf">Paper link</a></p>
 
-<h4 id="office">Office</h4>
-<h4 id="office-31">Office-31</h4>
-<p>It contains 4652 images organized in 31 classes from three different domains: Amazon (A), DSRL (D) and Webcam (W).</p>
-<h4 id="office-caltech">Office-Caltech</h4>
-<p>It selects the subset of 10 common categories in the Office31 and the Caltech256 datasets. It contains 2533 images of which about half belong to Caltech256. Each of Amazon (A), DSLR (D), Webcam (W) and Caltech256 (C) are regarded as separate domains.</p>
-
-<h3 id="image-segmentation">Image segmentation</h3>
-
-<h4 id="gta5-synthetic-dataset">GTA5 (synthetic dataset)</h4>
-<p><a href="https://download.visinf.tu-darmstadt.de/data/from_games/">homepage</a></p>
-
-<p>GTA is a synthetic, vehicle-egocentric image
-dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.</p>
-
-<h4 id="synthia-synthetic-data">synthia (synthetic data)</h4>
-<p><a href="http://synthia-dataset.net/">homepage</a></p>
-
-<p>SYNTHIA  is a large dataset of synthetic images and provides a particular subset, called SYNTHIA-RANDCITYSCAPES, to pair with Cityscapes. This subset contains 9,400 images that are automatically annotated with 12 object categories, one void class, and some unnamed classes. Note that the virtual city used to generate the synthetic images does not correspond to any of the real cities covered by Cityscapes.</p>
-
-<p>Note: usually consider the 16 common classes shared with Cityscapes: sky, building, road, sidewalk, fence, vegetation, pole, car, traffic sign, person, bicycle, motorcycle, traffic light, bus, wall, and rider.</p>
-
-<h4 id="cityscapes">Cityscapes</h4>
-<p><a href="https://www.cityscapes-dataset.com/">homepage</a></p>
-
-<p>a real-world, vehicle-egocentric image dataset collected in 50 cities in Germany and nearby countries. It provides four disjoint subsets: 2,993 training images, 503 validation image, 1,531 test images, and 20,021 auxiliary images. All the training, validation, and test images are accurately annotated with per pixel category labels, while the auxiliary set is coarsely labeled. There are 34 distinct categories in the dataset.</p>
-
-<p>Note: usually consider the 19 common classes shared with Cityscapes: bike, fence, wall, traffic sign, pole, motorcycle, traffic light, sky, bus, rider, vegetation, <strong>terrain</strong>, <strong>train</strong>, building, car, person, <strong>truck</strong>, sidewalk and road.</p>
-
-<h3 id="multi-source-domain-adaptation">multi-source domain adaptation</h3>
-<h4 id="domainnet">DomainNet</h4>
+<h4 id="take-away-message">Take away message</h4>
 <ol>
-  <li><a href="http://ai.bu.edu/M3SDA/">homepage</a></li>
-  <li>Challenge: <a href="http://ai.bu.edu/visda-2019/">VisDA-2019</a></li>
+  <li>设计RefineNet，结合高层语义信息和低层细节信息，得到高分辨率的分割图</li>
+  <li>RefineNet中大量使用了ResNet中Identity mapping (both short range and long range) 的思想，保证了有效的端到端训练</li>
 </ol>
 
+<h4 id="introduction">Introduction</h4>
+<p>网络中pooling操作会降低分割图的分辨率，目前有三种解决方式：</p>
+<ol>
+  <li>learn deconvolutional filters as an up-sampling operation: The deconvolution operations are not able to recover the low-level visual features which are lost after the downsampling operation in the convolution forward stage.</li>
+  <li>Deeplab系列中的atrous convolution: <strong>a significant cost in memory, because unlike the image subsampling methods, one must retain very large numbers of feature maps at higher resolution.</strong> In practice, therefore, dilation convolution methods usually have a resolution prediction of no more than 1/8 size of the original rather than 1/4, when using a deep network.</li>
+  <li>exploits features from intermediate layers for generating high-resolution prediction (本文基于的方法)</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p><img src="/img/15890589297975.jpg" width="70%" height="100%" />
+<img src="/img/15890589494152.jpg" width="100%" height="100%" /></p>
+
+<h4 id="result">Result</h4>
+<p><img src="/img/15890590750133.jpg" width="50%" height="100%" /></p>
+
+<p><img src="/img/15890590946983.jpg" width="50%" height="100%" /></p>
+
+<p><img src="/img/15890591146152.jpg" width="100%" height="100%" /></p>
+
+<h4 id="reflection">Reflection</h4>
+<p>感觉整个网络设计并没有太新颖的模块或思路，但可能是通过大量的identity mapping达成了有效的端对端训练，最后得到了非常棒的结果。如果是的话，说明设计网络时，网络各个模块能否得到充分的训练非常重要。</p>
 
 
                 <hr style="visibility: hidden;">
@@ -256,19 +244,12 @@ dataset collected from the open world in the realistically rendered computer gam
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/" data-toggle="tooltip" data-placement="top" title="Moment Matching for Multi-Source Domain Adaptation">
+                        <a href="/2020/05/08/DeepLab-v2/" data-toggle="tooltip" data-placement="top" title="DeepLab v2">
                         Previous<br>
-                        <span>Moment Matching for Multi-Source Domain Adaptation</span>
+                        <span>DeepLab v2</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/04/02/Backbones/" data-toggle="tooltip" data-placement="top" title="Backbones">
-                        Next<br>
-                        <span>Backbones</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 

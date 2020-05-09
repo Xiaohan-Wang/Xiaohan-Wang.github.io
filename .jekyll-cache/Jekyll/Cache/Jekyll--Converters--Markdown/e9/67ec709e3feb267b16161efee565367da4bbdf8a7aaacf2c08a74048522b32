@@ -1,4 +1,4 @@
-I" <h3 id="domain-adaptation">Domain Adaptation</h3>
+I"�<h3 id="domain-adaptation">Domain Adaptation</h3>
 
 <table>
   <thead>
@@ -113,13 +113,13 @@
       <td>20.5.6</td>
       <td>ICLR 2015</td>
       <td>DeepLab v1</td>
-      <td>TODO</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/05/07/Deeplab-v1/">link</a></td>
     </tr>
     <tr>
       <td>20.5.7</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
+      <td>TPAMI 2017</td>
+      <td>DeepLab v2</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/05/08/DeepLab-v2/">link</a></td>
     </tr>
   </tbody>
 </table>

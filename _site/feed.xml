@@ -5,9 +5,50 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 08 May 2020 17:39:09 -0400</pubDate>
-    <lastBuildDate>Fri, 08 May 2020 17:39:09 -0400</lastBuildDate>
+    <pubDate>Sat, 09 May 2020 17:34:33 -0400</pubDate>
+    <lastBuildDate>Sat, 09 May 2020 17:34:33 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1611.06612.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;设计RefineNet，结合高层语义信息和低层细节信息，得到高分辨率的分割图&lt;/li&gt;
+  &lt;li&gt;RefineNet中大量使用了ResNet中Identity mapping (both short range and long range) 的思想，保证了有效的端到端训练&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;introduction&quot;&gt;Introduction&lt;/h4&gt;
+&lt;p&gt;网络中pooling操作会降低分割图的分辨率，目前有三种解决方式：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;learn deconvolutional filters as an up-sampling operation: The deconvolution operations are not able to recover the low-level visual features which are lost after the downsampling operation in the convolution forward stage.&lt;/li&gt;
+  &lt;li&gt;Deeplab系列中的atrous convolution: &lt;strong&gt;a significant cost in memory, because unlike the image subsampling methods, one must retain very large numbers of feature maps at higher resolution.&lt;/strong&gt; In practice, therefore, dilation convolution methods usually have a resolution prediction of no more than 1/8 size of the original rather than 1/4, when using a deep network.&lt;/li&gt;
+  &lt;li&gt;exploits features from intermediate layers for generating high-resolution prediction (本文基于的方法)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15890589297975.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15890589494152.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15890590750133.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15890590946983.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15890591146152.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;reflection&quot;&gt;Reflection&lt;/h4&gt;
+&lt;p&gt;感觉整个网络设计并没有太新颖的模块或思路，但可能是通过大量的identity mapping达成了有效的端对端训练，最后得到了非常棒的结果。如果是的话，说明设计网络时，网络各个模块能否得到充分的训练非常重要。&lt;/p&gt;
+</description>
+        <pubDate>Sat, 09 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
     
       <item>
         <title>DeepLab v2</title>
@@ -598,64 +639,6 @@ source domain用standard cross entropy loss， target domain用entropy minimizat
         <pubDate>Wed, 15 Apr 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/</guid>
-        
-        <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Maximum Classifier Discrepancy for Unsupervised Domain Adaptation</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1712.02560.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/mil-tokyo/MCD_DA&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;if only consider distribution matching (based on statistics), a trained generator can generate ambiguous features near class boundaries (在class boundary附近，由于缺少训练数据，相当于随机分类)
-&lt;img src=&quot;/img/15873584186697.jpg&quot; width=&quot;80%&quot; height=&quot;80%&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;For better distribution alignment:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;maximize the discrepancy between two classifiers’ outputs to detect target samples that are far from the support of the source.&lt;/li&gt;
-  &lt;li&gt;A feature generator learns to generate target features near the support to minimize the discrepancy, in order to avoid generating target features near class boundaries.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15873586517441.jpg&quot; alt=&quot;-w775&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;discrepancy-loss&quot;&gt;discrepancy loss&lt;/h5&gt;
-&lt;p&gt;use the absolute values of the difference between the two classifiers’ probabilistic outputs as discrepancy loss.
-&lt;img src=&quot;/img/15873624804347.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;training-step&quot;&gt;Training step&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;task-specific loss&lt;br /&gt;
-train both classifiers and generator to
-classify the source samples correctly. In order to make classifiers and generator obtain task-specific discriminative features, this step is crucial.&lt;br /&gt;
-&lt;img src=&quot;/img/15873636378997.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15873636851548.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;train classifier&lt;br /&gt;
-A classification loss on the source samples is added here. Without this loss, the authors experimentally found that our algorithm’s performance drops significantly.
-&lt;img src=&quot;/img/15873638777096.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;train generator
-&lt;img src=&quot;/img/15873639472583.jpg&quot; width=&quot;15%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;reflection&quot;&gt;Reflection&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;distribution alignment也可以用adversarial learning来实现。adversarial learning自由度更大，相比于传统的基于参数的hand-crafted transformation， 也许更能实现理想的distribution alignment.&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Fri, 10 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/</guid>
         
         <category>Domain Adaptation</category>
         
