@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 10 May 2020 17:20:25 -0400</pubDate>
-    <lastBuildDate>Sun, 10 May 2020 17:20:25 -0400</lastBuildDate>
+    <pubDate>Sun, 10 May 2020 17:26:34 -0400</pubDate>
+    <lastBuildDate>Sun, 10 May 2020 17:26:34 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -133,7 +133,7 @@ The testing result of this 1202-layer network is worse than that of our 110-laye
         <link>http://localhost:4000/2020/05/10/ResNet/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/05/10/ResNet/</guid>
         
-        <category>CV paperlist</category>
+        <category>Baseline</category>
         
         
       </item>
