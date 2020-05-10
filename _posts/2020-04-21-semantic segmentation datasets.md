@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: semantic segmentation dataset summary
+title: Semantic Segmentation 
 subtitle:   
 date:       2020-04-21
 author:     Xiaohan
