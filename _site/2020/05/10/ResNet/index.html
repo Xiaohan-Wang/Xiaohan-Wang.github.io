@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？ - Xiaohan's Blog</title>
+    <title>ResNet - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/10/ResNet/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Q & A" title="Q & A">Q & A</a>
+                        <a class="tag" href="/tags/#CV paperlist" title="CV paperlist">CV paperlist</a>
                         
                     </div>
-                    <h2>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</h2>
+                    <h2>ResNet</h2>
                     
                     
-                    <span class="meta"> Posted on May 10, 2020</span>
+                    <span class="meta">CVPR 2016 Best Paper&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 10, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,17 +208,100 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>答案来自<a href="https://www.zhihu.com/question/43370067/answer/128881262">知乎</a></p>
+				<p><a href="https://arxiv.org/pdf/1512.03385.pdf">Paper link</a></p>
 
-<p>Q: 为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</p>
+<h4 id="take-away-message">Take away message</h4>
+<ul>
+  <li>出发点：The depth of representations is of central importance for many visual recognition tasks.</li>
+  <li>问题：Deeper networks have degradation problems.</li>
+  <li>解决方案：We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. Experiments show that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth.</li>
+</ul>
 
-<p>A:</p>
+<h4 id="degradation-problem-of-deeper-network">Degradation problem of deeper network</h4>
+<p><img src="/img/15891414912328.jpg" width="60%" height="100%" /></p>
+
+<p>Figure 1 shows adding more layers to a suitably deep model leads to higher training error. This is unexpected because if the added layers are identity mapping, then a deeper model should produce no higher training error than its shallower counterpart.</p>
+
+<h4 id="resnet">ResNet</h4>
+<p><img src="/img/15891418268694.jpg" width="40%" height="100%" /></p>
+
+<p>To solve the degradation problem of deeper network, the authors proposed ResNet. They explicitly let these layers fit a residual mapping. Formally, denoting the desired underlying mapping as $H(x)$, they let the stacked nonlinear layers fit another mapping of $F(x):= H(x)−x$. The original mapping is recast into $F(x)+x$.</p>
+
+<p>Advantage:</p>
 <ol>
-  <li>公开的论文需要一个标准的baseline及在baseline上改进的比较，因此大家会基于一个公认的baseline开始做实验，这样大家才比较信服。</li>
-  <li>视觉、自然语言等更专注于本领域的内部知识，而非baseline本身。因此常常是在一个base网络的基础之上进行修改，以验证自己方法的有效性。</li>
-  <li>进行基本模型的改进需要大量的实验和尝试，很有可能投入产出比比较小。对于深度学习，很大部分可以提升性能的点在于一些对于细节的精确把握。因此可以看到许多排名靠前的队伍最后讲的关键技术点似乎都是tricks。而这样精确细节的把握是需要大量的时间和计算资源的，往往在学校不可行。</li>
-  <li>AlexNet, Network in Network, VGG, GoogLeNet, Resnet等CNN网络都是图片分类网络, 都是在imagenet上1.2 million数据训练出来的。一般来说，某CNN网络在imagenet上面的分类结果越好，其deep feature的generalization能力越强，可以应用到各种CV问题。</li>
+  <li>It is easier to optimize the residual mapping than to optimize the original, unreferenced mapping.
+    <ul>
+      <li>To the extreme, if an identity mapping were optimal, it would be easier to push the residual to zero than to fit an identity mapping by a stack of nonlinear layers.</li>
+      <li>In real cases, it is unlikely that identity mappings are optimal, but our reformulation may help to precondition the problem. If the optimal function is closer to an identity mapping than to a zero mapping, it should be easier for the solver to find the perturbations with reference to an identity mapping, than to learn the function as a new one.</li>
+    </ul>
+  </li>
+  <li>Identity shortcut connections add neither extra parameter nor computational complexity.</li>
+  <li>The deep residual nets can easily enjoy accuracy gains from greatly increased depth.</li>
 </ol>
+
+<h4 id="network-architecture">Network Architecture</h4>
+<ol>
+  <li>
+    <p>Network complexity: There is no fc-4096 in ResNet, which greatly reduce the complexity of ResNet. (Although the depth is significantly increased, the 152-layer ResNet (11.3 billion FLOPs) still has lower complexity than VGG-16/19 nets (15.3/19.6 bilion FLOPs).)</p>
+  </li>
+  <li>Identity mapping and projection shortcuts:
+    <ul>
+      <li>The identity shortcuts can be directly used when the input and output are of the same dimensions 
+  <img src="/img/15891425389236.jpg" width="25%" height="100%" /></li>
+      <li>When the dimensions increase, we consider two options: (A) The shortcut still performs identity mapping, with extra zero entries padded for increasing dimensions. This option introduces no extra parameter; (B) The projection shortcut is used to match dimensions (done by 1×1 convolutions).
+  <img src="/img/15891426033483.jpg" width="25%" height="100%" /></li>
+    </ul>
+  </li>
+  <li>Deeper Bottleneck Architecture<br />
+ The three layers are 1×1, 3×3, and 1×1 convolutions, where the 1×1 layers are responsible for reducing and then increasing (restoring) dimensions, leaving the 3×3 layer a bottleneck with smaller input/output dimensions. (use option B for increasing dimensions.)
+<img src="/img/15891433710930.jpg" width="65%" height="100%" /></li>
+</ol>
+
+<h5 id="detailed-illustration">Detailed illustration</h5>
+<p><img src="/img/15891422325129.jpg" width="50%" height="100%" />
+<img src="/img/15891450870398.jpg" width="100%" height="100%" /></p>
+
+<h4 id="experiments">Experiments</h4>
+<h5 id="plain-network-and-resnet-zero-padding-for-increasing-dimension">Plain network and ResNet (zero padding for increasing dimension)</h5>
+
+<p><img src="/img/15891427682633.jpg" width="85%" height="100%" />
+<img src="/img/15891427832726.jpg" width="55%" height="100%" /></p>
+
+<ul>
+  <li>The 34-layer ResNet exhibits considerably lower training error and is generalizable to the validation data. This indicates that the degradation problem is well addressed in this setting and we manage to obtain accuracy gains from increased depth.</li>
+  <li>The effectiveness of residual learning on extremely deep systems: Compared to its plain counterpart, the 34-layer ResNet reduces the top-1 error by 3.5% (Table 2), resulting from the successfully reduced training error (Fig. 4 right vs. left).</li>
+  <li>When the net is “not overly deep” (18 layers here), the 18-layer plain/residual nets are comparably accurate (Table 2), but the 18-layer ResNet converges faster.</li>
+</ul>
+
+<h5 id="identity-vs-projection-shortcuts">Identity vs. Projection Shortcuts</h5>
+
+<p><img src="/img/15891431852656.jpg" width="60%" height="100%" />
+In Table 3 we compare three options: <br />
+(A) zero-padding shortcuts are used for increasing dimensions, and all shortcuts are parameter-free <br />
+(B) projection shortcuts are used for increasing dimensions, and other shortcuts are identity<br />
+(C) all shortcuts are projections.</p>
+
+<ul>
+  <li>B is slightly better than A.We argue that this is because the zero-padded dimensions in A indeed have no residual learning.</li>
+  <li>C is marginally better than B, and we attribute this to the extra parameters introduced by many (thirteen) projection shortcuts.</li>
+  <li>But the small differences among A/B/C indicate that projection shortcuts are not essential for addressing the degradation problem.</li>
+</ul>
+
+<h5 id="deeper-network">Deeper network</h5>
+
+<p><img src="/img/15891439141245.jpg" width="60%" height="100%" />
+From Table 3 and 4, the 50/101/152-layer ResNets are more accurate than the 34-layer ones by considerable margins. We do not observe the degradation problem and thus en- joy significant accuracy gains from considerably increased depth.</p>
+
+<h5 id="analysis-of-layer-reponses">Analysis of layer reponses</h5>
+<p><img src="/img/15891442467427.jpg" width="60%" height="100%" /></p>
+<ul>
+  <li>ResNets have generally smaller responses than their plain counterparts. These results support our basic motivation that the residual functions might be generally closer to zero than the non-residual functions.</li>
+  <li>The deeper ResNet has smaller magnitudes of responses, showing when there are more layers, an individual layer of ResNets tends to modify the signal less.</li>
+</ul>
+
+<h5 id="exploring-over-1000-layers">Exploring Over 1000 layers</h5>
+<p><img src="/img/15891445047122.jpg" width="100%" height="100%" />
+The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting. The 1202-layer network may be unnecessarily large (19.4M) for this small dataset. But combining with stronger regularization may improve results, which we will study in the future.</p>
 
 
                 <hr style="visibility: hidden;">
@@ -226,12 +309,19 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/05/10/ResNet/" data-toggle="tooltip" data-placement="top" title="ResNet">
+                        <a href="/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/" data-toggle="tooltip" data-placement="top" title="RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation">
                         Previous<br>
-                        <span>ResNet</span>
+                        <span>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation</span>
                         </a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/" data-toggle="tooltip" data-placement="top" title="为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？">
+                        Next<br>
+                        <span>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</span>
+                        </a>previous
+                    </li>
                     
                 </ul> -->
 

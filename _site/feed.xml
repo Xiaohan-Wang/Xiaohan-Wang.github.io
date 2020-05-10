@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 10 May 2020 15:57:00 -0400</pubDate>
-    <lastBuildDate>Sun, 10 May 2020 15:57:00 -0400</lastBuildDate>
+    <pubDate>Sun, 10 May 2020 17:20:25 -0400</pubDate>
+    <lastBuildDate>Sun, 10 May 2020 17:20:25 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -28,6 +28,112 @@
         <guid isPermaLink="true">http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/</guid>
         
         <category>Q &amp; A</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>ResNet</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1512.03385.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;出发点：The depth of representations is of central importance for many visual recognition tasks.&lt;/li&gt;
+  &lt;li&gt;问题：Deeper networks have degradation problems.&lt;/li&gt;
+  &lt;li&gt;解决方案：We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. Experiments show that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;degradation-problem-of-deeper-network&quot;&gt;Degradation problem of deeper network&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15891414912328.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Figure 1 shows adding more layers to a suitably deep model leads to higher training error. This is unexpected because if the added layers are identity mapping, then a deeper model should produce no higher training error than its shallower counterpart.&lt;/p&gt;
+
+&lt;h4 id=&quot;resnet&quot;&gt;ResNet&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15891418268694.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;To solve the degradation problem of deeper network, the authors proposed ResNet. They explicitly let these layers fit a residual mapping. Formally, denoting the desired underlying mapping as $H(x)$, they let the stacked nonlinear layers fit another mapping of $F(x):= H(x)−x$. The original mapping is recast into $F(x)+x$.&lt;/p&gt;
+
+&lt;p&gt;Advantage:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;It is easier to optimize the residual mapping than to optimize the original, unreferenced mapping.
+    &lt;ul&gt;
+      &lt;li&gt;To the extreme, if an identity mapping were optimal, it would be easier to push the residual to zero than to fit an identity mapping by a stack of nonlinear layers.&lt;/li&gt;
+      &lt;li&gt;In real cases, it is unlikely that identity mappings are optimal, but our reformulation may help to precondition the problem. If the optimal function is closer to an identity mapping than to a zero mapping, it should be easier for the solver to find the perturbations with reference to an identity mapping, than to learn the function as a new one.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Identity shortcut connections add neither extra parameter nor computational complexity.&lt;/li&gt;
+  &lt;li&gt;The deep residual nets can easily enjoy accuracy gains from greatly increased depth.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;network-architecture&quot;&gt;Network Architecture&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Network complexity: There is no fc-4096 in ResNet, which greatly reduce the complexity of ResNet. (Although the depth is significantly increased, the 152-layer ResNet (11.3 billion FLOPs) still has lower complexity than VGG-16/19 nets (15.3/19.6 bilion FLOPs).)&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Identity mapping and projection shortcuts:
+    &lt;ul&gt;
+      &lt;li&gt;The identity shortcuts can be directly used when the input and output are of the same dimensions 
+  &lt;img src=&quot;/img/15891425389236.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;When the dimensions increase, we consider two options: (A) The shortcut still performs identity mapping, with extra zero entries padded for increasing dimensions. This option introduces no extra parameter; (B) The projection shortcut is used to match dimensions (done by 1×1 convolutions).
+  &lt;img src=&quot;/img/15891426033483.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Deeper Bottleneck Architecture&lt;br /&gt;
+ The three layers are 1×1, 3×3, and 1×1 convolutions, where the 1×1 layers are responsible for reducing and then increasing (restoring) dimensions, leaving the 3×3 layer a bottleneck with smaller input/output dimensions. (use option B for increasing dimensions.)
+&lt;img src=&quot;/img/15891433710930.jpg&quot; width=&quot;65%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;detailed-illustration&quot;&gt;Detailed illustration&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15891422325129.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15891450870398.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;experiments&quot;&gt;Experiments&lt;/h4&gt;
+&lt;h5 id=&quot;plain-network-and-resnet-zero-padding-for-increasing-dimension&quot;&gt;Plain network and ResNet (zero padding for increasing dimension)&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15891427682633.jpg&quot; width=&quot;85%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15891427832726.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The 34-layer ResNet exhibits considerably lower training error and is generalizable to the validation data. This indicates that the degradation problem is well addressed in this setting and we manage to obtain accuracy gains from increased depth.&lt;/li&gt;
+  &lt;li&gt;The effectiveness of residual learning on extremely deep systems: Compared to its plain counterpart, the 34-layer ResNet reduces the top-1 error by 3.5% (Table 2), resulting from the successfully reduced training error (Fig. 4 right vs. left).&lt;/li&gt;
+  &lt;li&gt;When the net is “not overly deep” (18 layers here), the 18-layer plain/residual nets are comparably accurate (Table 2), but the 18-layer ResNet converges faster.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;identity-vs-projection-shortcuts&quot;&gt;Identity vs. Projection Shortcuts&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15891431852656.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
+In Table 3 we compare three options: &lt;br /&gt;
+(A) zero-padding shortcuts are used for increasing dimensions, and all shortcuts are parameter-free &lt;br /&gt;
+(B) projection shortcuts are used for increasing dimensions, and other shortcuts are identity&lt;br /&gt;
+(C) all shortcuts are projections.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;B is slightly better than A.We argue that this is because the zero-padded dimensions in A indeed have no residual learning.&lt;/li&gt;
+  &lt;li&gt;C is marginally better than B, and we attribute this to the extra parameters introduced by many (thirteen) projection shortcuts.&lt;/li&gt;
+  &lt;li&gt;But the small differences among A/B/C indicate that projection shortcuts are not essential for addressing the degradation problem.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;deeper-network&quot;&gt;Deeper network&lt;/h5&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15891439141245.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
+From Table 3 and 4, the 50/101/152-layer ResNets are more accurate than the 34-layer ones by considerable margins. We do not observe the degradation problem and thus en- joy significant accuracy gains from considerably increased depth.&lt;/p&gt;
+
+&lt;h5 id=&quot;analysis-of-layer-reponses&quot;&gt;Analysis of layer reponses&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15891442467427.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;ResNets have generally smaller responses than their plain counterparts. These results support our basic motivation that the residual functions might be generally closer to zero than the non-residual functions.&lt;/li&gt;
+  &lt;li&gt;The deeper ResNet has smaller magnitudes of responses, showing when there are more layers, an individual layer of ResNets tends to modify the signal less.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;exploring-over-1000-layers&quot;&gt;Exploring Over 1000 layers&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15891445047122.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
+The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting. The 1202-layer network may be unnecessarily large (19.4M) for this small dataset. But combining with stronger regularization may improve results, which we will study in the future.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 10 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/10/ResNet/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/10/ResNet/</guid>
+        
+        <category>CV paperlist</category>
         
         
       </item>
@@ -541,69 +647,6 @@ employing a “poly” learning rate iter policy (the learning rate is multiplie
         <guid isPermaLink="true">http://localhost:4000/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/</guid>
         
         <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>semantic segmentation dataset summary</title>
-        <description>&lt;p&gt;部分内容来自于 https://blog.csdn.net/MOU_IT/article/details/82225505&lt;/p&gt;
-
-&lt;h4 id=&quot;总述&quot;&gt;总述&lt;/h4&gt;
-&lt;p&gt;目前学术界主要有三个benchmark（数据集）用于模型训练和测试。&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Pascal VOC系列
-    &lt;ul&gt;
-      &lt;li&gt;VOC 2012 (最常见)&lt;/li&gt;
-      &lt;li&gt;Pascal Context (偶尔)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Microsoft COCO&lt;br /&gt;
- COCO一共有80个类别。虽然有很详细的像素级别的标注，但由于官方没有专门对语义分割的测评，因此COCO数据集往往被当成是额外的训练数据集用于模型的训练（预训练？）。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Cityscapes
-    &lt;ul&gt;
-      &lt;li&gt;辅助驾驶（自动驾驶）环境&lt;/li&gt;
-      &lt;li&gt;使用比较常见的19个类别用于评测&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;voc-2012&quot;&gt;VOC 2012&lt;/h4&gt;
-
-&lt;p&gt;标准的VOC2012数据集有21个类别(包括背景)，包含:{ 0=background，1=aeroplane, 2=bicycle, 3=bird, 4=boat, 5=bottle, 6=bus, 7=car , 8=cat, 9=chair, 10=cow, 11=diningtable, 12=dog, 13=horse, 14=motorbike, 15=person, 16=potted plant, 17=sheep, 18=sofa, 19=train, 20=tv/monitor，255= ’void’ or unlabelled }这些比较常见的类别。&lt;/p&gt;
-
-&lt;p&gt;对于分割任务：&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;VOC 2012用于分割的数据中train+val包含 2007-2011年间的所有数据，test包含2008-2011年间的数据，没有包含07年的是因为07年的test数据已经公开了。&lt;/li&gt;
-  &lt;li&gt;trainval：2913张图片，共6929个物体&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;补充：&lt;a href=&quot;https://arleyzhang.github.io/articles/1dc20586/&quot;&gt;PASCAL VOC详细介绍&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;ms-coco&quot;&gt;MS COCO&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;官方没有semantic segmentation测评，因此该数据集常常只用于预训练&lt;/li&gt;
-  &lt;li&gt;数据集大小？&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;cityscapes&quot;&gt;Cityscapes&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。&lt;/li&gt;
-  &lt;li&gt;主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张fine annotated images来训练）&lt;/li&gt;
-  &lt;li&gt;分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
-&lt;img src=&quot;/img/15875266001958.jpg&quot; alt=&quot;-w721&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;补充: &lt;a href=&quot;https://niecongchong.github.io/2019/08/10/CityScapes%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%92%8C%E7%B2%BE%E5%BA%A6%E6%8C%87%E6%A0%87/&quot;&gt;Cityscapes详细介绍&lt;/a&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 21 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/21/semantic-segmentation-datasets/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/21/semantic-segmentation-datasets/</guid>
-        
-        <category>Datasets</category>
         
         
       </item>
