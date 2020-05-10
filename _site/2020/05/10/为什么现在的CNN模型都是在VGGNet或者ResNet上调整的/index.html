@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Domain Adaptation Concept Summary - Xiaohan's Blog</title>
+    <title>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？ - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/03/14/Domain-Adaptation-Concept-Summary/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,15 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
-                        
-                        <a class="tag" href="/tags/#Concept" title="Concept">Concept</a>
+                        <a class="tag" href="/tags/#Q & A" title="Q & A">Q & A</a>
                         
                     </div>
-                    <h2>Domain Adaptation Concept Summary</h2>
+                    <h2>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</h2>
                     
                     
-                    <span class="meta"> Posted on March 14, 2020</span>
+                    <span class="meta"> Posted on May 10, 2020</span>
                 </div>
             </div>
         </div>
@@ -210,36 +208,17 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="transfer-learning">Transfer learning</h3>
-<h4 id="domain-and-task">domain and task</h4>
+				<p>答案来自<a href="https://www.zhihu.com/question/43370067/answer/128881262">知乎</a></p>
+
+<p>Q: 为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</p>
+
+<p>A:</p>
 <ol>
-  <li>domain = feature space + marginal distribution</li>
-  <li>task = label space + conditional distribution (predictive function)</li>
+  <li>公开的论文需要一个标准的baseline及在baseline上改进的比较，因此大家会基于一个公认的baseline开始做实验，这样大家才比较信服。</li>
+  <li>视觉、自然语言等更专注于本领域的内部知识，而非baseline本身。因此常常是在一个base网络的基础之上进行修改，以验证自己方法的有效性。</li>
+  <li>进行基本模型的改进需要大量的实验和尝试，很有可能投入产出比比较小。对于深度学习，很大部分可以提升性能的点在于一些对于细节的精确把握。因此可以看到许多排名靠前的队伍最后讲的关键技术点似乎都是tricks。而这样精确细节的把握是需要大量的时间和计算资源的，往往在学校不可行。</li>
+  <li>AlexNet, Network in Network, VGG, GoogLeNet, Resnet等CNN网络都是图片分类网络, 都是在imagenet上1.2 million数据训练出来的。一般来说，某CNN网络在imagenet上面的分类结果越好，其deep feature的generalization能力越强，可以应用到各种CV问题。</li>
 </ol>
-
-<h4 id="transfer-learning定义">transfer learning定义</h4>
-<p><img src="/img/15842471547628.jpg" alt="-w914" /></p>
-<ol>
-  <li>正常的machine learning: 只有一个domain，通过自己的X、Y学习predictive function</li>
-  <li>transfer learning：利用source的知识提高target的predictive function的表现
-    <ul>
-      <li>source和target是不同的
-        <ul>
-          <li>feature space不同</li>
-          <li>marginal distribution不同</li>
-          <li>label space不同</li>
-          <li>conditional distribution不同  （？？）</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><em>domain adaptation</em>: transfer learning的子类，source和target只有marginal distribution不同，其余三点都相同</li>
-</ol>
-
-<h4 id="domain-adaptation">Domain adaptation</h4>
-<p><img src="/img/15850826248103.jpg" alt="" />
-from https://en.wikipedia.org/wiki/Domain_adaptation</p>
-
 
 
                 <hr style="visibility: hidden;">
@@ -247,19 +226,12 @@ from https://en.wikipedia.org/wiki/Domain_adaptation</p>
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/02/11/A-Few-Useful-Things-to-Know-About-Machine-Learning/" data-toggle="tooltip" data-placement="top" title="A Few Useful Things to Know About Machine Learning">
+                        <a href="/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/" data-toggle="tooltip" data-placement="top" title="RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation">
                         Previous<br>
-                        <span>A Few Useful Things to Know About Machine Learning</span>
+                        <span>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/03/14/Unsupervised-Domain-Adaptation-using-Feature-Whitening-and-Consensus-Loss/" data-toggle="tooltip" data-placement="top" title="Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss">
-                        Next<br>
-                        <span>Unsupervised Domain Adaptation using Feature-Whitening and Consensus Loss</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 

@@ -5,9 +5,32 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 09 May 2020 17:34:33 -0400</pubDate>
-    <lastBuildDate>Sat, 09 May 2020 17:34:33 -0400</lastBuildDate>
+    <pubDate>Sun, 10 May 2020 15:57:00 -0400</pubDate>
+    <lastBuildDate>Sun, 10 May 2020 15:57:00 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</title>
+        <description>&lt;p&gt;答案来自&lt;a href=&quot;https://www.zhihu.com/question/43370067/answer/128881262&quot;&gt;知乎&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Q: 为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？&lt;/p&gt;
+
+&lt;p&gt;A:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;公开的论文需要一个标准的baseline及在baseline上改进的比较，因此大家会基于一个公认的baseline开始做实验，这样大家才比较信服。&lt;/li&gt;
+  &lt;li&gt;视觉、自然语言等更专注于本领域的内部知识，而非baseline本身。因此常常是在一个base网络的基础之上进行修改，以验证自己方法的有效性。&lt;/li&gt;
+  &lt;li&gt;进行基本模型的改进需要大量的实验和尝试，很有可能投入产出比比较小。对于深度学习，很大部分可以提升性能的点在于一些对于细节的精确把握。因此可以看到许多排名靠前的队伍最后讲的关键技术点似乎都是tricks。而这样精确细节的把握是需要大量的时间和计算资源的，往往在学校不可行。&lt;/li&gt;
+  &lt;li&gt;AlexNet, Network in Network, VGG, GoogLeNet, Resnet等CNN网络都是图片分类网络, 都是在imagenet上1.2 million数据训练出来的。一般来说，某CNN网络在imagenet上面的分类结果越好，其deep feature的generalization能力越强，可以应用到各种CV问题。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Sun, 10 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/</guid>
+        
+        <category>Q &amp; A</category>
+        
+        
+      </item>
     
       <item>
         <title>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation</title>
@@ -581,66 +604,6 @@ employing a “poly” learning rate iter policy (the learning rate is multiplie
         <guid isPermaLink="true">http://localhost:4000/2020/04/21/semantic-segmentation-datasets/</guid>
         
         <category>Datasets</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>AutoDIAL:Automatic DomaIn Alignment Layers</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1704.08082.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/ducksoup/autodial&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;limitation of AdaBN: the target samples have no influence on the network parameters, as they are not observed during training.&lt;/li&gt;
-  &lt;li&gt;对训练过程描述的很详细，可以参考&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15873547625687.jpg&quot; alt=&quot;-w821&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15873551722703.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;img src=&quot;/img/15873552325041.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;img src=&quot;/img/15873552520236.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-其中， $\alpha$ 在[0.5, 1]中：1对应AdaBN (full degree of DA)；0.5对应没有DA，因为此时$q_\alpha^{st}$和$q_\alpha^{ts}$相同，即source和target domain会做相同的transformation。通过让网络自己学习参数$\alpha$，实现了automatically learn the degree of alignment that should be pursued at different levels of the network.&lt;/p&gt;
-
-&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
-&lt;p&gt;Bayes based training process:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;objective:&lt;br /&gt;
-&lt;img src=&quot;/img/15873556873967.jpg&quot; width=&quot;45%&quot; height=&quot;100%&quot; /&gt;&lt;img src=&quot;/img/15873557363954.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;sampling distribution&lt;br /&gt;
-&lt;img src=&quot;/img/15873558553822.jpg&quot; width=&quot;35%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;prior
-&lt;img src=&quot;/img/15873559027282.jpg&quot; width=&quot;45%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-&lt;img src=&quot;/img/15873559171140.jpg&quot; width=&quot;45%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;转化为training objective：
-&lt;img src=&quot;/img/15873559673684.jpg&quot; width=&quot;45%&quot; height=&quot;100%&quot; /&gt;  &lt;br /&gt;
-source domain用standard cross entropy loss， target domain用entropy minimization.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;$\alpha$ 大部分接近1.&lt;br /&gt;
-&lt;img src=&quot;/img/15873565357251.jpg&quot; alt=&quot;-w907&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;others:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;the entropy regularization term is especially beneficial when source and target data representations are aligned. (?)&lt;/li&gt;
-  &lt;li&gt;lower layers in a network are subject to domain shift even more than the very last layers.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;reflection&quot;&gt;Reflection&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;同时结合了AdaBN和entropy minimization， 不确定结果的提高是否来源于提出的DA layer.&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Wed, 15 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/</guid>
-        
-        <category>Domain Adaptation</category>
         
         
       </item>
