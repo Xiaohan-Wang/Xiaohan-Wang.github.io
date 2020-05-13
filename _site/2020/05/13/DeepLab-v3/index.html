@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks - Xiaohan's Blog</title>
+    <title>DeepLab v3 - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/08/Unsupervised-Pixel-Level-Domain-Adaptation-with-GAN/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/13/DeepLab-v3/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Domain Adaptation" title="Domain Adaptation">Domain Adaptation</a>
+                        <a class="tag" href="/tags/#Semantic Segmentation" title="Semantic Segmentation">Semantic Segmentation</a>
                         
                     </div>
-                    <h2>Unsupervised Pixel-Level Domain Adaptation with Generative Adversarial Networks</h2>
+                    <h2>DeepLab v3</h2>
                     
                     
-                    <span class="meta">CVPR 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on January 8, 2020</span>
+                    <span class="meta">arXiv 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 13, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,28 +208,62 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="idea">Idea</h3>
-<ul>
-  <li>适用于domain间存在low-level difference的domain adaptation</li>
-  <li>不需要domain间的corresponding pairs</li>
-</ul>
+				<p><a href="https://arxiv.org/pdf/1706.05587.pdf">Paper link</a></p>
 
-<h3 id="model">Model</h3>
-<p><img src="/img/15785106924617.jpg" alt="-w857" />
-<img src="/img/15785107411179.jpg" alt="-w50" height="100px" width="400px" /></p>
-
-<p>主要由discriminator(D)来学习，classifier(T: task)和content-similarity loss主要用来 stabalize GAN的训练</p>
-<ul>
-  <li>context-similarity loss: PMSE (pairwise mean squared error)
-    <blockquote>
-      <p>This loss allows the model to learn to reproduce the overall shape of the objects being modeled without wasting modeling power on the absolute color or intensity of the inputs, while allowing our adversarial training to change the object in a consistent way.</p>
-    </blockquote>
-  </li>
-</ul>
-
-<h3 id="reflection">Reflection</h3>
+<h4 id="take-away-message">Take away message</h4>
 <ol>
-  <li>T的参与感觉让domain adaptation变成了迎合任务的domain adaptation, 而不是单纯的pixel-level domain adaptation. (也有优势，在对应任务上应该有更好的表现)</li>
+  <li>modules employing atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates.</li>
+  <li>主要还是各种tricks</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<p>output_stride: the ratio of input image spatial resolution to final output resolution.</p>
+<h5 id="atrous-convolution-in-cascade">atrous convolution in cascade</h5>
+<p><img src="/img/15893990006461.jpg" alt="-w840" /></p>
+<ol>
+  <li>duplicate several copies of the last ResNet block (Block 5, Block 6, Block 7)</li>
+  <li>apply atrous convolution with rates determined by the desired output stride value (output stride = 256 if no atrous convolution is applied)</li>
+  <li>multi-grid method: adopt different atrous rates within block4 to block7 in the proposed model. For example, when $\text{output stride} = 16$ and $\text{Multi Grid} = (1, 2, 4)$, the three convolutions will have $rates = 2 · (1, 2, 4) = (2, 4, 8)$ in the block4, respectively.</li>
+</ol>
+
+<h5 id="atrous-convolution-in-parallel">atrous convolution in parallel</h5>
+<p><img src="/img/15893997101137.jpg" alt="-w778" /></p>
+<ol>
+  <li>include batch normalization within ASPP.</li>
+  <li>image level feature: apply global average pooling on the last feature map of the model, feed the resulting image-level features to a 1 × 1 convolution with 256 filters (and batch normalization), and then bilinearly upsample the feature to the desired spatial dimension.</li>
+  <li>the improved ASPP consists of
+    <ul>
+      <li>one 1×1 convolution, and three 3 × 3 convolutions with rates = (6, 12, 18) when output stride = 16 (all with 256 filters and batch normalization). Note that the rates are doubled when output stride = 8.</li>
+      <li>the image-level features (the rates are doubled when output stride = 8)</li>
+    </ul>
+  </li>
+  <li>The resulting features from all the branches are concatenated and pass through another 1 × 1 convolution (with 256 filters and batch normalization) before the final 1 × 1 convolution which generates the final logits.</li>
+</ol>
+
+<h4 id="tricks">Tricks</h4>
+<ol>
+  <li>“poly” learning rate policy: the initial learning rate is
+multiplied by $(1 −\text{maxiter})^{\text{power}}$ with $\text{power} = 0.9 $.</li>
+  <li><strong>upsampling logits: upsample the final logits, since downsampling the groundtruths removes the fine annotations resulting in no back-propagation of details.</strong></li>
+  <li>$\text{output stride}=16$ during training, and $\text{output stride}=8$ during inference to get more detailed feature map.</li>
+</ol>
+
+<h4 id="result">Result</h4>
+<ol>
+  <li>cascade:
+<img src="/img/15894010210339.jpg" width="60%" height="100%" /></li>
+  <li>parallel:
+<img src="/img/15894010431381.jpg" width="60%" height="100%" /></li>
+</ol>
+
+<ul>
+  <li>Both their best cascaded model (in Tab. 4) and ASPP model (in Tab. 6) (in both cases without DenseCRF post-processing or MS-COCO pre-training) already outperform DeepLabv2 (77.69% with DenseCRF and pretrained on MS-COCO) on the PASCAL VOC 2012 val set.</li>
+  <li>The improvement mainly comes from including and fine-tuning batch normalization parameters in the proposed models and having a better way to encode multi-scale context.</li>
+</ul>
+
+<h4 id="further-reference">Further reference</h4>
+<ol>
+  <li>S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv:1502.03167, 2015.</li>
 </ol>
 
 
@@ -238,19 +272,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/07/Pixel-Level-Domain-Transfer/" data-toggle="tooltip" data-placement="top" title="Pixel-Level Domain Transfer">
+                        <a href="/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/" data-toggle="tooltip" data-placement="top" title="为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？">
                         Previous<br>
-                        <span>Pixel-Level Domain Transfer</span>
+                        <span>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/08/python%E5%90%84%E7%B1%BB%E5%9B%BE%E5%83%8F%E5%BA%93/" data-toggle="tooltip" data-placement="top" title="python各类图像库">
-                        Next<br>
-                        <span>python各类图像库</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
