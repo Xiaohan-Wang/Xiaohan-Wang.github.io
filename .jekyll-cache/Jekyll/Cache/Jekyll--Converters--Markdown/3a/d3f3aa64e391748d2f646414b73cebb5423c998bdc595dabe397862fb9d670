@@ -1,0 +1,65 @@
+I"l<p><a href="https://arxiv.org/pdf/1612.01105.pdf">Paper link</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li><strong>Observations:</strong> many errors are partially or completely related to contextual relationship and global information for different receptive field.</li>
+  <li><strong>Solution:</strong> exploit the capability of global context information by different-region-based context aggregation.</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<h5 id="observation-about-failures">observation about failures</h5>
+<p><img src="/img/15894252749235.jpg" alt="-w933" /></p>
+<ul>
+  <li>doesn’t match co-occurrent visual patterns</li>
+  <li>confused by similar categories</li>
+  <li>ignore small-size things / discontinuous prediction on large size things</li>
+</ul>
+
+<p>Many errors are partially or completely related to contextual relationship and global information for different receptive fields. Thus a deep network with a suitable global-scene-level prior can much improve the performance of scene parsing.</p>
+
+<h5 id="pyramid-scene-parsing-network-pspnet">pyramid scene parsing network (PSPNet)</h5>
+<p><img src="/img/15894259020057.jpg" alt="-w918" /></p>
+
+<ol>
+  <li>Use a pretrained ResNet model with the dilated network strategy to extract the feature map. The final feature map size is 1/8 of the input image, as shown in Fig. 3(b).</li>
+  <li>pyramid pooling module for global scene prior construction upon the final-layer-feature-map of the deep neural network.</li>
+  <li>Use 1×1 convolution layer after each pyramid level to reduce the dimension of context representation to $\frac{1}{N}$ of the original one if the level size of pyramid is $N$. Then we directly upsample the low-dimension feature maps to get the same size feature as the original feature map via bilinear interpolation.</li>
+  <li>Different levels of features are concatenated as the final pyramid pooling global feature. It is followed by a convolution layer to generate the final prediction map in (d).</li>
+</ol>
+
+<h4 id="deep-supervised-loss">Deep supervised loss</h4>
+<p><img src="/img/15894269590978.jpg" width="60%" height="100%" /></p>
+<ul>
+  <li>Generating initial results by supervision with an additional loss, and learning the residue afterwards with the final loss. Thus, optimization of the deep network is decomposed into two, each is simpler to solve.</li>
+  <li>The auxiliary loss helps optimize the learning process, while the master branch loss takes the most responsibility.</li>
+  <li>In the testing phase, we abandon this auxiliary branch and only use the well optimized master branch for final prediction.</li>
+</ul>
+
+<h4 id="result">Result</h4>
+<h5 id="architecture-for-pspnet">Architecture for PSPNet</h5>
+<p><img src="/img/15894274392623.jpg" width="60%" height="100%" /></p>
+<ul>
+  <li>average pooling works better than max pooling in all settings</li>
+  <li>Pooling with pyramid parsing (B1236) outperforms that using global pooling (B1)</li>
+  <li>With dimension reduction, the performance is further enhanced.</li>
+</ul>
+
+<h5 id="auxiliary-loss">Auxiliary Loss</h5>
+<p><img src="/img/15894275459126.jpg" width="60%" height="100%" /></p>
+
+<h5 id="pretrained-model">Pretrained model</h5>
+<p><img src="/img/15894276146708.jpg" width="60%" height="100%" /></p>
+
+<h5 id="detailed-analysis">Detailed analysis</h5>
+<p><img src="/img/15894276963001.jpg" width="60%" height="100%" /></p>
+
+<h5 id="others">Others</h5>
+<p>需要注意各个方法的baseline是不是resnet
+<img src="/img/15894278542140.jpg" alt="-w923" />
+<img src="/img/15894279159043.jpg" width="60%" height="100%" /></p>
+
+<h4 id="further-reference">Further reference</h4>
+<ol>
+  <li>B. Zhou, A. Khosla, A.` Lapedriza, A. Oliva, and A. Torralba. Object detectors emerge in deep scene cnns. arXiv:1412.6856, 2014. 3. (The paper shows the empirical receptive field of CNN is much smaller than the theoretical one especially on high-level layers.)</li>
+</ol>
+:ET

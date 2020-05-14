@@ -20,9 +20,9 @@ tags:
 
 #### Model
 
-#### Result
-
 #### Tricks
+
+#### Result
 
 #### Reflection
 

@@ -5,9 +5,87 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 13 May 2020 16:23:00 -0400</pubDate>
-    <lastBuildDate>Wed, 13 May 2020 16:23:00 -0400</lastBuildDate>
+    <pubDate>Wed, 13 May 2020 23:49:43 -0400</pubDate>
+    <lastBuildDate>Wed, 13 May 2020 23:49:43 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>PSP-Net</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.01105.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Observations:&lt;/strong&gt; many errors are partially or completely related to contextual relationship and global information for different receptive field.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Solution:&lt;/strong&gt; exploit the capability of global context information by different-region-based context aggregation.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;h5 id=&quot;observation-about-failures&quot;&gt;observation about failures&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894252749235.jpg&quot; alt=&quot;-w933&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;doesn’t match co-occurrent visual patterns&lt;/li&gt;
+  &lt;li&gt;confused by similar categories&lt;/li&gt;
+  &lt;li&gt;ignore small-size things / discontinuous prediction on large size things&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Many errors are partially or completely related to contextual relationship and global information for different receptive fields. Thus a deep network with a suitable global-scene-level prior can much improve the performance of scene parsing.&lt;/p&gt;
+
+&lt;h5 id=&quot;pyramid-scene-parsing-network-pspnet&quot;&gt;pyramid scene parsing network (PSPNet)&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894259020057.jpg&quot; alt=&quot;-w918&quot; /&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Use a pretrained ResNet model with the dilated network strategy to extract the feature map. The final feature map size is 1/8 of the input image, as shown in Fig. 3(b).&lt;/li&gt;
+  &lt;li&gt;pyramid pooling module for global scene prior construction upon the final-layer-feature-map of the deep neural network.&lt;/li&gt;
+  &lt;li&gt;Use 1×1 convolution layer after each pyramid level to reduce the dimension of context representation to $\frac{1}{N}$ of the original one if the level size of pyramid is $N$. Then we directly upsample the low-dimension feature maps to get the same size feature as the original feature map via bilinear interpolation.&lt;/li&gt;
+  &lt;li&gt;Different levels of features are concatenated as the final pyramid pooling global feature. It is followed by a convolution layer to generate the final prediction map in (d).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;deep-supervised-loss&quot;&gt;Deep supervised loss&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894269590978.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Generating initial results by supervision with an additional loss, and learning the residue afterwards with the final loss. Thus, optimization of the deep network is decomposed into two, each is simpler to solve.&lt;/li&gt;
+  &lt;li&gt;The auxiliary loss helps optimize the learning process, while the master branch loss takes the most responsibility.&lt;/li&gt;
+  &lt;li&gt;In the testing phase, we abandon this auxiliary branch and only use the well optimized master branch for final prediction.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;h5 id=&quot;architecture-for-pspnet&quot;&gt;Architecture for PSPNet&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894274392623.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;average pooling works better than max pooling in all settings&lt;/li&gt;
+  &lt;li&gt;Pooling with pyramid parsing (B1236) outperforms that using global pooling (B1)&lt;/li&gt;
+  &lt;li&gt;With dimension reduction, the performance is further enhanced.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;auxiliary-loss&quot;&gt;Auxiliary Loss&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894275459126.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;pretrained-model&quot;&gt;Pretrained model&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894276146708.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;detailed-analysis&quot;&gt;Detailed analysis&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15894276963001.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;others&quot;&gt;Others&lt;/h5&gt;
+&lt;p&gt;需要注意各个方法的baseline是不是resnet
+&lt;img src=&quot;/img/15894278542140.jpg&quot; alt=&quot;-w923&quot; /&gt;
+&lt;img src=&quot;/img/15894279159043.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;B. Zhou, A. Khosla, A.` Lapedriza, A. Oliva, and A. Torralba. Object detectors emerge in deep scene cnns. arXiv:1412.6856, 2014. 3. (The paper shows the empirical receptive field of CNN is much smaller than the theoretical one especially on high-level layers.)&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 13 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/13/PSPNet/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/13/PSPNet/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        <category>Context information</category>
+        
+        
+      </item>
     
       <item>
         <title>DeepLab v3</title>
@@ -625,47 +703,6 @@ employing a “poly” learning rate iter policy (the learning rate is multiplie
         <guid isPermaLink="true">http://localhost:4000/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/</guid>
         
         <category>Domain Adaptation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>SegNet:_A Deep Convolutional Encoder-Decoder Architecture for Image Segmentation</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1511.00561.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;In practice, we have to consider the cost of memory and computational time.&lt;/li&gt;
-  &lt;li&gt;Most recent deep architectures for segmentation have identical encoder networks, i.e VGG16, but differ in the form of the decoder network, training and inference.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15880309668474.jpg&quot; alt=&quot;-w901&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Encoder:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;The encoder network consists of 13 convolutional layers which correspond to the first 13 convolutional layers in the VGG16 network.&lt;/li&gt;
-  &lt;li&gt;Initialize the training process from weights trained for classification on large datasets.&lt;/li&gt;
-  &lt;li&gt;Benifit: Removing the fully connected layers of VGG16 makes the SegNet encoder network significantly smaller [reduces the number of parameters in the SegNet encoder network significantly (from 134M to 14.7M)] and easier to train.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Decoder:
-&lt;img src=&quot;/img/15880312579950.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;The appropriate decoder in the decoder network upsamples its input feature map(s) using the memorized max-pooling indices from the corresponding encoder feature map(s). This step produces sparse feature map(s).&lt;/li&gt;
-  &lt;li&gt;These feature maps are then convolved with a trainable decoder filter bank to produce dense feature maps.&lt;/li&gt;
-  &lt;li&gt;Except for the last decoder (which corresponds to the first encoder), the other decoders in the network produce feature maps with the same number of size and channels as their encoder inputs.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
-&lt;p&gt;class balancing&lt;/p&gt;
-
-</description>
-        <pubDate>Mon, 27 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/</guid>
-        
-        <category>Semantic Segmentation</category>
         
         
       </item>
