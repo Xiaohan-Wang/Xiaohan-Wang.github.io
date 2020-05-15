@@ -5,12 +5,86 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 13 May 2020 23:49:43 -0400</pubDate>
-    <lastBuildDate>Wed, 13 May 2020 23:49:43 -0400</lastBuildDate>
+    <pubDate>Thu, 14 May 2020 20:57:17 -0400</pubDate>
+    <lastBuildDate>Thu, 14 May 2020 20:57:17 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>PSP-Net</title>
+        <title>DeepLab v3+</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1802.02611.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/jfzhang95/pytorch-deeplab-xception&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;encoder-decoder structure:
+    &lt;ul&gt;
+      &lt;li&gt;DeepLabv3 is used to encode the rich contextual information&lt;/li&gt;
+      &lt;li&gt;a simple yet effective decoder module is adopted to recover the object boundaries&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;explore the Xception model and atrous separable convolution to make the proposed model faster and stronger&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;introduction&quot;&gt;Introduction&lt;/h4&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;h5 id=&quot;resnet-as-baseline&quot;&gt;ResNet as baseline&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895024156855.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;DeepLab v3 as encoder: use the last feature map before logits in the original DeepLab v3 as the encoder output (contains 256 channels and rich semantic information).&lt;/li&gt;
+  &lt;li&gt;Decoder:
+    &lt;ul&gt;
+      &lt;li&gt;The encoder features from DeepLabv3 are usually computed with output stride = 16&lt;/li&gt;
+      &lt;li&gt;first bilinearly upsampled the encoder features by a factor of 4&lt;/li&gt;
+      &lt;li&gt;concatenate the upsampled features with the corresponding low-level features from the network backbone that have the same spatial resolution (e.g., Conv2 before striding in ResNet-101)
+        &lt;ul&gt;
+          &lt;li&gt;1 × 1 convolution on the low-level features to reduce the number of channels, since the corresponding low- level features usually contain a large number of channels (e.g., 256 or 512) which may outweigh the importance of the rich encoder features (only 256 channels in our model) and make the training harder.&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;apply a few (two) 3 × 3 convolutions to refine the features&lt;/li&gt;
+      &lt;li&gt;another simple bilinear upsampling by a factor of 4&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;modified-aligned-xception&quot;&gt;Modified Aligned Xception&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895033728737.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;h5 id=&quot;resnet-as-baseline-1&quot;&gt;ResNet as baseline&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;reduce the channels of low level features
+&lt;img src=&quot;/img/15895034376564.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;number of 3x3 convolutions / low level feature
+&lt;img src=&quot;/img/15895034547360.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;detailed performance
+&lt;img src=&quot;/img/15895035126473.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;xception&quot;&gt;Xception&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895037132342.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;employing Xception as network backbone improves the performance by about 2% when train output stride = eval output stride = 16 over the case where ResNet-101 is used&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;improvement-on-object-boundaries&quot;&gt;improvement on object boundaries&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895038788124.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;Chollet, F.: Xception: Deep learning with depthwise separable convolutions. In: CVPR. (2017)&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 14 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/14/Deeplab-v3+/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/14/Deeplab-v3+/</guid>
+        
+        <category>Semantic Segmentation</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>PSPNet</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.01105.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
@@ -637,72 +711,6 @@ employing a “poly” learning rate iter policy (the learning rate is multiplie
         <guid isPermaLink="true">http://localhost:4000/2020/04/29/U-Net/</guid>
         
         <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Conditional Generative Adversarial Network for Structured Domain Adaptation</title>
-        <description>&lt;p&gt;&lt;a href=&quot;http://openaccess.thecvf.com/content_cvpr_2018/papers/Hong_Conditional_Generative_Adversarial_CVPR_2018_paper.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;We shouldn’t assume that the source and target domains share same intermediate feature space(s), i.e. using loss to obtain domain-invariant features.&lt;/li&gt;
-  &lt;li&gt;Use a conditional generator to transform source feature maps into target-like, and trained on the target-like feature maps and original labels (和pixel level domain adaptation类似，但pixel level DA将source images转化为target-like，而本文将source features转化为target-like).&lt;/li&gt;
-  &lt;li&gt;文章中提到 without relying on the assumption that the source and target domains share a same prediction function in a domain-invariant feature space。 实际只完成了not in a domain-invariant feature space， 本质上还是same prediction function (source和target domain的encoder和decoder都相同)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15881099962969.jpg&quot; alt=&quot;-w913&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;a conditional generator to generate residual features, to transform features of synthetic images to real-image like features.
-    &lt;ul&gt;
-      &lt;li&gt;a noise map $z$ is addd for randomness to create an unlimited number of training samples.&lt;/li&gt;
-      &lt;li&gt;expect that $x_f$ preserves the semantic of the source feature map $x_s$, meanwhile appears as if it were extracted from a target domain image, i.e., a real image.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;a discriminator to distinguish adapted source features and real target features.&lt;/li&gt;
-  &lt;li&gt;task-specific loss (decoder part)
-    &lt;ul&gt;
-      &lt;li&gt;train T with both adapted and non-adapted source feature maps (Training T solely on adapted feature maps leads to similar performance, but requires many runs with different initializations and learning rates due to the instability of the GAN).&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;overall minimax objective:&lt;br /&gt;
-&lt;img src=&quot;/img/15881108285954.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;overall performance: 涨幅非常大&lt;br /&gt;
-&lt;img src=&quot;/img/15881108796823.jpg&quot; alt=&quot;-w905&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;amount of synthetic data
- &lt;img src=&quot;/img/15881109617007.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Ablation Studies&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;The effectiveness of conditional generator&lt;br /&gt;
- &lt;img src=&quot;/img/15881110275006.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;Different lower layers for learning generator
- &lt;img src=&quot;/img/15881111038400.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;On the number of residual blocks （上图）&lt;/li&gt;
-      &lt;li&gt;How much does the noise channel contribute?
- &lt;img src=&quot;/img/15881111498987.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Tue, 28 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/</guid>
-        
-        <category>Domain Adaptation</category>
         
         
       </item>

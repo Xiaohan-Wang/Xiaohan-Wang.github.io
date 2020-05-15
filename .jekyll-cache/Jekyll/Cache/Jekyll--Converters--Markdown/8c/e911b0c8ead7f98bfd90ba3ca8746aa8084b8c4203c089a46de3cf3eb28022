@@ -1,0 +1,63 @@
+I"�<p><a href="https://arxiv.org/pdf/1802.02611.pdf">Paper link</a> and <a href="https://github.com/jfzhang95/pytorch-deeplab-xception">code</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>encoder-decoder structure:
+    <ul>
+      <li>DeepLabv3 is used to encode the rich contextual information</li>
+      <li>a simple yet effective decoder module is adopted to recover the object boundaries</li>
+    </ul>
+  </li>
+  <li>explore the Xception model and atrous separable convolution to make the proposed model faster and stronger</li>
+</ol>
+
+<h4 id="introduction">Introduction</h4>
+
+<h4 id="model">Model</h4>
+<h5 id="resnet-as-baseline">ResNet as baseline</h5>
+<p><img src="/img/15895024156855.jpg" width="70%" height="100%" /></p>
+<ol>
+  <li>DeepLab v3 as encoder: use the last feature map before logits in the original DeepLab v3 as the encoder output (contains 256 channels and rich semantic information).</li>
+  <li>Decoder:
+    <ul>
+      <li>The encoder features from DeepLabv3 are usually computed with output stride = 16</li>
+      <li>first bilinearly upsampled the encoder features by a factor of 4</li>
+      <li>concatenate the upsampled features with the corresponding low-level features from the network backbone that have the same spatial resolution (e.g., Conv2 before striding in ResNet-101)
+        <ul>
+          <li>1 × 1 convolution on the low-level features to reduce the number of channels, since the corresponding low- level features usually contain a large number of channels (e.g., 256 or 512) which may outweigh the importance of the rich encoder features (only 256 channels in our model) and make the training harder.</li>
+        </ul>
+      </li>
+      <li>apply a few (two) 3 × 3 convolutions to refine the features</li>
+      <li>another simple bilinear upsampling by a factor of 4</li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="modified-aligned-xception">Modified Aligned Xception</h5>
+<p><img src="/img/15895033728737.jpg" alt="-w640" /></p>
+
+<h4 id="result">Result</h4>
+<h5 id="resnet-as-baseline-1">ResNet as baseline</h5>
+<ol>
+  <li>reduce the channels of low level features
+<img src="/img/15895034376564.jpg" alt="-w641" /></li>
+  <li>number of 3x3 convolutions / low level feature
+<img src="/img/15895034547360.jpg" alt="-w632" /></li>
+  <li>detailed performance
+<img src="/img/15895035126473.jpg" alt="-w645" /></li>
+</ol>
+
+<h5 id="xception">Xception</h5>
+<p><img src="/img/15895037132342.jpg" alt="-w637" /></p>
+<ul>
+  <li>employing Xception as network backbone improves the performance by about 2% when train output stride = eval output stride = 16 over the case where ResNet-101 is used</li>
+</ul>
+
+<h5 id="improvement-on-object-boundaries">improvement on object boundaries</h5>
+<p><img src="/img/15895038788124.jpg" alt="-w679" /></p>
+
+<h4 id="further-reference">Further reference</h4>
+<ol>
+  <li>Chollet, F.: Xception: Deep learning with depthwise separable convolutions. In: CVPR. (2017)</li>
+</ol>
+:ET
