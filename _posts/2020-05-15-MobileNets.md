@@ -2,7 +2,7 @@
 layout:     post
 title: MobileNets
 subtitle:  arXiv 2017 
-date:       2000-1-1
+date:       2020-5-15
 author:     Xiaohan
 header-img: img/ice.jpg
 catalog: true
