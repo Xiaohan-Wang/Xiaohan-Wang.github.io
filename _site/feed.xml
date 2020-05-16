@@ -5,9 +5,166 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 15 May 2020 15:33:02 -0400</pubDate>
-    <lastBuildDate>Fri, 15 May 2020 15:33:02 -0400</lastBuildDate>
+    <pubDate>Sat, 16 May 2020 13:16:55 -0400</pubDate>
+    <lastBuildDate>Sat, 16 May 2020 13:16:55 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>代码管理、实验管理</title>
+        <description>&lt;p&gt;目前对代码管理以及实验管理的一些小想法，部分来自&lt;a href=&quot;https://www.zhihu.com/question/269707221&quot;&gt;知乎&lt;/a&gt;，随时修改…&lt;/p&gt;
+
+&lt;h4 id=&quot;项目代码&quot;&gt;项目代码&lt;/h4&gt;
+&lt;h5 id=&quot;before-starting&quot;&gt;before starting&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;实现前先思考代码的整体框架和结构、各部分功能，可以用xmind做一个简单思维导图&lt;/li&gt;
+  &lt;li&gt;尽量解耦代码，从而获得更高的复用性
+    &lt;ul&gt;
+      &lt;li&gt;实现一个基础整体框架 e.g. &lt;a href=&quot;https://github.com/MrGemy95/Tensorflow-Project-Template&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;单独实现各个模块&lt;/li&gt;
+      &lt;li&gt;组合代码，同时添加一些单独的细节部分&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;tricks&quot;&gt;tricks&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;分离代码和数据
+    &lt;ul&gt;
+      &lt;li&gt;最好假设它们不在一个文件夹&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;试验参数
+    &lt;ul&gt;
+      &lt;li&gt;尽量使用config文件传入，并且config尽量与log文件同名保存。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;实验管理&quot;&gt;实验管理&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;使用&lt;a href=&quot;https://mlflow.org/docs/latest/index.html&quot;&gt;MLflow&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;实验记录&quot;&gt;实验记录&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;内容
+    &lt;ul&gt;
+      &lt;li&gt;记录每个实验的目的、方法、结果&lt;/li&gt;
+      &lt;li&gt;尽量附代码 （用代码的 commit id）、数据&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;工具
+    &lt;ul&gt;
+      &lt;li&gt;最好用overleaf，可以与github repo 或者本地 git repo 同步 【TODO】&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 15 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/15/Patterns-for-Research/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/15/Patterns-for-Research/</guid>
+        
+        <category>Q &amp; A</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>MobileNets</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1704.04861.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;MobileNets: light weight deep neural networks that use depth-wise separable convolutions&lt;/li&gt;
+  &lt;li&gt;two simple global hyper-parameters that efficiently trade off between latency and accuracy&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;h5 id=&quot;depth-separable-convolution&quot;&gt;Depth separable convolution&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895586236484.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;depthwise convolution: apply a single filter per each input channel&lt;/li&gt;
+  &lt;li&gt;pointwise convolution: a simple 1×1 convolution to create a linear combination of the output of the depthwise layer&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MobileNets use both batchnorm and ReLU nonlinearities for both layers.
+&lt;img src=&quot;/img/15895586917635.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;computation cost
+    &lt;ul&gt;
+      &lt;li&gt;symbols
+        &lt;ul&gt;
+          &lt;li&gt;$D_F$: input feature size / output feature size&lt;/li&gt;
+          &lt;li&gt;$D_K$: kernel size&lt;/li&gt;
+          &lt;li&gt;$M$: input channels&lt;/li&gt;
+          &lt;li&gt;$N$: outout channels&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;standard convolutions&lt;br /&gt;
+  &lt;img src=&quot;/img/15895585271744.jpg&quot; width=&quot;33%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;depthwise separable convolutions&lt;br /&gt;
+  &lt;img src=&quot;/img/15895588519425.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+      &lt;li&gt;reduction in computation: MobileNet uses 3 × 3 depthwise separable convolutions, which uses between 8 to 9 times less computation than standard convolutions at only a small reduction in accuracy&lt;br /&gt;
+  &lt;img src=&quot;/img/15895588852425.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;network-structure&quot;&gt;Network structure&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895692454944.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;The first layer is a full convolution.&lt;/li&gt;
+  &lt;li&gt;All layers are followed by a batchnorm and ReLU nonlinearity with the exception of the final fully connected layer which has no nonlinearity and feeds into a softmax layer for classification&lt;/li&gt;
+  &lt;li&gt;Down sampling is handled with strided convolution in the depthwise convolutions as well as in the first layer.&lt;/li&gt;
+  &lt;li&gt;A final average pooling reduces the spatial resolution to 1 before the fully connected layer.&lt;/li&gt;
+  &lt;li&gt;Counting depthwise and pointwise convo- lutions as separate layers, MobileNet has 28 layers.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MobileNets structure puts nearly all of the computation into dense 1×1 convolutions. This can be implemented with highly optimized general matrix multiply (GEMM) functions.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;tricks&quot;&gt;Tricks&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;contrary to training large models we use less regularization and data augmentation techniques because small models have less trouble with overfitting.&lt;/li&gt;
+  &lt;li&gt;it was important to put very little or no weight decay (L2 regularization) on the depthwise filters since their are so few parameters in them.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;hyperparameter&quot;&gt;Hyperparameter&lt;/h4&gt;
+&lt;h5 id=&quot;width-multiplier-thinner-models&quot;&gt;Width Multiplier: Thinner Models&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;The role of the width multiplier $\alpha$ is to thin a network uniformly at each layer (the number of input channels $M$ becomes $\alpha M$,  and the number of output channels $N$ becomes $\alpha N$)&lt;/li&gt;
+  &lt;li&gt;The computational cost of a depthwise separable convolution with width multiplier $\alpha$:
+  &lt;img src=&quot;/img/15895698351332.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;$ \alpha \in (0, 1]$ with typical settings of 1, 0.75, 0.5 and 0.25.&lt;/li&gt;
+  &lt;li&gt;Width multiplier has the effect of reducing &lt;strong&gt;computational cost&lt;/strong&gt; and &lt;strong&gt;the number of parameters&lt;/strong&gt; quadratically by roughly $\alpha^2$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;resolution-multiplier-reduced-representation&quot;&gt;Resolution Multiplier: Reduced Representation&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;resolution multiplier $\rho$ is applied to the input image and the internal representation of every layer. In practice we implicitly set $\rho$ by setting the input resolution.&lt;/li&gt;
+  &lt;li&gt;the computational cost for the core layers with width multiplier $\alpha$ and resolution multiplier $\alpha$:
+  &lt;img src=&quot;/img/15895703362678.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;$\rho \in (0, 1]$, which is typically set implicitly so that the input resolution of the network is 224, 192, 160 or 128.&lt;/li&gt;
+  &lt;li&gt;Resolution multiplier has the effect of reducing &lt;strong&gt;computational cost&lt;/strong&gt; by $\rho^2$.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15895706506529.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;G. Hinton, O. Vinyals, and J. Dean. Distilling the knowledge in a neural network. arXiv preprint arXiv:1503.02531, 2015.&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 15 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/15/MobileNets/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/15/MobileNets/</guid>
+        
+        <category>Baseline</category>
+        
+        
+      </item>
     
       <item>
         <title>DeepLab v3+</title>
@@ -564,151 +721,6 @@ employing a “poly” learning rate iter policy (the learning rate is multiplie
         <pubDate>Thu, 07 May 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/05/07/Deeplab-v1/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/05/07/Deeplab-v1/</guid>
-        
-        <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Dilated convolutions</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1511.07122.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;Dilated convolution operator, which can expend the receptive field without losing resolution or coverage, is very suitable for dense prediction task.&lt;/li&gt;
-  &lt;li&gt;multi-scale context module, can reliably increases accuracy when plugged into existing semantic segmentation systems.&lt;/li&gt;
-  &lt;li&gt;Replace pooling layer (designed for classification task) with dilated convolution (designed for segmentation task) can increase accuracy.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;dilated convolutions
-    &lt;ul&gt;
-      &lt;li&gt;$l$-dilated convolution: The familiar discrete convolution is simply the 1-dilated convolution.&lt;br /&gt;
- &lt;img src=&quot;/img/15887283730533.jpg&quot; width=&quot;35%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
- use $∗_l$ to represent an $l$-dilated convolution&lt;/li&gt;
-      &lt;li&gt;Let $F_0, F_1, \cdots , F_{n−1} : Z^2 \rightarrow R$ be discrete functions and let $k_0, k_1, \cdots, k_{n−2} : Ω_1 \rightarrow R$ ($Ω_r = [−r, r]^2 ∩ Z^2$) be discrete 3×3 filter. Consider applying the filters with exponentially increasing dilation: 
-  &lt;script type=&quot;math/tex&quot;&gt;F_{i+1} = F_i ∗_{2^i}k_i\text{   for   } i = 0, 1, \cdots , n − 2&lt;/script&gt;, then the size of the receptive field of each element in $F_{i+1}$ is $(2^{i+2} − 1)×(2^{i+2} − 1)$.
-&lt;img src=&quot;/img/15887296456656.jpg&quot; alt=&quot;-w709&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;context module
-    &lt;blockquote&gt;
-      &lt;p&gt;The context module is designed to increase the performance of dense prediction architectures by aggregating multi-scale contextual information. The module takes C feature maps as input and produces C feature maps as output. The input and output have the same form, thus the module can be plugged into existing dense prediction architectures.&lt;/p&gt;
-    &lt;/blockquote&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;
-        &lt;p&gt;module architecture&lt;/p&gt;
-
-        &lt;p&gt;here truncation is a ReLU function $f(\cdot)=max(\cdot, 0)$.&lt;br /&gt;
-&lt;img src=&quot;/img/15887338289922.jpg&quot; alt=&quot;-w656&quot; /&gt;&lt;/p&gt;
-      &lt;/li&gt;
-      &lt;li&gt;
-        &lt;p&gt;initialization&lt;/p&gt;
-
-        &lt;p&gt;Experiments revealed that standard initialization procedures (random initialization) do not readily support the training of the module.&lt;/p&gt;
-        &lt;ul&gt;
-          &lt;li&gt;Basic: identity initialization&lt;br /&gt;
-  &lt;img src=&quot;/img/15887343089814.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-          &lt;li&gt;Large:&lt;br /&gt;
-  &lt;img src=&quot;/img/15887343601296.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;front end
-    &lt;ul&gt;
-      &lt;li&gt;adapted the VGG-16 network for dense prediction and removed the last two pooling and striding layers. Specifically, each of these pooling and striding layers was removed and convolutions in all subsequent layers were dilated by a factor of 2 for each pooling layer that was ablated.&lt;/li&gt;
-      &lt;li&gt;use reflection padding: the buffer zone is filled by reflecting the image about each edge.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Front end
-&lt;img src=&quot;/img/15887346292420.jpg&quot; alt=&quot;-w599&quot; /&gt;
-&lt;img src=&quot;/img/15887346668224.jpg&quot; alt=&quot;-w609&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;context module
-&lt;img src=&quot;/img/15887347716594.jpg&quot; alt=&quot;-w599&quot; /&gt;
-&lt;img src=&quot;/img/15887348908756.jpg&quot; alt=&quot;-w606&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Tue, 05 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/05/Dilated-convolutions/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/05/Dilated-convolutions/</guid>
-        
-        <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>U-Net</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1505.04597.pdf&quot;&gt;Paper link&lt;/a&gt; and &lt;a href=&quot;https://github.com/milesial/Pytorch-UNet&quot;&gt;code&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;contracting path + expending path + skip connection&lt;/li&gt;
-  &lt;li&gt;strong data augmentation, works well for very few images (it was designed for biomedical images)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15882170880287.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15882176961707.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;It use valid convolution, thus the resolution gets lower and lower in the contracting path and expending path.&lt;/li&gt;
-  &lt;li&gt;Because of the high resolution of biomedical images, overlap-tile strategy is used.&lt;/li&gt;
-  &lt;li&gt;To predict the pixels in the border region of the image, the missing context is extrapolated by mirroring the input image.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;contracting path:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;repeated application of two 3x3 convolutions (unpadded convolutions), each followed by a rectified linear unit (ReLU) and a 2x2 max pooling operation with stride 2 for downsampling. At each downsampling step we double the number of feature channels.&lt;/li&gt;
-  &lt;li&gt;an upsampling of the feature map by a 2x2 convolution (“up-convolution”) that halves the number of feature channels, a concatenation with the correspondingly cropped feature map from the contracting path, and two 3x3 convolutions, each followed by a ReLU.&lt;/li&gt;
-  &lt;li&gt;At the final layer a 1x1 convolution is used to map each 64- component feature vector to the desired number of classes.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Training objective:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;softmax + cross entropy&lt;/li&gt;
-  &lt;li&gt;class balancing (it’s important because of the large background)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;data-augmentation&quot;&gt;Data augmentation&lt;/h4&gt;
-&lt;p&gt;Teach the network the desired invariance and robustness properties, when only few training samples are available:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;shift&lt;/li&gt;
-  &lt;li&gt;rotation&lt;/li&gt;
-  &lt;li&gt;gray value deformations&lt;/li&gt;
-  &lt;li&gt;random elastic deformation&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;select the input tile size such that all 2x2 max-pooling operations are applied to a layer with an even x- and y-size.&lt;/li&gt;
-  &lt;li&gt;favor large input tiles over a large batch size and hence reduce the batch to a single image.&lt;/li&gt;
-  &lt;li&gt;use a high momentum (0.99) such that a large number of the previously seen training samples determine the update in the current optimization step.&lt;/li&gt;
-  &lt;li&gt;Xavier initialization.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;time&quot;&gt;Time&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;Training time: 10 hours on a NVidia Titan GPU (6 GB)&lt;/li&gt;
-  &lt;li&gt;Inference time: Segmentation of a 512x512 image takes less than a second on a recent GPU&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Wed, 29 Apr 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/04/29/U-Net/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/04/29/U-Net/</guid>
         
         <category>Semantic Segmentation</category>
         

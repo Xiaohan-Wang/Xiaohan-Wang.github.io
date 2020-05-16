@@ -1,0 +1,49 @@
+I"�<p>目前对代码管理以及实验管理的一些小想法，部分来自<a href="https://www.zhihu.com/question/269707221">知乎</a>，随时修改…</p>
+
+<h4 id="项目代码">项目代码</h4>
+<h5 id="before-starting">before starting</h5>
+<ol>
+  <li>实现前先思考代码的整体框架和结构、各部分功能，可以用xmind做一个简单思维导图</li>
+  <li>尽量解耦代码，从而获得更高的复用性
+    <ul>
+      <li>实现一个基础整体框架 e.g. <a href="https://github.com/MrGemy95/Tensorflow-Project-Template">link</a></li>
+      <li>单独实现各个模块</li>
+      <li>组合代码，同时添加一些单独的细节部分</li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="tricks">tricks</h5>
+<ol>
+  <li>分离代码和数据
+    <ul>
+      <li>最好假设它们不在一个文件夹</li>
+    </ul>
+  </li>
+  <li>试验参数
+    <ul>
+      <li>尽量使用config文件传入，并且config尽量与log文件同名保存。</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="实验管理">实验管理</h4>
+<ol>
+  <li>使用<a href="https://mlflow.org/docs/latest/index.html">MLflow</a></li>
+</ol>
+
+<h4 id="实验记录">实验记录</h4>
+<ol>
+  <li>内容
+    <ul>
+      <li>记录每个实验的目的、方法、结果</li>
+      <li>尽量附代码 （用代码的 commit id）、数据</li>
+    </ul>
+  </li>
+  <li>工具
+    <ul>
+      <li>最好用overleaf，可以与github repo 或者本地 git repo 同步 【TODO】</li>
+    </ul>
+  </li>
+</ol>
+:ET

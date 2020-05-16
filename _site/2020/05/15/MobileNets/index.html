@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>t-SNE dimension reduction - Xiaohan's Blog</title>
+    <title>MobileNets - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/04/03/t-SNE%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/15/MobileNets/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#ML" title="ML">ML</a>
+                        <a class="tag" href="/tags/#Baseline" title="Baseline">Baseline</a>
                         
                     </div>
-                    <h2>t-SNE dimension reduction</h2>
+                    <h2>MobileNets</h2>
                     
                     
-                    <span class="meta">t-distributed stochastic neighborhood embedding&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on April 3, 2020</span>
+                    <span class="meta">arXiv 2017&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 15, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,15 +208,91 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="http://www.jmlr.org/papers/volume9/vandermaaten08a/vandermaaten08a.pdf">paper</a></p>
+				<p><a href="https://arxiv.org/pdf/1704.04861.pdf">Paper link</a></p>
 
-<p>t-SNE was proposed in 2008, which is s a very powerful and state-of-the-art dimension reduction algorithm, and is especially good at data visualization.</p>
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>MobileNets: light weight deep neural networks that use depth-wise separable convolutions</li>
+  <li>two simple global hyper-parameters that efficiently trade off between latency and accuracy</li>
+</ol>
 
-<p>PCA: perseve global structure (principle component)
-t-SNE: preverse local structure or global structure</p>
+<h4 id="model">Model</h4>
+<h5 id="depth-separable-convolution">Depth separable convolution</h5>
+<p><img src="/img/15895586236484.jpg" width="50%" height="100%" /></p>
+<ol>
+  <li>depthwise convolution: apply a single filter per each input channel</li>
+  <li>pointwise convolution: a simple 1×1 convolution to create a linear combination of the output of the depthwise layer</li>
+</ol>
 
-<p>https://www.appliedaicourse.com/lecture/11/applied-machine-learning-online-course/2899/neighborhood-of-a-point-embedding/2/module-2-data-science-exploratory-data-analysis-and-data-visualization</p>
+<ul>
+  <li>MobileNets use both batchnorm and ReLU nonlinearities for both layers.
+<img src="/img/15895586917635.jpg" width="50%" height="100%" /></li>
+  <li>computation cost
+    <ul>
+      <li>symbols
+        <ul>
+          <li>$D_F$: input feature size / output feature size</li>
+          <li>$D_K$: kernel size</li>
+          <li>$M$: input channels</li>
+          <li>$N$: outout channels</li>
+        </ul>
+      </li>
+      <li>standard convolutions<br />
+  <img src="/img/15895585271744.jpg" width="33%" height="100%" /></li>
+      <li>depthwise separable convolutions<br />
+  <img src="/img/15895588519425.jpg" width="50%" height="100%" /></li>
+      <li>reduction in computation: MobileNet uses 3 × 3 depthwise separable convolutions, which uses between 8 to 9 times less computation than standard convolutions at only a small reduction in accuracy<br />
+  <img src="/img/15895588852425.jpg" width="55%" height="100%" /></li>
+    </ul>
+  </li>
+</ul>
 
+<h5 id="network-structure">Network structure</h5>
+<p><img src="/img/15895692454944.jpg" width="55%" height="100%" /></p>
+<ol>
+  <li>The first layer is a full convolution.</li>
+  <li>All layers are followed by a batchnorm and ReLU nonlinearity with the exception of the final fully connected layer which has no nonlinearity and feeds into a softmax layer for classification</li>
+  <li>Down sampling is handled with strided convolution in the depthwise convolutions as well as in the first layer.</li>
+  <li>A final average pooling reduces the spatial resolution to 1 before the fully connected layer.</li>
+  <li>Counting depthwise and pointwise convo- lutions as separate layers, MobileNet has 28 layers.</li>
+</ol>
+
+<ul>
+  <li>MobileNets structure puts nearly all of the computation into dense 1×1 convolutions. This can be implemented with highly optimized general matrix multiply (GEMM) functions.</li>
+</ul>
+
+<h5 id="tricks">Tricks</h5>
+<ol>
+  <li>contrary to training large models we use less regularization and data augmentation techniques because small models have less trouble with overfitting.</li>
+  <li>it was important to put very little or no weight decay (L2 regularization) on the depthwise filters since their are so few parameters in them.</li>
+</ol>
+
+<h4 id="hyperparameter">Hyperparameter</h4>
+<h5 id="width-multiplier-thinner-models">Width Multiplier: Thinner Models</h5>
+<ul>
+  <li>The role of the width multiplier $\alpha$ is to thin a network uniformly at each layer (the number of input channels $M$ becomes $\alpha M$,  and the number of output channels $N$ becomes $\alpha N$)</li>
+  <li>The computational cost of a depthwise separable convolution with width multiplier $\alpha$:
+  <img src="/img/15895698351332.jpg" width="50%" height="100%" /></li>
+  <li>$ \alpha \in (0, 1]$ with typical settings of 1, 0.75, 0.5 and 0.25.</li>
+  <li>Width multiplier has the effect of reducing <strong>computational cost</strong> and <strong>the number of parameters</strong> quadratically by roughly $\alpha^2$.</li>
+</ul>
+
+<h5 id="resolution-multiplier-reduced-representation">Resolution Multiplier: Reduced Representation</h5>
+<ul>
+  <li>resolution multiplier $\rho$ is applied to the input image and the internal representation of every layer. In practice we implicitly set $\rho$ by setting the input resolution.</li>
+  <li>the computational cost for the core layers with width multiplier $\alpha$ and resolution multiplier $\alpha$:
+  <img src="/img/15895703362678.jpg" width="50%" height="100%" /></li>
+  <li>$\rho \in (0, 1]$, which is typically set implicitly so that the input resolution of the network is 224, 192, 160 or 128.</li>
+  <li>Resolution multiplier has the effect of reducing <strong>computational cost</strong> by $\rho^2$.</li>
+</ul>
+
+<h4 id="result">Result</h4>
+<p><img src="/img/15895706506529.jpg" width="60%" height="100%" /></p>
+
+<h4 id="further-reference">Further reference</h4>
+<ol>
+  <li>G. Hinton, O. Vinyals, and J. Dean. Distilling the knowledge in a neural network. arXiv preprint arXiv:1503.02531, 2015.</li>
+</ol>
 
 
                 <hr style="visibility: hidden;">
@@ -224,17 +300,17 @@ t-SNE: preverse local structure or global structure</p>
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/04/02/DA-dataset-summary/" data-toggle="tooltip" data-placement="top" title="Domain Adaptation">
+                        <a href="/2020/05/14/Deeplab-v3+/" data-toggle="tooltip" data-placement="top" title="DeepLab v3+">
                         Previous<br>
-                        <span>Domain Adaptation</span>
+                        <span>DeepLab v3+</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/" data-toggle="tooltip" data-placement="top" title="Maximum Classifier Discrepancy for Unsupervised Domain Adaptation">
+                        <a href="/2020/05/15/Patterns-for-Research/" data-toggle="tooltip" data-placement="top" title="代码管理、实验管理">
                         Next<br>
-                        <span>Maximum Classifier Discrepancy for Unsupervised Domain Adaptation</span>
+                        <span>代码管理、实验管理</span>
                         </a>previous
                     </li>
                     
