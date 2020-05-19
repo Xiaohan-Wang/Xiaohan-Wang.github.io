@@ -243,6 +243,27 @@
   </li>
 </ol>
 
+<ul>
+  <li>DeepLabv3+ model has final output stride = 4
+    <ul>
+      <li>encoder output stride = 16
+        <ul>
+          <li>upsample by a factor of 4</li>
+          <li>concatenate with Conv2</li>
+          <li>another upsample by a factor of 4</li>
+        </ul>
+      </li>
+      <li>encoder output stride = 8
+        <ul>
+          <li>upsample by a factor of 2</li>
+          <li>concatenate with Conv2</li>
+          <li>another upsample by a factor of 4</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
 <h5 id="modified-aligned-xception">Modified Aligned Xception</h5>
 <p><img src="/img/15895033728737.jpg" width="70%" height="100%" /></p>
 

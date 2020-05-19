@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 18 May 2020 21:32:13 -0400</pubDate>
-    <lastBuildDate>Mon, 18 May 2020 21:32:13 -0400</lastBuildDate>
+    <pubDate>Mon, 18 May 2020 22:44:55 -0400</pubDate>
+    <lastBuildDate>Mon, 18 May 2020 22:44:55 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -77,11 +77,11 @@
     &lt;span class=&quot;n&quot;&gt;tw&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;draw_model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aspp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;生成的结果是横屏，很乱，就不贴图了&lt;/p&gt;
+&lt;p&gt;只能在jupyter notebook上运行，但生成的结果是横屏，很乱，就不贴图了&lt;/p&gt;
 </description>
-        <pubDate>Fri, 15 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/15/pytorch%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/15/pytorch%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
+        <pubDate>Mon, 18 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/18/pytorch%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/18/pytorch%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96/</guid>
         
         <category>PyTorch</category>
         
@@ -281,6 +281,27 @@
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DeepLabv3+ model has final output stride = 4
+    &lt;ul&gt;
+      &lt;li&gt;encoder output stride = 16
+        &lt;ul&gt;
+          &lt;li&gt;upsample by a factor of 4&lt;/li&gt;
+          &lt;li&gt;concatenate with Conv2&lt;/li&gt;
+          &lt;li&gt;another upsample by a factor of 4&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;encoder output stride = 8
+        &lt;ul&gt;
+          &lt;li&gt;upsample by a factor of 2&lt;/li&gt;
+          &lt;li&gt;concatenate with Conv2&lt;/li&gt;
+          &lt;li&gt;another upsample by a factor of 4&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h5 id=&quot;modified-aligned-xception&quot;&gt;Modified Aligned Xception&lt;/h5&gt;
 &lt;p&gt;&lt;img src=&quot;/img/15895033728737.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;

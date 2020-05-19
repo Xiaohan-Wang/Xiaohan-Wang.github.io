@@ -1,4 +1,4 @@
-I"�<h4 id="print">print</h4>
+I"g<h4 id="print">print</h4>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># 打印所有子模块，但不能显示各个模块间的关系
 </span>    
     <span class="n">aspp</span> <span class="o">=</span> <span class="n">build_ASPP</span><span class="p">(</span><span class="n">backbone</span><span class="o">=</span><span class="s">'resnet'</span><span class="p">,</span> <span class="n">output_stride</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
@@ -24,8 +24,7 @@
 <p><img src="/img/15898469921259.jpg" alt="-w1157" /></p>
 <h5 id="netron">netron</h5>
 
-<p>github link: https://github.com/lutzroeder/Netron<br />
-超有潜力，但目前还不能稳定支持pytorch</p>
+<p><a href="https://github.com/lutzroeder/Netron">github link</a> ，超有潜力，但目前还不能稳定支持pytorch</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">netron</span>
     <span class="n">aspp</span> <span class="o">=</span> <span class="n">build_ASPP</span><span class="p">(</span><span class="n">backbone</span><span class="o">=</span><span class="s">'resnet'</span><span class="p">,</span> <span class="n">output_stride</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
@@ -33,10 +32,12 @@
 </span>   
     <span class="n">file_path</span> <span class="o">=</span> <span class="s">"aspp.pth"</span>
     <span class="n">torch</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">aspp</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
-    <span class="c1"># 用python srver打开
+    <span class="c1"># 用python server打开
 </span>    
     <span class="n">netron</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
 </code></pre></div></div>
+
+<p><img src="/img/15898517608333.jpg" alt="-w1008" /></p>
 
 <h5 id="tensorboard">tensorboard</h5>
 
@@ -52,7 +53,7 @@
 
 <p>通过<code class="highlighter-rouge">tensorboard --logdir=runs</code>, 可以在浏览器打开。但感觉不太直观，有点看不懂</p>
 
-<p><img src="/img/15898488137991.jpg" alt="-w680" /></p>
+<p><img src="/img/15898488137991.jpg" width="60%" height="100%" /></p>
 
 <h5 id="tensorwatch">tensorwatch</h5>
 
@@ -63,5 +64,5 @@
     <span class="n">tw</span><span class="o">.</span><span class="n">draw_model</span><span class="p">(</span><span class="n">aspp</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>生成的结果是横屏，很乱，就不贴图了</p>
+<p>只能在jupyter notebook上运行，但生成的结果是横屏，很乱，就不贴图了</p>
 :ET
