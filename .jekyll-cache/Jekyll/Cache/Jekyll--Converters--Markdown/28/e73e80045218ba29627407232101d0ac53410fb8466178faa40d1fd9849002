@@ -1,0 +1,64 @@
+I"�<p><a href="https://arxiv.org/pdf/1603.05027.pdf">Paper link</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<p>The forward and backward signals can be directly propagated from one block to any other block, when using identity mappings as 1) the skip connections and 2) after-addition activation. This makes training easier and improves generalization.</p>
+
+<h4 id="model">Model</h4>
+<p>Residual unit:
+<img src="/img/15902038485632.jpg" width="20%" height="100%" /></p>
+<ul>
+  <li>$x_l$ and $x_{l+1}$ are input and output of the $l$-th unit</li>
+  <li>$F$ is a residual function</li>
+  <li>$h(x_l) $ is an skip connection</li>
+  <li>$f$ is an after-addition activation function.</li>
+</ul>
+
+<p>If (i) skip connection is identity mapping $h(x_l) = x_l$, and (ii) after-addition activation $f$ is an identity mapping, then we have
+<img src="/img/15902041544783.jpg" width="30%" height="100%" />
+<img src="/img/15902041725422.jpg" width="50%" height="100%" />
+that is, the signal can be directly propagated from any unit to another, both forward and backward.</p>
+
+<h5 id="identity-skip-connections">Identity Skip Connections</h5>
+<p><img src="/img/15902046739782.jpg" alt="-w631" />
+<img src="/img/15902049097732.jpg" alt="-w620" /></p>
+
+<p>As indicated by the grey arrows in Fig. 2, the shortcut connections are the most direct paths for the information to propagate. Multiplicative manipulations (scaling, gating, 1×1 convolutions, and dropout) on the shortcuts can hamper information propagation and lead to optimization problems.</p>
+
+<h5 id="activation-functions">Activation Functions</h5>
+<p><img src="/img/15902048739817.jpg" alt="-w617" />
+<img src="/img/15902048935542.jpg" alt="-w631" /></p>
+<ol>
+  <li>(a) original residual unit</li>
+  <li>(b) BN after addition
+    <ul>
+      <li>the BN layer alters the signal that passes through the shortcut and impedes information propagation</li>
+    </ul>
+  </li>
+  <li>(c) ReLU before addition
+    <ul>
+      <li>a non-negative output from the transform $F$, while intuitively a “residual” function should take values in $(-\infty, +\infty)$. As a result, the forward propagated signal is monotonically increasing, which may impact the representational ability.</li>
+    </ul>
+  </li>
+  <li>pre-activation: develop an asymmetric form where an activation $f$ only affect the residual path but not the both paths in the next Residual Unit (i.e. move the activation module in a) and b) to the residual path, which become d) and e))
+    <ul>
+      <li>(d) This ReLU layer is not used in conjunction with a BN layer, and may not enjoy the benefits of BN.</li>
+      <li>(e)  result is good</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Benefit of pre-activation</p>
+<ol>
+  <li>Ease of optimization
+    <ul>
+      <li>the benefit of ease of optimization is more obvious in 1001-layer network than networks with fewer layers.</li>
+    </ul>
+  </li>
+  <li>Reducing overfitting
+    <ul>
+      <li>The pre-activation version reaches slightly higher training loss at convergence, but produces lower test error. This phenomenon is observed on ResNet-110, ResNet-110(1-layer), and ResNet-164 on both CIFAR-10 and 100.</li>
+      <li>In the original Residual Unit (Fig. 4(a)), although the BN normalizes the signal, this is soon added to the shortcut and thus the merged signal is not normalized. This unnormalized signal is then used as the input of the next weight layer. On the contrary, in the pre-activation version, the inputs to all weight layers have been normalized.</li>
+    </ul>
+  </li>
+</ol>
+:ET

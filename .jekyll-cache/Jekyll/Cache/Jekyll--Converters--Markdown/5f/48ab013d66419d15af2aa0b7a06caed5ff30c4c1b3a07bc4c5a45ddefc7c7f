@@ -1,4 +1,4 @@
-I"¾<h3 id="domain-adaptation">Domain Adaptation</h3>
+I"2<h3 id="domain-adaptation">Domain Adaptation</h3>
 
 <table>
   <thead>
@@ -165,6 +165,12 @@
       <td>CVPR 2016</td>
       <td>ResNet</td>
       <td><a href="https://xiaohan-wang.github.io/2020/05/10/ResNet/">link</a></td>
+    </tr>
+    <tr>
+      <td>5.20</td>
+      <td>ECCV 2016</td>
+      <td>Identity mapping</td>
+      <td>TODO</td>
     </tr>
     <tr>
       <td>5.15</td>

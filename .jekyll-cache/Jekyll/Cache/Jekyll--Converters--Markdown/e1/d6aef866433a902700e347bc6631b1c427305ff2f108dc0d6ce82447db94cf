@@ -24,7 +24,7 @@
 <p><img src="/img/15898469921259.jpg" alt="-w1157" /></p>
 <h5 id="netron">netron</h5>
 
-<p><a href="https://github.com/lutzroeder/Netron">github link</a> ，超有潜力，但目前还不能稳定支持pytorch</p>
+<p><a href="https://github.com/lutzroeder/Netron">github link</a> ，超有潜力，但目前还不能稳定支持PyTorch</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kn">import</span> <span class="nn">netron</span>
     <span class="n">aspp</span> <span class="o">=</span> <span class="n">build_ASPP</span><span class="p">(</span><span class="n">backbone</span><span class="o">=</span><span class="s">'resnet'</span><span class="p">,</span> <span class="n">output_stride</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>

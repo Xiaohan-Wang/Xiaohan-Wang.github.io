@@ -5,9 +5,84 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 19 May 2020 16:29:47 -0400</pubDate>
-    <lastBuildDate>Tue, 19 May 2020 16:29:47 -0400</lastBuildDate>
+    <pubDate>Sat, 23 May 2020 00:01:03 -0400</pubDate>
+    <lastBuildDate>Sat, 23 May 2020 00:01:03 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Identity mapping</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.05027.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;p&gt;The forward and backward signals can be directly propagated from one block to any other block, when using identity mappings as 1) the skip connections and 2) after-addition activation. This makes training easier and improves generalization.&lt;/p&gt;
+
+&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
+&lt;p&gt;Residual unit:
+&lt;img src=&quot;/img/15902038485632.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;$x_l$ and $x_{l+1}$ are input and output of the $l$-th unit&lt;/li&gt;
+  &lt;li&gt;$F$ is a residual function&lt;/li&gt;
+  &lt;li&gt;$h(x_l) $ is an skip connection&lt;/li&gt;
+  &lt;li&gt;$f$ is an after-addition activation function.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;If (i) skip connection is identity mapping $h(x_l) = x_l$, and (ii) after-addition activation $f$ is an identity mapping, then we have
+&lt;img src=&quot;/img/15902041544783.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15902041725422.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;
+that is, the signal can be directly propagated from any unit to another, both forward and backward.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h5 id=&quot;identity-skip-connections&quot;&gt;Identity Skip Connections&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15902046739782.jpg&quot; width=&quot;81%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15902049097732.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As indicated by the grey arrows in Fig. 2, the shortcut connections are the most direct paths for the information to propagate. Multiplicative manipulations (scaling, gating, 1×1 convolutions, and dropout) on the shortcuts can hamper information propagation and lead to optimization problems.&lt;/p&gt;
+
+&lt;h5 id=&quot;activation-functions&quot;&gt;Activation Functions&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15902048739817.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/img/15902048935542.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;(a) original residual unit&lt;/li&gt;
+  &lt;li&gt;(b) BN after addition
+    &lt;ul&gt;
+      &lt;li&gt;the BN layer alters the signal that passes through the shortcut and impedes information propagation&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;(c) ReLU before addition
+    &lt;ul&gt;
+      &lt;li&gt;a non-negative output from the transform $F$, while intuitively a “residual” function should take values in $(-\infty, +\infty)$. As a result, the forward propagated signal is monotonically increasing, which may impact the representational ability.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;pre-activation: develop an asymmetric form where an activation $f$ only affect the residual path but not the both paths in the next Residual Unit (i.e. move the activation module in a) and b) to the residual path, which become d) and e))
+    &lt;ul&gt;
+      &lt;li&gt;(d) This ReLU layer is not used in conjunction with a BN layer, and may not enjoy the benefits of BN.&lt;/li&gt;
+      &lt;li&gt;(e)  result is good&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Benefit of pre-activation&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Ease of optimization
+    &lt;ul&gt;
+      &lt;li&gt;the benefit of ease of optimization is more obvious in 1001-layer network than networks with fewer layers.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Reducing overfitting
+    &lt;ul&gt;
+      &lt;li&gt;The pre-activation version reaches slightly higher training loss at convergence, but produces lower test error. This phenomenon is observed on ResNet-110, ResNet-110(1-layer), and ResNet-164 on both CIFAR-10 and 100.&lt;/li&gt;
+      &lt;li&gt;In the original Residual Unit (Fig. 4(a)), although the BN normalizes the signal, this is soon added to the shortcut and thus the merged signal is not normalized. This unnormalized signal is then used as the input of the next weight layer. On the contrary, in the pre-activation version, the inputs to all weight layers have been normalized.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 22 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/22/Identity-mapping/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/22/Identity-mapping/</guid>
+        
+        <category>Baseline</category>
+        
+        
+      </item>
     
       <item>
         <title>PyTorch模型检查/可视化</title>
@@ -37,7 +112,7 @@
 &lt;p&gt;&lt;img src=&quot;/img/15898469921259.jpg&quot; alt=&quot;-w1157&quot; /&gt;&lt;/p&gt;
 &lt;h5 id=&quot;netron&quot;&gt;netron&lt;/h5&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://github.com/lutzroeder/Netron&quot;&gt;github link&lt;/a&gt; ，超有潜力，但目前还不能稳定支持pytorch&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/lutzroeder/Netron&quot;&gt;github link&lt;/a&gt; ，超有潜力，但目前还不能稳定支持PyTorch&lt;/p&gt;
 
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;netron&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;aspp&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;build_ASPP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backbone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'resnet'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;output_stride&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -651,94 +726,6 @@ The testing result of this 1202-layer network is worse than that of our 110-laye
         <pubDate>Sat, 09 May 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/</guid>
-        
-        <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>DeepLab v2</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1606.00915.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;p&gt;相比于DeepLab v1:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;atrous spatial pyramid pooling (ASPP) to deal with multiscale context and objects.&lt;/li&gt;
-  &lt;li&gt;deeper convolutional neural networks (from VGG-16 to ResNet-101).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;h5 id=&quot;atrous-convolution-for-dense-feature-extraction&quot;&gt;atrous convolution for dense feature extraction&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15889713549783.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;the number of filter parameters and the number of operations per position stay constant, but the effective filter size increases.&lt;/li&gt;
-  &lt;li&gt;Pushing this approach all the way through the network could allow us to compute feature responses at the original image resolution, but this ends up being too costly. Thus the authors have adopted instead a hybrid approach that strikes a good efficiency/accuracy trade-off, using atrous convolution to increase by a factor of 4 the density of computed feature maps, followed by fast bilinear interpolation by an additional factor of 8 to recover feature maps at the original image resolution. Bilinear interpolation is sufficient in this setting because the class score maps are quite smooth.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;multiscale-image-representation&quot;&gt;multiscale image representation&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;standard multiscale processing
-    &lt;ul&gt;
-      &lt;li&gt;extract DCNN score maps from multiplerescaled versions of the original image using parallel DCNN branches that share the same parameters. To produce the final result, the authors bilinearly interpolate the feature maps from the parallel DCNN branches to the original image resolution and fuse them, by taking at each position the maximum response across the different scales.&lt;/li&gt;
-      &lt;li&gt;do this both during training and testing.&lt;/li&gt;
-      &lt;li&gt;Multiscale processing significantly improves performance, but at the cost of computing feature responses at all DCNN layers for multiple scales of input.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ASPP
-&lt;img src=&quot;/img/15889716579187.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15889716791787.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;fully-connected CRF&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;p&gt;three main improvements compared to DeepLab v1:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;different learning policy during training&lt;/li&gt;
-  &lt;li&gt;atrous spatial pyramid pooling&lt;/li&gt;
-  &lt;li&gt;multi-scale processing and other factors&lt;/li&gt;
-  &lt;li&gt;employment of deeper networks&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;different learning policy during training&lt;br /&gt;
-employing a “poly” learning rate iter policy (the learning rate is multiplied by $(1−
-\frac{\text{iter}}{\text{max_iter}} )^{\text{power}}$) is more effective than “step” learning rate (reduce the learning rate at a fixed step size).&lt;br /&gt;
- &lt;img src=&quot;/img/15889722172052.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;ASPP
-&lt;img src=&quot;/img/15889726217656.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15889726447069.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;multi-scale processing and other factors (on ResNet 101)
-&lt;img src=&quot;/img/15889728730154.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;VGG-16 vs. ResNet-101&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;DeepLab based on ResNet-101 delivers better segmentation results along object boundaries than employing VGG- 16. &lt;br /&gt;
- &lt;img src=&quot;/img/15889733334375.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
- &lt;img src=&quot;/img/15889732341678.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;Post-processing the ResNet-101 result with a CRF further improves the segmentation result. (有提高，但不大)&lt;br /&gt;
- &lt;img src=&quot;/img/15889730892561.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;VGG-16. K. Simonyan and A. Zisserman, “Very deep convolutional net- works for large-scale image recognition,” in ICLR, 2015.&lt;/li&gt;
-  &lt;li&gt;ResNet. K. He, X. Zhang, S. Ren, and J. Sun, “Deep residual learning for image recognition,” arXiv:1512.03385, 2015.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 08 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/08/DeepLab-v2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/08/DeepLab-v2/</guid>
         
         <category>Semantic Segmentation</category>
         

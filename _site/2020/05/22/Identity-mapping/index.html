@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Reading list - 2020 - Xiaohan's Blog</title>
+    <title>Identity mapping - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/01/papers-20/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/22/Identity-mapping/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#reading list" title="reading list">reading list</a>
+                        <a class="tag" href="/tags/#Baseline" title="Baseline">Baseline</a>
                         
                     </div>
-                    <h2>Reading list - 2020</h2>
+                    <h2>Identity mapping</h2>
                     
                     
-                    <span class="meta"> Posted on January 1, 2020</span>
+                    <span class="meta">ECCV 2016&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 22, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,195 +208,69 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="domain-adaptation">Domain Adaptation</h3>
+				<p><a href="https://arxiv.org/pdf/1603.05027.pdf">Paper link</a></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>3.23</td>
-      <td>CVPR 2019</td>
-      <td>ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/21/ADVENT/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.24</td>
-      <td>ICCV 2019</td>
-      <td>Domain Adaptation for Semantic Segmentation with Maximum Squares Loss</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/24/Maximum-Squares-Loss/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.25</td>
-      <td>CVPR 2018</td>
-      <td>Unsupervised Domain Adaptation with Similarity Learning</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/30/week-summary/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.26</td>
-      <td>NIPS 2013</td>
-      <td>Reshaping Visual Datasets for Domain Adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.27</td>
-      <td>CVPR 2018</td>
-      <td>Boosting Domain Adaptation by Discovering Latent Domains</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.31</td>
-      <td>ICCV 2019</td>
-      <td>Moment Matching for Multi-Source Domain Adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.1</td>
-      <td>CVPR 2018</td>
-      <td>Maximum classifier discrepancy for unsupervised domain adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.15</td>
-      <td>ICCV 2017</td>
-      <td>AutoDIAL: Automatic Domain Alignment Layers</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.28</td>
-      <td>CVPR 2018</td>
-      <td>Conditional Generative Adversarial Network for Structured Domain Adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/">link</a></td>
-    </tr>
-  </tbody>
-</table>
+<h4 id="take-away-message">Take away message</h4>
+<p>The forward and backward signals can be directly propagated from one block to any other block, when using identity mappings as 1) the skip connections and 2) after-addition activation. This makes training easier and improves generalization.</p>
 
-<h3 id="semantic-segmentation">Semantic segmentation</h3>
+<h4 id="model">Model</h4>
+<p>Residual unit:
+<img src="/img/15902038485632.jpg" width="25%" height="100%" /></p>
+<ul>
+  <li>$x_l$ and $x_{l+1}$ are input and output of the $l$-th unit</li>
+  <li>$F$ is a residual function</li>
+  <li>$h(x_l) $ is an skip connection</li>
+  <li>$f$ is an after-addition activation function.</li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>4.21</td>
-      <td>CVPR 2015</td>
-      <td>FCN</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.27</td>
-      <td>TPAMI 17 (Arxiv 15)</td>
-      <td>SegNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.29</td>
-      <td>MICCAI 2015</td>
-      <td>U-Net</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/29/U-Net/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.5</td>
-      <td>ICLR 2016</td>
-      <td>Dilated convolutions</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/05/Dilated-convolutions/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.6</td>
-      <td>ICLR 2015</td>
-      <td>DeepLab v1</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/07/Deeplab-v1/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.7</td>
-      <td>TPAMI 2017</td>
-      <td>DeepLab v2</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/08/DeepLab-v2/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.9</td>
-      <td>CVPR 2017</td>
-      <td>RefineNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.13</td>
-      <td>arXiv 2017</td>
-      <td>DeepLab v3</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/13/DeepLab-v3/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.13</td>
-      <td>CVPR 2017</td>
-      <td>PSPNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/13/PSPNet/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.14</td>
-      <td>ECCV 2018</td>
-      <td>DeepLab v3+</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/14/Deeplab-v3+/">link</a></td>
-    </tr>
-  </tbody>
-</table>
+<p><strong>If (i) skip connection is identity mapping $h(x_l) = x_l$, and (ii) after-addition activation $f$ is an identity mapping, then we have
+<img src="/img/15902041544783.jpg" width="30%" height="100%" />
+<img src="/img/15902041725422.jpg" width="50%" height="100%" />
+that is, the signal can be directly propagated from any unit to another, both forward and backward.</strong></p>
 
-<h3 id="baseline">Baseline</h3>
+<h5 id="identity-skip-connections">Identity Skip Connections</h5>
+<p><img src="/img/15902046739782.jpg" width="81%" height="100%" />
+<img src="/img/15902049097732.jpg" width="80%" height="100%" /></p>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1.1</td>
-      <td>NIPS 2012</td>
-      <td>AlexNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/27/AlexNet/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.10</td>
-      <td>CVPR 2016</td>
-      <td>ResNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/10/ResNet/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.20</td>
-      <td>ECCV 2016</td>
-      <td>Identity mapping</td>
-      <td>TODO</td>
-    </tr>
-    <tr>
-      <td>5.15</td>
-      <td>arXiv 2017</td>
-      <td>MobileNets</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/15/MobileNets/">link</a></td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>CVPR 2017</td>
-      <td>Xception</td>
-      <td>TODO</td>
-    </tr>
-  </tbody>
-</table>
+<p>As indicated by the grey arrows in Fig. 2, the shortcut connections are the most direct paths for the information to propagate. Multiplicative manipulations (scaling, gating, 1×1 convolutions, and dropout) on the shortcuts can hamper information propagation and lead to optimization problems.</p>
 
+<h5 id="activation-functions">Activation Functions</h5>
+<p><img src="/img/15902048739817.jpg" width="80%" height="100%" />
+<img src="/img/15902048935542.jpg" width="80%" height="100%" /></p>
+<ol>
+  <li>(a) original residual unit</li>
+  <li>(b) BN after addition
+    <ul>
+      <li>the BN layer alters the signal that passes through the shortcut and impedes information propagation</li>
+    </ul>
+  </li>
+  <li>(c) ReLU before addition
+    <ul>
+      <li>a non-negative output from the transform $F$, while intuitively a “residual” function should take values in $(-\infty, +\infty)$. As a result, the forward propagated signal is monotonically increasing, which may impact the representational ability.</li>
+    </ul>
+  </li>
+  <li>pre-activation: develop an asymmetric form where an activation $f$ only affect the residual path but not the both paths in the next Residual Unit (i.e. move the activation module in a) and b) to the residual path, which become d) and e))
+    <ul>
+      <li>(d) This ReLU layer is not used in conjunction with a BN layer, and may not enjoy the benefits of BN.</li>
+      <li>(e)  result is good</li>
+    </ul>
+  </li>
+</ol>
+
+<p>Benefit of pre-activation</p>
+<ol>
+  <li>Ease of optimization
+    <ul>
+      <li>the benefit of ease of optimization is more obvious in 1001-layer network than networks with fewer layers.</li>
+    </ul>
+  </li>
+  <li>Reducing overfitting
+    <ul>
+      <li>The pre-activation version reaches slightly higher training loss at convergence, but produces lower test error. This phenomenon is observed on ResNet-110, ResNet-110(1-layer), and ResNet-164 on both CIFAR-10 and 100.</li>
+      <li>In the original Residual Unit (Fig. 4(a)), although the BN normalizes the signal, this is soon added to the shortcut and thus the merged signal is not normalized. This unnormalized signal is then used as the input of the next weight layer. On the contrary, in the pre-activation version, the inputs to all weight layers have been normalized.</li>
+    </ul>
+  </li>
+</ol>
 
 
                 <hr style="visibility: hidden;">
@@ -404,19 +278,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2000/01/01/template/" data-toggle="tooltip" data-placement="top" title="U-Net">
+                        <a href="/2020/05/18/pytorch%E6%A8%A1%E5%9E%8B%E5%8F%AF%E8%A7%86%E5%8C%96/" data-toggle="tooltip" data-placement="top" title="PyTorch模型检查/可视化">
                         Previous<br>
-                        <span>U-Net</span>
+                        <span>PyTorch模型检查/可视化</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/05/Unbiased-Look-at-Dataset-Bias/" data-toggle="tooltip" data-placement="top" title="Unbiased Look at Dataset Bias">
-                        Next<br>
-                        <span>Unbiased Look at Dataset Bias</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
