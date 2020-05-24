@@ -40,14 +40,31 @@ tags:
 2. 数据集大小？
 
 #### Cityscapes
-1. 由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。
-2. 主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。
-3. 5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张fine annotated images来训练）
-4. 分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
-![-w721](/img/15875266001958.jpg)
-
 
 补充: [Cityscapes详细介绍](https://niecongchong.github.io/2019/08/10/CityScapes%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%92%8C%E7%B2%BE%E5%BA%A6%E6%8C%87%E6%A0%87/)
+
+1. 包含来自50个不同城市的街道场景（主要在德国）
+2. 从27个城市中选择了5000张图像进行dense pixel-level annotation，其余23个城市提供了20000张有coarse annotation的图像
+3. annotation包括
+    * pixel-level annotation
+    * instance-level labels for humans and vehicles
+4. 定义了8个大类(category)，下分为30个小类(class)
+    * void代表unclear (void类会在training和evaluation过程中被忽略)
+    * evaluation过程中，会忽略太不常见的classes，即剩余19个classes
+    ![-w721](/img/15875266001958.jpg)
+5. densely annotated images被分为training, validation和test sets, 而coarsely annotated images 只作为额外的training data
+    * a city is completely within a single split
+    * densely annotated images中：2975 training, 500 validation images, and 1525 test images
+    * 每张图片大小都是1024x2048
+    ![-w878](/img/15903541919594.jpg)
+6. 评价指标：
+    * Pixel-Level Semantic Labelling
+        * $IoU_{category}和IoU_{class}$
+        * $iIoU_{category}和iIoU_{class}$ (instance-level intersection-over-union metric)
+            * In contrast to the standard IoU measure, the contribution of each pixel is weighted by the ratio of the class’ average instance size to the size of the respective ground truth instance.
+            * $iIoU$ metric treats instances of any size equally and is therefore more sensitive to errors in predicting small objects compared to the $IoU$
+    * Instance-Level Semantic Labeling
+
 
 
 

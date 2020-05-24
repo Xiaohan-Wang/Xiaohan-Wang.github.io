@@ -1,5 +1,4 @@
-I"{
-<p>部分内容来自于 https://blog.csdn.net/MOU_IT/article/details/82225505</p>
+I"�<p>部分内容来自于 https://blog.csdn.net/MOU_IT/article/details/82225505</p>
 
 <h4 id="总述">总述</h4>
 <p>目前学术界主要有三个benchmark（数据集）用于模型训练和测试。</p>
@@ -41,14 +40,40 @@
 </ol>
 
 <h4 id="cityscapes">Cityscapes</h4>
-<ol>
-  <li>由奔驰主推，提供无人驾驶环境下的图像分割数据集，用于评估视觉算法在城区场景语义理解方面的性能。</li>
-  <li>主要包含来自50个不同城市的街道场景，拥有5000张fine annotated images，20000张coarse annotated images。</li>
-  <li>5000张fine annotated images中，2975张训练图，500张验证图和1525张测试图，每张图片大小都是1024x2048。（一般用5000张fine annotated images来训练）</li>
-  <li>分为category(大类)和class(小类)。evaluation过程中，会忽略太不常见的classes，即剩余19个classes。
-<img src="/img/15875266001958.jpg" alt="-w721" /></li>
-</ol>
 
 <p>补充: <a href="https://niecongchong.github.io/2019/08/10/CityScapes%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%92%8C%E7%B2%BE%E5%BA%A6%E6%8C%87%E6%A0%87/">Cityscapes详细介绍</a></p>
+
+<ol>
+  <li>包含来自50个不同城市的街道场景（主要在德国）</li>
+  <li>从27个城市中选择了5000张图像进行dense pixel-level annotation，其余23个城市提供了20000张有coarse annotation的图像</li>
+  <li>annotation包括
+    <ul>
+      <li>pixel-level annotation</li>
+      <li>instance-level labels for humans and vehicles</li>
+    </ul>
+  </li>
+  <li>定义了8个大类(category)，下分为30个小类(class)
+    <ul>
+      <li>void代表unclear (void类会在training和evaluation过程中被忽略)</li>
+      <li>evaluation过程中，会忽略太不常见的classes，即剩余19个classes
+ <img src="/img/15875266001958.jpg" alt="-w721" /></li>
+    </ul>
+  </li>
+  <li>densely annotated images被分为training, validation和test sets, 而coarsely annotated images 只作为额外的training data
+    <ul>
+      <li>a city is completely within a single split</li>
+      <li>densely annotated images中：2975 training, 500 validation images, and 1525 test images</li>
+      <li>每张图片大小都是1024x2048
+ <img src="/img/15903541919594.jpg" alt="-w878" /></li>
+    </ul>
+  </li>
+  <li>评价指标：
+     * Pixel-Level Semantic Labelling
+         * $IoU_{category}和IoU_{class}$
+         * $iIoU_{category}和iIoU_{class}$ (instance-level intersection-over-union metric)
+             * In contrast to the standard IoU measure, the contribution of each pixel is weighted by the ratio of the class’ average instance size to the size of the respective ground truth instance.
+             * $iIoU$ metric treats instances of any size equally and is therefore more sensitive to errors in predicting small objects compared to the $IoU$
+     * Instance-Level Semantic Labeling</li>
+</ol>
 
 :ET
