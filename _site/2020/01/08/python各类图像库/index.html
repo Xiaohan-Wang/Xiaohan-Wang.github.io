@@ -208,7 +208,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="short-version">short version</h3>
+				<h4 id="short-version">short version</h4>
 
 <table>
   <thead>
@@ -245,8 +245,8 @@
   </tbody>
 </table>
 
-<h3 id="cv2">cv2</h3>
-<h4 id="ioshow">i/o/show</h4>
+<h4 id="cv2">cv2</h4>
+<h5 id="ioshow">i/o/show</h5>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
 
 <span class="c1">#读入图像
@@ -269,7 +269,7 @@
   <font size="3">`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)</font>
 </blockquote>
 
-<h4 id="attribute">attribute</h4>
+<h5 id="attribute">attribute</h5>
 <ul>
   <li>numpy array</li>
   <li>默认读入彩色图像
@@ -286,8 +286,8 @@
   <li>img.dtype: uint8(255)</li>
 </ul>
 
-<h3 id="pil">PIL</h3>
-<h4 id="ioshow-1">i/o/show</h4>
+<h4 id="pil">PIL</h4>
+<h5 id="ioshow-1">i/o/show</h5>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 
 <span class="c1">#读入图像
@@ -302,14 +302,14 @@
 </span>
 <span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'2.jpg'</span><span class="p">)</span>
 </code></pre></div></div>
-<h4 id="image对象">Image对象</h4>
+<h5 id="image对象">Image对象</h5>
 <ul>
   <li>PIL读入图片后生成Image对象</li>
   <li>img.size: (w, h)</li>
   <li>img.mode: 灰度L / 真彩色RGB</li>
 </ul>
 
-<h4 id="image转numpy矩阵">Image转numpy矩阵</h4>
+<h5 id="image转numpy矩阵">Image转numpy矩阵</h5>
 <ul>
   <li><code class="highlighter-rouge">arr = np.array(img) </code></li>
   <li>channel顺序：RGB</li>
@@ -318,8 +318,8 @@
   <li><code class="highlighter-rouge">new_img = Image.fromarray(arr)</code></li>
 </ul>
 
-<h3 id="skimage">skimage</h3>
-<h4 id="ioshow-2">i/o/show</h4>
+<h4 id="skimage">skimage</h4>
+<h5 id="ioshow-2">i/o/show</h5>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
 
 <span class="c1">#读入图像
@@ -334,7 +334,7 @@
 </span>
 <span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
 </code></pre></div></div>
-<h4 id="attribute-1">attribute</h4>
+<h5 id="attribute-1">attribute</h5>
 <ul>
   <li>numpy array</li>
   <li>channel顺序：RGB</li>
@@ -448,6 +448,8 @@
                 				<a href="/tags/#Semantic Segmentation" title="Semantic Segmentation" rel="10">
                                     Semantic Segmentation
                                 </a>
+                            
+        				
                             
         				
                             

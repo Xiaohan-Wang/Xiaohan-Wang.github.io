@@ -1,4 +1,4 @@
-I"�<p>目前对代码管理以及实验管理的一些小想法，部分来自<a href="https://www.zhihu.com/question/269707221">知乎</a>，随时修改…</p>
+I")<p>目前对代码管理以及实验管理的一些小想法，部分来自<a href="https://www.zhihu.com/question/269707221">知乎</a>，随时修改…</p>
 
 <h4 id="项目代码">项目代码</h4>
 <h5 id="before-starting">before starting</h5>
@@ -25,6 +25,7 @@
       <li>尽量使用config文件传入，并且config尽量与log文件同名保存。</li>
     </ul>
   </li>
+  <li><strong>train, val, test set各自的数据最好放在各自的文件夹中</strong></li>
 </ol>
 
 <h4 id="实验管理">实验管理</h4>

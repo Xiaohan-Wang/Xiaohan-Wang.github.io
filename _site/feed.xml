@@ -5,9 +5,123 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 24 May 2020 17:19:11 -0400</pubDate>
-    <lastBuildDate>Sun, 24 May 2020 17:19:11 -0400</lastBuildDate>
+    <pubDate>Mon, 25 May 2020 15:30:37 -0400</pubDate>
+    <lastBuildDate>Mon, 25 May 2020 15:30:37 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Image Preprocessing</title>
+        <description>
+&lt;p&gt;原文：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://medium.com/nanonets/how-to-use-deep-learning-when-you-have-limited-data-part-2-data-augmentation-c26971dc8ced&lt;/li&gt;
+  &lt;li&gt;https://freecontent.manning.com/the-computer-vision-pipeline-part-3-image-preprocessing/&lt;/li&gt;
+  &lt;li&gt;https://www.codecademy.com/articles/normalization&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;No free lunch theorem for optimization:
+In ML project, it means that there’s no single prescribed recipe that is guaranteed to work well in all situations. We must make certain assumption about the dataset and the problem we are trying to solve.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;why-image-preprocessing&quot;&gt;why image preprocessing&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;The acquired data are usually messy and come from different sources, they need to be standardized and cleaned up.&lt;/li&gt;
+  &lt;li&gt;We can’t write a unique algorithm for each of the condition in which an image is taken, thus, when we acquire an image, we tend to convert it into a form that allows a general algorithm to solve it.&lt;/li&gt;
+  &lt;li&gt;It can reduce the complexity and increase the accuracy of the applied algorithm.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;彩色图像--灰度图像&quot;&gt;彩色图像 / 灰度图像&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;In many objects, color isn’t necessary to recognize and interpret an image. Grayscale can be good enough for recognizing certain objects. Because color images contain more information than black and white images, they can add unnecessary complexity and take up more space in memory.
+ &lt;img src=&quot;/img/15904315018825.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;In other applications, color is important to define certain objects. Like skin cancer detection which relies heavily on the skin colors (red rashes).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;standardize-image&quot;&gt;Standardize Image&lt;/h4&gt;
+&lt;h5 id=&quot;reason&quot;&gt;Reason&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;If we didn’t scale our input training vectors, the ranges of our distributions of feature values would likely be different for each feature, and thus the learning rate would &lt;strong&gt;cause corrections in each dimension that would differ (proportionally speaking) from one another&lt;/strong&gt;. We might be over compensating a correction in one weight dimension while undercompensating in another.&lt;/li&gt;
+  &lt;li&gt;In the process of training our network, we’re going to be multiplying (weights) and adding to (biases) these initial inputs in order to cause activations that we then backpropogate with the gradients to train the model. We’d like in this process for each feature to have a similar range so that our &lt;strong&gt;gradients don’t go out of control&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;ways&quot;&gt;ways&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Min-max normalization $\frac{\text{value}-\text{min}}{\text{max}-\text{min}}$: Guarantees all features will have the exact same scale but does not handle outliers well.&lt;br /&gt;
+ &lt;img src=&quot;/img/15904331747160.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+ Normalizing fixed the squishing problem on the y-axis, but the x-axis is still problematic. Now if we were to compare these points, the y-axis would dominate; the y-axis can differ by 1, but the x-axis can only differ by 0.4.&lt;/li&gt;
+  &lt;li&gt;Z-score normalization $\frac{value-mean}{std}$: Handles outliers, but does not produce normalized data with the exact same scale.&lt;br /&gt;
+ &lt;img src=&quot;/img/15904332447812.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+ While the data still looks squished, notice that the points are now on roughly the same scale for both features — almost all points are between -2 and 2 on both the x-axis and y-axis.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;data-augmentation&quot;&gt;Data Augmentation&lt;/h4&gt;
+&lt;h5 id=&quot;offline--online-augmentation&quot;&gt;Offline / Online augmentation&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;Offline augmentation:
+    &lt;ul&gt;
+      &lt;li&gt;事先进行所有必需的图像平移工作，基本上就是增加数据集大小&lt;/li&gt;
+      &lt;li&gt;当数据集相对较小时，优先选择这种方法，因为会将数据集增大N倍（N=执行的转换数量）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Online augmentation:
+    &lt;ul&gt;
+      &lt;li&gt;将图像输入机器学习模型之前，以小批量进行图像平移&lt;/li&gt;
+      &lt;li&gt;比较适合数据集较大时的情况，因为我们很难应付数据集爆炸性变大。相反，我们可以小批量平移输入到模型中的图像。有些机器学习框架支持在线增强，使用GPU可以加快增强速度。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;基本数据增强方法&quot;&gt;基本数据增强方法&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;翻转&lt;/li&gt;
+  &lt;li&gt;旋转
+    &lt;ul&gt;
+      &lt;li&gt;由于可能引入了图像边界之外的位置，可能会导致没有图像没有覆盖的黑色区域&lt;/li&gt;
+      &lt;li&gt;解决方法：填充未知区域
+        &lt;ul&gt;
+          &lt;li&gt;常数、边缘、反射、对称&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;平移&lt;/li&gt;
+  &lt;li&gt;裁剪
+    &lt;ul&gt;
+      &lt;li&gt;从原始图像中随机采样一部分。然后我们将采样区域大小调整为原始图像大小&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;缩放&lt;/li&gt;
+  &lt;li&gt;高斯噪声
+    &lt;ul&gt;
+      &lt;li&gt;当神经网络试图学习可能并无用处的高频特征时（即频繁发生的无意义模式），常常会发生过拟合。具有零均值特征的高斯噪声本质上就是在所有频率上都有数据点，能有效使得高频特征失真，减弱它对模型的影响。这也意味着低频成分（通常也是我们关心的数据）也会失真，但神经网络能够通过学习忽略这部分影响。添加正确数量的噪声就能增强神经网络的学习能力。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;1-3都是仿射变化，可以通过$2\times3$的矩阵实现
+    &lt;ul&gt;
+      &lt;li&gt;R: $2 \times 2$，线性变换矩阵&lt;/li&gt;
+      &lt;li&gt;t: $2 \times 1$, 平移矩阵&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;基于网络的数据增强方法&quot;&gt;基于网络的数据增强方法&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;条件式生成对抗网络&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Mon, 25 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/25/data-augmentation/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/25/data-augmentation/</guid>
+        
+        <category>Image Preprocessing</category>
+        
+        
+      </item>
     
       <item>
         <title>Identity mapping</title>
@@ -192,6 +306,7 @@ that is, the signal can be directly propagated from any unit to another, both fo
       &lt;li&gt;尽量使用config文件传入，并且config尽量与log文件同名保存。&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;train, val, test set各自的数据最好放在各自的文件夹中&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h4 id=&quot;实验管理&quot;&gt;实验管理&lt;/h4&gt;
@@ -687,47 +802,6 @@ The testing result of this 1202-layer network is worse than that of our 110-laye
         <guid isPermaLink="true">http://localhost:4000/2020/05/10/ResNet/</guid>
         
         <category>Baseline</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>RefineNet:_Multi-Path Refinement Networks for High-Resolution Semantic Segmentation</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1611.06612.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;设计RefineNet，结合高层语义信息和低层细节信息，得到高分辨率的分割图&lt;/li&gt;
-  &lt;li&gt;RefineNet中大量使用了ResNet中Identity mapping (both short range and long range) 的思想，保证了有效的端到端训练&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;introduction&quot;&gt;Introduction&lt;/h4&gt;
-&lt;p&gt;网络中pooling操作会降低分割图的分辨率，目前有三种解决方式：&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;learn deconvolutional filters as an up-sampling operation: The deconvolution operations are not able to recover the low-level visual features which are lost after the downsampling operation in the convolution forward stage.&lt;/li&gt;
-  &lt;li&gt;Deeplab系列中的atrous convolution: &lt;strong&gt;a significant cost in memory, because unlike the image subsampling methods, one must retain very large numbers of feature maps at higher resolution.&lt;/strong&gt; In practice, therefore, dilation convolution methods usually have a resolution prediction of no more than 1/8 size of the original rather than 1/4, when using a deep network.&lt;/li&gt;
-  &lt;li&gt;exploits features from intermediate layers for generating high-resolution prediction (本文基于的方法)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15890589297975.jpg&quot; width=&quot;70%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15890589494152.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15890590750133.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15890590946983.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15890591146152.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;reflection&quot;&gt;Reflection&lt;/h4&gt;
-&lt;p&gt;感觉整个网络设计并没有太新颖的模块或思路，但可能是通过大量的identity mapping达成了有效的端对端训练，最后得到了非常棒的结果。如果是的话，说明设计网络时，网络各个模块能否得到充分的训练非常重要。&lt;/p&gt;
-</description>
-        <pubDate>Sat, 09 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/</guid>
-        
-        <category>Semantic Segmentation</category>
         
         
       </item>

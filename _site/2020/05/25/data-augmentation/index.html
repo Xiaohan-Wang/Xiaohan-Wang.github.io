@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Domain Adaptation - Xiaohan's Blog</title>
+    <title>Image Preprocessing - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/04/02/DA-dataset-summary/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/25/data-augmentation/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Datasets" title="Datasets">Datasets</a>
+                        <a class="tag" href="/tags/#Image Preprocessing" title="Image Preprocessing">Image Preprocessing</a>
                         
                     </div>
-                    <h2>Domain Adaptation</h2>
+                    <h2>Image Preprocessing</h2>
                     
                     
-                    <span class="meta"> Posted on April 2, 2020</span>
+                    <span class="meta"> Posted on May 25, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,45 +208,106 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="image-classification">Image classification</h3>
-<h4 id="numbers">Numbers</h4>
-<h5 id="mnist">Mnist</h5>
-<h5 id="usps">USPS</h5>
-<h5 id="svhn-street-view-house-numbers">SVHN (street view house numbers)</h5>
-
-<h4 id="office">Office</h4>
-<h4 id="office-31">Office-31</h4>
-<p>It contains 4652 images organized in 31 classes from three different domains: Amazon (A), DSRL (D) and Webcam (W).</p>
-<h4 id="office-caltech">Office-Caltech</h4>
-<p>It selects the subset of 10 common categories in the Office31 and the Caltech256 datasets. It contains 2533 images of which about half belong to Caltech256. Each of Amazon (A), DSLR (D), Webcam (W) and Caltech256 (C) are regarded as separate domains.</p>
-
-<h3 id="image-segmentation">Image segmentation</h3>
-
-<h4 id="gta5-synthetic-dataset">GTA5 (synthetic dataset)</h4>
-<p><a href="https://download.visinf.tu-darmstadt.de/data/from_games/">homepage</a></p>
-
-<p>GTA is a synthetic, vehicle-egocentric image
-dataset collected from the open world in the realistically rendered computer game Grand Theft Auto V (GTA, or GTA5). It contains 24,996 images, whose semantic segmentation annotations are fully compatible with the classes used in Cityscapes.</p>
-
-<h4 id="synthia-synthetic-data">synthia (synthetic data)</h4>
-<p><a href="http://synthia-dataset.net/">homepage</a></p>
-
-<p>SYNTHIA  is a large dataset of synthetic images and provides a particular subset, called SYNTHIA-RANDCITYSCAPES, to pair with Cityscapes. This subset contains 9,400 images that are automatically annotated with 12 object categories, one void class, and some unnamed classes. Note that the virtual city used to generate the synthetic images does not correspond to any of the real cities covered by Cityscapes.</p>
-
-<p>Note: usually consider the 16 common classes shared with Cityscapes: sky, building, road, sidewalk, fence, vegetation, pole, car, traffic sign, person, bicycle, motorcycle, traffic light, bus, wall, and rider.</p>
-
-<h4 id="cityscapes">Cityscapes</h4>
-<p><a href="https://www.cityscapes-dataset.com/">homepage</a></p>
-
-<p>a real-world, vehicle-egocentric image dataset collected in 50 cities in Germany and nearby countries. It provides four disjoint subsets: 2,993 training images, 503 validation image, 1,531 test images, and 20,021 auxiliary images. All the training, validation, and test images are accurately annotated with per pixel category labels, while the auxiliary set is coarsely labeled. There are 34 distinct categories in the dataset.</p>
-
-<p>Note: usually consider the 19 common classes shared with Cityscapes: bike, fence, wall, traffic sign, pole, motorcycle, traffic light, sky, bus, rider, vegetation, <strong>terrain</strong>, <strong>train</strong>, building, car, person, <strong>truck</strong>, sidewalk and road.</p>
-
-<h3 id="multi-source-domain-adaptation">multi-source domain adaptation</h3>
-<h4 id="domainnet">DomainNet</h4>
+				
+<p>原文：</p>
 <ol>
-  <li><a href="http://ai.bu.edu/M3SDA/">homepage</a></li>
-  <li>Challenge: <a href="http://ai.bu.edu/visda-2019/">VisDA-2019</a></li>
+  <li>https://medium.com/nanonets/how-to-use-deep-learning-when-you-have-limited-data-part-2-data-augmentation-c26971dc8ced</li>
+  <li>https://freecontent.manning.com/the-computer-vision-pipeline-part-3-image-preprocessing/</li>
+  <li>https://www.codecademy.com/articles/normalization</li>
+</ol>
+
+<blockquote>
+  <p>No free lunch theorem for optimization:
+In ML project, it means that there’s no single prescribed recipe that is guaranteed to work well in all situations. We must make certain assumption about the dataset and the problem we are trying to solve.</p>
+</blockquote>
+
+<h4 id="why-image-preprocessing">why image preprocessing</h4>
+<ol>
+  <li>The acquired data are usually messy and come from different sources, they need to be standardized and cleaned up.</li>
+  <li>We can’t write a unique algorithm for each of the condition in which an image is taken, thus, when we acquire an image, we tend to convert it into a form that allows a general algorithm to solve it.</li>
+  <li>It can reduce the complexity and increase the accuracy of the applied algorithm.</li>
+</ol>
+
+<h4 id="彩色图像--灰度图像">彩色图像 / 灰度图像</h4>
+<ol>
+  <li>In many objects, color isn’t necessary to recognize and interpret an image. Grayscale can be good enough for recognizing certain objects. Because color images contain more information than black and white images, they can add unnecessary complexity and take up more space in memory.
+ <img src="/img/15904315018825.jpg" width="100%" height="100%" /></li>
+  <li>In other applications, color is important to define certain objects. Like skin cancer detection which relies heavily on the skin colors (red rashes).</li>
+</ol>
+
+<h4 id="standardize-image">Standardize Image</h4>
+<h5 id="reason">Reason</h5>
+<ol>
+  <li>If we didn’t scale our input training vectors, the ranges of our distributions of feature values would likely be different for each feature, and thus the learning rate would <strong>cause corrections in each dimension that would differ (proportionally speaking) from one another</strong>. We might be over compensating a correction in one weight dimension while undercompensating in another.</li>
+  <li>In the process of training our network, we’re going to be multiplying (weights) and adding to (biases) these initial inputs in order to cause activations that we then backpropogate with the gradients to train the model. We’d like in this process for each feature to have a similar range so that our <strong>gradients don’t go out of control</strong>.</li>
+</ol>
+
+<h5 id="ways">ways</h5>
+<ol>
+  <li>Min-max normalization $\frac{\text{value}-\text{min}}{\text{max}-\text{min}}$: Guarantees all features will have the exact same scale but does not handle outliers well.<br />
+ <img src="/img/15904331747160.jpg" width="60%" height="100%" /><br />
+ Normalizing fixed the squishing problem on the y-axis, but the x-axis is still problematic. Now if we were to compare these points, the y-axis would dominate; the y-axis can differ by 1, but the x-axis can only differ by 0.4.</li>
+  <li>Z-score normalization $\frac{value-mean}{std}$: Handles outliers, but does not produce normalized data with the exact same scale.<br />
+ <img src="/img/15904332447812.jpg" width="60%" height="100%" /><br />
+ While the data still looks squished, notice that the points are now on roughly the same scale for both features — almost all points are between -2 and 2 on both the x-axis and y-axis.</li>
+</ol>
+
+<h4 id="data-augmentation">Data Augmentation</h4>
+<h5 id="offline--online-augmentation">Offline / Online augmentation</h5>
+<ol>
+  <li>Offline augmentation:
+    <ul>
+      <li>事先进行所有必需的图像平移工作，基本上就是增加数据集大小</li>
+      <li>当数据集相对较小时，优先选择这种方法，因为会将数据集增大N倍（N=执行的转换数量）</li>
+    </ul>
+  </li>
+  <li>Online augmentation:
+    <ul>
+      <li>将图像输入机器学习模型之前，以小批量进行图像平移</li>
+      <li>比较适合数据集较大时的情况，因为我们很难应付数据集爆炸性变大。相反，我们可以小批量平移输入到模型中的图像。有些机器学习框架支持在线增强，使用GPU可以加快增强速度。</li>
+    </ul>
+  </li>
+</ol>
+
+<h5 id="基本数据增强方法">基本数据增强方法</h5>
+<ol>
+  <li>翻转</li>
+  <li>旋转
+    <ul>
+      <li>由于可能引入了图像边界之外的位置，可能会导致没有图像没有覆盖的黑色区域</li>
+      <li>解决方法：填充未知区域
+        <ul>
+          <li>常数、边缘、反射、对称</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>平移</li>
+  <li>裁剪
+    <ul>
+      <li>从原始图像中随机采样一部分。然后我们将采样区域大小调整为原始图像大小</li>
+    </ul>
+  </li>
+  <li>缩放</li>
+  <li>高斯噪声
+    <ul>
+      <li>当神经网络试图学习可能并无用处的高频特征时（即频繁发生的无意义模式），常常会发生过拟合。具有零均值特征的高斯噪声本质上就是在所有频率上都有数据点，能有效使得高频特征失真，减弱它对模型的影响。这也意味着低频成分（通常也是我们关心的数据）也会失真，但神经网络能够通过学习忽略这部分影响。添加正确数量的噪声就能增强神经网络的学习能力。</li>
+    </ul>
+  </li>
+</ol>
+
+<ul>
+  <li>1-3都是仿射变化，可以通过$2\times3$的矩阵实现
+    <ul>
+      <li>R: $2 \times 2$，线性变换矩阵</li>
+      <li>t: $2 \times 1$, 平移矩阵</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="基于网络的数据增强方法">基于网络的数据增强方法</h5>
+<ol>
+  <li>条件式生成对抗网络</li>
 </ol>
 
 
@@ -256,19 +317,12 @@ dataset collected from the open world in the realistically rendered computer gam
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/" data-toggle="tooltip" data-placement="top" title="Moment Matching for Multi-Source Domain Adaptation">
+                        <a href="/2020/05/22/Identity-mapping/" data-toggle="tooltip" data-placement="top" title="Identity mapping">
                         Previous<br>
-                        <span>Moment Matching for Multi-Source Domain Adaptation</span>
+                        <span>Identity mapping</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/04/03/t-SNE%E9%99%8D%E7%BB%B4%E7%AE%97%E6%B3%95/" data-toggle="tooltip" data-placement="top" title="t-SNE dimension reduction">
-                        Next<br>
-                        <span>t-SNE dimension reduction</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
