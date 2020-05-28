@@ -5,9 +5,81 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 25 May 2020 15:30:37 -0400</pubDate>
-    <lastBuildDate>Mon, 25 May 2020 15:30:37 -0400</lastBuildDate>
+    <pubDate>Thu, 28 May 2020 11:42:41 -0400</pubDate>
+    <lastBuildDate>Thu, 28 May 2020 11:42:41 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Learning rate scheduler</title>
+        <description>
+&lt;h4 id=&quot;warm-up&quot;&gt;Warm up&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;减缓模型在训练初期过拟合mini-batch  &lt;br /&gt;
+ 个人猜测：
+    &lt;ul&gt;
+      &lt;li&gt;在第一轮训练的时候（尤其是训练刚开始），模型只见过部分数据，此时梯度大概率是偏离相对全局真正较优的方向的（此时很大概率是过拟合当前小部分数据的方向），因此需要使用较小的学习率，以免对当前小部分数据过拟合，对后面训练造成影响（影响有两种可能：1）需要后面多轮训练来修正之间的偏差；2）偏差太大，后面多轮训练也没用，最后accuracy下降）。&lt;/li&gt;
+      &lt;li&gt;当训练了一段时间（比如两轮、三轮）后，模型见过了全部数据，此时梯度基本符合相对全局真正较优的方向，所以可以适当调大学习率。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;有助于保持模型深层的稳定性&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;learning-rate-decay&quot;&gt;Learning rate decay&lt;/h4&gt;
+&lt;p&gt;学习率衰减的基本思想是学习率随着训练的进行逐渐衰减，即在开始的时候使用较大的学习率，加快靠近最小值的速度，在后来些时候用较小的学习率，提高稳定性，避免因学习率太大跳过最小值，保证能够收敛到最小值。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;step(固定步长衰减): 每隔step_size个epoch后，lr衰减为原来的gamma倍&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/img/15906775729941.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;multistep(多步长衰减): 动态步长控制，lr衰减为原来的gamma倍&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/img/15906776874073.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;poly(多项式衰减): $lr = \text{base_lr} * (1 - \frac{T_{cur}}{T_{max}}) ^ {power} $
+    &lt;ul&gt;
+      &lt;li&gt;学习率曲线的形状主要由参数 power 的值来控制。当 power = 1 的时候，学习率曲线为一条直线。当 power &amp;lt; 1 的时候，下降速率由慢到快。当 power &amp;gt; 1 的时候，下降速率由快到慢。
+ &lt;img src=&quot;/img/15906784236558.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;cosine(余弦衰减): $lr = \frac{1}{2}*\text{base_lr} * \left(1+ \cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)$
+    &lt;ul&gt;
+      &lt;li&gt;余弦值首先缓慢下降，然后加速下降，之后再次缓慢下降。&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/img/15906782692333.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://www.zhihu.com/question/338066667&lt;/li&gt;
+  &lt;li&gt;https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html&lt;/li&gt;
+  &lt;li&gt;https://zhuanlan.zhihu.com/p/39565465&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Thu, 28 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/28/learning-rate/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/28/learning-rate/</guid>
+        
+        <category>Model Training</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Batch size与learning rate</title>
+        <description>&lt;p&gt;#&lt;/p&gt;
+</description>
+        <pubDate>Thu, 28 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Image Preprocessing</title>
@@ -17,6 +89,7 @@
   &lt;li&gt;https://medium.com/nanonets/how-to-use-deep-learning-when-you-have-limited-data-part-2-data-augmentation-c26971dc8ced&lt;/li&gt;
   &lt;li&gt;https://freecontent.manning.com/the-computer-vision-pipeline-part-3-image-preprocessing/&lt;/li&gt;
   &lt;li&gt;https://www.codecademy.com/articles/normalization&lt;/li&gt;
+  &lt;li&gt;https://www.infoq.cn/article/kyXx3sRKNsdFgqapv2Gw&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;blockquote&gt;
@@ -56,6 +129,43 @@ In ML project, it means that there’s no single prescribed recipe that is guara
 &lt;/ol&gt;
 
 &lt;h4 id=&quot;data-augmentation&quot;&gt;Data Augmentation&lt;/h4&gt;
+
+&lt;h5 id=&quot;分类&quot;&gt;分类&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;有监督的数据增强：采用预设的数据变换规则，在已有数据的基础上进行数据的扩增
+    &lt;ul&gt;
+      &lt;li&gt;单样本数据增强：增强一个样本的时候，全部围绕着该样本本身进行操作
+        &lt;ul&gt;
+          &lt;li&gt;几何操作类：对图像进行几何变换，包括翻转，旋转，裁剪，变形，缩放等各类操作
+            &lt;ul&gt;
+              &lt;li&gt;可能会引入图像边界之外的位置，导致没有图像没有覆盖的黑色区域，此时可以通过常数、边缘、反射、对称等方式填充未知区域&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;颜色变换类：改变图像本身的内容，包括噪声、模糊、颜色变换（HSV，对比度变换）、擦除、填充
+            &lt;ul&gt;
+              &lt;li&gt;高斯噪声：当神经网络试图学习可能并无用处的高频特征时（即频繁发生的无意义模式），常常会发生过拟合。具有零均值特征的高斯噪声本质上就是在所有频率上都有数据点，能有效使得高频特征失真，减弱它对模型的影响。这也意味着低频成分（通常也是我们关心的数据）也会失真，但神经网络能够通过学习忽略这部分影响。添加正确数量的噪声就能增强神经网络的学习能力。&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;多样本数据增强方法：利用多个样本来产生新的样本
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;https://www.jair.org/index.php/jair/article/view/10302/24590&quot;&gt;SMOTE&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1801.02929.pdf&quot;&gt;SamplePairing&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1710.09412.pdf&quot;&gt;mixup&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;SMOTE，SamplePairing，mixup 三者思路上有相同之处，都是试图将离散样本点连续化来拟合真实样本分布，不过所增加的样本点在特征空间中仍位于已知小样本点所围成的区域内。如果能够在给定范围之外适当插值，也许能实现更好的数据增强效果。&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;无监督的数据增强方法
+    &lt;ul&gt;
+      &lt;li&gt;生成新的数据: 通过模型学习数据的分布，随机生成与训练数据集分布一致的图片，代表方法 &lt;a href=&quot;https://arxiv.org/pdf/1406.2661.pdf&quot;&gt;GAN&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;学习增强策略: 通过模型，学习出适合当前任务的数据增强方法，代表方法 &lt;a href=&quot;https://arxiv.org/pdf/1805.09501.pdf&quot;&gt;AutoAugment&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
 &lt;h5 id=&quot;offline--online-augmentation&quot;&gt;Offline / Online augmentation&lt;/h5&gt;
 &lt;ol&gt;
   &lt;li&gt;Offline augmentation:
@@ -72,53 +182,12 @@ In ML project, it means that there’s no single prescribed recipe that is guara
   &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h5 id=&quot;基本数据增强方法&quot;&gt;基本数据增强方法&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;翻转&lt;/li&gt;
-  &lt;li&gt;旋转
-    &lt;ul&gt;
-      &lt;li&gt;由于可能引入了图像边界之外的位置，可能会导致没有图像没有覆盖的黑色区域&lt;/li&gt;
-      &lt;li&gt;解决方法：填充未知区域
-        &lt;ul&gt;
-          &lt;li&gt;常数、边缘、反射、对称&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;平移&lt;/li&gt;
-  &lt;li&gt;裁剪
-    &lt;ul&gt;
-      &lt;li&gt;从原始图像中随机采样一部分。然后我们将采样区域大小调整为原始图像大小&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;缩放&lt;/li&gt;
-  &lt;li&gt;高斯噪声
-    &lt;ul&gt;
-      &lt;li&gt;当神经网络试图学习可能并无用处的高频特征时（即频繁发生的无意义模式），常常会发生过拟合。具有零均值特征的高斯噪声本质上就是在所有频率上都有数据点，能有效使得高频特征失真，减弱它对模型的影响。这也意味着低频成分（通常也是我们关心的数据）也会失真，但神经网络能够通过学习忽略这部分影响。添加正确数量的噪声就能增强神经网络的学习能力。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;1-3都是仿射变化，可以通过$2\times3$的矩阵实现
-    &lt;ul&gt;
-      &lt;li&gt;R: $2 \times 2$，线性变换矩阵&lt;/li&gt;
-      &lt;li&gt;t: $2 \times 1$, 平移矩阵&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;基于网络的数据增强方法&quot;&gt;基于网络的数据增强方法&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;条件式生成对抗网络&lt;/li&gt;
-&lt;/ol&gt;
-
 </description>
         <pubDate>Mon, 25 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/25/data-augmentation/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/25/data-augmentation/</guid>
+        <link>http://localhost:4000/2020/05/25/image-preprocessing/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/25/image-preprocessing/</guid>
         
-        <category>Image Preprocessing</category>
+        <category>Model Training</category>
         
         
       </item>
@@ -673,135 +742,6 @@ multiplied by $(1 −\text{maxiter})^{\text{power}}$ with $\text{power} = 0.9 $.
         <guid isPermaLink="true">http://localhost:4000/2020/05/13/DeepLab-v3/</guid>
         
         <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？</title>
-        <description>&lt;p&gt;答案来自&lt;a href=&quot;https://www.zhihu.com/question/43370067/answer/128881262&quot;&gt;知乎&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Q: 为什么现在的CNN模型都是在VGGNet或者ResNet上调整的？&lt;/p&gt;
-
-&lt;p&gt;A:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;公开的论文需要一个标准的baseline及在baseline上改进的比较，因此大家会基于一个公认的baseline开始做实验，这样大家才比较信服。&lt;/li&gt;
-  &lt;li&gt;视觉、自然语言等更专注于本领域的内部知识，而非baseline本身。因此常常是在一个base网络的基础之上进行修改，以验证自己方法的有效性。&lt;/li&gt;
-  &lt;li&gt;进行基本模型的改进需要大量的实验和尝试，很有可能投入产出比比较小。对于深度学习，很大部分可以提升性能的点在于一些对于细节的精确把握。因此可以看到许多排名靠前的队伍最后讲的关键技术点似乎都是tricks。而这样精确细节的把握是需要大量的时间和计算资源的，往往在学校不可行。&lt;/li&gt;
-  &lt;li&gt;AlexNet, Network in Network, VGG, GoogLeNet, Resnet等CNN网络都是图片分类网络, 都是在imagenet上1.2 million数据训练出来的。一般来说，某CNN网络在imagenet上面的分类结果越好，其deep feature的generalization能力越强，可以应用到各种CV问题。&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Sun, 10 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/10/%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E7%9A%84CNN%E6%A8%A1%E5%9E%8B%E9%83%BD%E6%98%AF%E5%9C%A8VGGNet%E6%88%96%E8%80%85ResNet%E4%B8%8A%E8%B0%83%E6%95%B4%E7%9A%84/</guid>
-        
-        <category>Q &amp; A</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>ResNet</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1512.03385.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;出发点：The depth of representations is of central importance for many visual recognition tasks.&lt;/li&gt;
-  &lt;li&gt;问题：Deeper networks have degradation problems.&lt;/li&gt;
-  &lt;li&gt;解决方案：We explicitly reformulate the layers as learning residual functions with reference to the layer inputs, instead of learning unreferenced functions. Experiments show that these residual networks are easier to optimize, and can gain accuracy from considerably increased depth.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;degradation-problem-of-deeper-network&quot;&gt;Degradation problem of deeper network&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15891414912328.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Figure 1 shows adding more layers to a suitably deep model leads to higher training error. This is unexpected because if the added layers are identity mapping, then a deeper model should produce no higher training error than its shallower counterpart.&lt;/p&gt;
-
-&lt;h4 id=&quot;resnet&quot;&gt;ResNet&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15891418268694.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;To solve the degradation problem of deeper network, the authors proposed ResNet. They explicitly let these layers fit a residual mapping. Formally, denoting the desired underlying mapping as $H(x)$, they let the stacked nonlinear layers fit another mapping of $F(x):= H(x)−x$. The original mapping is recast into $F(x)+x$.&lt;/p&gt;
-
-&lt;p&gt;Advantage:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;It is easier to optimize the residual mapping than to optimize the original, unreferenced mapping.
-    &lt;ul&gt;
-      &lt;li&gt;To the extreme, if an identity mapping were optimal, it would be easier to push the residual to zero than to fit an identity mapping by a stack of nonlinear layers.&lt;/li&gt;
-      &lt;li&gt;In real cases, it is unlikely that identity mappings are optimal, but our reformulation may help to precondition the problem. If the optimal function is closer to an identity mapping than to a zero mapping, it should be easier for the solver to find the perturbations with reference to an identity mapping, than to learn the function as a new one.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Identity shortcut connections add neither extra parameter nor computational complexity.&lt;/li&gt;
-  &lt;li&gt;The deep residual nets can easily enjoy accuracy gains from greatly increased depth.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;network-architecture&quot;&gt;Network Architecture&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;Network complexity: There is no fc-4096 in ResNet, which greatly reduce the complexity of ResNet. (Although the depth is significantly increased, the 152-layer ResNet (11.3 billion FLOPs) still has lower complexity than VGG-16/19 nets (15.3/19.6 bilion FLOPs).)&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Identity mapping and projection shortcuts:
-    &lt;ul&gt;
-      &lt;li&gt;The identity shortcuts can be directly used when the input and output are of the same dimensions 
-  &lt;img src=&quot;/img/15891425389236.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-      &lt;li&gt;When the dimensions increase, we consider two options: (A) The shortcut still performs identity mapping, with extra zero entries padded for increasing dimensions. This option introduces no extra parameter; (B) The projection shortcut is used to match dimensions (done by 1×1 convolutions).
-  &lt;img src=&quot;/img/15891426033483.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Deeper Bottleneck Architecture&lt;br /&gt;
- The three layers are 1×1, 3×3, and 1×1 convolutions, where the 1×1 layers are responsible for reducing and then increasing (restoring) dimensions, leaving the 3×3 layer a bottleneck with smaller input/output dimensions. (use option B for increasing dimensions.)
-&lt;img src=&quot;/img/15891433710930.jpg&quot; width=&quot;65%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;detailed-illustration&quot;&gt;Detailed illustration&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15891422325129.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15891450870398.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;experiments&quot;&gt;Experiments&lt;/h4&gt;
-&lt;h5 id=&quot;plain-network-and-resnet-zero-padding-for-increasing-dimension&quot;&gt;Plain network and ResNet (zero padding for increasing dimension)&lt;/h5&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15891427682633.jpg&quot; width=&quot;85%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15891427832726.jpg&quot; width=&quot;55%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The 34-layer ResNet exhibits considerably lower training error and is generalizable to the validation data. This indicates that the degradation problem is well addressed in this setting and we manage to obtain accuracy gains from increased depth.&lt;/li&gt;
-  &lt;li&gt;The effectiveness of residual learning on extremely deep systems: Compared to its plain counterpart, the 34-layer ResNet reduces the top-1 error by 3.5% (Table 2), resulting from the successfully reduced training error (Fig. 4 right vs. left).&lt;/li&gt;
-  &lt;li&gt;When the net is “not overly deep” (18 layers here), the 18-layer plain/residual nets are comparably accurate (Table 2), but the 18-layer ResNet converges faster.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;identity-vs-projection-shortcuts&quot;&gt;Identity vs. Projection Shortcuts&lt;/h5&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15891431852656.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
-In Table 3 we compare three options: &lt;br /&gt;
-(A) zero-padding shortcuts are used for increasing dimensions, and all shortcuts are parameter-free &lt;br /&gt;
-(B) projection shortcuts are used for increasing dimensions, and other shortcuts are identity&lt;br /&gt;
-(C) all shortcuts are projections.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;B is slightly better than A.We argue that this is because the zero-padded dimensions in A indeed have no residual learning.&lt;/li&gt;
-  &lt;li&gt;C is marginally better than B, and we attribute this to the extra parameters introduced by many (thirteen) projection shortcuts.&lt;/li&gt;
-  &lt;li&gt;But the small differences among A/B/C indicate that projection shortcuts are not essential for addressing the degradation problem.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;deeper-network&quot;&gt;Deeper network&lt;/h5&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15891439141245.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;
-From Table 3 and 4, the 50/101/152-layer ResNets are more accurate than the 34-layer ones by considerable margins. We do not observe the degradation problem and thus en- joy significant accuracy gains from considerably increased depth.&lt;/p&gt;
-
-&lt;h5 id=&quot;analysis-of-layer-reponses&quot;&gt;Analysis of layer reponses&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15891442467427.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;ResNets have generally smaller responses than their plain counterparts. These results support our basic motivation that the residual functions might be generally closer to zero than the non-residual functions.&lt;/li&gt;
-  &lt;li&gt;The deeper ResNet has smaller magnitudes of responses, showing when there are more layers, an individual layer of ResNets tends to modify the signal less.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;exploring-over-1000-layers&quot;&gt;Exploring Over 1000 layers&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15891445047122.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;
-The testing result of this 1202-layer network is worse than that of our 110-layer network, although both have similar training error. We argue that this is because of overfitting. The 1202-layer network may be unnecessarily large (19.4M) for this small dataset. But combining with stronger regularization may improve results, which we will study in the future.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 10 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/10/ResNet/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/10/ResNet/</guid>
-        
-        <category>Baseline</category>
         
         
       </item>

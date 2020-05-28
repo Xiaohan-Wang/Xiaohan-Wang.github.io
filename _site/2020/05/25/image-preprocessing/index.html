@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Reading list - 2020 - Xiaohan's Blog</title>
+    <title>Image Preprocessing - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/01/01/papers-20/">
+    <link rel="canonical" href="http://localhost:4000/2020/05/25/image-preprocessing/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#reading list" title="reading list">reading list</a>
+                        <a class="tag" href="/tags/#Model Training" title="Model Training">Model Training</a>
                         
                     </div>
-                    <h2>Reading list - 2020</h2>
+                    <h2>Image Preprocessing</h2>
                     
                     
-                    <span class="meta"> Posted on January 1, 2020</span>
+                    <span class="meta"> Posted on May 25, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,215 +208,104 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h3 id="domain-adaptation">Domain Adaptation</h3>
+				
+<p>原文：</p>
+<ol>
+  <li>https://medium.com/nanonets/how-to-use-deep-learning-when-you-have-limited-data-part-2-data-augmentation-c26971dc8ced</li>
+  <li>https://freecontent.manning.com/the-computer-vision-pipeline-part-3-image-preprocessing/</li>
+  <li>https://www.codecademy.com/articles/normalization</li>
+  <li>https://www.infoq.cn/article/kyXx3sRKNsdFgqapv2Gw</li>
+</ol>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>3.23</td>
-      <td>CVPR 2019</td>
-      <td>ADVENT:Adversarial Entropy Minimization for Domain Adaptation in Semantic Segmentation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/21/ADVENT/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.24</td>
-      <td>ICCV 2019</td>
-      <td>Domain Adaptation for Semantic Segmentation with Maximum Squares Loss</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/24/Maximum-Squares-Loss/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.25</td>
-      <td>CVPR 2018</td>
-      <td>Unsupervised Domain Adaptation with Similarity Learning</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/30/week-summary/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.26</td>
-      <td>NIPS 2013</td>
-      <td>Reshaping Visual Datasets for Domain Adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/26/Reshaping-Visual-Datasets-for-Domain-Adaptation/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.27</td>
-      <td>CVPR 2018</td>
-      <td>Boosting Domain Adaptation by Discovering Latent Domains</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/29/Boosting-Domain-Adaptation-by-Discovering-Latent-Domains/">link</a></td>
-    </tr>
-    <tr>
-      <td>3.31</td>
-      <td>ICCV 2019</td>
-      <td>Moment Matching for Multi-Source Domain Adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/31/Moment-Matching-for-Multi-Source-Domain-Adaptation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.1</td>
-      <td>CVPR 2018</td>
-      <td>Maximum classifier discrepancy for unsupervised domain adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/10/Maximum-classifier-discrepancy-for-unsupervised-domain-adaptation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.15</td>
-      <td>ICCV 2017</td>
-      <td>AutoDIAL: Automatic Domain Alignment Layers</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.28</td>
-      <td>CVPR 2018</td>
-      <td>Conditional Generative Adversarial Network for Structured Domain Adaptation</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/28/Conditional-Generative-Adversarial-Network-for-Structured-Domain-Adaptation/">link</a></td>
-    </tr>
-  </tbody>
-</table>
+<blockquote>
+  <p>No free lunch theorem for optimization:
+In ML project, it means that there’s no single prescribed recipe that is guaranteed to work well in all situations. We must make certain assumption about the dataset and the problem we are trying to solve.</p>
+</blockquote>
 
-<h3 id="semantic-segmentation">Semantic segmentation</h3>
+<h4 id="why-image-preprocessing">why image preprocessing</h4>
+<ol>
+  <li>The acquired data are usually messy and come from different sources, they need to be standardized and cleaned up.</li>
+  <li>We can’t write a unique algorithm for each of the condition in which an image is taken, thus, when we acquire an image, we tend to convert it into a form that allows a general algorithm to solve it.</li>
+  <li>It can reduce the complexity and increase the accuracy of the applied algorithm.</li>
+</ol>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>4.21</td>
-      <td>CVPR 2015</td>
-      <td>FCN</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.27</td>
-      <td>TPAMI 17 (Arxiv 15)</td>
-      <td>SegNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/27/SegNet-A-Deep-Convolutional-Encoder-Decoder-Architecture-for-Image-Segmentation/">link</a></td>
-    </tr>
-    <tr>
-      <td>4.29</td>
-      <td>MICCAI 2015</td>
-      <td>U-Net</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/29/U-Net/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.5</td>
-      <td>ICLR 2016</td>
-      <td>Dilated convolutions</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/05/Dilated-convolutions/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.6</td>
-      <td>ICLR 2015</td>
-      <td>DeepLab v1</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/07/Deeplab-v1/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.7</td>
-      <td>TPAMI 2017</td>
-      <td>DeepLab v2</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/08/DeepLab-v2/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.9</td>
-      <td>CVPR 2017</td>
-      <td>RefineNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/09/RefineNet-Multi-Path-Refinement-Networks-for-High-Resolution-Semantic-Segmentation/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.13</td>
-      <td>arXiv 2017</td>
-      <td>DeepLab v3</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/13/DeepLab-v3/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.13</td>
-      <td>CVPR 2017</td>
-      <td>PSPNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/13/PSPNet/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.14</td>
-      <td>ECCV 2018</td>
-      <td>DeepLab v3+</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/14/Deeplab-v3+/">link</a></td>
-    </tr>
-  </tbody>
-</table>
+<h4 id="彩色图像--灰度图像">彩色图像 / 灰度图像</h4>
+<ol>
+  <li>In many objects, color isn’t necessary to recognize and interpret an image. Grayscale can be good enough for recognizing certain objects. Because color images contain more information than black and white images, they can add unnecessary complexity and take up more space in memory.
+ <img src="/img/15904315018825.jpg" width="100%" height="100%" /></li>
+  <li>In other applications, color is important to define certain objects. Like skin cancer detection which relies heavily on the skin colors (red rashes).</li>
+</ol>
 
-<h3 id="baseline">Baseline</h3>
+<h4 id="standardize-image">Standardize Image</h4>
+<h5 id="reason">Reason</h5>
+<ol>
+  <li>If we didn’t scale our input training vectors, the ranges of our distributions of feature values would likely be different for each feature, and thus the learning rate would <strong>cause corrections in each dimension that would differ (proportionally speaking) from one another</strong>. We might be over compensating a correction in one weight dimension while undercompensating in another.</li>
+  <li>In the process of training our network, we’re going to be multiplying (weights) and adding to (biases) these initial inputs in order to cause activations that we then backpropogate with the gradients to train the model. We’d like in this process for each feature to have a similar range so that our <strong>gradients don’t go out of control</strong>.</li>
+</ol>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1.1</td>
-      <td>NIPS 2012</td>
-      <td>AlexNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/03/27/AlexNet/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.10</td>
-      <td>CVPR 2016</td>
-      <td>ResNet</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/10/ResNet/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.20</td>
-      <td>ECCV 2016</td>
-      <td>Identity mapping</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/22/Identity-mapping/">link</a></td>
-    </tr>
-    <tr>
-      <td>5.15</td>
-      <td>arXiv 2017</td>
-      <td>MobileNets</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/05/15/MobileNets/">link</a></td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>CVPR 2017</td>
-      <td>Xception</td>
-      <td>TODO</td>
-    </tr>
-  </tbody>
-</table>
+<h5 id="ways">ways</h5>
+<ol>
+  <li>Min-max normalization $\frac{\text{value}-\text{min}}{\text{max}-\text{min}}$: Guarantees all features will have the exact same scale but does not handle outliers well.<br />
+ <img src="/img/15904331747160.jpg" width="60%" height="100%" /><br />
+ Normalizing fixed the squishing problem on the y-axis, but the x-axis is still problematic. Now if we were to compare these points, the y-axis would dominate; the y-axis can differ by 1, but the x-axis can only differ by 0.4.</li>
+  <li>Z-score normalization $\frac{value-mean}{std}$: Handles outliers, but does not produce normalized data with the exact same scale.<br />
+ <img src="/img/15904332447812.jpg" width="60%" height="100%" /><br />
+ While the data still looks squished, notice that the points are now on roughly the same scale for both features — almost all points are between -2 and 2 on both the x-axis and y-axis.</li>
+</ol>
 
-<h3 id="dataset">Dataset</h3>
+<h4 id="data-augmentation">Data Augmentation</h4>
 
-<table>
-  <thead>
-    <tr>
-      <th>date</th>
-      <th>C/J</th>
-      <th>titile</th>
-      <th>comment</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>5.22</td>
-      <td>CVPR 2016</td>
-      <td>CityScapes</td>
-      <td><a href="https://xiaohan-wang.github.io/2020/04/21/semantic-segmentation-datasets/">link</a></td>
-    </tr>
-  </tbody>
-</table>
+<h5 id="分类">分类</h5>
+<ul>
+  <li>有监督的数据增强：采用预设的数据变换规则，在已有数据的基础上进行数据的扩增
+    <ul>
+      <li>单样本数据增强：增强一个样本的时候，全部围绕着该样本本身进行操作
+        <ul>
+          <li>几何操作类：对图像进行几何变换，包括翻转，旋转，裁剪，变形，缩放等各类操作
+            <ul>
+              <li>可能会引入图像边界之外的位置，导致没有图像没有覆盖的黑色区域，此时可以通过常数、边缘、反射、对称等方式填充未知区域</li>
+            </ul>
+          </li>
+          <li>颜色变换类：改变图像本身的内容，包括噪声、模糊、颜色变换（HSV，对比度变换）、擦除、填充
+            <ul>
+              <li>高斯噪声：当神经网络试图学习可能并无用处的高频特征时（即频繁发生的无意义模式），常常会发生过拟合。具有零均值特征的高斯噪声本质上就是在所有频率上都有数据点，能有效使得高频特征失真，减弱它对模型的影响。这也意味着低频成分（通常也是我们关心的数据）也会失真，但神经网络能够通过学习忽略这部分影响。添加正确数量的噪声就能增强神经网络的学习能力。</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>多样本数据增强方法：利用多个样本来产生新的样本
+        <ul>
+          <li><a href="https://www.jair.org/index.php/jair/article/view/10302/24590">SMOTE</a></li>
+          <li><a href="https://arxiv.org/pdf/1801.02929.pdf">SamplePairing</a></li>
+          <li><a href="https://arxiv.org/pdf/1710.09412.pdf">mixup</a></li>
+          <li>SMOTE，SamplePairing，mixup 三者思路上有相同之处，都是试图将离散样本点连续化来拟合真实样本分布，不过所增加的样本点在特征空间中仍位于已知小样本点所围成的区域内。如果能够在给定范围之外适当插值，也许能实现更好的数据增强效果。</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>无监督的数据增强方法
+    <ul>
+      <li>生成新的数据: 通过模型学习数据的分布，随机生成与训练数据集分布一致的图片，代表方法 <a href="https://arxiv.org/pdf/1406.2661.pdf">GAN</a></li>
+      <li>学习增强策略: 通过模型，学习出适合当前任务的数据增强方法，代表方法 <a href="https://arxiv.org/pdf/1805.09501.pdf">AutoAugment</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="offline--online-augmentation">Offline / Online augmentation</h5>
+<ol>
+  <li>Offline augmentation:
+    <ul>
+      <li>事先进行所有必需的图像平移工作，基本上就是增加数据集大小</li>
+      <li>当数据集相对较小时，优先选择这种方法，因为会将数据集增大N倍（N=执行的转换数量）</li>
+    </ul>
+  </li>
+  <li>Online augmentation:
+    <ul>
+      <li>将图像输入机器学习模型之前，以小批量进行图像平移</li>
+      <li>比较适合数据集较大时的情况，因为我们很难应付数据集爆炸性变大。相反，我们可以小批量平移输入到模型中的图像。有些机器学习框架支持在线增强，使用GPU可以加快增强速度。</li>
+    </ul>
+  </li>
+</ol>
 
 
 
@@ -425,17 +314,17 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2000/01/01/template/" data-toggle="tooltip" data-placement="top" title="U-Net">
+                        <a href="/2020/05/22/Identity-mapping/" data-toggle="tooltip" data-placement="top" title="Identity mapping">
                         Previous<br>
-                        <span>U-Net</span>
+                        <span>Identity mapping</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/01/05/Unbiased-Look-at-Dataset-Bias/" data-toggle="tooltip" data-placement="top" title="Unbiased Look at Dataset Bias">
+                        <a href="/2020/05/28/batch-size%E4%B8%8Elearning-rate/" data-toggle="tooltip" data-placement="top" title="Batch size与learning rate">
                         Next<br>
-                        <span>Unbiased Look at Dataset Bias</span>
+                        <span>Batch size与learning rate</span>
                         </a>previous
                     </li>
                     

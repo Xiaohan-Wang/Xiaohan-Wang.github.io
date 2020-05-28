@@ -1,0 +1,136 @@
+I"�<h4 id="short-version">short version</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right"> </th>
+      <th style="text-align: right">类型</th>
+      <th style="text-align: right">顺序</th>
+      <th style="text-align: right">size</th>
+      <th style="text-align: right">scale</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">cv2</td>
+      <td style="text-align: right">numpy</td>
+      <td style="text-align: right">BGR</td>
+      <td style="text-align: right">(h,w,c)</td>
+      <td style="text-align: right">255(uint8)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">PIL</td>
+      <td style="text-align: right">Image/numpy</td>
+      <td style="text-align: right">RGB</td>
+      <td style="text-align: right">(w,h) / (h,w,c)</td>
+      <td style="text-align: right">- / 255(uint8)</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">skimage</td>
+      <td style="text-align: right">numpy</td>
+      <td style="text-align: right">RGB</td>
+      <td style="text-align: right">(h,w,c)</td>
+      <td style="text-align: right">rgb:255(uint8) / gray:1(float)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="cv2">cv2</h4>
+<h5 id="ioshow">i/o/show</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="c1">#读入图像
+</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span> 
+  
+<span class="c1">#显示图像    
+</span>
+<span class="n">cv2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="s">'src'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
+<span class="n">cv2</span><span class="o">.</span><span class="n">waitkey</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> 
+
+<span class="c1">#保存图像   
+</span> 
+<span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="s">'test.jpg'</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>  
+
+<span class="c1">#归一化  
+</span><span class="n">img3</span> <span class="o">=</span> <span class="n">img3</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">"float"</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.0</span>
+</code></pre></div></div>
+
+<blockquote>
+  <font size="3">`imshow` should be followed by `waitKey` function which displays the image for specified milliseconds. **Otherwise, it won’t display the image**. For example, `waitKey(0)` will display the window infinitely until any keypress (it is suitable for image display). waitKey(25) will display a frame for 25 ms, after which display will be automatically closed. (If you put it in a loop to read videos, it will display the video frame-by-frame)</font>
+</blockquote>
+
+<h5 id="attribute">attribute</h5>
+<ul>
+  <li>numpy array</li>
+  <li>默认读入彩色图像
+    <ul>
+      <li><code class="highlighter-rouge">gray = cv2.imread('1.jpg',cv2.IMREAD_GRAYSCALE)</code></li>
+    </ul>
+  </li>
+  <li>channel顺序：BGR
+    <ul>
+      <li><code class="highlighter-rouge">im2 = cv2.cvtColor(im,cv2.COLOR_BGR2RGB)</code></li>
+    </ul>
+  </li>
+  <li>img.shape: (h,w,c)</li>
+  <li>img.dtype: uint8(255)</li>
+</ul>
+
+<h4 id="pil">PIL</h4>
+<h5 id="ioshow-1">i/o/show</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1">#读入图像
+</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span>
+
+<span class="c1">#显示图像
+</span>
+<span class="n">img</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#保存图像
+</span>
+<span class="n">img</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">'2.jpg'</span><span class="p">)</span>
+</code></pre></div></div>
+<h5 id="image对象">Image对象</h5>
+<ul>
+  <li>PIL读入图片后生成Image对象</li>
+  <li>img.size: (w, h)</li>
+  <li>img.mode: 灰度L / 真彩色RGB</li>
+</ul>
+
+<h5 id="image转numpy矩阵">Image转numpy矩阵</h5>
+<ul>
+  <li><code class="highlighter-rouge">arr = np.array(img) </code></li>
+  <li>channel顺序：RGB</li>
+  <li>arr.shape: (h,w,c)</li>
+  <li>arr.dtype: uint8 (255)</li>
+  <li><code class="highlighter-rouge">new_img = Image.fromarray(arr)</code></li>
+</ul>
+
+<h4 id="skimage">skimage</h4>
+<h5 id="ioshow-2">i/o/show</h5>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+
+<span class="c1">#读入图像
+</span>
+<span class="n">im</span><span class="o">=</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">)</span>
+
+<span class="c1">#显示图像
+</span>
+<span class="n">io</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="c1">#保存图像
+</span>
+<span class="n">io</span><span class="o">.</span><span class="n">imsave</span><span class="p">(</span><span class="s">'1.jpg'</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span>
+</code></pre></div></div>
+<h5 id="attribute-1">attribute</h5>
+<ul>
+  <li>numpy array</li>
+  <li>channel顺序：RGB</li>
+  <li>img.shape: (h,w,c)</li>
+  <li>img.dtype: RGB uint8 (255) / gray float (1)</li>
+</ul>
+
+:ET
