@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 May 2020 11:50:11 -0400</pubDate>
-    <lastBuildDate>Thu, 28 May 2020 11:50:11 -0400</lastBuildDate>
+    <pubDate>Thu, 28 May 2020 17:32:07 -0400</pubDate>
+    <lastBuildDate>Thu, 28 May 2020 17:32:07 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -56,6 +56,9 @@
   &lt;/li&gt;
 &lt;/ol&gt;
 
+&lt;h4 id=&quot;warm-restart&quot;&gt;Warm restart&lt;/h4&gt;
+&lt;p&gt;TODO&lt;/p&gt;
+
 &lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/338066667&quot;&gt;warm up&lt;/a&gt;&lt;/li&gt;
@@ -75,12 +78,41 @@
       </item>
     
       <item>
-        <title>Batch size与learning rate</title>
-        <description>&lt;p&gt;#&lt;/p&gt;
+        <title>batch size与learning rate</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1706.02677.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;当满足一定条件下，batch_size增大k倍时，lr可以直接相应增大k倍&lt;/li&gt;
+  &lt;li&gt;训练初期不满足1)所需的条件，此时lr需要使用warm up&lt;/li&gt;
+  &lt;li&gt;underlying loss function受batch size影响。为了不改变underlying loss function，在增大batch_size时，其实并不是改变per-worker sample size n，而是增大the number of workers k&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;linear-scaling-rule&quot;&gt;Linear Scaling Rule&lt;/h4&gt;
+&lt;p&gt;设有 k 个mini-batch $B_0, \cdots, B_{k-1}$:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;$lr=\eta$, 使用小batch_size $B_j$训练，共训 k 个iteration（$j=0, \cdots, k-1$）：&lt;br /&gt;
+ &lt;img src=&quot;/img/15906983171534.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;$lr = \hat{\eta}$, 使用大batch-size $\cup_j{B_j}$训一个iteration：
+ &lt;img src=&quot;/img/15906986727563.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1和2对应不同的更新方式，因此不太可能有$\hat w_{t+1} = w_{t+k}$。但是，&lt;strong&gt;如果我们假设$\nabla l(x,w_t) \approx \nabla l(x,w_{t+j})$ for $j &amp;lt; k$，那么在 $\hat \eta =k\eta$ 条件下能推出 $\hat w_{t+1} \approx  w_{t+k}$，即使用不同batch-size得到相似的更新结果&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;warm-up&quot;&gt;Warm up&lt;/h4&gt;
+&lt;p&gt;在训练的开始阶段，模型权重迅速改变，不满足linear scaling rule中的条件。此时使用gradual warmup有助于解决训练中出现的问题。&lt;/p&gt;
+
+&lt;h4 id=&quot;batch-normalization&quot;&gt;Batch normalization&lt;/h4&gt;
+&lt;p&gt;如果有BN层，那么每个sample的loss其实并不是独立的，而是与其所在的mini-batch有关（因为会根据每个mini-batch的mean/std做normalization）。由于不同的mini-batch size会导致不同的mean/variance statistics distribution，因此改变mini-batch size会改变underlying loss function。&lt;/p&gt;
+
+&lt;p&gt;为了不改变underlying loss function，根据上述分析，在增大mini-batch size时，我们其实不应该改变per-worker sample size n（batch statistics是在每个worker上单独计算的），而是应该增大the number of workers k。通常n=32在大部分数据集和网络上都表现良好。&lt;/p&gt;
+
 </description>
         <pubDate>Thu, 28 May 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/</guid>
+        
+        <category>Model Training</category>
         
         
       </item>

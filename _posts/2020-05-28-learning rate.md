@@ -45,6 +45,9 @@ tags:
     * 余弦值首先缓慢下降，然后加速下降，之后再次缓慢下降。
     
     <img src="/img/15906782692333.jpg" width="50%" height="100%">
+    
+#### Warm restart
+TODO
    
     
 #### 参考资料

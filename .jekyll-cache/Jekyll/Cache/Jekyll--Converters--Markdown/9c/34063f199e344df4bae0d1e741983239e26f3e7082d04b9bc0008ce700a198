@@ -1,4 +1,6 @@
-I"e
+I"�
+<h4 id="take-away-message">Take away message</h4>
+<p>总体来说，学习率呈现“上升——平稳——下降”的规律。</p>
 
 <h4 id="warm-up">Warm up</h4>
 <ol>
@@ -29,7 +31,7 @@
   <li>poly(多项式衰减): $lr = \text{base_lr} * (1 - \frac{T_{cur}}{T_{max}}) ^ {power} $
     <ul>
       <li>学习率曲线的形状主要由参数 power 的值来控制。当 power = 1 的时候，学习率曲线为一条直线。当 power &lt; 1 的时候，下降速率由慢到快。当 power &gt; 1 的时候，下降速率由快到慢。
- <img src="/img/15906784236558.jpg" width="90%" height="100%" /></li>
+ <img src="/img/15906784236558.jpg" width="85%" height="100%" /></li>
     </ul>
   </li>
   <li>cosine(余弦衰减): $lr = \frac{1}{2}*\text{base_lr} * \left(1+ \cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)$
@@ -41,11 +43,15 @@
   </li>
 </ol>
 
+<h4 id="warm-restart">Warm restart</h4>
+<p>TODO</p>
+
 <h4 id="参考资料">参考资料</h4>
 <ol>
   <li><a href="https://www.zhihu.com/question/338066667">warm up</a></li>
-  <li>https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html</li>
-  <li>https://zhuanlan.zhihu.com/p/39565465</li>
+  <li><a href="https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html">cosine</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/39565465">poly</a></li>
+  <li><a href="https://zhuanlan.zhihu.com/p/93624972">step and multistep</a></li>
 </ol>
 
 :ET

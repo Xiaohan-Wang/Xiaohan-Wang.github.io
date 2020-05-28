@@ -1,0 +1,30 @@
+I"�<p><a href="https://arxiv.org/pdf/1706.02677.pdf">Paper link</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>当满足一定条件下，batch_size增大k倍时，lr可以直接相应增大k倍</li>
+  <li>训练初期不满足1)所需的条件，此时lr需要使用warm up</li>
+  <li>underlying loss function受batch size影响。为了不改变underlying loss function，在增大batch_size时，其实并不是改变per-worker sample size n，而是增大the number of workers k</li>
+</ol>
+
+<h4 id="linear-scaling-rule">Linear Scaling Rule</h4>
+<p>设有 k 个mini-batch $B_0, \cdots, B_{k-1}$:</p>
+<ol>
+  <li>$lr=\eta$, 使用小batch_size $B_j$训练，共训k个iteration（$j=0, \cdots, k-1$）：<br />
+ <img src="/img/15906983171534.jpg" width="40%" height="100%" /></li>
+  <li>$lr = \hat{\eta}$, 使用大batch-size$\cup_j{B_j}$训一个iteration：
+ <img src="/img/15906986727563.jpg" width="40%" height="100%" /></li>
+</ol>
+
+<p>1）2）对应不同的更新方式，因此不太可能有
+$\hat{w}<em>{t+1} = w</em>{t+k}$。但是，<strong>如果我们假设$\nabla l(x,w_t) \approx \nabla l(x,w_{t+j})$ for $j &lt; k$，那么在$\hat{\eta}=k\eta$能推出$\hat{w}<em>{t+1} \approx  w</em>{t+k}$，即使用不同batch-size得到相似的更新结果</strong>。</p>
+
+<h4 id="warm-up">Warm up</h4>
+<p>在训练的开始阶段，模型权重迅速改变，不满足linear scaling rule中的条件。此时使用gradual warmup有助于解决训练中出现的问题。</p>
+
+<h4 id="batch-normalization">Batch normalization</h4>
+<p>如果有BN层，那么每个sample的loss其实并不是独立的，而是与其所在的mini-batch有关（因为会根据每个mini-batch的mean/std做normalization）。由于不同的mini-batch size会导致不同的mean/variance statistics distribution，因此改变mini-batch size会改变underlying loss function。</p>
+
+<p>为了不改变underlying loss function，根据上述分析，在增大mini-batch size时，我们其实不应该改变per-worker sample size n（batch statistics是在每个worker上单独计算的），而是应该增大the number of workers k。通常n=32在大部分数据集和网络上都表现良好。</p>
+
+:ET
