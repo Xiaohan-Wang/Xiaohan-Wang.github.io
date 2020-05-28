@@ -12,6 +12,9 @@ tags:
 
 [//]: #(<img src="" width="100%" height="100%">)
 
+#### Take away message
+总体来说，学习率呈现“上升——平稳——下降”的规律。
+
 #### Warm up
 1. 减缓模型在训练初期过拟合mini-batch    
     个人猜测：
@@ -35,7 +38,7 @@ tags:
      
 1. poly(多项式衰减): $lr = \text{base_lr} * (1 - \frac{T_{cur}}{T_{max}}) ^ {power} $
     * 学习率曲线的形状主要由参数 power 的值来控制。当 power = 1 的时候，学习率曲线为一条直线。当 power < 1 的时候，下降速率由慢到快。当 power > 1 的时候，下降速率由快到慢。
-    <img src="/img/15906784236558.jpg" width="50%" height="100%">
+    <img src="/img/15906784236558.jpg" width="85%" height="100%">
     
 
 1. cosine(余弦衰减): $lr = \frac{1}{2}*\text{base_lr} * \left(1+ \cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)$
@@ -45,8 +48,9 @@ tags:
    
     
 #### 参考资料
-1. https://www.zhihu.com/question/338066667
-2. https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html
-3. https://zhuanlan.zhihu.com/p/39565465
+1. [warm up](https://www.zhihu.com/question/338066667)
+2. [cosine](https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html)
+3. [poly](https://zhuanlan.zhihu.com/p/39565465)
+4. [step and multistep](https://zhuanlan.zhihu.com/p/93624972)
 
 

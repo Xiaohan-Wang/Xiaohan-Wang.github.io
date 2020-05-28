@@ -5,13 +5,16 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 May 2020 11:42:41 -0400</pubDate>
-    <lastBuildDate>Thu, 28 May 2020 11:42:41 -0400</lastBuildDate>
+    <pubDate>Thu, 28 May 2020 11:50:11 -0400</pubDate>
+    <lastBuildDate>Thu, 28 May 2020 11:50:11 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>Learning rate scheduler</title>
         <description>
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
+&lt;p&gt;总体来说，学习率呈现“上升——平稳——下降”的规律。&lt;/p&gt;
+
 &lt;h4 id=&quot;warm-up&quot;&gt;Warm up&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;减缓模型在训练初期过拟合mini-batch  &lt;br /&gt;
@@ -41,7 +44,7 @@
   &lt;li&gt;poly(多项式衰减): $lr = \text{base_lr} * (1 - \frac{T_{cur}}{T_{max}}) ^ {power} $
     &lt;ul&gt;
       &lt;li&gt;学习率曲线的形状主要由参数 power 的值来控制。当 power = 1 的时候，学习率曲线为一条直线。当 power &amp;lt; 1 的时候，下降速率由慢到快。当 power &amp;gt; 1 的时候，下降速率由快到慢。
- &lt;img src=&quot;/img/15906784236558.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+ &lt;img src=&quot;/img/15906784236558.jpg&quot; width=&quot;85%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;cosine(余弦衰减): $lr = \frac{1}{2}*\text{base_lr} * \left(1+ \cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)$
@@ -55,9 +58,10 @@
 
 &lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;https://www.zhihu.com/question/338066667&lt;/li&gt;
-  &lt;li&gt;https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html&lt;/li&gt;
-  &lt;li&gt;https://zhuanlan.zhihu.com/p/39565465&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/338066667&quot;&gt;warm up&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html&quot;&gt;cosine&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/39565465&quot;&gt;poly&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/93624972&quot;&gt;step and multistep&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 </description>
