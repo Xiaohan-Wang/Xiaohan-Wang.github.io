@@ -5,9 +5,73 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 28 May 2020 17:32:07 -0400</pubDate>
-    <lastBuildDate>Thu, 28 May 2020 17:32:07 -0400</lastBuildDate>
+    <pubDate>Sat, 30 May 2020 00:35:13 -0400</pubDate>
+    <lastBuildDate>Sat, 30 May 2020 00:35:13 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>语义分割损失函数</title>
+        <description>
+&lt;p&gt;&lt;strong&gt;Note： 以下虽然将预测结果称为概率，但其本身并不具有概率的内在含义，其本质上只是各个类别的得分情况。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;cross-entropy系列&quot;&gt;cross entropy系列&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;把每个像素看作一个单独的sample&lt;/li&gt;
+  &lt;li&gt;整个图像的loss是所有像素loss的（加权）平均值&lt;/li&gt;
+  &lt;li&gt;实际使用中，可以用weighted focal loss：$\text{pixel loss}=-\sum\limits_{classes}\alpha_{class}(1-y_{pred})^\gamma \times y_{true}log(y_{pred})$，以同时解决难学习样本问题和样本数量不均衡问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;basic-ce-loss&quot;&gt;basic CE loss&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;cross entropy loss （ce loss）
+    &lt;ul&gt;
+      &lt;li&gt;适用于二分类及多分类问题&lt;/li&gt;
+      &lt;li&gt;用多通道one-hot标签表示ground-truth。prediction同样为多通道，每个通道表示属于各个类的概率&lt;/li&gt;
+      &lt;li&gt;用一个像素的预测结果（概率分布向量）和它的one-hot标签向量比较，得到该像素的损失：$\text{pixel loss}=-\sum\limits_{classes}y_{true}log(y_{pred})=-log(y_{\text{true_pred}})$。化简后的结果就是该像素的真实类别所对应的预测值的负log值。&lt;br /&gt;
+ &lt;img src=&quot;/img/15907867544949.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;binary cross entropy loss （bce loss）
+    &lt;ul&gt;
+      &lt;li&gt;适用于二分类问题&lt;/li&gt;
+      &lt;li&gt;单通道图表示ground truth，0为负样本，1为正样本。prediction同样为单通道，表示为1（正样本）的概率&lt;/li&gt;
+      &lt;li&gt;每个像素的损失为：$\text{bce loss}=-y_{true}log(y_{pred})-(1-y_{true})log(1-y_{pred})$&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;weighed-ce-loss&quot;&gt;weighed CE loss&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;针对在图像中多个类的样本不均衡问题&lt;/strong&gt;。基本的交叉熵损失为各个像素损失的平均值，也就是平等的对待各个像素（样本）。&lt;strong&gt;此时如果多个类的样本数量分布不均衡，图像最终的损失将由样本数量多的类别对应的损失所主导，导致模型会主要学习样本数量多的类别的特征，并且学习出来的模型会更偏向将像素预测为该类别&lt;/strong&gt;。&lt;/li&gt;
+  &lt;li&gt;为了避免图像最终的损失由样本数量多的类别对应的损失所主导，可以选择增大样本数量少的类的损失，即为不同样本数量的类别对应的损失添加不同的权重&lt;/li&gt;
+  &lt;li&gt;加权交叉熵损失函数：$\text{pixel loss}=-\sum\limits_{classes}\alpha_{class}\times y_{true}log(y_{pred})$，其中 $\alpha_{class}$ 对应不同类别的权重&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;focal-loss&quot;&gt;focal loss&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;使网络更加关注难学习样本&lt;/strong&gt;。当图像中存在大量的易学习像素（对应类别的 $y_{pred}&amp;gt;0.5$）和少量的难学习像素（对应类别的 $y_{pred}&amp;lt;0.5$）时，虽然易学习像素的loss小于难学习像素的loss，但由于样本数量的影响，&lt;strong&gt;大量易学习像素总体的loss也将远远超过少量难学习像素总体的loss，使得图像最终的loss由大量易学习像素的loss所主导，导致模型趋向于继续关注大量易学习的样本，而不会关注难学习的样本&lt;/strong&gt;。&lt;/li&gt;
+  &lt;li&gt;focal loss修改交叉熵损失函数为：$\text{pixel loss}=-\sum\limits_{classes}(1-y_{pred})^\gamma \times y_{true}log(y_{pred})$，其中 $y_{pred}$ 越小（越难学习），对应的权重越大。实验表明 $\gamma=2$ 效果最好。&lt;/li&gt;
+  &lt;li&gt;focal loss也一定程度上解决了样本数量不平衡问题。因为样本数量少的类别对应的像素往往也是难学习的像素，因此关注难学习样本有助于关注样本数量少的类别。
+&lt;img src=&quot;/img/15908083180433.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;dice-loss系列&quot;&gt;dice loss系列&lt;/h4&gt;
+&lt;p&gt;待填…&lt;/p&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://zhuanlan.zhihu.com/p/101773544&lt;/li&gt;
+  &lt;li&gt;https://niecongchong.github.io/2019/08/06/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 29 May 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/05/29/segmentation-loss/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/05/29/segmentation-loss/</guid>
+        
+        <category>Loss</category>
+        
+        
+      </item>
     
       <item>
         <title>Learning rate scheduler</title>
@@ -709,75 +773,6 @@ that is, the signal can be directly propagated from any unit to another, both fo
         <category>Semantic Segmentation</category>
         
         <category>Context information</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>DeepLab v3</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1706.05587.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;modules employing atrous convolution in cascade or in parallel to capture multi-scale context by adopting multiple atrous rates.&lt;/li&gt;
-  &lt;li&gt;主要还是各种tricks&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;output_stride: the ratio of input image spatial resolution to final output resolution.&lt;/p&gt;
-&lt;h5 id=&quot;atrous-convolution-in-cascade&quot;&gt;atrous convolution in cascade&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15893990006461.jpg&quot; alt=&quot;-w840&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;duplicate several copies of the last ResNet block (Block 5, Block 6, Block 7)&lt;/li&gt;
-  &lt;li&gt;apply atrous convolution with rates determined by the desired output stride value (output stride = 256 if no atrous convolution is applied)&lt;/li&gt;
-  &lt;li&gt;multi-grid method: adopt different atrous rates within block4 to block7 in the proposed model. For example, when $\text{output stride} = 16$ and $\text{Multi Grid} = (1, 2, 4)$, the three convolutions will have $rates = 2 · (1, 2, 4) = (2, 4, 8)$ in the block4, respectively.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;atrous-convolution-in-parallel&quot;&gt;atrous convolution in parallel&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15893997101137.jpg&quot; alt=&quot;-w778&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;include batch normalization within ASPP.&lt;/li&gt;
-  &lt;li&gt;image level feature: apply global average pooling on the last feature map of the model, feed the resulting image-level features to a 1 × 1 convolution with 256 filters (and batch normalization), and then bilinearly upsample the feature to the desired spatial dimension.&lt;/li&gt;
-  &lt;li&gt;the improved ASPP consists of
-    &lt;ul&gt;
-      &lt;li&gt;one 1×1 convolution, and three 3 × 3 convolutions with rates = (6, 12, 18) when output stride = 16 (all with 256 filters and batch normalization). Note that the rates are doubled when output stride = 8.&lt;/li&gt;
-      &lt;li&gt;the image-level features (the rates are doubled when output stride = 8)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;The resulting features from all the branches are concatenated and pass through another 1 × 1 convolution (with 256 filters and batch normalization) before the final 1 × 1 convolution which generates the final logits.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;tricks&quot;&gt;Tricks&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;“poly” learning rate policy: the initial learning rate is
-multiplied by $(1 −\text{maxiter})^{\text{power}}$ with $\text{power} = 0.9 $.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;upsampling logits: upsample the final logits, since downsampling the groundtruths removes the fine annotations resulting in no back-propagation of details.&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;$\text{output stride}=16$ during training, and $\text{output stride}=8$ during inference to get more detailed feature map.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;cascade:
-&lt;img src=&quot;/img/15894010210339.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;parallel:
-&lt;img src=&quot;/img/15894010431381.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Both their best cascaded model (in Tab. 4) and ASPP model (in Tab. 6) (in both cases without DenseCRF post-processing or MS-COCO pre-training) already outperform DeepLabv2 (77.69% with DenseCRF and pretrained on MS-COCO) on the PASCAL VOC 2012 val set.&lt;/li&gt;
-  &lt;li&gt;The improvement mainly comes from including and fine-tuning batch normalization parameters in the proposed models and having a better way to encode multi-scale context.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;S. Ioffe and C. Szegedy. Batch normalization: Accelerating deep network training by reducing internal covariate shift. arXiv:1502.03167, 2015.&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 13 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/13/DeepLab-v3/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/13/DeepLab-v3/</guid>
-        
-        <category>Semantic Segmentation</category>
         
         
       </item>
