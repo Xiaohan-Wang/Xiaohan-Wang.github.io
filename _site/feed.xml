@@ -5,9 +5,35 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 30 May 2020 00:35:13 -0400</pubDate>
-    <lastBuildDate>Sat, 30 May 2020 00:35:13 -0400</lastBuildDate>
+    <pubDate>Mon, 01 Jun 2020 15:25:37 -0400</pubDate>
+    <lastBuildDate>Mon, 01 Jun 2020 15:25:37 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>语义分割评价指标</title>
+        <description>
+&lt;p&gt;Let $n_{ij}$ be the number of pixels of class $i$ predicted to belong to class $j$, where there are $n_{cl}$ different classes, and let $t_i=\sum_jn_{ij}$ be the total number of pixels of class $i$.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;pixel accuracy: $\frac{\sum\limits_i n_{ii}}{\sum\limits_i t_{i}}$&lt;/li&gt;
+  &lt;li&gt;mean pixel accuracy $\frac{1}{n_{cl}}\sum\limits_i \frac{n_{ii}}{ t_{i}}$&lt;/li&gt;
+  &lt;li&gt;mean IoU: $\frac{1}{n_{cl}}\sum\limits_i \frac{n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$&lt;/li&gt;
+  &lt;li&gt;frequency weighted IoU $\frac{1}{\sum\limits_k t_k}\sum\limits_i \frac{t_i n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Reference:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Fully Convolutional Networks for Semantic Segmentation&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 01 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/01/segmentation-metrics/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/01/segmentation-metrics/</guid>
+        
+        <category>Metrics</category>
+        
+        
+      </item>
     
       <item>
         <title>语义分割损失函数</title>
@@ -60,8 +86,8 @@
 
 &lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
 &lt;ol&gt;
-  &lt;li&gt;https://zhuanlan.zhihu.com/p/101773544&lt;/li&gt;
-  &lt;li&gt;https://niecongchong.github.io/2019/08/06/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/101773544&quot;&gt;link1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://niecongchong.github.io/2019/08/06/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/&quot;&gt;link2&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Fri, 29 May 2020 00:00:00 -0400</pubDate>
@@ -452,30 +478,25 @@ that is, the signal can be directly propagated from any unit to another, both fo
 
 &lt;h4 id=&quot;项目代码&quot;&gt;项目代码&lt;/h4&gt;
 &lt;h5 id=&quot;before-starting&quot;&gt;before starting&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;实现前先思考代码的整体框架和结构、各部分功能，可以用xmind做一个简单思维导图&lt;/li&gt;
-  &lt;li&gt;尽量解耦代码，从而获得更高的复用性
-    &lt;ul&gt;
-      &lt;li&gt;实现一个基础整体框架 e.g. &lt;a href=&quot;https://github.com/MrGemy95/Tensorflow-Project-Template&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;单独实现各个模块&lt;/li&gt;
-      &lt;li&gt;组合代码，同时添加一些单独的细节部分&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
+&lt;ol class=&quot;task-list&quot;&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; checked=&quot;checked&quot; /&gt;完成自己的代码框架，注意解耦代码&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;不同项目大部分可以复用框架，另外根据具体项目添加一些细节&lt;/li&gt;
+  &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;不要盲写代码，先去github上看看是不是已经被实现了&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h5 id=&quot;tricks&quot;&gt;tricks&lt;/h5&gt;
 &lt;ol&gt;
-  &lt;li&gt;分离代码和数据
-    &lt;ul&gt;
-      &lt;li&gt;最好假设它们不在一个文件夹&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;文件管理
+    &lt;ol&gt;
+      &lt;li&gt;分离代码和数据，比如说分两个文件夹data和code&lt;/li&gt;
+      &lt;li&gt;train, val, test set各自的数据最好放在各自的文件夹中&lt;/li&gt;
+    &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;试验参数
-    &lt;ul&gt;
-      &lt;li&gt;尽量使用config文件传入，并且config尽量与log文件同名保存。&lt;/li&gt;
-    &lt;/ul&gt;
+  &lt;li&gt;参数管理
+    &lt;ol&gt;
+      &lt;li&gt;对于某个位置有多个选择，比如说loss可以用basic cross entropy loss，focal loss等等，用config传入选项，这样可以保存试验参数&lt;/li&gt;
+    &lt;/ol&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;train, val, test set各自的数据最好放在各自的文件夹中&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h4 id=&quot;实验管理&quot;&gt;实验管理&lt;/h4&gt;
@@ -492,8 +513,8 @@ that is, the signal can be directly propagated from any unit to another, both fo
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;工具
-    &lt;ul&gt;
-      &lt;li&gt;最好用overleaf，可以与github repo 或者本地 git repo 同步 【TODO】&lt;/li&gt;
+    &lt;ul class=&quot;task-list&quot;&gt;
+      &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;task-list-item-checkbox&quot; disabled=&quot;disabled&quot; /&gt;最好用overleaf，可以与github repo 或者本地 git repo 同步&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ol&gt;
@@ -695,84 +716,6 @@ that is, the signal can be directly propagated from any unit to another, both fo
         <guid isPermaLink="true">http://localhost:4000/2020/05/14/Deeplab-v3+/</guid>
         
         <category>Semantic Segmentation</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>PSPNet</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1612.01105.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Observations:&lt;/strong&gt; many errors are partially or completely related to contextual relationship and global information for different receptive field.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Solution:&lt;/strong&gt; exploit the capability of global context information by different-region-based context aggregation.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;h5 id=&quot;observation-about-failures&quot;&gt;observation about failures&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894252749235.jpg&quot; alt=&quot;-w933&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;doesn’t match co-occurrent visual patterns&lt;/li&gt;
-  &lt;li&gt;confused by similar categories&lt;/li&gt;
-  &lt;li&gt;ignore small-size things / discontinuous prediction on large size things&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Many errors are partially or completely related to contextual relationship and global information for different receptive fields. Thus a deep network with a suitable global-scene-level prior can much improve the performance of scene parsing.&lt;/p&gt;
-
-&lt;h5 id=&quot;pyramid-scene-parsing-network-pspnet&quot;&gt;pyramid scene parsing network (PSPNet)&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894259020057.jpg&quot; alt=&quot;-w918&quot; /&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Use a pretrained ResNet model with the dilated network strategy to extract the feature map. The final feature map size is 1/8 of the input image, as shown in Fig. 3(b).&lt;/li&gt;
-  &lt;li&gt;pyramid pooling module for global scene prior construction upon the final-layer-feature-map of the deep neural network.&lt;/li&gt;
-  &lt;li&gt;Use 1×1 convolution layer after each pyramid level to reduce the dimension of context representation to $\frac{1}{N}$ of the original one if the level size of pyramid is $N$. Then we directly upsample the low-dimension feature maps to get the same size feature as the original feature map via bilinear interpolation.&lt;/li&gt;
-  &lt;li&gt;Different levels of features are concatenated as the final pyramid pooling global feature. It is followed by a convolution layer to generate the final prediction map in (d).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;deep-supervised-loss&quot;&gt;Deep supervised loss&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894269590978.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Generating initial results by supervision with an additional loss, and learning the residue afterwards with the final loss. Thus, optimization of the deep network is decomposed into two, each is simpler to solve.&lt;/li&gt;
-  &lt;li&gt;The auxiliary loss helps optimize the learning process, while the master branch loss takes the most responsibility.&lt;/li&gt;
-  &lt;li&gt;In the testing phase, we abandon this auxiliary branch and only use the well optimized master branch for final prediction.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;result&quot;&gt;Result&lt;/h4&gt;
-&lt;h5 id=&quot;architecture-for-pspnet&quot;&gt;Architecture for PSPNet&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894274392623.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;average pooling works better than max pooling in all settings&lt;/li&gt;
-  &lt;li&gt;Pooling with pyramid parsing (B1236) outperforms that using global pooling (B1)&lt;/li&gt;
-  &lt;li&gt;With dimension reduction, the performance is further enhanced.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;auxiliary-loss&quot;&gt;Auxiliary Loss&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894275459126.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;pretrained-model&quot;&gt;Pretrained model&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894276146708.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;detailed-analysis&quot;&gt;Detailed analysis&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15894276963001.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;others&quot;&gt;Others&lt;/h5&gt;
-&lt;p&gt;需要注意各个方法的baseline是不是resnet
-&lt;img src=&quot;/img/15894278542140.jpg&quot; alt=&quot;-w923&quot; /&gt;
-&lt;img src=&quot;/img/15894279159043.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;further-reference&quot;&gt;Further reference&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;B. Zhou, A. Khosla, A.` Lapedriza, A. Oliva, and A. Torralba. Object detectors emerge in deep scene cnns. arXiv:1412.6856, 2014. 3. (The paper shows the empirical receptive field of CNN is much smaller than the theoretical one especially on high-level layers.)&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 13 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/13/PSPNet/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/13/PSPNet/</guid>
-        
-        <category>Semantic Segmentation</category>
-        
-        <category>Context information</category>
         
         
       </item>

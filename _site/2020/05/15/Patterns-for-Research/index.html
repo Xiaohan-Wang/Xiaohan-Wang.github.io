@@ -212,30 +212,25 @@
 
 <h4 id="项目代码">项目代码</h4>
 <h5 id="before-starting">before starting</h5>
-<ol>
-  <li>实现前先思考代码的整体框架和结构、各部分功能，可以用xmind做一个简单思维导图</li>
-  <li>尽量解耦代码，从而获得更高的复用性
-    <ul>
-      <li>实现一个基础整体框架 e.g. <a href="https://github.com/MrGemy95/Tensorflow-Project-Template">link</a></li>
-      <li>单独实现各个模块</li>
-      <li>组合代码，同时添加一些单独的细节部分</li>
-    </ul>
-  </li>
+<ol class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />完成自己的代码框架，注意解耦代码</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />不同项目大部分可以复用框架，另外根据具体项目添加一些细节</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />不要盲写代码，先去github上看看是不是已经被实现了</li>
 </ol>
 
 <h5 id="tricks">tricks</h5>
 <ol>
-  <li>分离代码和数据
-    <ul>
-      <li>最好假设它们不在一个文件夹</li>
-    </ul>
+  <li>文件管理
+    <ol>
+      <li>分离代码和数据，比如说分两个文件夹data和code</li>
+      <li>train, val, test set各自的数据最好放在各自的文件夹中</li>
+    </ol>
   </li>
-  <li>试验参数
-    <ul>
-      <li>尽量使用config文件传入，并且config尽量与log文件同名保存。</li>
-    </ul>
+  <li>参数管理
+    <ol>
+      <li>对于某个位置有多个选择，比如说loss可以用basic cross entropy loss，focal loss等等，用config传入选项，这样可以保存试验参数</li>
+    </ol>
   </li>
-  <li><strong>train, val, test set各自的数据最好放在各自的文件夹中</strong></li>
 </ol>
 
 <h4 id="实验管理">实验管理</h4>
@@ -252,8 +247,8 @@
     </ul>
   </li>
   <li>工具
-    <ul>
-      <li>最好用overleaf，可以与github repo 或者本地 git repo 同步 【TODO】</li>
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />最好用overleaf，可以与github repo 或者本地 git repo 同步</li>
     </ul>
   </li>
 </ol>
@@ -363,6 +358,8 @@
                 				<a href="/tags/#Semantic Segmentation" title="Semantic Segmentation" rel="10">
                                     Semantic Segmentation
                                 </a>
+                            
+        				
                             
         				
                             

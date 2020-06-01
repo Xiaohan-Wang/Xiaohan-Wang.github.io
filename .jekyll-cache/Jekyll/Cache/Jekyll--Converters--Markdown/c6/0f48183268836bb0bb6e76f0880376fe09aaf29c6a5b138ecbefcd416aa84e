@@ -1,0 +1,45 @@
+I"g<p>目前对代码管理以及实验管理的一些小想法，部分来自<a href="https://www.zhihu.com/question/269707221">知乎</a>，随时修改…</p>
+
+<h4 id="项目代码">项目代码</h4>
+<h5 id="before-starting">before starting</h5>
+<ol class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" checked="checked" />完成自己的代码框架，注意解耦代码</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />不同项目大部分可以复用框架，另外根据具体项目添加一些细节</li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />不要盲写代码，先去github上看看是不是已经被实现了</li>
+</ol>
+
+<h5 id="tricks">tricks</h5>
+<ol>
+  <li>文件管理
+    <ol>
+      <li>分离代码和数据，比如说分两个文件夹data和code</li>
+      <li>train, val, test set各自的数据最好放在各自的文件夹中</li>
+    </ol>
+  </li>
+  <li>参数管理
+    <ol>
+      <li>对于某个位置有多个选择，比如说loss可以用basic cross entropy loss，focal loss等等，用config传入选项，这样可以保存试验参数</li>
+    </ol>
+  </li>
+</ol>
+
+<h4 id="实验管理">实验管理</h4>
+<ol>
+  <li>使用<a href="https://mlflow.org/docs/latest/index.html">MLflow</a></li>
+</ol>
+
+<h4 id="实验记录">实验记录</h4>
+<ol>
+  <li>内容
+    <ul>
+      <li>记录每个实验的目的、方法、结果</li>
+      <li>尽量附代码 （用代码的 commit id）、数据</li>
+    </ul>
+  </li>
+  <li>工具
+    <ul class="task-list">
+      <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" />最好用overleaf，可以与github repo 或者本地 git repo 同步</li>
+    </ul>
+  </li>
+</ol>
+:ET

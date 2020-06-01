@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>batch size与learning rate - Xiaohan's Blog</title>
+    <title>语义分割评价指标 - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/">
+    <link rel="canonical" href="http://localhost:4000/2020/06/01/segmentation-metrics/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Model Training" title="Model Training">Model Training</a>
+                        <a class="tag" href="/tags/#Metrics" title="Metrics">Metrics</a>
                         
                     </div>
-                    <h2>batch size与learning rate</h2>
+                    <h2>语义分割评价指标</h2>
                     
                     
-                    <span class="meta">Accurate, Large Minibatch SGD:_Training ImageNet in 1 Hour&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on May 28, 2020</span>
+                    <span class="meta"> Posted on June 1, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,34 +208,20 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="https://arxiv.org/pdf/1706.02677.pdf">Paper link</a></p>
+				
+<p>Let $n_{ij}$ be the number of pixels of class $i$ predicted to belong to class $j$, where there are $n_{cl}$ different classes, and let $t_i=\sum_jn_{ij}$ be the total number of pixels of class $i$.</p>
 
-<h4 id="take-away-message">Take away message</h4>
 <ol>
-  <li>当满足一定条件下，batch_size增大k倍时，lr可以直接相应增大k倍</li>
-  <li>训练初期不满足1)所需的条件，此时lr需要使用warm up</li>
-  <li>underlying loss function受batch size影响。为了不改变underlying loss function，在增大batch_size时，其实并不是改变per-worker sample size n，而是增大the number of workers k</li>
+  <li>pixel accuracy: $\frac{\sum\limits_i n_{ii}}{\sum\limits_i t_{i}}$</li>
+  <li>mean pixel accuracy $\frac{1}{n_{cl}}\sum\limits_i \frac{n_{ii}}{ t_{i}}$</li>
+  <li>mean IoU: $\frac{1}{n_{cl}}\sum\limits_i \frac{n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$</li>
+  <li>frequency weighted IoU $\frac{1}{\sum\limits_k t_k}\sum\limits_i \frac{t_i n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$</li>
 </ol>
 
-<h4 id="linear-scaling-rule">Linear Scaling Rule</h4>
-<p>设有 k 个mini-batch $B_0, \cdots, B_{k-1}$:</p>
+<p>Reference:</p>
 <ol>
-  <li>$lr=\eta$, 使用小batch_size $B_j$训练，共训 k 个iteration（$j=0, \cdots, k-1$）：<br />
- <img src="/img/15906983171534.jpg" width="40%" height="100%" /></li>
-  <li>$lr = \hat{\eta}$, 使用大batch-size $\cup_j{B_j}$训一个iteration：
- <img src="/img/15906986727563.jpg" width="40%" height="100%" /></li>
+  <li>Fully Convolutional Networks for Semantic Segmentation</li>
 </ol>
-
-<p>1和2对应不同的更新方式，因此不太可能有$\hat w_{t+1} = w_{t+k}$。但是，<strong>如果我们假设$\nabla l(x,w_t) \approx \nabla l(x,w_{t+j})$ for $j &lt; k$，那么在 $\hat \eta =k\eta$ 条件下能推出 $\hat w_{t+1} \approx  w_{t+k}$，即使用不同batch-size得到相似的更新结果</strong>。</p>
-
-<h4 id="warm-up">Warm up</h4>
-<p>在训练的开始阶段，模型权重迅速改变，不满足linear scaling rule中的条件。此时使用gradual warmup有助于解决训练中出现的问题。</p>
-
-<h4 id="batch-normalization">Batch normalization</h4>
-<p>如果有BN层，那么每个sample的loss其实并不是独立的，而是与其所在的mini-batch有关（因为会根据每个mini-batch的mean/std做normalization）。由于不同的mini-batch size会导致不同的mean/variance statistics distribution，因此改变mini-batch size会改变underlying loss function。</p>
-
-<p>为了不改变underlying loss function，根据上述分析，在增大mini-batch size时，我们其实不应该改变per-worker sample size n（batch statistics是在每个worker上单独计算的），而是应该增大the number of workers k。通常n=32在大部分数据集和网络上都表现良好。</p>
-
 
 
                 <hr style="visibility: hidden;">
@@ -243,19 +229,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/05/25/image-preprocessing/" data-toggle="tooltip" data-placement="top" title="Image Preprocessing">
+                        <a href="/2020/05/29/segmentation-loss/" data-toggle="tooltip" data-placement="top" title="语义分割损失函数">
                         Previous<br>
-                        <span>Image Preprocessing</span>
+                        <span>语义分割损失函数</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/05/28/learning-rate/" data-toggle="tooltip" data-placement="top" title="Learning rate scheduler">
-                        Next<br>
-                        <span>Learning rate scheduler</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
