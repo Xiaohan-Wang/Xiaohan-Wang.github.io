@@ -1,0 +1,35 @@
+I"�
+<h4 id="cuda_visible_devices">CUDA_VISIBLE_DEVICES</h4>
+<ul>
+  <li>CUDA_VISIBLE_DEVICES环境变量限制CUDA程序可见的GPU设备</li>
+  <li>CUDA应用运行时，CUDA将遍历当前可见的设备，并从零开始为可见设备编号（）</li>
+  <li>如果为CUDA_VISIBLE_DEVICES 设置了不存在的设备，所有实际设备将被隐藏，CUDA 应用将无法使用GPU设备；如果设备序列是存在和不存在设备的混合，那么不存在设备前的所有存在设备将被重新编号，不存在设备之后的所有设备将被屏蔽。当前上下文中可见的（重新编号后的）设备可使用CUDA SDK搭配的deviceQuery程序来查看</li>
+</ul>
+
+<p>作者：肆不肆傻
+链接：https://www.jianshu.com/p/0816c3a5fa5c
+来源：简书
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<ul>
+  <li><code class="highlighter-rouge">data.cuda()</code>: the old, pre-0.4 way</li>
+  <li><code class="highlighter-rouge">data.to(device)</code>: more flexible. For example, <code class="highlighter-rouge">data.to('cuda:1')</code> put data to GPU1</li>
+</ul>
+
+<h4 id="单机单卡">单机单卡</h4>
+<p>如果不设置Dataparallel，即使一台机器上有多个GPU，pytorch也只会占用编号为0的GPU</p>
+
+<h4 id="单机多卡">单机多卡</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># have to put model and data to GPU0
+</span>
+<span class="c1"># model
+</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">DataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:0'</span><span class="p">)</span>
+<span class="c1"># data
+</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:0'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="多机多卡">多机多卡</h4>
+<p>待填</p>
+:ET

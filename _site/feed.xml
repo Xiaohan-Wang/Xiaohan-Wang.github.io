@@ -5,13 +5,14 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 01 Jun 2020 15:25:37 -0400</pubDate>
-    <lastBuildDate>Mon, 01 Jun 2020 15:25:37 -0400</lastBuildDate>
+    <pubDate>Fri, 05 Jun 2020 00:00:49 -0400</pubDate>
+    <lastBuildDate>Fri, 05 Jun 2020 00:00:49 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
         <title>语义分割评价指标</title>
         <description>
+&lt;h4 id=&quot;评价指标&quot;&gt;评价指标&lt;/h4&gt;
 &lt;p&gt;Let $n_{ij}$ be the number of pixels of class $i$ predicted to belong to class $j$, where there are $n_{cl}$ different classes, and let $t_i=\sum_jn_{ij}$ be the total number of pixels of class $i$.&lt;/p&gt;
 
 &lt;ol&gt;
@@ -21,7 +22,7 @@
   &lt;li&gt;frequency weighted IoU $\frac{1}{\sum\limits_k t_k}\sum\limits_i \frac{t_i n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Reference:&lt;/p&gt;
+&lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;Fully Convolutional Networks for Semantic Segmentation&lt;/li&gt;
 &lt;/ol&gt;
@@ -394,7 +395,7 @@ that is, the signal can be directly propagated from any unit to another, both fo
       </item>
     
       <item>
-        <title>PyTorch模型检查/可视化</title>
+        <title>模型检查/可视化</title>
         <description>&lt;h4 id=&quot;print&quot;&gt;print&lt;/h4&gt;
 &lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;c1&quot;&gt;# 打印所有子模块，但不能显示各个模块间的关系
 &lt;/span&gt;    

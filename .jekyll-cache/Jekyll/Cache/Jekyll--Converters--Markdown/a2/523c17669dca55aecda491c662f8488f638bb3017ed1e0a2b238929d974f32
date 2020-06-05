@@ -1,0 +1,46 @@
+I"�	
+<h4 id="cuda_visible_devices">CUDA_VISIBLE_DEVICES</h4>
+<ul>
+  <li>CUDA_VISIBLE_DEVICES环境变量限制CUDA程序可见的GPU设备</li>
+  <li>CUDA应用运行时，CUDA将遍历当前<strong>可见的</strong>设备，并从零开始为可见设备编号（因此显卡的实际编号和程序看到的编号不同）</li>
+  <li>如果设备序列是存在和不存在设备的混合，那么不存在设备前的所有存在设备将被重新编号，不存在设备之后的所有设备将被屏蔽</li>
+</ul>
+
+<ol>
+  <li>在终端中设置
+ <code class="highlighter-rouge">CUDA_VISIBLE_DEVICES=0,1 python my_script.py</code></li>
+  <li>python代码开头设置
+ <code class="highlighter-rouge">os.environ["CUDA_VISIBLE_DEVICES"] = "0,2"</code></li>
+</ol>
+
+<h4 id="pytorch使用gpu">PyTorch使用GPU</h4>
+<ul>
+  <li><code class="highlighter-rouge">data.cuda()</code>: the old, pre-0.4 way</li>
+  <li><code class="highlighter-rouge">data.to(device)</code>: more flexible. For example, <code class="highlighter-rouge">data.to('cuda:1')</code> put data to GPU1</li>
+</ul>
+
+<h4 id="单机单卡">单机单卡</h4>
+<p>如果不设置Dataparallel，即使一台机器上有多个GPU，pytorch也只会占用编号为0的GPU</p>
+
+<h4 id="单机多卡">单机多卡</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># have to put model and data to GPU0
+</span>
+<span class="c1"># model
+</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">DataParallel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:0'</span><span class="p">)</span>
+<span class="c1"># data
+</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s">'cuda:0'</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Note: <code class="highlighter-rouge">nn.DataParallel</code>默认使用机器上的所有显卡，如果</p>
+
+<h4 id="多机多卡">多机多卡</h4>
+<p>待填</p>
+
+<h4 id="参考资料">参考资料</h4>
+<ol>
+  <li>https://www.jianshu.com/p/0816c3a5fa5c</li>
+  <li>https://zhuanlan.zhihu.com/p/86441879</li>
+</ol>
+:ET
