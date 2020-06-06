@@ -251,15 +251,21 @@ table th:nth-of-type(4) {
   </thead>
   <tbody>
     <tr>
-      <td>-J</td>
-      <td>–job-name</td>
-      <td>指定作业名称</td>
-      <td> </td>
-    </tr>
-    <tr>
       <td>-p</td>
       <td>–partition</td>
       <td>指定队列资源</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–gres=gpu:&lt;number&gt;</td>
+      <td>每个节点的GPU数</td>
+      <td>gres是generic resource</td>
+    </tr>
+    <tr>
+      <td>-J</td>
+      <td>–job-name</td>
+      <td>指定作业名称</td>
       <td> </td>
     </tr>
     <tr>
@@ -267,18 +273,6 @@ table th:nth-of-type(4) {
       <td>–nodelist=&lt;host1,host2,…&gt;</td>
       <td>在指定的节点上运行</td>
       <td> </td>
-    </tr>
-    <tr>
-      <td>-N</td>
-      <td>–nodes=&lt;number&gt;</td>
-      <td>指定节点数量</td>
-      <td>是节点数，不是CPU核数，实际分配的是节点数×每节点CPU核数</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>–gres=gpu:&lt;number&gt;</td>
-      <td>每个节点的GPU数</td>
-      <td>gres是generic resource</td>
     </tr>
   </tbody>
 </table>
@@ -295,6 +289,12 @@ table th:nth-of-type(4) {
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>-N</td>
+      <td>–nodes=&lt;number&gt;</td>
+      <td>指定节点数量</td>
+      <td>是节点数，不是CPU核数，实际分配的是节点数×每节点CPU核数</td>
+    </tr>
     <tr>
       <td>-n</td>
       <td>–ntasks=&lt;number&gt;</td>
@@ -328,19 +328,42 @@ table th:nth-of-type(4) {
       <li>down 故障节点不可用</li>
     </ul>
   </li>
-  <li>scontrol show partition <partition name="">：显示队列详细信息</partition></li>
+  <li>scontrol show partition &lt;partition name&gt;：显示队列详细信息</li>
 </ol>
 
 <h4 id="作业">作业</h4>
 <ol>
   <li>squeue：显示排队和运行中的作业（可以设置参数限制显示范围，e.g. -u显示特定user的作业）</li>
-  <li>scontrol show job <job>：实时作业详细信息</job></li>
+  <li>scontrol show job &lt;job id&gt;：实时作业详细信息</li>
 </ol>
 
 <h4 id="节点">节点</h4>
 <ol>
-  <li>scontrol show node <node name="">：显示节点状态</node></li>
+  <li>scontrol show node &lt;node name&gt;：显示节点状态
+    <ul>
+      <li>CfgTRES: 该节点的总资源（TRES表示Trackable Resource）
+        <ul>
+          <li>CfgTRES=cpu=32,mem=257828M,billing=32,gres/gpu=8</li>
+        </ul>
+      </li>
+      <li>AllocTRES: 已经分配的资源
+        <ul>
+          <li>AllocTRES=cpu=4,mem=8800M,gres/gpu=2：已经占用 了 4 个 CPU 核心，8800 MB 内存和 2 块 GPU 卡</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
 </ol>
+
+<h4 id="简单使用方法">简单使用方法</h4>
+<ol>
+  <li>sinfo -&gt; 查看总体GPU使用情况</li>
+  <li>scontrol show node &lt;node name&gt; -&gt; 查看具体节点GPU剩余情况</li>
+  <li>sbatch -w &lt;node name&gt; –gres=gpu:&lt;number&gt; train.sh -&gt; 在相应节点上request对应的GPU资源</li>
+  <li>scontrol show job &lt;jobid&gt; -&gt; 查看任务详细信息</li>
+</ol>
+
+<p>在申请相应资源后，任务只能<strong>获取到</strong>对应部分资源。比如说，无论节点总体的GPU使用情况如何 (e.g. 一共8个GPU，已占用3个)，若–gres=gpu:4 (申请了4个GPU)，那么程序的CUDA_VISIBLE_DEVICES=0,1,2,3</p>
 
 <h4 id="参考资料">参考资料</h4>
 <ol>

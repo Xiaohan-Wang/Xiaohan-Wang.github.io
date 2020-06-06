@@ -1,0 +1,153 @@
+I"e
+<p>SLURM：开源作业调度系统</p>
+
+<h4 id="提交作业">提交作业</h4>
+<h5 id="提交方式">提交方式</h5>
+<p>Slurm提交作业有3种模式，分别为交互模式，批处理模式，分配模式。这三种方式<strong>只是用户使用方式的区别，而在管理，调度，记账时同等对待</strong></p>
+<ol>
+  <li>交互模式(srun)：交互式作业提交，提交命令后，等待作业执行完成之后返回命令行窗口。</li>
+  <li>批处理模式(sbatch)：用户编写作业脚本，指定资源需求约束，提交后台执行作业。</li>
+  <li>分配模式(salloc)：结点资源抢占命令。该命令支持用户在提交作业前，抢占所需计算资源。</li>
+</ol>
+
+<h5 id="运行参数">运行参数</h5>
+<p>以下参数适用于所有作业提交命令(srun, sbatch, salloc)。<strong>sbatch时可以通过脚本提交或命令行提交</strong>。</p>
+
+<p>常用：</p>
+
+<style>
+table th:first-of-type {
+    width: 8%;
+}
+table th:nth-of-type(2) {
+    width: 28%;
+}
+table th:nth-of-type(3) {
+    width: 25%;
+}
+table th:nth-of-type(4) {
+    width: 39%;
+}
+</style>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>简写</th>
+      <th>作用</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-J</td>
+      <td>–job-name</td>
+      <td>指定作业名称</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-p</td>
+      <td>–partition</td>
+      <td>指定队列资源</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>-w</td>
+      <td>–nodelist=&lt;host1,host2,…&gt;</td>
+      <td>在指定的节点上运行</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–gres=gpu:&lt;number&gt;</td>
+      <td>每个节点的GPU数</td>
+      <td>gres是generic resource</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>其他：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>参数</th>
+      <th>简写</th>
+      <th>作用</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>-N</td>
+      <td>–nodes=&lt;number&gt;</td>
+      <td>指定节点数量</td>
+      <td>是节点数，不是CPU核数，实际分配的是节点数×每节点CPU核数</td>
+    </tr>
+    <tr>
+      <td>-n</td>
+      <td>–ntasks=&lt;number&gt;</td>
+      <td>运行&lt;number&gt;个任务</td>
+      <td>默认为每个节点一个任务，注意是所需总CPU核数</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–ntasks-per-node=&lt;ntasks&gt;</td>
+      <td>每个节点运行&lt;ntasks&gt;个任务</td>
+      <td>需与-n=&lt;number&gt;配合</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>–ntasks-per-core=&lt;ntasks&gt;</td>
+      <td>每颗CPU核运行&lt;ntasks&gt;个任务</td>
+      <td>需与-n=&lt;number&gt;配合，并自动绑定&lt;ntasks&gt;个任务到每个CPU核</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="查看信息">查看信息</h4>
+<h5 id="队列">队列</h5>
+<ol>
+  <li>sinfo：显示队列中各个节点的状态（idle, mix, alloc, drain）
+    <ul>
+      <li>idle，表示节点处于空闲状态</li>
+      <li>mix，节点具有分配CPU的作业，而其他的CPU状态是IDLE，新提交的作业继续运行</li>
+      <li>alloc，节点所有CPU都被占用，新提交的作业将排队</li>
+      <li>drain，出现这个状态时，不影响正在运行的作业，但是不接受新的作业调度，可以使用命令sinfo –R打印节点不正常的状态产生原因</li>
+      <li>down 故障节点不可用</li>
+    </ul>
+  </li>
+  <li>scontrol show partition &lt;partition name&gt;：显示队列详细信息</li>
+</ol>
+
+<h4 id="作业">作业</h4>
+<ol>
+  <li>squeue：显示排队和运行中的作业（可以设置参数限制显示范围，e.g. -u显示特定user的作业）</li>
+  <li>scontrol show job &lt;job id&gt;：实时作业详细信息</li>
+</ol>
+
+<h4 id="节点">节点</h4>
+<ol>
+  <li>scontrol show node &lt;node name&gt;：显示节点状态
+    <ul>
+      <li>CfgTRES: 总资源（TRES表示Trackable Resource）
+        <ul>
+          <li>CfgTRES=cpu=32,mem=257828M,billing=32,gres/gpu=8</li>
+        </ul>
+      </li>
+      <li>AllocTRES: 已经分配的资源
+        <ul>
+          <li>AllocTRES=cpu=4,mem=8800M,gres/gpu=2：已经占用 了 4 个 CPU 核心，8800 MB 内存和 2 块 GPU 卡</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="参考资料">参考资料</h4>
+<ol>
+  <li><a href="https://www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B#.E6.96.87.E6.A1.A3.E6.A6.82.E8.BF.B0">SLURM使用基础教程</a></li>
+  <li><a href="http://hmli.ustc.edu.cn/doc/userguide/slurm-userguide.pdf">Slurm作业调度系统使用指南</a></li>
+</ol>
+:ET
