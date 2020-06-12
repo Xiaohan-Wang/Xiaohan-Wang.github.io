@@ -5,9 +5,88 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 10 Jun 2020 20:04:15 -0400</pubDate>
-    <lastBuildDate>Wed, 10 Jun 2020 20:04:15 -0400</lastBuildDate>
+    <pubDate>Thu, 11 Jun 2020 21:24:30 -0400</pubDate>
+    <lastBuildDate>Thu, 11 Jun 2020 21:24:30 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>假设检验</title>
+        <description>&lt;h4 id=&quot;各种分布&quot;&gt;各种分布&lt;/h4&gt;
+&lt;h5 id=&quot;正态分布&quot;&gt;正态分布&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15919078017261.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;$\mu \pm \sigma$ 之间的概率是68%&lt;/li&gt;
+  &lt;li&gt;$\mu \pm 1.96\sigma$ 之间的概率是95%&lt;/li&gt;
+  &lt;li&gt;$\mu \pm 2.56\sigma$ 之间的概率是99%&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;其它分布&quot;&gt;其它分布&lt;/h5&gt;
+&lt;p&gt;&lt;img src=&quot;/img/15919118904133.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+和正态分布不同，需要其它方法计算对应的概率范围&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;假设检验&quot;&gt;假设检验&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;原假设：也叫零假设，用 $H_0$ 来表示，一般是希望能证明为错误的假设。&lt;/li&gt;
+  &lt;li&gt;备择假设：原假设的反面，一般用 $H_1$ 来表示，是希望证明是正确的另一种可能。&lt;/li&gt;
+  &lt;li&gt;假设检验的目的在于试图找到证据拒绝原假设。当没有足够证据拒绝原假设时，不采用 “接受原假设” 的表述，而采用 “不拒绝原假设” 的表述。“不拒绝”的表述实际上意味着并未给出明确的结论，我们没有说原假设正确，也没有说它不正确。&lt;strong&gt;假设检验的主要目的是为了拒绝而不是接受。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;思路&quot;&gt;思路&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;欲证：备择假设为真&lt;/li&gt;
+  &lt;li&gt;原理1: &lt;strong&gt;假设证明难而证伪易&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;只需证：备择假设的否命题（原假设）为假&lt;/li&gt;
+  &lt;li&gt;原理2: &lt;strong&gt;小概率事件在少量实验中是不可能出现的&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;只需：观察到“&lt;strong&gt;原假设条件下的小概率事件&lt;/strong&gt;的发生”&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;检验方法&quot;&gt;检验方法&lt;/h5&gt;
+&lt;ol&gt;
+  &lt;li&gt;首先确定“小概率事件”的概率范围，即&lt;strong&gt;显著性水平&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;e.g. 显著性水平为0.05，即发生概率小于5%的事件为“小概率事件”&lt;/li&gt;
+      &lt;li&gt;显著性水平越高，“小概率事件”发生的可能性越大，即越来越容易拒绝原假设&lt;/li&gt;
+      &lt;li&gt;“小概率事件”发生的区域对应&lt;strong&gt;拒绝域&lt;/strong&gt;，&lt;strong&gt;拒绝域&lt;/strong&gt;没有覆盖的区域为&lt;strong&gt;置信区间&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;如下图：设已知成绩服从正态分布，原假设为成绩均值为$\mu$，在该条件下，红色区域对应小概率事件 (发生概率为5%)，即拒绝域概率为5%，置信区间概率为95%&lt;br /&gt;
+ &lt;img src=&quot;/img/15919111868762.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;检验方法1 (临界概率 to 临界值):
+    &lt;ul&gt;
+      &lt;li&gt;根据设定的显著度和对应分布找到“小概率事件”对应的临界值&lt;/li&gt;
+      &lt;li&gt;计算样本得到的统计量值，判定是否越过了临界值&lt;/li&gt;
+      &lt;li&gt;若是，则进入了小概率错误域 (拒绝域)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;检验方法2 (样本值 to 样本概率)：
+    &lt;ul&gt;
+      &lt;li&gt;计算样本得到的统计量值，进而在分布中找到对应的概率值，即p值&lt;/li&gt;
+      &lt;li&gt;将p值与显著度 (设定的“小概率事件”判定值) 进行比较&lt;/li&gt;
+      &lt;li&gt;如果p值比显著度小，则发生的样本属于“小概率事件”，故而拒绝原假设&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;检验方法1和2本质上是相同的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://www.zhihu.com/question/20254932&lt;/li&gt;
+  &lt;li&gt;https://cosx.org/2009/03/meaning-of-failure-to-reject-h0/&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</guid>
+        
+        <category>Statistics</category>
+        
+        
+      </item>
     
       <item>
         <title>EM algorithm, K-means, and GMM</title>
@@ -679,81 +758,6 @@ In ML project, it means that there’s no single prescribed recipe that is guara
         <guid isPermaLink="true">http://localhost:4000/2020/05/25/image-preprocessing/</guid>
         
         <category>Model Training</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Identity mapping</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1603.05027.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;p&gt;The forward and backward signals can be directly propagated from one block to any other block, when using identity mappings as 1) the skip connections and 2) after-addition activation. This makes training easier and improves generalization.&lt;/p&gt;
-
-&lt;h4 id=&quot;model&quot;&gt;Model&lt;/h4&gt;
-&lt;p&gt;Residual unit:
-&lt;img src=&quot;/img/15902038485632.jpg&quot; width=&quot;25%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;$x_l$ and $x_{l+1}$ are input and output of the $l$-th unit&lt;/li&gt;
-  &lt;li&gt;$F$ is a residual function&lt;/li&gt;
-  &lt;li&gt;$h(x_l) $ is an skip connection&lt;/li&gt;
-  &lt;li&gt;$f$ is an after-addition activation function.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;If (i) skip connection is identity mapping $h(x_l) = x_l$, and (ii) after-addition activation $f$ is an identity mapping, then we have
-&lt;img src=&quot;/img/15902041544783.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15902041725422.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;
-that is, the signal can be directly propagated from any unit to another, both forward and backward.&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h5 id=&quot;identity-skip-connections&quot;&gt;Identity Skip Connections&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15902046739782.jpg&quot; width=&quot;81%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15902049097732.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As indicated by the grey arrows in Fig. 2, the shortcut connections are the most direct paths for the information to propagate. Multiplicative manipulations (scaling, gating, 1×1 convolutions, and dropout) on the shortcuts can hamper information propagation and lead to optimization problems.&lt;/p&gt;
-
-&lt;h5 id=&quot;activation-functions&quot;&gt;Activation Functions&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15902048739817.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;
-&lt;img src=&quot;/img/15902048935542.jpg&quot; width=&quot;80%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;(a) original residual unit&lt;/li&gt;
-  &lt;li&gt;(b) BN after addition
-    &lt;ul&gt;
-      &lt;li&gt;the BN layer alters the signal that passes through the shortcut and impedes information propagation&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;(c) ReLU before addition
-    &lt;ul&gt;
-      &lt;li&gt;a non-negative output from the transform $F$, while intuitively a “residual” function should take values in $(-\infty, +\infty)$. As a result, the forward propagated signal is monotonically increasing, which may impact the representational ability.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;pre-activation: develop an asymmetric form where an activation $f$ only affect the residual path but not the both paths in the next Residual Unit (i.e. move the activation module in a) and b) to the residual path, which become d) and e))
-    &lt;ul&gt;
-      &lt;li&gt;(d) This ReLU layer is not used in conjunction with a BN layer, and may not enjoy the benefits of BN.&lt;/li&gt;
-      &lt;li&gt;(e)  result is good&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Benefit of pre-activation&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;Ease of optimization
-    &lt;ul&gt;
-      &lt;li&gt;the benefit of ease of optimization is more obvious in 1001-layer network than networks with fewer layers.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Reducing overfitting
-    &lt;ul&gt;
-      &lt;li&gt;The pre-activation version reaches slightly higher training loss at convergence, but produces lower test error. This phenomenon is observed on ResNet-110, ResNet-110(1-layer), and ResNet-164 on both CIFAR-10 and 100.&lt;/li&gt;
-      &lt;li&gt;In the original Residual Unit (Fig. 4(a)), although the BN normalizes the signal, this is soon added to the shortcut and thus the merged signal is not normalized. This unnormalized signal is then used as the input of the next weight layer. On the contrary, in the pre-activation version, the inputs to all weight layers have been normalized.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 22 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/22/Identity-mapping/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/22/Identity-mapping/</guid>
-        
-        <category>Baseline</category>
         
         
       </item>
