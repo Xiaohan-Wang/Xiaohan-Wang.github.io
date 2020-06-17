@@ -1,0 +1,20 @@
+I"�<h4 id="用总体估计总体方差">用总体估计总体方差</h4>
+<ul>
+  <li>calculating population variance and std for the whole population using all the data</li>
+  <li>e.g. What is the standard deviation of last year’s returns of the 12 funds I have invested in? In this case, we have the data for the whole population available.</li>
+  <li>When using the whole population to calculate population variance, <strong>divide</strong> the sum of squared deviations from the mean <strong>by the number of items in the population</strong>.</li>
+</ul>
+
+<h4 id="用样本估计总体方差">用样本估计总体方差</h4>
+<ul>
+  <li>calculating population variance and std using only a sample of data</li>
+  <li>e.g. What is the standard deviation of last year’s returns of equity funds in the world? In this case, we don’t have all the data available and we will have to estimate the population’s standard deviation from a sample.</li>
+  <li>When using a sample to calculate population variance, <strong>divide it by the number of items in the sample less one</strong>.</li>
+  <li>As a result, the calculated variance (and therefore also the standard deviation) will <strong>be slightly higher than if we would have used the population variance formula</strong>. The purpose of this little difference is to get a better and unbiased estimate of the population‘s variance (by dividing by the sample size lowered by one, we <strong>compensate for the fact that we are working only with a sample rather than with the whole population</strong>).</li>
+</ul>
+
+<h4 id="参考资料">参考资料</h4>
+<ol>
+  <li>https://www.macroption.com/population-sample-variance-standard-deviation/</li>
+</ol>
+:ET

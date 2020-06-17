@@ -1,0 +1,30 @@
+I"6
+<h4 id="amazon-sagemaker简介">Amazon SageMaker简介</h4>
+<ul>
+  <li>AWS提供的面向所有开发人员和数据科学家的<strong>机器学习服务</strong></li>
+  <li>可以帮助开快速构建、训练和部署机器学习 (ML) 模型</li>
+</ul>
+
+<ol>
+  <li>Amazon SageMaker Ground Truth
+    <ul>
+      <li>快速构建和管理高度准确的训练数据集</li>
+    </ul>
+  </li>
+  <li>Amazon SageMaker Studio
+    <ul>
+      <li>首个<strong>适用于机器学习的完全集成式开发环境 (IDE)</strong></li>
+      <li>提供了一个基于 Web 的可视化界面，可以通过该界面执行所有 ML 开发步骤，包括笔记本、实验管理、自动创建模型、调试以及模型偏差检测</li>
+    </ul>
+  </li>
+</ol>
+
+<h4 id="amazon-sagemaker-studio">Amazon SageMaker Studio</h4>
+<p>待填…</p>
+
+<h4 id="参考资料">参考资料</h4>
+<ol>
+  <li>https://aws.amazon.com/cn/sagemaker/?nc2=h_ql_prod_ml_sm</li>
+  <li>https://aws.amazon.com/cn/getting-started/hands-on/create-machine-learning-model-automatically-sagemaker-autopilot/</li>
+</ol>
+:ET

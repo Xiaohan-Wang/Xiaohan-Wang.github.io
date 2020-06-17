@@ -5,9 +5,186 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 11 Jun 2020 21:24:30 -0400</pubDate>
-    <lastBuildDate>Thu, 11 Jun 2020 21:24:30 -0400</lastBuildDate>
+    <pubDate>Wed, 17 Jun 2020 09:27:47 -0400</pubDate>
+    <lastBuildDate>Wed, 17 Jun 2020 09:27:47 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>核方法、核函数、核技巧、再生核希尔伯特空间</title>
+        <description>&lt;h4 id=&quot;核方法kernel-method&quot;&gt;核方法（kernel method）&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;理论基础: Cover’s theorem，其指出，在低维空间中线性不可分的数据，通过非线性变换将其投影到高维空间之后，大概率会变为线性可分的数据&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;将低维空间的非线性可分问题，转化为高维空间的线性可分问题&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;核技巧kernel-trick&quot;&gt;核技巧（kernel trick）&lt;/h4&gt;
+&lt;p&gt;设$\phi(x)$为映射函数，$\phi(x): \mathcal{X} \to \mathcal{H}$，其中$\mathcal{X}$为输入空间，$\mathcal{H}$为特征空间 (特征空间需要是Hilbert space，即完备的内积空间)。&lt;/p&gt;
+
+&lt;p&gt;欲求$&amp;lt;\phi(x_1), \phi(x_2)&amp;gt;$：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;传统方法：先分别计算$\phi(x_1)$和$\phi(x_2)$，再在特征空间中计算二者的内积
+    &lt;ul&gt;
+      &lt;li&gt;缺点：当特征空间维度很大时，计算非常复杂&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;核技巧：在输入空间找到一个函数$K(x_1, x_2)$，使得$K(x_1, x_2)=&amp;lt;\phi(x_1), \phi(x_2)&amp;gt;$，从而可以直接在低维空间中计算出结果，加速核方法计算。对应的函数 $K$ 就是核函数&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;核函数kernels&quot;&gt;核函数（kernels）&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;在实际应用时，映射函数 $\phi(x)$ 不需要是已知的。换句话说，核技巧的目的就是在不需要显式地定义特征空间和映射函数的条件下，计算映射之后的内积&lt;/li&gt;
+  &lt;li&gt;核函数 $K$ 本质上需要满足的条件 (不需要$\phi(x)$已知):
+    &lt;ul&gt;
+      &lt;li&gt;对称性: $K(\mathrm{x_1},\mathrm{x_2}) = K(\mathrm{x_2},\mathrm{x_1})$&lt;/li&gt;
+      &lt;li&gt;半正定性: 对于任意 $n$ 和任意 $x_1, x_2, \cdots, x_n  \in \mathcal{X}$，由 $K(x_i, x_j)$ 定义的 Gram matrix 总是半正定的&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;只要 $K$ 是核函数，那么一定存在一个Hilbert space和一个映射函数$\phi$，使得$K(x_1, x_2)=&amp;lt;\phi(x_1), \phi(x_2)&amp;gt;$&lt;/li&gt;
+  &lt;li&gt;常见核函数&lt;br /&gt;
+  &lt;img src=&quot;/img/15923213053700.jpg&quot; width=&quot;90%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+  其它变换得到的核函数：参考资料3 $\text{P}_{17, 18}$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;再生核希尔伯特空间reproducing-kernel-hilbert-spacesrkhs&quot;&gt;再生核希尔伯特空间（reproducing kernel Hilbert spaces，RKHS）&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;再生核希尔伯特空间
+    &lt;ul&gt;
+      &lt;li&gt;设 $\displaystyle \mathcal{H}$ 是希尔伯特空间，其元素为函数 $\displaystyle f:X\rightarrow R$。对于某个固定的 $\displaystyle x\in \mathcal{X}$，映射$\displaystyle \delta _{x} :H\rightarrow R,\delta _{x} :f\rightarrow f( x)$称为点 $x$ 的 (Dirac) evaluation functional&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;设 $\displaystyle \mathcal{H}$ 是希尔伯特空间，其元素为函数 $\displaystyle f:X\rightarrow R$。若对于任意的 $x \in \mathcal{X}$，$\delta_x$ 都是连续的，则 $\mathcal{H}$ 为RKHS&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;RKHS是一个函数空间，其中的元素 $f$ 为函数。通常情况下特征空间 $\mathcal{H}$ 为 RKHS。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;再生核
+    &lt;ul&gt;
+      &lt;li&gt;再生核 $K$ 是核函数的一种，其满足
+        &lt;ul&gt;
+          &lt;li&gt;对于任意固定的 $x_0\in\mathcal{X}$，$K(x,x_0)$作为 $x$ 的函数属于我们的函数空间$\mathcal{H}$&lt;/li&gt;
+          &lt;li&gt;对于任意 $x\in\mathcal{X}$ 和 $f(\cdot)\in\mathcal{H}$，有 $f(x) = \langle f(\cdot),K(\cdot,x)\rangle$ (再生性质 / reproducing property)&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;对于再生核 $K$，我们可以自然的定义映射函数 $\phi(x)=K(\cdot, x)$，此时，通过再生核的再生性质，可知
+  &lt;script type=&quot;math/tex&quot;&gt;\langle \phi(x_1),\phi(x_2)\rangle = \langle K(\cdot,x_1),K(\cdot,x_2)\rangle = K(x_1,x_2)&lt;/script&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;关系
+    &lt;ul&gt;
+      &lt;li&gt;一个希尔伯特空间存在至多一个再生核 (不存在 / 存在一个)&lt;/li&gt;
+      &lt;li&gt;存在再生核的希尔伯特空间就是再生核希尔伯特空间&lt;/li&gt;
+      &lt;li&gt;一个再生核对应唯一的再生核希尔伯特空间&lt;/li&gt;
+      &lt;li&gt;再生核和再生核希尔伯特空间是一一对应的&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;总结&quot;&gt;总结&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;一个核函数 $K$ 可能对应多个映射函数 $\phi$，而每个映射函数$\phi$ 有自己对应的特征空间 (i.e. 希尔伯特空间）
+    &lt;ul&gt;
+      &lt;li&gt;例子详见 参考资料6 $P_{11}$ example 35&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;任意一个核函数 $K$ 都可以作为再生核，构建其对应的唯一的再生核希尔伯特空间&lt;/li&gt;
+  &lt;li&gt;对于任意一个核函数 $K$，可以存在多个对应的特征空间 $\mathcal{H_0}$，但其作为再生核只对应唯一的RKHS。同时，RKHS是所有特征空间最为“精简”的一个，这里的精简体现在，无论在 $\mathcal{H_0}$ 中得到怎样的分类模型 $⟨w,\phi_0(x)⟩_{\mathcal{H_0}}$，在RKHS中都存在一个 $f$ 可以得到和它相同的效果，因此对于某个核函数，RKHS代表了它最本征的信息。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/61794781&quot;&gt;核方法、核技巧和核函数&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.fanyeong.com/2017/11/13/the-kernel-trick/&quot;&gt;核技巧&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.stat.berkeley.edu/~bartlett/courses/2014spring-cs281bstat241b/lectures/20-notes.pdf&quot;&gt;PPT&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cosx.org/2014/05/svm-series-add-2-kernel-ii/&quot;&gt;“支持向量机系列” 的番外篇二: Kernel II&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/54704957&quot;&gt;什么是RKHS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.gatsby.ucl.ac.uk/~gretton/coursefiles/RKHS_Notes1.pdf&quot;&gt;课程讲义&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://murongxixi.github.io/2013/11/12/%E6%A0%B8%E5%87%BD%E6%95%B0%EF%BC%8C%E5%86%8D%E7%94%9F%E6%A0%B8Hilbert%E7%A9%BA%E9%97%B4%EF%BC%8C%E8%A1%A8%E7%A4%BA%E5%AE%9A%E7%90%86/&quot;&gt;核函数，再生核Hilbert空间，表示定理&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Tue, 16 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/16/%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%A0%B8%E5%87%BD%E6%95%B0-%E6%A0%B8%E6%8A%80%E5%B7%A7/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/16/%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%A0%B8%E5%87%BD%E6%95%B0-%E6%A0%B8%E6%8A%80%E5%B7%A7/</guid>
+        
+        <category>Math</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Amazon SageMaker</title>
+        <description>
+&lt;h4 id=&quot;amazon-sagemaker简介&quot;&gt;Amazon SageMaker简介&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;AWS提供的面向所有开发人员和数据科学家的&lt;strong&gt;机器学习服务&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;可以帮助开快速构建、训练和部署机器学习 (ML) 模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Amazon SageMaker Ground Truth
+    &lt;ul&gt;
+      &lt;li&gt;快速构建和管理高度准确的训练数据集&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Amazon SageMaker Studio
+    &lt;ul&gt;
+      &lt;li&gt;首个&lt;strong&gt;适用于机器学习的完全集成式开发环境 (IDE)&lt;/strong&gt;&lt;/li&gt;
+      &lt;li&gt;提供了一个基于 Web 的可视化界面，可以通过该界面执行所有 ML 开发步骤，包括笔记本、实验管理、自动创建模型、调试以及模型偏差检测&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;amazon-sagemaker-studio&quot;&gt;Amazon SageMaker Studio&lt;/h4&gt;
+&lt;p&gt;待填…&lt;/p&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://aws.amazon.com/cn/sagemaker/?nc2=h_ql_prod_ml_sm&lt;/li&gt;
+  &lt;li&gt;https://aws.amazon.com/cn/getting-started/hands-on/create-machine-learning-model-automatically-sagemaker-autopilot/&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 12 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/12/SageMaker/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/12/SageMaker/</guid>
+        
+        <category>Tools</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>AWS</title>
+        <description>
+&lt;h4 id=&quot;aws简介&quot;&gt;AWS简介&lt;/h4&gt;
+&lt;p&gt;Amazon Web Services (AWS) 是全球最全面、应用最广泛的云平台。从全球数据中心提供涉及超过十二种类别的，超过 175 项功能齐全的服务：不仅包括计算、存储和数据库等基础设施技术，而且提供机器学习、人工智能、数据湖和分析以及物联网等新兴技术。&lt;/p&gt;
+
+&lt;h4 id=&quot;amazon-sagemaker&quot;&gt;Amazon SageMaker&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;面向所有开发人员和数据科学家的&lt;strong&gt;机器学习服务&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;可以帮助开快速构建、训练和部署机器学习 (ML) 模型&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;amazon-ec2-amazon-elastic-compute-cloud&quot;&gt;Amazon EC2 (Amazon Elastic Compute Cloud)&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;可以在云中提供安全并且可调整大小的计算容量&lt;/li&gt;
+  &lt;li&gt;提供多种经过优化，适用于不同使用场景的实例类型以供选择。&lt;strong&gt;不同实例类型具有不同的 CPU、内存、存储和网络容量，可以灵活地为不同应用程序选择适当的资源组合&lt;/strong&gt;。每种实例类型都包括一种或多种实例大小，从而能够扩展资源以满足目标工作负载的要求。
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/cn/ec2/instance-types/&quot;&gt;实例类型&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/cn/ec2/pricing/on-demand/&quot;&gt;定价&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://aws.amazon.com/cn/getting-started/fundamentals-overview/&lt;/li&gt;
+  &lt;li&gt;https://aws.amazon.com/cn/sagemaker/?nc2=h_ql_prod_ml_sm&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Fri, 12 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/12/AWS/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/12/AWS/</guid>
+        
+        <category>Tools</category>
+        
+        
+      </item>
     
       <item>
         <title>假设检验</title>
@@ -28,8 +205,9 @@
 
 &lt;h4 id=&quot;假设检验&quot;&gt;假设检验&lt;/h4&gt;
 &lt;ul&gt;
-  &lt;li&gt;原假设：也叫零假设，用 $H_0$ 来表示，一般是希望能证明为错误的假设。&lt;/li&gt;
-  &lt;li&gt;备择假设：原假设的反面，一般用 $H_1$ 来表示，是希望证明是正确的另一种可能。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;原假设 (Null hypothesis)&lt;/strong&gt;：也叫零假设，用 $H_0$ 来表示，一般是希望能证明为错误的假设。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;备择假设 (Alternative hypothesis)&lt;/strong&gt;：原假设的反面，一般用 $H_1$ 来表示，是希望证明是正确的另一种可能。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;检验统计量 (Test statistic)&lt;/strong&gt;：用于统计假设检验的统计量，是数据集的数字汇总，将数据减少到可用于执行假设检验的一个值。&lt;/li&gt;
   &lt;li&gt;假设检验的目的在于试图找到证据拒绝原假设。当没有足够证据拒绝原假设时，不采用 “接受原假设” 的表述，而采用 “不拒绝原假设” 的表述。“不拒绝”的表述实际上意味着并未给出明确的结论，我们没有说原假设正确，也没有说它不正确。&lt;strong&gt;假设检验的主要目的是为了拒绝而不是接受。&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -56,13 +234,13 @@
   &lt;li&gt;检验方法1 (临界概率 to 临界值):
     &lt;ul&gt;
       &lt;li&gt;根据设定的显著度和对应分布找到“小概率事件”对应的临界值&lt;/li&gt;
-      &lt;li&gt;计算样本得到的统计量值，判定是否越过了临界值&lt;/li&gt;
+      &lt;li&gt;计算样本得到的统计量，判定是否越过了临界值&lt;/li&gt;
       &lt;li&gt;若是，则进入了小概率错误域 (拒绝域)&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
   &lt;li&gt;检验方法2 (样本值 to 样本概率)：
     &lt;ul&gt;
-      &lt;li&gt;计算样本得到的统计量值，进而在分布中找到对应的概率值，即p值&lt;/li&gt;
+      &lt;li&gt;计算样本得到的统计量，进而在分布中找到对应的概率值，即p值&lt;/li&gt;
       &lt;li&gt;将p值与显著度 (设定的“小概率事件”判定值) 进行比较&lt;/li&gt;
       &lt;li&gt;如果p值比显著度小，则发生的样本属于“小概率事件”，故而拒绝原假设&lt;/li&gt;
     &lt;/ul&gt;
@@ -73,6 +251,14 @@
   &lt;li&gt;检验方法1和2本质上是相同的。&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h4 id=&quot;错误类型&quot;&gt;错误类型&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;I类错误 (Type I error): 拒绝了正确的零假设&lt;/li&gt;
+  &lt;li&gt;II类错误 (Type II error): 没有拒绝错误的零假设&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/img/15920070800446.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+
 &lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
 &lt;ol&gt;
   &lt;li&gt;https://www.zhihu.com/question/20254932&lt;/li&gt;
@@ -82,6 +268,37 @@
         <pubDate>Thu, 11 Jun 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</guid>
+        
+        <category>Statistics</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>从 总体 &amp; 样本 估计总体方差</title>
+        <description>&lt;h4 id=&quot;用总体估计总体方差&quot;&gt;用总体估计总体方差&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;calculating population variance and std for the whole population using all the data&lt;/li&gt;
+  &lt;li&gt;e.g. What is the standard deviation of last year’s returns of the 12 funds I have invested in? In this case, we have the data for the whole population available.&lt;/li&gt;
+  &lt;li&gt;When using the whole population to calculate population variance, &lt;strong&gt;divide&lt;/strong&gt; the sum of squared deviations from the mean &lt;strong&gt;by the number of items in the population&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;用样本估计总体方差&quot;&gt;用样本估计总体方差&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;calculating population variance and std using only a sample of data&lt;/li&gt;
+  &lt;li&gt;e.g. What is the standard deviation of last year’s returns of equity funds in the world? In this case, we don’t have all the data available and we will have to estimate the population’s standard deviation from a sample.&lt;/li&gt;
+  &lt;li&gt;When using a sample to calculate population variance, &lt;strong&gt;divide it by the number of items in the sample less one&lt;/strong&gt;.&lt;/li&gt;
+  &lt;li&gt;As a result, the calculated variance (and therefore also the standard deviation) will &lt;strong&gt;be slightly higher than if we would have used the population variance formula&lt;/strong&gt;. The purpose of this little difference is to get a better and unbiased estimate of the population‘s variance (by dividing by the sample size lowered by one, we &lt;strong&gt;compensate for the fact that we are working only with a sample rather than with the whole population&lt;/strong&gt;).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://www.macroption.com/population-sample-variance-standard-deviation/&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 11 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/11/population-and-sample-variance/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/11/population-and-sample-variance/</guid>
         
         <category>Statistics</category>
         
@@ -384,7 +601,7 @@ table th:nth-of-type(4) {
         <link>http://localhost:4000/2020/06/05/slurm/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/05/slurm/</guid>
         
-        <category>Linux</category>
+        <category>Tools</category>
         
         
       </item>
@@ -475,289 +692,6 @@ table th:nth-of-type(4) {
         <guid isPermaLink="true">http://localhost:4000/2020/06/01/segmentation-metrics/</guid>
         
         <category>Metrics</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>语义分割损失函数</title>
-        <description>
-&lt;p&gt;&lt;strong&gt;Note： 以下虽然将预测结果称为概率，但其本身并不具有概率的内在含义，其本质上只是各个类别的得分情况。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;cross-entropy系列&quot;&gt;cross entropy系列&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;把每个像素看作一个单独的sample&lt;/li&gt;
-  &lt;li&gt;整个图像的loss是所有像素loss的（加权）平均值&lt;/li&gt;
-  &lt;li&gt;实际使用中，可以用weighted focal loss：$\text{pixel loss}=-\sum\limits_{classes}\alpha_{class}(1-y_{pred})^\gamma \times y_{true}log(y_{pred})$，以同时解决难学习样本问题和样本数量不均衡问题&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;basic-ce-loss&quot;&gt;basic CE loss&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;cross entropy loss （ce loss）
-    &lt;ul&gt;
-      &lt;li&gt;适用于二分类及多分类问题&lt;/li&gt;
-      &lt;li&gt;用多通道one-hot标签表示ground-truth。prediction同样为多通道，每个通道表示属于各个类的概率&lt;/li&gt;
-      &lt;li&gt;用一个像素的预测结果（概率分布向量）和它的one-hot标签向量比较，得到该像素的损失：$\text{pixel loss}=-\sum\limits_{classes}y_{true}log(y_{pred})=-log(y_{\text{true_pred}})$。化简后的结果就是该像素的真实类别所对应的预测值的负log值。&lt;br /&gt;
- &lt;img src=&quot;/img/15907867544949.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;binary cross entropy loss （bce loss）
-    &lt;ul&gt;
-      &lt;li&gt;适用于二分类问题&lt;/li&gt;
-      &lt;li&gt;单通道图表示ground truth，0为负样本，1为正样本。prediction同样为单通道，表示为1（正样本）的概率&lt;/li&gt;
-      &lt;li&gt;每个像素的损失为：$\text{bce loss}=-y_{true}log(y_{pred})-(1-y_{true})log(1-y_{pred})$&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;weighed-ce-loss&quot;&gt;weighed CE loss&lt;/h5&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;针对在图像中多个类的样本不均衡问题&lt;/strong&gt;。基本的交叉熵损失为各个像素损失的平均值，也就是平等的对待各个像素（样本）。&lt;strong&gt;此时如果多个类的样本数量分布不均衡，图像最终的损失将由样本数量多的类别对应的损失所主导，导致模型会主要学习样本数量多的类别的特征，并且学习出来的模型会更偏向将像素预测为该类别&lt;/strong&gt;。&lt;/li&gt;
-  &lt;li&gt;为了避免图像最终的损失由样本数量多的类别对应的损失所主导，可以选择增大样本数量少的类的损失，即为不同样本数量的类别对应的损失添加不同的权重&lt;/li&gt;
-  &lt;li&gt;加权交叉熵损失函数：$\text{pixel loss}=-\sum\limits_{classes}\alpha_{class}\times y_{true}log(y_{pred})$，其中 $\alpha_{class}$ 对应不同类别的权重&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;focal-loss&quot;&gt;focal loss&lt;/h5&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;使网络更加关注难学习样本&lt;/strong&gt;。当图像中存在大量的易学习像素（对应类别的 $y_{pred}&amp;gt;0.5$）和少量的难学习像素（对应类别的 $y_{pred}&amp;lt;0.5$）时，虽然易学习像素的loss小于难学习像素的loss，但由于样本数量的影响，&lt;strong&gt;大量易学习像素总体的loss也将远远超过少量难学习像素总体的loss，使得图像最终的loss由大量易学习像素的loss所主导，导致模型趋向于继续关注大量易学习的样本，而不会关注难学习的样本&lt;/strong&gt;。&lt;/li&gt;
-  &lt;li&gt;focal loss修改交叉熵损失函数为：$\text{pixel loss}=-\sum\limits_{classes}(1-y_{pred})^\gamma \times y_{true}log(y_{pred})$，其中 $y_{pred}$ 越小（越难学习），对应的权重越大。实验表明 $\gamma=2$ 效果最好。&lt;/li&gt;
-  &lt;li&gt;focal loss也一定程度上解决了样本数量不平衡问题。因为样本数量少的类别对应的像素往往也是难学习的像素，因此关注难学习样本有助于关注样本数量少的类别。
-&lt;img src=&quot;/img/15908083180433.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;dice-loss系列&quot;&gt;dice loss系列&lt;/h4&gt;
-&lt;p&gt;待填…&lt;/p&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/101773544&quot;&gt;link1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://niecongchong.github.io/2019/08/06/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E6%80%BB%E7%BB%93/&quot;&gt;link2&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 29 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/29/segmentation-loss/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/29/segmentation-loss/</guid>
-        
-        <category>Loss</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Learning rate scheduler</title>
-        <description>
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;p&gt;总体来说，学习率呈现“上升——平稳——下降”的规律。&lt;/p&gt;
-
-&lt;h4 id=&quot;warm-up&quot;&gt;Warm up&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;减缓模型在训练初期过拟合mini-batch  &lt;br /&gt;
- 个人猜测：
-    &lt;ul&gt;
-      &lt;li&gt;在第一轮训练的时候（尤其是训练刚开始），模型只见过部分数据，此时梯度大概率是偏离相对全局真正较优的方向的（此时很大概率是过拟合当前小部分数据的方向），因此需要使用较小的学习率，以免对当前小部分数据过拟合，对后面训练造成影响（影响有两种可能：1）需要后面多轮训练来修正之间的偏差；2）偏差太大，后面多轮训练也没用，最后accuracy下降）。&lt;/li&gt;
-      &lt;li&gt;当训练了一段时间（比如两轮、三轮）后，模型见过了全部数据，此时梯度基本符合相对全局真正较优的方向，所以可以适当调大学习率。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;有助于保持模型深层的稳定性&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;learning-rate-decay&quot;&gt;Learning rate decay&lt;/h4&gt;
-&lt;p&gt;学习率衰减的基本思想是学习率随着训练的进行逐渐衰减，即在开始的时候使用较大的学习率，加快靠近最小值的速度，在后来些时候用较小的学习率，提高稳定性，避免因学习率太大跳过最小值，保证能够收敛到最小值。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;step(固定步长衰减): 每隔step_size个epoch后，lr衰减为原来的gamma倍&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/img/15906775729941.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;multistep(多步长衰减): 动态步长控制，lr衰减为原来的gamma倍&lt;/p&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/img/15906776874073.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;poly(多项式衰减): $lr = \text{base_lr} * (1 - \frac{T_{cur}}{T_{max}}) ^ {power} $
-    &lt;ul&gt;
-      &lt;li&gt;学习率曲线的形状主要由参数 power 的值来控制。当 power = 1 的时候，学习率曲线为一条直线。当 power &amp;lt; 1 的时候，下降速率由慢到快。当 power &amp;gt; 1 的时候，下降速率由快到慢。
- &lt;img src=&quot;/img/15906784236558.jpg&quot; width=&quot;85%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;cosine(余弦衰减): $lr = \frac{1}{2}*\text{base_lr} * \left(1+ \cos\left(\frac{T_{cur}}{T_{max}}\pi\right)\right)$
-    &lt;ul&gt;
-      &lt;li&gt;余弦值首先缓慢下降，然后加速下降，之后再次缓慢下降。&lt;/li&gt;
-    &lt;/ul&gt;
-
-    &lt;p&gt;&lt;img src=&quot;/img/15906782692333.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;warm-restart&quot;&gt;Warm restart&lt;/h4&gt;
-&lt;p&gt;TODO&lt;/p&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/338066667&quot;&gt;warm up&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://lumingdong.cn/setting-strategy-of-gradient-descent-learning-rate.html&quot;&gt;cosine&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/39565465&quot;&gt;poly&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/93624972&quot;&gt;step and multistep&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Thu, 28 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/28/learning-rate/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/28/learning-rate/</guid>
-        
-        <category>Model Training</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>batch size与learning rate</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://arxiv.org/pdf/1706.02677.pdf&quot;&gt;Paper link&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;当满足一定条件下，batch_size增大k倍时，lr可以直接相应增大k倍&lt;/li&gt;
-  &lt;li&gt;训练初期不满足1)所需的条件，此时lr需要使用warm up&lt;/li&gt;
-  &lt;li&gt;underlying loss function受batch size影响。为了不改变underlying loss function，在增大batch_size时，其实并不是改变per-worker sample size n，而是增大the number of workers k&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;linear-scaling-rule&quot;&gt;Linear Scaling Rule&lt;/h4&gt;
-&lt;p&gt;设有 k 个mini-batch $B_0, \cdots, B_{k-1}$:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;$lr=\eta$, 使用小batch_size $B_j$训练，共训 k 个iteration（$j=0, \cdots, k-1$）：&lt;br /&gt;
- &lt;img src=&quot;/img/15906983171534.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;$lr = \hat{\eta}$, 使用大batch-size $\cup_j{B_j}$训一个iteration：
- &lt;img src=&quot;/img/15906986727563.jpg&quot; width=&quot;40%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;1和2对应不同的更新方式，因此不太可能有$\hat w_{t+1} = w_{t+k}$。但是，&lt;strong&gt;如果我们假设$\nabla l(x,w_t) \approx \nabla l(x,w_{t+j})$ for $j &amp;lt; k$，那么在 $\hat \eta =k\eta$ 条件下能推出 $\hat w_{t+1} \approx  w_{t+k}$，即使用不同batch-size得到相似的更新结果&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;h4 id=&quot;warm-up&quot;&gt;Warm up&lt;/h4&gt;
-&lt;p&gt;在训练的开始阶段，模型权重迅速改变，不满足linear scaling rule中的条件。此时使用gradual warmup有助于解决训练中出现的问题。&lt;/p&gt;
-
-&lt;h4 id=&quot;batch-normalization&quot;&gt;Batch normalization&lt;/h4&gt;
-&lt;p&gt;如果有BN层，那么每个sample的loss其实并不是独立的，而是与其所在的mini-batch有关（因为会根据每个mini-batch的mean/std做normalization）。由于不同的mini-batch size会导致不同的mean/variance statistics distribution，因此改变mini-batch size会改变underlying loss function。&lt;/p&gt;
-
-&lt;p&gt;为了不改变underlying loss function，根据上述分析，在增大mini-batch size时，我们其实不应该改变per-worker sample size n（batch statistics是在每个worker上单独计算的），而是应该增大the number of workers k。通常n=32在大部分数据集和网络上都表现良好。&lt;/p&gt;
-
-</description>
-        <pubDate>Thu, 28 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/28/batch-size%E4%B8%8Elearning-rate/</guid>
-        
-        <category>Model Training</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Image Preprocessing</title>
-        <description>
-&lt;p&gt;原文：&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;https://medium.com/nanonets/how-to-use-deep-learning-when-you-have-limited-data-part-2-data-augmentation-c26971dc8ced&lt;/li&gt;
-  &lt;li&gt;https://freecontent.manning.com/the-computer-vision-pipeline-part-3-image-preprocessing/&lt;/li&gt;
-  &lt;li&gt;https://www.codecademy.com/articles/normalization&lt;/li&gt;
-  &lt;li&gt;https://www.infoq.cn/article/kyXx3sRKNsdFgqapv2Gw&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;No free lunch theorem for optimization:
-In ML project, it means that there’s no single prescribed recipe that is guaranteed to work well in all situations. We must make certain assumption about the dataset and the problem we are trying to solve.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;why-image-preprocessing&quot;&gt;why image preprocessing&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;The acquired data are usually messy and come from different sources, they need to be standardized and cleaned up.&lt;/li&gt;
-  &lt;li&gt;We can’t write a unique algorithm for each of the condition in which an image is taken, thus, when we acquire an image, we tend to convert it into a form that allows a general algorithm to solve it.&lt;/li&gt;
-  &lt;li&gt;It can reduce the complexity and increase the accuracy of the applied algorithm.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;彩色图像--灰度图像&quot;&gt;彩色图像 / 灰度图像&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;In many objects, color isn’t necessary to recognize and interpret an image. Grayscale can be good enough for recognizing certain objects. Because color images contain more information than black and white images, they can add unnecessary complexity and take up more space in memory.
- &lt;img src=&quot;/img/15904315018825.jpg&quot; width=&quot;100%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;In other applications, color is important to define certain objects. Like skin cancer detection which relies heavily on the skin colors (red rashes).&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;standardize-image&quot;&gt;Standardize Image&lt;/h4&gt;
-&lt;h5 id=&quot;reason&quot;&gt;Reason&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;If we didn’t scale our input training vectors, the ranges of our distributions of feature values would likely be different for each feature, and thus the learning rate would &lt;strong&gt;cause corrections in each dimension that would differ (proportionally speaking) from one another&lt;/strong&gt;. We might be over compensating a correction in one weight dimension while undercompensating in another.&lt;/li&gt;
-  &lt;li&gt;In the process of training our network, we’re going to be multiplying (weights) and adding to (biases) these initial inputs in order to cause activations that we then backpropogate with the gradients to train the model. We’d like in this process for each feature to have a similar range so that our &lt;strong&gt;gradients don’t go out of control&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;ways&quot;&gt;ways&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;Min-max normalization $\frac{\text{value}-\text{min}}{\text{max}-\text{min}}$: Guarantees all features will have the exact same scale but does not handle outliers well.&lt;br /&gt;
- &lt;img src=&quot;/img/15904331747160.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
- Normalizing fixed the squishing problem on the y-axis, but the x-axis is still problematic. Now if we were to compare these points, the y-axis would dominate; the y-axis can differ by 1, but the x-axis can only differ by 0.4.&lt;/li&gt;
-  &lt;li&gt;Z-score normalization $\frac{value-mean}{std}$: Handles outliers, but does not produce normalized data with the exact same scale.&lt;br /&gt;
- &lt;img src=&quot;/img/15904332447812.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
- While the data still looks squished, notice that the points are now on roughly the same scale for both features — almost all points are between -2 and 2 on both the x-axis and y-axis.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;data-augmentation&quot;&gt;Data Augmentation&lt;/h4&gt;
-
-&lt;h5 id=&quot;分类&quot;&gt;分类&lt;/h5&gt;
-&lt;ul&gt;
-  &lt;li&gt;有监督的数据增强：采用预设的数据变换规则，在已有数据的基础上进行数据的扩增
-    &lt;ul&gt;
-      &lt;li&gt;单样本数据增强：增强一个样本的时候，全部围绕着该样本本身进行操作
-        &lt;ul&gt;
-          &lt;li&gt;几何操作类：对图像进行几何变换，包括翻转，旋转，裁剪，变形，缩放等各类操作
-            &lt;ul&gt;
-              &lt;li&gt;可能会引入图像边界之外的位置，导致没有图像没有覆盖的黑色区域，此时可以通过常数、边缘、反射、对称等方式填充未知区域&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-          &lt;li&gt;颜色变换类：改变图像本身的内容，包括噪声、模糊、颜色变换（HSV，对比度变换）、擦除、填充
-            &lt;ul&gt;
-              &lt;li&gt;高斯噪声：当神经网络试图学习可能并无用处的高频特征时（即频繁发生的无意义模式），常常会发生过拟合。具有零均值特征的高斯噪声本质上就是在所有频率上都有数据点，能有效使得高频特征失真，减弱它对模型的影响。这也意味着低频成分（通常也是我们关心的数据）也会失真，但神经网络能够通过学习忽略这部分影响。添加正确数量的噪声就能增强神经网络的学习能力。&lt;/li&gt;
-            &lt;/ul&gt;
-          &lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;多样本数据增强方法：利用多个样本来产生新的样本
-        &lt;ul&gt;
-          &lt;li&gt;&lt;a href=&quot;https://www.jair.org/index.php/jair/article/view/10302/24590&quot;&gt;SMOTE&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1801.02929.pdf&quot;&gt;SamplePairing&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;&lt;a href=&quot;https://arxiv.org/pdf/1710.09412.pdf&quot;&gt;mixup&lt;/a&gt;&lt;/li&gt;
-          &lt;li&gt;SMOTE，SamplePairing，mixup 三者思路上有相同之处，都是试图将离散样本点连续化来拟合真实样本分布，不过所增加的样本点在特征空间中仍位于已知小样本点所围成的区域内。如果能够在给定范围之外适当插值，也许能实现更好的数据增强效果。&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;无监督的数据增强方法
-    &lt;ul&gt;
-      &lt;li&gt;生成新的数据: 通过模型学习数据的分布，随机生成与训练数据集分布一致的图片，代表方法 &lt;a href=&quot;https://arxiv.org/pdf/1406.2661.pdf&quot;&gt;GAN&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;学习增强策略: 通过模型，学习出适合当前任务的数据增强方法，代表方法 &lt;a href=&quot;https://arxiv.org/pdf/1805.09501.pdf&quot;&gt;AutoAugment&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;offline--online-augmentation&quot;&gt;Offline / Online augmentation&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;Offline augmentation:
-    &lt;ul&gt;
-      &lt;li&gt;事先进行所有必需的图像平移工作，基本上就是增加数据集大小&lt;/li&gt;
-      &lt;li&gt;当数据集相对较小时，优先选择这种方法，因为会将数据集增大N倍（N=执行的转换数量）&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Online augmentation:
-    &lt;ul&gt;
-      &lt;li&gt;将图像输入机器学习模型之前，以小批量进行图像平移&lt;/li&gt;
-      &lt;li&gt;比较适合数据集较大时的情况，因为我们很难应付数据集爆炸性变大。相反，我们可以小批量平移输入到模型中的图像。有些机器学习框架支持在线增强，使用GPU可以加快增强速度。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Mon, 25 May 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/05/25/image-preprocessing/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/05/25/image-preprocessing/</guid>
-        
-        <category>Model Training</category>
         
         
       </item>
