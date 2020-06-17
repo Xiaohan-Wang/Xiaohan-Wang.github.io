@@ -5,9 +5,56 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 17 Jun 2020 09:27:47 -0400</pubDate>
-    <lastBuildDate>Wed, 17 Jun 2020 09:27:47 -0400</lastBuildDate>
+    <pubDate>Wed, 17 Jun 2020 11:40:45 -0400</pubDate>
+    <lastBuildDate>Wed, 17 Jun 2020 11:40:45 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>估计量的无偏性、有效性、一致性</title>
+        <description>&lt;h4 id=&quot;估计量&quot;&gt;估计量&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;根据样本构造一个统计量，作为总体未知参数的估计，则该统计量为估计量&lt;/li&gt;
+  &lt;li&gt;估计量可视为一个随机变量
+    &lt;ul&gt;
+      &lt;li&gt;同一个总体可以进行多次抽样，不同的抽样结果可以计算出不同的估计量取值&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;无偏性&quot;&gt;无偏性&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;无偏估计指，估计量的数学期望等于被估计参数的真实值&lt;/li&gt;
+  &lt;li&gt;例子&lt;br /&gt;
+  &lt;img src=&quot;/img/15924068989806.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
+  假设圆心是被估计参数的真实值，粉色x代表每次抽样计算出的估计量。左图估计量的期望等于被估计参数的真实值，是无偏的。右图估计量的期望不等于被估计参数的真实值，是有偏的。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;有效性&quot;&gt;有效性&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;指估计量的离散程度，离散程度越小越有效&lt;/li&gt;
+  &lt;li&gt;注意，有效性和无偏性是不相关的&lt;br /&gt;
+  &lt;img src=&quot;/img/15924081407687.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+  &lt;li&gt;无偏估计不一定是最好的&lt;br /&gt;
+  &lt;img src=&quot;/img/15924083443839.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;一致性&quot;&gt;一致性&lt;/h4&gt;
+&lt;p&gt;待填…&lt;/p&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/22983179&quot;&gt;什么是无偏估计？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/qq_40597317/article/details/80639511&quot;&gt;估计量的无偏性、有效性、一致性&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</guid>
+        
+        <category>Statistics</category>
+        
+        
+      </item>
     
       <item>
         <title>核方法、核函数、核技巧、再生核希尔伯特空间</title>
@@ -665,33 +712,6 @@ table th:nth-of-type(4) {
         <guid isPermaLink="true">http://localhost:4000/2020/06/04/PyTorch%E5%A4%9A%E5%8D%A1%E8%AE%AD%E7%BB%83/</guid>
         
         <category>PyTorch</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>语义分割评价指标</title>
-        <description>
-&lt;h4 id=&quot;评价指标&quot;&gt;评价指标&lt;/h4&gt;
-&lt;p&gt;Let $n_{ij}$ be the number of pixels of class $i$ predicted to belong to class $j$, where there are $n_{cl}$ different classes, and let $t_i=\sum_jn_{ij}$ be the total number of pixels of class $i$.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;pixel accuracy: $\frac{\sum\limits_i n_{ii}}{\sum\limits_i t_{i}}$&lt;/li&gt;
-  &lt;li&gt;mean pixel accuracy $\frac{1}{n_{cl}}\sum\limits_i \frac{n_{ii}}{ t_{i}}$&lt;/li&gt;
-  &lt;li&gt;mean IoU: $\frac{1}{n_{cl}}\sum\limits_i \frac{n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$&lt;/li&gt;
-  &lt;li&gt;frequency weighted IoU $\frac{1}{\sum\limits_k t_k}\sum\limits_i \frac{t_i n_{ii}}{t_i+\sum\limits_j n_{ji}-n_{ii}}$&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;reference&quot;&gt;Reference&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;Fully Convolutional Networks for Semantic Segmentation&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 01 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/01/segmentation-metrics/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/01/segmentation-metrics/</guid>
-        
-        <category>Metrics</category>
         
         
       </item>
