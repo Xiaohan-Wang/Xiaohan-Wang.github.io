@@ -5,9 +5,36 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 17 Jun 2020 11:40:45 -0400</pubDate>
-    <lastBuildDate>Wed, 17 Jun 2020 11:40:45 -0400</lastBuildDate>
+    <pubDate>Thu, 18 Jun 2020 00:04:02 -0400</pubDate>
+    <lastBuildDate>Thu, 18 Jun 2020 00:04:02 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>迁移学习损失函数</title>
+        <description>&lt;h4 id=&quot;基于统计量&quot;&gt;基于统计量&lt;/h4&gt;
+&lt;h5 id=&quot;mmd-maximum-mean-discrepancy&quot;&gt;MMD (maximum mean discrepancy)&lt;/h5&gt;
+&lt;ul&gt;
+  &lt;li&gt;解决two-sample problem：通过比较两个distribution的sample，来判断两个distribution是否相同&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;paper&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;基于对抗学习&quot;&gt;基于对抗学习&lt;/h4&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;https://www.w3xue.com/exp/article/20196/40020.html&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/17/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/17/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid>
+        
+        <category>Loss</category>
+        
+        
+      </item>
     
       <item>
         <title>估计量的无偏性、有效性、一致性</title>
@@ -50,6 +77,90 @@
         <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</guid>
+        
+        <category>Statistics</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>MMD</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://www.aaai.org/Papers/AAAI/2007/AAAI07-262.pdf&quot;&gt;AAAI 2007 paper&lt;/a&gt; and &lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;JMLR 2012 paper&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;summary&quot;&gt;Summary&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;传统的用于衡量两个概率分布P和Q差别的方法，例如KL divergence，要求概率分布P和Q已知。也就是说，&lt;strong&gt;如果我们只有来自P和Q的样本，那么我们需要先进行概率密度估计 (density estimation)，然后才能衡量两个分布的差异&lt;/strong&gt;。&lt;/li&gt;
+  &lt;li&gt;MMD：利用来自P和Q的样本，直接获得它们对应的总体概率分布的差异，而无需density estimation这一中间步骤。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;mmd-metric&quot;&gt;MMD metric&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;Give observations $X := {x_1, \cdots , x_m}$ and $Y := {y_1, \cdots, y_n}$, which are independently and identically distributed (i.i.d.) from distribution $p$ and $q$. Let $\mathcal{F}$ be a class of functions $f : X \to \mathbb{R}$, and shorthand notation $E_x[ f(x)] :=E_{x \sim p}[ f(x)]$ and $E_y[ f(y)] := E_{y\sim q}[ f(y)]$ denote expectations with respect to $p$ and $q$, respectively, where $x \sim p$ indicates x has distribution $p$.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Maximum mean discrepancy (MMD) is defined as:&lt;/p&gt;
+
+    &lt;script type=&quot;math/tex; mode=display&quot;&gt;MMD[\mathcal{F}, p,q] := \sup_{f \in \mathcal{F}}(E_x[ f(x)]−E_y[ f(y)]) .&lt;/script&gt;
+
+    &lt;p&gt;We must therefore dentify a function class that is &lt;strong&gt;rich enough to uniquely identify whether $p = q$&lt;/strong&gt;. And since we want to obtain this discrepancy by sample $X$ and $Y$,  the function class should also be &lt;strong&gt;restrictive enough to provide useful finite sample estimates&lt;/strong&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Propose the unit ball in a reproducing kernel Hilbert space $\mathcal H$ as our MMD function class $\mathcal{F}$. Define &lt;strong&gt;mean embedding&lt;/strong&gt; $\mu_p(t) \in \mathcal{H}$ such that &lt;script type=&quot;math/tex&quot;&gt;E_x [f(x)] = \lt f, \mu_p \gt _{\mathcal{H}}&lt;/script&gt; for all $f \in \mathcal{H}$. If we set $f= \phi (t) = k(t, \cdot)$, we obtain $\mu_p(t) = &amp;lt;\mu_p, k(t, ·)&amp;gt;_\mathcal{H} =E_xk(t, x)$, in other words, the mean embedding of the distribution $p$ is the expectation under $p$ of the canonical feature map.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;We thus have
+    &lt;center&gt; 
+ $$
+ \begin{split}
+ MMD^2 \left[ \mathcal{F}, p,q \right] &amp;amp;= \left[ \sup_{||f||_\mathcal{H} \leq 1}(E_x [ f(x)]−E_y [ f(y)])
+\right]^2\\&amp;amp;=    \left[ \sup_{||f||_\mathcal{H} \leq 1}&amp;lt;\mu_p-\mu_q,f&amp;gt;_\mathcal{H}
+\right]^2\\&amp;amp;=||\mu_p-\mu_q||_\mathcal{H}^2\\&amp;amp;=||E_x\phi(x)-E_y\phi(y)||_\mathcal{H}^2
+ \end{split}
+ $$
+ &lt;/center&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The MMD is a metric, when $\mathcal{H}$ is a universal RKHSs, defined on a compact metric space X. It can be proven that &lt;strong&gt;the Gaussian and Laplace RKHSs&lt;/strong&gt; are universal.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;finite-sample-estimate&quot;&gt;Finite sample estimate&lt;/h4&gt;
+&lt;p&gt;Given $x$ and $x^{\prime}$ independent random variables with distribution $p$, and $y$ and $y^\prime$ independent random variables with distribution $q$, the squared population MMD is&lt;/p&gt;
+&lt;center&gt;
+$$
+MMD^2 [\mathcal{F}, p,q] = E_{x,x^\prime}
+\left[k(x, x^\prime)\right] +E_{y,y^\prime}\left[ k(y, y′)\right]−2E_{x,y} \left[k(x, y)\right]
+$$
+&lt;/center&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;An unbiased empirical estimate
+ &lt;img src=&quot;/img/15924519721534.jpg&quot; width=&quot;75%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;An biased empirical estimate
+ &lt;img src=&quot;/img/15924520728791.jpg&quot; width=&quot;75%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;A linear time statistics&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;link&lt;/a&gt; $P_{739}$ Lemma 14&lt;/li&gt;
+      &lt;li&gt;need sufficient data (many more samples than the quadratic-cost tests)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Estimate 1 and 2 cost $O((m+n)^2)$ time to compute both statistics&lt;/li&gt;
+  &lt;li&gt;Estimate 3 can be computed in linear time&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/kailugaji/p/11004246.html&quot;&gt;MATLAB最大均值差异&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/17/MMD/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/17/MMD/</guid>
         
         <category>Statistics</category>
         
@@ -475,243 +586,6 @@ in each iteration, we are absolutely certain as to which cluster the point belon
         <guid isPermaLink="true">http://localhost:4000/2020/06/09/Image-classification-dataset/</guid>
         
         <category>Datasets</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>slurm使用基础</title>
-        <description>
-&lt;p&gt;SLURM：开源作业调度系统&lt;/p&gt;
-
-&lt;h4 id=&quot;提交作业&quot;&gt;提交作业&lt;/h4&gt;
-&lt;h5 id=&quot;提交方式&quot;&gt;提交方式&lt;/h5&gt;
-&lt;p&gt;Slurm提交作业有3种模式，分别为交互模式，批处理模式，分配模式。这三种方式&lt;strong&gt;只是用户使用方式的区别，而在管理，调度，记账时同等对待&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;交互模式(srun)：交互式作业提交，提交命令后，等待作业执行完成之后返回命令行窗口。&lt;/li&gt;
-  &lt;li&gt;批处理模式(sbatch)：用户编写作业脚本，指定资源需求约束，提交后台执行作业。&lt;/li&gt;
-  &lt;li&gt;分配模式(salloc)：结点资源抢占命令。该命令支持用户在提交作业前，抢占所需计算资源。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;运行参数&quot;&gt;运行参数&lt;/h5&gt;
-&lt;p&gt;以下参数适用于所有作业提交命令(srun, sbatch, salloc)。&lt;strong&gt;sbatch时可以通过脚本提交或命令行提交&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;p&gt;常用：&lt;/p&gt;
-
-&lt;style&gt;
-table th:first-of-type {
-    width: 8%;
-}
-table th:nth-of-type(2) {
-    width: 28%;
-}
-table th:nth-of-type(3) {
-    width: 25%;
-}
-table th:nth-of-type(4) {
-    width: 39%;
-}
-&lt;/style&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;参数&lt;/th&gt;
-      &lt;th&gt;简写&lt;/th&gt;
-      &lt;th&gt;作用&lt;/th&gt;
-      &lt;th&gt;备注&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-p&lt;/td&gt;
-      &lt;td&gt;–partition&lt;/td&gt;
-      &lt;td&gt;指定队列资源&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;–gres=gpu:&amp;lt;number&amp;gt;&lt;/td&gt;
-      &lt;td&gt;每个节点的GPU数&lt;/td&gt;
-      &lt;td&gt;gres是generic resource&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-J&lt;/td&gt;
-      &lt;td&gt;–job-name&lt;/td&gt;
-      &lt;td&gt;指定作业名称&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-w&lt;/td&gt;
-      &lt;td&gt;–nodelist=&amp;lt;host1,host2,…&amp;gt;&lt;/td&gt;
-      &lt;td&gt;在指定的节点上运行&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;其他：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;参数&lt;/th&gt;
-      &lt;th&gt;简写&lt;/th&gt;
-      &lt;th&gt;作用&lt;/th&gt;
-      &lt;th&gt;备注&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-N&lt;/td&gt;
-      &lt;td&gt;–nodes=&amp;lt;number&amp;gt;&lt;/td&gt;
-      &lt;td&gt;指定节点数量&lt;/td&gt;
-      &lt;td&gt;是节点数，不是CPU核数，实际分配的是节点数×每节点CPU核数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;-n&lt;/td&gt;
-      &lt;td&gt;–ntasks=&amp;lt;number&amp;gt;&lt;/td&gt;
-      &lt;td&gt;运行&amp;lt;number&amp;gt;个任务&lt;/td&gt;
-      &lt;td&gt;默认为每个节点一个任务，注意是所需总CPU核数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;–ntasks-per-node=&amp;lt;ntasks&amp;gt;&lt;/td&gt;
-      &lt;td&gt;每个节点运行&amp;lt;ntasks&amp;gt;个任务&lt;/td&gt;
-      &lt;td&gt;需与-n=&amp;lt;number&amp;gt;配合&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt;–ntasks-per-core=&amp;lt;ntasks&amp;gt;&lt;/td&gt;
-      &lt;td&gt;每颗CPU核运行&amp;lt;ntasks&amp;gt;个任务&lt;/td&gt;
-      &lt;td&gt;需与-n=&amp;lt;number&amp;gt;配合，并自动绑定&amp;lt;ntasks&amp;gt;个任务到每个CPU核&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&quot;查看信息&quot;&gt;查看信息&lt;/h4&gt;
-&lt;h5 id=&quot;队列&quot;&gt;队列&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;sinfo：显示队列中各个节点的状态（idle, mix, alloc, drain）
-    &lt;ul&gt;
-      &lt;li&gt;idle，表示节点处于空闲状态&lt;/li&gt;
-      &lt;li&gt;mix，节点具有分配CPU的作业，而其他的CPU状态是IDLE，新提交的作业继续运行&lt;/li&gt;
-      &lt;li&gt;alloc，节点所有CPU都被占用，新提交的作业将排队&lt;/li&gt;
-      &lt;li&gt;drain，出现这个状态时，不影响正在运行的作业，但是不接受新的作业调度，可以使用命令sinfo –R打印节点不正常的状态产生原因&lt;/li&gt;
-      &lt;li&gt;down 故障节点不可用&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;scontrol show partition &amp;lt;partition name&amp;gt;：显示队列详细信息&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;作业&quot;&gt;作业&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;squeue：显示排队和运行中的作业（可以设置参数限制显示范围，e.g. -u显示特定user的作业）&lt;/li&gt;
-  &lt;li&gt;scontrol show job &amp;lt;job id&amp;gt;：实时作业详细信息&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;节点&quot;&gt;节点&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;scontrol show node &amp;lt;node name&amp;gt;：显示节点状态
-    &lt;ul&gt;
-      &lt;li&gt;CfgTRES: 该节点的总资源（TRES表示Trackable Resource）
-        &lt;ul&gt;
-          &lt;li&gt;CfgTRES=cpu=32,mem=257828M,billing=32,gres/gpu=8&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;AllocTRES: 已经分配的资源
-        &lt;ul&gt;
-          &lt;li&gt;AllocTRES=cpu=4,mem=8800M,gres/gpu=2：已经占用 了 4 个 CPU 核心，8800 MB 内存和 2 块 GPU 卡&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;简单使用方法&quot;&gt;简单使用方法&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;sinfo -&amp;gt; 查看总体GPU使用情况&lt;/li&gt;
-  &lt;li&gt;scontrol show node &amp;lt;node name&amp;gt; -&amp;gt; 查看具体节点GPU剩余情况&lt;/li&gt;
-  &lt;li&gt;sbatch -w &amp;lt;node name&amp;gt; –gres=gpu:&amp;lt;number&amp;gt; train.sh -&amp;gt; 在相应节点上request对应的GPU资源&lt;/li&gt;
-  &lt;li&gt;scontrol show job &amp;lt;jobid&amp;gt; -&amp;gt; 查看任务详细信息&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;在申请相应资源后，任务只能&lt;strong&gt;获取到&lt;/strong&gt;对应部分资源。比如说，无论节点总体的GPU使用情况如何 (e.g. 一共8个GPU，已占用3个)，若–gres=gpu:4 (申请了4个GPU)，那么程序的CUDA_VISIBLE_DEVICES=0,1,2,3&lt;/p&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.hpccube.com/wiki/index.php/SLURM%E4%BD%BF%E7%94%A8%E5%9F%BA%E7%A1%80%E6%95%99%E7%A8%8B#.E6.96.87.E6.A1.A3.E6.A6.82.E8.BF.B0&quot;&gt;SLURM使用基础教程&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://hmli.ustc.edu.cn/doc/userguide/slurm-userguide.pdf&quot;&gt;Slurm作业调度系统使用指南&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 05 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/05/slurm/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/05/slurm/</guid>
-        
-        <category>Tools</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>多卡训练</title>
-        <description>
-&lt;h4 id=&quot;cuda_visible_devices&quot;&gt;CUDA_VISIBLE_DEVICES&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;CUDA_VISIBLE_DEVICES环境变量限制CUDA程序可见的GPU设备&lt;/li&gt;
-  &lt;li&gt;CUDA应用运行时，CUDA将遍历当前&lt;strong&gt;可见的&lt;/strong&gt;设备，并从零开始为可见设备编号（因此显卡的实际编号和程序看到的编号不同）&lt;/li&gt;
-  &lt;li&gt;如果设备序列是存在和不存在设备的混合，那么不存在设备前的所有存在设备将被重新编号，不存在设备之后的所有设备将被屏蔽&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在终端中设置
- &lt;code class=&quot;highlighter-rouge&quot;&gt;CUDA_VISIBLE_DEVICES=0,1 python my_script.py&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;python代码开头设置
- &lt;code class=&quot;highlighter-rouge&quot;&gt;os.environ[&quot;CUDA_VISIBLE_DEVICES&quot;] = &quot;0,2&quot;&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;pytorch使用gpu&quot;&gt;PyTorch使用GPU&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;data.cuda()&lt;/code&gt;: the old, pre-0.4 way&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;data.to(device)&lt;/code&gt;: more flexible. For example, &lt;code class=&quot;highlighter-rouge&quot;&gt;data.to('cuda:1')&lt;/code&gt; put data to GPU1&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;单机单卡&quot;&gt;单机单卡&lt;/h4&gt;
-&lt;p&gt;如果不设置Dataparallel，即使一台机器上有多个GPU，pytorch也只会占用编号为0的GPU&lt;/p&gt;
-
-&lt;h4 id=&quot;单机多卡&quot;&gt;单机多卡&lt;/h4&gt;
-&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# have to put model and data to GPU0
-&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# model
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataParallel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; 
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'cuda:0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;# data
-&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'cuda:0'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;nn.DataParallel&lt;/code&gt;默认使用可见的所有显卡。如果只想使用特定的显卡，可以&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;修改CUDA_VISIBLE_DEVICES环境变量&lt;/li&gt;
-  &lt;li&gt;使用&lt;code class=&quot;highlighter-rouge&quot;&gt;nn.DataParallel(model, device_ids=[1,2])&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;Note：&lt;code class=&quot;highlighter-rouge&quot;&gt;nn.DataParallel&lt;/code&gt;返回的model是DataParallel，而不是原来的model。原来的model被保存在返回的model的module属性中(model.module)&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;多机多卡&quot;&gt;多机多卡&lt;/h4&gt;
-&lt;p&gt;待填&lt;/p&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;https://www.jianshu.com/p/0816c3a5fa5c&lt;/li&gt;
-  &lt;li&gt;https://zhuanlan.zhihu.com/p/86441879&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 04 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/04/PyTorch%E5%A4%9A%E5%8D%A1%E8%AE%AD%E7%BB%83/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/04/PyTorch%E5%A4%9A%E5%8D%A1%E8%AE%AD%E7%BB%83/</guid>
-        
-        <category>PyTorch</category>
         
         
       </item>

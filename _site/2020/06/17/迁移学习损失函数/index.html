@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>核方法、核函数、核技巧、再生核希尔伯特空间 - Xiaohan's Blog</title>
+    <title>迁移学习损失函数 - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/06/16/%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%A0%B8%E5%87%BD%E6%95%B0-%E6%A0%B8%E6%8A%80%E5%B7%A7/">
+    <link rel="canonical" href="http://localhost:4000/2020/06/17/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Math" title="Math">Math</a>
+                        <a class="tag" href="/tags/#Loss" title="Loss">Loss</a>
                         
                     </div>
-                    <h2>核方法、核函数、核技巧、再生核希尔伯特空间</h2>
+                    <h2>迁移学习损失函数</h2>
                     
                     
-                    <span class="meta"> Posted on June 16, 2020</span>
+                    <span class="meta"> Posted on June 17, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,91 +208,20 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<h4 id="核方法kernel-method">核方法（kernel method）</h4>
+				<h4 id="基于统计量">基于统计量</h4>
+<h5 id="mmd-maximum-mean-discrepancy">MMD (maximum mean discrepancy)</h5>
 <ul>
-  <li>理论基础: Cover’s theorem，其指出，在低维空间中线性不可分的数据，通过非线性变换将其投影到高维空间之后，大概率会变为线性可分的数据</li>
-  <li><strong>将低维空间的非线性可分问题，转化为高维空间的线性可分问题</strong></li>
+  <li>解决two-sample problem：通过比较两个distribution的sample，来判断两个distribution是否相同</li>
+  <li></li>
+  <li><a href="http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf">paper</a></li>
 </ul>
 
-<h4 id="核技巧kernel-trick">核技巧（kernel trick）</h4>
-<p>设$\phi(x)$为映射函数，$\phi(x): \mathcal{X} \to \mathcal{H}$，其中$\mathcal{X}$为输入空间，$\mathcal{H}$为特征空间 (特征空间需要是Hilbert space，即完备的内积空间)。</p>
-
-<p>欲求$&lt;\phi(x_1), \phi(x_2)&gt;$：</p>
-<ul>
-  <li>传统方法：先分别计算$\phi(x_1)$和$\phi(x_2)$，再在特征空间中计算二者的内积
-    <ul>
-      <li>缺点：当特征空间维度很大时，计算非常复杂</li>
-    </ul>
-  </li>
-  <li>核技巧：在输入空间找到一个函数$K(x_1, x_2)$，使得$K(x_1, x_2)=&lt;\phi(x_1), \phi(x_2)&gt;$，从而可以直接在低维空间中计算出结果，加速核方法计算。对应的函数 $K$ 就是核函数</li>
-</ul>
-
-<h4 id="核函数kernels">核函数（kernels）</h4>
-<ul>
-  <li>在实际应用时，映射函数 $\phi(x)$ 不需要是已知的。换句话说，核技巧的目的就是在不需要显式地定义特征空间和映射函数的条件下，计算映射之后的内积</li>
-  <li>核函数 $K$ 本质上需要满足的条件 (不需要$\phi(x)$已知):
-    <ul>
-      <li>对称性: $K(\mathrm{x_1},\mathrm{x_2}) = K(\mathrm{x_2},\mathrm{x_1})$</li>
-      <li>半正定性: 对于任意 $n$ 和任意 $x_1, x_2, \cdots, x_n  \in \mathcal{X}$，由 $K(x_i, x_j)$ 定义的 Gram matrix 总是半正定的</li>
-    </ul>
-  </li>
-  <li>只要 $K$ 是核函数，那么一定存在一个Hilbert space和一个映射函数$\phi$，使得$K(x_1, x_2)=&lt;\phi(x_1), \phi(x_2)&gt;$</li>
-  <li>常见核函数<br />
-  <img src="/img/15923213053700.jpg" width="90%" height="100%" /><br />
-  其它变换得到的核函数：参考资料3 $\text{P}_{17, 18}$</li>
-</ul>
-
-<h4 id="再生核希尔伯特空间reproducing-kernel-hilbert-spacesrkhs">再生核希尔伯特空间（reproducing kernel Hilbert spaces，RKHS）</h4>
-<ul>
-  <li>再生核希尔伯特空间
-    <ul>
-      <li>设 $\displaystyle \mathcal{H}$ 是希尔伯特空间，其元素为函数 $\displaystyle f:X\rightarrow R$。对于某个固定的 $\displaystyle x\in \mathcal{X}$，映射$\displaystyle \delta _{x} :H\rightarrow R,\delta _{x} :f\rightarrow f( x)$称为点 $x$ 的 (Dirac) evaluation functional</li>
-      <li><strong>设 $\displaystyle \mathcal{H}$ 是希尔伯特空间，其元素为函数 $\displaystyle f:X\rightarrow R$。若对于任意的 $x \in \mathcal{X}$，$\delta_x$ 都是连续的，则 $\mathcal{H}$ 为RKHS</strong></li>
-      <li>RKHS是一个函数空间，其中的元素 $f$ 为函数。通常情况下特征空间 $\mathcal{H}$ 为 RKHS。</li>
-    </ul>
-  </li>
-  <li>再生核
-    <ul>
-      <li>再生核 $K$ 是核函数的一种，其满足
-        <ul>
-          <li>对于任意固定的 $x_0\in\mathcal{X}$，$K(x,x_0)$作为 $x$ 的函数属于我们的函数空间$\mathcal{H}$</li>
-          <li>对于任意 $x\in\mathcal{X}$ 和 $f(\cdot)\in\mathcal{H}$，有 $f(x) = \langle f(\cdot),K(\cdot,x)\rangle$ (再生性质 / reproducing property)</li>
-        </ul>
-      </li>
-      <li>对于再生核 $K$，我们可以自然的定义映射函数 $\phi(x)=K(\cdot, x)$，此时，通过再生核的再生性质，可知
-  <script type="math/tex">\langle \phi(x_1),\phi(x_2)\rangle = \langle K(\cdot,x_1),K(\cdot,x_2)\rangle = K(x_1,x_2)</script></li>
-    </ul>
-  </li>
-  <li>关系
-    <ul>
-      <li>一个希尔伯特空间存在至多一个再生核 (不存在 / 存在一个)</li>
-      <li>存在再生核的希尔伯特空间就是再生核希尔伯特空间</li>
-      <li>一个再生核对应唯一的再生核希尔伯特空间</li>
-      <li>再生核和再生核希尔伯特空间是一一对应的</li>
-    </ul>
-  </li>
-</ul>
-
-<h4 id="总结">总结</h4>
-<ul>
-  <li>一个核函数 $K$ 可能对应多个映射函数 $\phi$，而每个映射函数$\phi$ 有自己对应的特征空间 (i.e. 希尔伯特空间）
-    <ul>
-      <li>例子详见 参考资料6 $P_{11}$ example 35</li>
-    </ul>
-  </li>
-  <li>任意一个核函数 $K$ 都可以作为再生核，构建其对应的唯一的再生核希尔伯特空间</li>
-  <li>对于任意一个核函数 $K$，可以存在多个对应的特征空间 $\mathcal{H_0}$，但其作为再生核只对应唯一的RKHS。同时，RKHS是所有特征空间最为“精简”的一个，这里的精简体现在，无论在 $\mathcal{H_0}$ 中得到怎样的分类模型 $⟨w,\phi_0(x)⟩_{\mathcal{H_0}}$，在RKHS中都存在一个 $f$ 可以得到和它相同的效果，因此对于某个核函数，RKHS代表了它最本征的信息。</li>
-</ul>
+<h4 id="基于对抗学习">基于对抗学习</h4>
 
 <h4 id="参考资料">参考资料</h4>
 <ol>
-  <li><a href="https://zhuanlan.zhihu.com/p/61794781">核方法、核技巧和核函数</a></li>
-  <li><a href="http://www.fanyeong.com/2017/11/13/the-kernel-trick/">核技巧</a></li>
-  <li><a href="https://www.stat.berkeley.edu/~bartlett/courses/2014spring-cs281bstat241b/lectures/20-notes.pdf">PPT</a></li>
-  <li><a href="https://cosx.org/2014/05/svm-series-add-2-kernel-ii/">“支持向量机系列” 的番外篇二: Kernel II</a></li>
-  <li><a href="https://zhuanlan.zhihu.com/p/54704957">什么是RKHS</a></li>
-  <li><a href="http://www.gatsby.ucl.ac.uk/~gretton/coursefiles/RKHS_Notes1.pdf">课程讲义</a></li>
-  <li><a href="https://murongxixi.github.io/2013/11/12/%E6%A0%B8%E5%87%BD%E6%95%B0%EF%BC%8C%E5%86%8D%E7%94%9F%E6%A0%B8Hilbert%E7%A9%BA%E9%97%B4%EF%BC%8C%E8%A1%A8%E7%A4%BA%E5%AE%9A%E7%90%86/">核函数，再生核Hilbert空间，表示定理</a></li>
+  <li>https://www.w3xue.com/exp/article/20196/40020.html</li>
+  <li></li>
 </ol>
 
 
@@ -301,19 +230,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/06/12/SageMaker/" data-toggle="tooltip" data-placement="top" title="Amazon SageMaker">
+                        <a href="/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/" data-toggle="tooltip" data-placement="top" title="估计量的无偏性、有效性、一致性">
                         Previous<br>
-                        <span>Amazon SageMaker</span>
+                        <span>估计量的无偏性、有效性、一致性</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/06/17/MMD/" data-toggle="tooltip" data-placement="top" title="MMD">
-                        Next<br>
-                        <span>MMD</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 

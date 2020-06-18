@@ -1,0 +1,21 @@
+I"-<p><a href="https://www.aaai.org/Papers/AAAI/2007/AAAI07-262.pdf">AAAI 2007 paper</a> and <a href="http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf">JMLR 2012 paper</a></p>
+
+<h4 id="mmd作用">MMD作用</h4>
+<ul>
+  <li>传统的用于衡量两个概率分布P和Q差别的方法，例如KL divergence，要求概率分布P和Q已知。也就是说，<strong>如果我们只有来自P和Q的样本，那么我们需要先进行概率密度估计 (density estimation)，然后才能衡量两个分布的差异</strong>。</li>
+  <li>MMD：利用来自P和Q的样本，直接获得它们对应的总体概率分布的差异，而无需density estimation这一中间步骤。</li>
+</ul>
+
+<h4 id="mmd计算">MMD计算</h4>
+<ul>
+  <li>Give observations $X := {x_1, \cdots , x_m}$ and $Y := {y_1, \cdots, y_n}$, which are independently and identically distributed (i.i.d.) from distribution $p$ and $q$. Let $\mathcal{F}$ be a class of functions $f : X \to \mathbb{R}$, and shorthand notation $E_x[ f(x)] :=E_{x \sim p}[ f(x)]$ and $E_y[ f(y)] := E_{y\sim q}[ f(y)]$ denote expectations with respect to $p$ and $q$, respectively, where $x \sim p$ indicates x has distribution $p$.</li>
+  <li>
+    <p>Maximum mean discrepancy (MMD) is defined as:</p>
+
+    <p><script type="math/tex">MMD[\mathcal{F}, p,q] := \sup_{f \in \mathcal{F}}(E_x[ f(x)]−E_y[ f(y)]) .</script>
+  But we must therefore identify a function class that is rich enough to uniquely identify whether p = q, yet restrictive enough to provide useful finite sample estimates (</p>
+  </li>
+  <li>123</li>
+</ul>
+
+:ET
