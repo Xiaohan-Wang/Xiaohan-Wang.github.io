@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 18 Jun 2020 00:04:02 -0400</pubDate>
-    <lastBuildDate>Thu, 18 Jun 2020 00:04:02 -0400</lastBuildDate>
+    <pubDate>Thu, 18 Jun 2020 00:08:42 -0400</pubDate>
+    <lastBuildDate>Thu, 18 Jun 2020 00:08:42 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -14,18 +14,13 @@
         <description>&lt;h4 id=&quot;基于统计量&quot;&gt;基于统计量&lt;/h4&gt;
 &lt;h5 id=&quot;mmd-maximum-mean-discrepancy&quot;&gt;MMD (maximum mean discrepancy)&lt;/h5&gt;
 &lt;ul&gt;
-  &lt;li&gt;解决two-sample problem：通过比较两个distribution的sample，来判断两个distribution是否相同&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;paper&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;通过比较两个distribution的sample，直接获得两个distribution的差异&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://xiaohan-wang.github.io/2020/06/17/MMD/&quot;&gt;link&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h4 id=&quot;基于对抗学习&quot;&gt;基于对抗学习&lt;/h4&gt;
 
 &lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;https://www.w3xue.com/exp/article/20196/40020.html&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
-&lt;/ol&gt;
 </description>
         <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/06/17/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>

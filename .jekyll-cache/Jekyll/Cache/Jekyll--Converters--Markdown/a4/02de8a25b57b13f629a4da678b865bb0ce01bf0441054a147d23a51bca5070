@@ -1,0 +1,11 @@
+I"�<h4 id="基于统计量">基于统计量</h4>
+<h5 id="mmd-maximum-mean-discrepancy">MMD (maximum mean discrepancy)</h5>
+<ul>
+  <li>通过比较两个distribution的sample，直接获得两个distribution的差异</li>
+  <li><a href="https://xiaohan-wang.github.io/2020/06/17/MMD/">link</a></li>
+</ul>
+
+<h4 id="基于对抗学习">基于对抗学习</h4>
+
+<h4 id="参考资料">参考资料</h4>
+:ET
