@@ -5,8 +5,8 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 18 Jun 2020 00:08:42 -0400</pubDate>
-    <lastBuildDate>Thu, 18 Jun 2020 00:08:42 -0400</lastBuildDate>
+    <pubDate>Mon, 22 Jun 2020 00:04:23 -0400</pubDate>
+    <lastBuildDate>Mon, 22 Jun 2020 00:04:23 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
@@ -82,7 +82,7 @@
         <title>MMD</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://www.aaai.org/Papers/AAAI/2007/AAAI07-262.pdf&quot;&gt;AAAI 2007 paper&lt;/a&gt; and &lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;JMLR 2012 paper&lt;/a&gt;&lt;/p&gt;
 
-&lt;h4 id=&quot;summary&quot;&gt;Summary&lt;/h4&gt;
+&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
 &lt;ul&gt;
   &lt;li&gt;传统的用于衡量两个概率分布P和Q差别的方法，例如KL divergence，要求概率分布P和Q已知。也就是说，&lt;strong&gt;如果我们只有来自P和Q的样本，那么我们需要先进行概率密度估计 (density estimation)，然后才能衡量两个分布的差异&lt;/strong&gt;。&lt;/li&gt;
   &lt;li&gt;MMD：利用来自P和Q的样本，直接获得它们对应的总体概率分布的差异，而无需density estimation这一中间步骤。&lt;/li&gt;
