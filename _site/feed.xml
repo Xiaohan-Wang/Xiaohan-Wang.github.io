@@ -5,9 +5,20 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Mon, 22 Jun 2020 00:04:23 -0400</pubDate>
-    <lastBuildDate>Mon, 22 Jun 2020 00:04:23 -0400</lastBuildDate>
+    <pubDate>Mon, 22 Jun 2020 20:35:50 -0400</pubDate>
+    <lastBuildDate>Mon, 22 Jun 2020 20:35:50 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Cross entropy loss</title>
+        <description>&lt;p&gt;#&lt;/p&gt;
+</description>
+        <pubDate>Mon, 22 Jun 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/06/22/cross-entropy-loss/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/06/22/cross-entropy-loss/</guid>
+        
+        
+      </item>
     
       <item>
         <title>迁移学习损失函数</title>
@@ -561,26 +572,6 @@ in each iteration, we are absolutely certain as to which cluster the point belon
         <guid isPermaLink="true">http://localhost:4000/2020/06/09/K-means%E5%92%8CGMM/</guid>
         
         <category>Clustering</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>Image classification</title>
-        <description>&lt;h4 id=&quot;cifar-10&quot;&gt;CIFAR-10&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;60000 32x32 color images in 10 classes, with 6000 images per class&lt;/li&gt;
-  &lt;li&gt;50000 training images and 10000 test images&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15917518925606.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-</description>
-        <pubDate>Tue, 09 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/09/Image-classification-dataset/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/09/Image-classification-dataset/</guid>
-        
-        <category>Datasets</category>
         
         
       </item>
