@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Distilling the Knowledge in a Neural Network - Xiaohan's Blog</title>
+    <title>Self-supervised feature learning 综述 - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2000/01/01/Distilling-the-Knowledge-in-a-Neural-Network/">
+    <link rel="canonical" href="http://localhost:4000/2020/06/26/self-supervised-feature-learning/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Knowledge Distillation" title="Knowledge Distillation">Knowledge Distillation</a>
+                        <a class="tag" href="/tags/#Self-supervision" title="Self-supervision">Self-supervision</a>
                         
                     </div>
-                    <h2>Distilling the Knowledge in a Neural Network</h2>
+                    <h2>Self-supervised feature learning 综述</h2>
                     
                     
-                    <span class="meta">NIPS 2014 workshop&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on January 1, 2000</span>
+                    <span class="meta">TPAMI 2020&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Posted on June 26, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,86 +208,76 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p><a href="https://arxiv.org/pdf/1503.02531.pdf">Paper link</a></p>
+				<p><a href="https://arxiv.org/pdf/1902.06162.pdf">Paper link</a></p>
 
-<h4 id="take-away-message">Take away message</h4>
-<ol>
-  <li>transfer the knowledge from the cumbersome model (used in training stage) to a small model (suitable for deployment)</li>
-  <li><strong>“knowledge”: a learned mapping from input vectors to output vectors</strong>
-    <ul>
-      <li>use the class probabilities produced by the cumbersome model as “soft targets” for training the small model.</li>
-    </ul>
-  </li>
-  <li><strong>small probabilities in the soft targets define a rich similarity structure over the data, but it has very little influence on the cross-entropy cost function during the transfer stage because the probabilities are so close to zero</strong>.
-    <ul>
-      <li>use “distillation” to raise the temperature of the final softmax until the cumbersome model produces a suitably soft set of targets.</li>
-    </ul>
-  </li>
-  <li>adding a small term to the objective function that encourages the small model to <strong>predict the true targets as well as matching the soft targets provided by the cumbersome model</strong> works pretty well.</li>
-</ol>
-
-<h4 id="model">Model</h4>
-<h5 id="整体思路">整体思路：</h5>
+<h4 id="self-supervised-feature-learning">self-supervised feature learning</h4>
 <ul>
-  <li>想要transfer的knowledge是从input到output的映射。也就是说，对于相同的input，希望cumbersome model和small model能生成相同的output (soft label)</li>
-  <li>用cumbersome model和small model产生的soft label做cross entropy loss
-    <ul>
-      <li>问题：除了hard target对应的概率，其它负标签的概率其实也提供了大量的信息。比如说一张2的图片，对应3的soft label是1e-6，而7的soft label是1e-9，说明这张图片除2之外，更像3而不像7。但是，如果使用传统的softmax层 (T=1)，我们很难有效利用这些信息，因为这些负标签的soft label太小了，基本不能影响cross entropy loss的结果</li>
-      <li>为了能利用负标签对应概率所提供的信息，使用distillation，通过增大T来产生softer probability distribution，此时正负标签对应的soft label差距将被缩小，因此负标签的soft label也能影响最终的cross entropy loss</li>
-    </ul>
-  </li>
+  <li>learn visual features from large-scale unlabeled images or videos without using any human annotations</li>
+  <li>a subset of unsupervised learning methods</li>
+  <li>pretext task: the supervisory signal is generated from the data itself by leveraging its structure</li>
+  <li>visual features of images or videos need to be captured by ConvNets to solve the pretext tasks</li>
 </ul>
 
-<h5 id="知识蒸馏">知识蒸馏</h5>
-<ul>
-  <li>
-    <p>带温度T的softmax表达式：</p>
-
-    <script type="math/tex; mode=display">q_{i}=\frac{\exp \left(z_{i}/T\right)}{\sum_{j} \exp \left(z_{j}/T \right)}</script>
-  </li>
-  <li>温度T的影响<br />
-  <img src="/img/15928689216135.jpg" width="70%" height="100%" />
+<h4 id="作用">作用</h4>
+<ol>
+  <li>作为pretext task获得pre-trained model
     <ul>
-      <li>原始的softmax函数是 $T=1$ 时的特例</li>
-      <li>温度越高，softmax后各个值z的分布就越平均，原本较小的soft label此时相对增大，对最终cross entropy loss的影响增大，也就提高了对这些原本soft label较小的负标签的关注程度</li>
+      <li>提供一个好的起始点，加速收敛</li>
+      <li>已经学习到hierarchy features，即使downstream task的数据集很小，也不会过拟合太严重</li>
     </ul>
   </li>
-  <li>如何选择温度T
+  <li>作为auxiliary task来添加regularization</li>
+</ol>
+
+<h4 id="分类">分类</h4>
+<p><img src="/img/15932024508723.jpg" alt="-w1112" /></p>
+<ol>
+  <li>Information recovery: 先抹除图片的一部分信息，然后让网络学习恢复这些信息
     <ul>
-      <li>不是所有的负标签对应的soft label都是有效的：这些soft label本身是由Teacher-Net (cumbersome model) 训练得到的，因此结果一定存在noise，而且soft label越小，noise的影响越大</li>
-      <li>温度T决定了对负标签的关注程度
+      <li>generation based:
         <ul>
-          <li>从有部分信息量的负标签中学习 –&gt; 温度要高一些</li>
-          <li>防止受负标签中噪声的影响 –&gt;温度要低一些</li>
+          <li><strong>image generation</strong>: help the network to capture the real distribution of the real data and generate realists data</li>
+          <li><strong>color recovery</strong>: network need to recognize objects and to group pixels of the same part together</li>
+          <li><strong>inpainting</strong>: networks are required to learn the common knowledge including the color and structure of the common objects</li>
+          <li><strong>super resolution</strong>: learn the semantic features of images</li>
+        </ul>
+      </li>
+      <li>context based:
+        <ul>
+          <li><strong>Context Similarity (contrasting)</strong>: learn the invariance within one class and the variance among different classes
+            <ul>
+              <li>contrasting: train networks to maximum agreement of different views of same scene while minimizing agreement of views from different scenes</li>
+            </ul>
+          </li>
+          <li><strong>Spatial Context Structure</strong>：learn spatial context information such as the shape of the objects and the relative positions of different parts of an object</li>
         </ul>
       </li>
     </ul>
   </li>
-</ul>
-
-<h5 id="知识蒸馏方法">知识蒸馏方法</h5>
-<p><img src="/img/15928705010652.jpg" width="70%" height="100%" /></p>
-<ol>
-  <li>训练Teacher model</li>
-  <li>对Teacher model蒸馏，得到student distilled model
+  <li>Hard-code program
     <ul>
-      <li>soft prediction loss：Teacher model和 Student model在相同温度T下产生的soft label的cross entropy loss</li>
-      <li>hard prediction loss：Student model在T=1时和groundtruth的cross entropy loss</li>
+      <li>This type of methods generally has two steps:
+        <ul>
+          <li>label generation by employing hard-code programs on images or videos to obtain labels,</li>
+          <li>train ConvNets with the generated labels.</li>
+        </ul>
+      </li>
+      <li>distill knowledge from hard-code detector</li>
+      <li>one drawback is that the semantic labels generated by hard-code detector usually are very noisy which need to specifically cope with.</li>
+    </ul>
+  </li>
+  <li>Game Engines
+    <ul>
+      <li>game engines are able to render realistic images and provide accurate pixel-level labels</li>
+      <li>one problem is the domain gap between synthetic and real-world images</li>
     </ul>
   </li>
 </ol>
 
-<h4 id="note">Note</h4>
-<ol>
-  <li>the magnitudes of the gradients produced by the soft targets scale as $\frac{1}{T^2}$, so it is important to multiply them by $T^2$ when using both hard and soft targets</li>
-  <li>matching logits is a special case of distillation</li>
-</ol>
+<h4 id="performance">Performance</h4>
+<p><img src="/img/15932060535480.jpg" alt="-w913" />
+The performance of self-supervised methods are comparable to the supervised methods on some downstream tasks, especially for the object detection and semantic segmentation tasks.</p>
 
-<h4 id="参考资料">参考资料</h4>
-<ol>
-  <li><a href="https://zhuanlan.zhihu.com/p/102038521">知识蒸馏</a></li>
-  <li><a href="https://zhuanlan.zhihu.com/p/61944055">交叉熵与KL散度</a></li>
-</ol>
 
 
                 <hr style="visibility: hidden;">
@@ -295,19 +285,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2000/01/01/SLIC%E8%B6%85%E5%83%8F%E7%B4%A0%E5%88%86%E5%89%B2/" data-toggle="tooltip" data-placement="top" title="SLIC超像素分割">
+                        <a href="/2020/06/21/Distilling-the-Knowledge-in-a-Neural-Network/" data-toggle="tooltip" data-placement="top" title="Distilling the Knowledge in a Neural Network">
                         Previous<br>
-                        <span>SLIC超像素分割</span>
+                        <span>Distilling the Knowledge in a Neural Network</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/01/01/papers-20/" data-toggle="tooltip" data-placement="top" title="Reading list - 2020">
-                        Next<br>
-                        <span>Reading list - 2020</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 
@@ -375,8 +358,6 @@
                             
         				
                             
-        				
-                            
                 				<a href="/tags/#Domain Adaptation" title="Domain Adaptation" rel="14">
                                     Domain Adaptation
                                 </a>
@@ -398,6 +379,10 @@
                 				<a href="/tags/#Semantic Segmentation" title="Semantic Segmentation" rel="10">
                                     Semantic Segmentation
                                 </a>
+                            
+        				
+                            
+        				
                             
         				
                             

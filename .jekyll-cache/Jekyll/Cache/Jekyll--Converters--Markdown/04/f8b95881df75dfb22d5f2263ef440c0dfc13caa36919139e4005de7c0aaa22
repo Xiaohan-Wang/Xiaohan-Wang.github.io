@@ -1,4 +1,4 @@
-I"�<h4 id="domain-adaptation">Domain Adaptation</h4>
+I"_<h4 id="domain-adaptation">Domain Adaptation</h4>
 
 <table>
   <thead>
@@ -158,7 +158,28 @@
       <td>6.21</td>
       <td>NIPS 2014</td>
       <td>Knowledge distillation</td>
-      <td>TODO</td>
+      <td><a href="https://xiaohan-wang.github.io/2000/01/01/Distilling-the-Knowledge-in-a-Neural-Network/">link</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="self-supervised-learning">Self-supervised learning</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th>date</th>
+      <th>C/J</th>
+      <th>titile</th>
+      <th>comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6.26</td>
+      <td>TPAMI 2020</td>
+      <td>self-supervised feature learning</td>
+      <td><a href="">link</a></td>
     </tr>
   </tbody>
 </table>
@@ -251,8 +272,24 @@
 </table>
 
 <h4 id="others">Others</h4>
-<p>| date  | C/J | titile |  comment |
-|—|—|—|—|
-|6.17|JMLR 2012|MMD|<a href="https://xiaohan-wang.github.io/2020/06/17/MMD/">link</a>|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>date</th>
+      <th>C/J</th>
+      <th>titile</th>
+      <th>comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>6.17</td>
+      <td>JMLR 2012</td>
+      <td>MMD</td>
+      <td><a href="https://xiaohan-wang.github.io/2020/06/17/MMD/">link</a></td>
+    </tr>
+  </tbody>
+</table>
 
 :ET

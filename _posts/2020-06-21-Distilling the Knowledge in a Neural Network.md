@@ -2,7 +2,7 @@
 layout:     post
 title: Distilling the Knowledge in a Neural Network
 subtitle:   NIPS 2014 workshop
-date:       2000-1-1
+date:       2020-6-21
 author:     Xiaohan
 header-img: img/ice.jpg
 catalog: true
