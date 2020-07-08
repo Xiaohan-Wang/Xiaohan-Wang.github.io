@@ -1,0 +1,92 @@
+I"A<p><a href="https://arxiv.org/pdf/1604.07379.pdf">Paper link</a> and <a href="http://people.eecs.berkeley.edu/~pathak/context_encoder/">website</a></p>
+
+<h4 id="take-away-message">Take away message</h4>
+<ol>
+  <li>Image inpainting:
+    <ul>
+      <li>to fill in large missing areas of the image, it can’t get “hints” from nearby pixels</li>
+      <li>a model needs to both understand the content of an image, as well as produce a plausible hypothesis for the missing parts</li>
+    </ul>
+  </li>
+  <li><strong>a standard pixel-wise reconstruction loss</strong>: only the reconstruction loss produces blurry results</li>
+  <li><strong>an adversarial loss</strong>: adding the adversarial loss results in much sharper predictions</li>
+</ol>
+
+<h4 id="model">Model</h4>
+<ol>
+  <li>Encoder-decoder pipeline:
+    <ul>
+      <li>encoder: produces a latent feature representation of that image</li>
+      <li>decoder: takes this feature representation and produces the missing image content
+        <ul>
+          <li>a series of five up-convolutional layers (upsampling followed by convolution)</li>
+        </ul>
+      </li>
+      <li><strong>channel-wise fully-connected layer</strong>: connect the encoder and the decoder
+        <ul>
+          <li>directly propagate information from one corner of the feature map to another corner (so that we can better capture global semantic information)</li>
+          <li>essentially a fully-connected layer with groups: only propagates information within feature maps, but it has no parameters connecting different feature maps</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Loss function:
+    <ul>
+      <li>reconstruction (L2) loss:
+        <ul>
+          <li>capturing the overall structure of the missing region and coherence with regards to its context, but prefer a blurry solution (because the expectation of all possible values minimizes the mean squared pixel-wise error)</li>
+          <li><img src="/img/15942152334674.jpg" alt="-w312" /></li>
+        </ul>
+      </li>
+      <li>adversarial loss:
+        <ul>
+          <li>tries to make prediction look real, and has the effect of picking a particular mode from the distribution</li>
+          <li><img src="/img/15942164552075.jpg" alt="-w345" /></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Region masks
+ <img src="/img/15942173051541.jpg" width="60%" height="100%" /></p>
+
+    <ul>
+      <li>central region</li>
+      <li>random block</li>
+      <li>random region (recommended)</li>
+    </ul>
+
+    <p>Random block and random region produce a similarly general feature, while significantly outperforming the central region features.</p>
+  </li>
+</ol>
+
+<h4 id="experiments">Experiments</h4>
+<h5 id="implementation-detail">Implementation detail</h5>
+<ol>
+  <li>Pool-free encoders: replacing all pooling layers with convolutions of the same kernel size and stride. (Intuitively, there is no reason to use pooling for reconstruction based networks.)</li>
+</ol>
+
+<h5 id="evaluation">Evaluation</h5>
+<ol>
+  <li>Semantic Inpainting
+<img src="/img/15942140401143.jpg" alt="-w849" />
+    <ul>
+      <li>The encoder and discriminator architecture is similar to that of discriminator in [1], and decoder is similar to generator in [1].</li>
+    </ul>
+  </li>
+  <li>Feature Learning
+ <img src="/img/15942140603053.jpg" alt="-w848" />
+    <ul>
+      <li>For consistency with prior work, this paper use AlexNet as its encoder in this part.</li>
+      <li>The authors did not manage to make the adversarial loss converge with AlexNet, so they used just the reconstruction loss.</li>
+    </ul>
+
+    <p><img src="/img/15942180841172.jpg" alt="-w892" /></p>
+  </li>
+</ol>
+
+<h4 id="further-reference">Further reference</h4>
+<ol>
+  <li>A. Radford, L. Metz, and S. Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks. ICLR, 2016.</li>
+</ol>
+:ET

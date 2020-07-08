@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: U-Net
+title: 
 subtitle:   
 date:       2000-1-1
 author:     Xiaohan
@@ -20,10 +20,8 @@ tags:
 
 #### Model
 
-#### Tricks
+#### Experiments
 
-#### Result
-
-#### Reflection
+#### Reflection / Tricks
 
 #### Further reference 
