@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>Semantic Segmentation - Xiaohan's Blog</title>
+    <title>通过SLURM上在节点上启动Jupyter Notebook - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/04/21/semantic-segmentation-datasets/">
+    <link rel="canonical" href="http://localhost:4000/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -184,13 +184,13 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Datasets" title="Datasets">Datasets</a>
+                        <a class="tag" href="/tags/#Configurations" title="Configurations">Configurations</a>
                         
                     </div>
-                    <h2>Semantic Segmentation</h2>
+                    <h2>通过SLURM上在节点上启动Jupyter Notebook</h2>
                     
                     
-                    <span class="meta"> Posted on April 21, 2020</span>
+                    <span class="meta"> Posted on July 16, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,92 +208,65 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>部分内容来自于 https://blog.csdn.net/MOU_IT/article/details/82225505</p>
+				<p>原载于 <a href="https://zhuanlan.zhihu.com/p/65130699">分享脚本远程登陆 Jupyter Notebook</a></p>
 
-<h4 id="总述">总述</h4>
-<p>目前学术界主要有三个benchmark（数据集）用于模型训练和测试。</p>
-<ol>
-  <li>Pascal VOC系列
-    <ul>
-      <li>VOC 2012 (最常见)</li>
-      <li>Pascal Context (偶尔)</li>
-    </ul>
-  </li>
-  <li>
-    <p>Microsoft COCO<br />
- COCO一共有80个类别。虽然有很详细的像素级别的标注，但由于官方没有专门对语义分割的测评，因此COCO数据集往往被当成是额外的训练数据集用于模型的训练（预训练？）。</p>
-  </li>
-  <li>Cityscapes
-    <ul>
-      <li>辅助驾驶（自动驾驶）环境</li>
-      <li>使用比较常见的19个类别用于评测</li>
-    </ul>
-  </li>
-</ol>
+<h4 id="服务器端">服务器端</h4>
+<h5 id="jupytergpush脚本">jupyterGPU.sh脚本</h5>
+<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+<span class="c">#SBATCH --partition compsci-gpu</span>
+<span class="c">#SBATCH --gres=gpu:2</span>
+<span class="c">#SBATCH --time 100:00:00</span>
+<span class="c">#SBATCH --job-name jupyterGPU</span>
 
-<h4 id="voc-2012">VOC 2012</h4>
+<span class="c"># get tunneling info</span>
+<span class="nv">port</span><span class="o">=</span><span class="si">$(</span><span class="nb">shuf</span> <span class="nt">-i8000-9999</span> <span class="nt">-n1</span><span class="si">)</span>
+<span class="nv">node</span><span class="o">=</span><span class="si">$(</span><span class="nb">hostname</span> <span class="nt">-s</span><span class="si">)</span>
+<span class="nv">user</span><span class="o">=</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span>
+<span class="nv">cluster</span><span class="o">=</span><span class="si">$(</span><span class="nb">hostname</span> <span class="nt">-f</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s2">"."</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
 
-<p>标准的VOC2012数据集有21个类别(包括背景)，包含:{ 0=background，1=aeroplane, 2=bicycle, 3=bird, 4=boat, 5=bottle, 6=bus, 7=car , 8=cat, 9=chair, 10=cow, 11=diningtable, 12=dog, 13=horse, 14=motorbike, 15=person, 16=potted plant, 17=sheep, 18=sofa, 19=train, 20=tv/monitor，255= ’void’ or unlabelled }这些比较常见的类别。</p>
+<span class="c"># 在这里添加你的服务器地址</span>
+<span class="nv">clusterurl</span><span class="o">=</span><span class="s2">"xxx"</span>
 
-<p>对于分割任务：</p>
-<ol>
-  <li>VOC 2012用于分割的数据中train+val包含 2007-2011年间的所有数据，test包含2008-2011年间的数据，没有包含07年的是因为07年的test数据已经公开了。</li>
-  <li>trainval：2913张图片，共6929个物体</li>
-</ol>
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/.local/bin
 
-<p>补充：<a href="https://arleyzhang.github.io/articles/1dc20586/">PASCAL VOC详细介绍</a></p>
+<span class="c"># print tunneling instructions jupyter-log</span>
+<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"
+MacOS or linux terminal command to create your ssh tunnel:
+ssh -N -L </span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">node</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2"> </span><span class="k">${</span><span class="nv">user</span><span class="k">}</span><span class="s2">@</span><span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span><span class="s2">
 
-<h4 id="ms-coco">MS COCO</h4>
-<ol>
-  <li>官方没有semantic segmentation测评，因此该数据集常常只用于预训练</li>
-  <li>数据集大小？</li>
-</ol>
+ Here is the MobaXterm info:
 
-<h4 id="cityscapes">Cityscapes</h4>
+ Forwarded port:same as remote port
+ Remote server: </span><span class="k">${</span><span class="nv">node</span><span class="k">}</span><span class="s2">
+ Remote port: </span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2">
+ SSH server: </span><span class="k">${</span><span class="nv">cluster</span><span class="k">}</span><span class="s2">.</span><span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span><span class="s2">
+ SSH login: </span><span class="nv">$user</span><span class="s2">
+ SSH port: 22
 
-<p>补充: <a href="https://niecongchong.github.io/2019/08/10/CityScapes%E6%95%B0%E6%8D%AE%E9%9B%86%E7%AE%80%E4%BB%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E5%92%8C%E7%B2%BE%E5%BA%A6%E6%8C%87%E6%A0%87/">Cityscapes详细介绍</a></p>
+ Use a Browser on your local machine to go to:
+ localhost:</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2"> (prefix w/ https:// if using password)
 
-<ol>
-  <li>包含来自50个不同城市的街道场景（主要在德国）</li>
-  <li>从27个城市中选择了5000张图像进行dense pixel-level annotation，其余23个城市提供了20000张有coarse annotation的图像</li>
-  <li>annotation包括
-    <ul>
-      <li>pixel-level annotation</li>
-      <li>instance-level labels for humans and vehicles</li>
-    </ul>
-  </li>
-  <li>定义了8个大类(category)，下分为30个小类(class)
-    <ul>
-      <li>void代表unclear (void类会在training和evaluation过程中被忽略)</li>
-      <li>evaluation过程中，会忽略太不常见的classes，即剩余19个classes
- <img src="/img/15875266001958.jpg" alt="-w721" /></li>
-    </ul>
-  </li>
-  <li>densely annotated images被分为training, validation和test sets, 而coarsely annotated images 只作为额外的training data
-    <ul>
-      <li>a city is completely within a single split</li>
-      <li>densely annotated images中：2975 training, 500 validation images, and 1525 test images</li>
-      <li>每张图片大小都是1024x2048
- <img src="/img/15903541919594.jpg" alt="-w878" /></li>
-    </ul>
-  </li>
-  <li>评价指标：
-    <ul>
-      <li>Pixel-Level Semantic Labelling
-        <ul>
-          <li>$IoU_{category}和IoU_{class}$</li>
-          <li>$iIoU_{category}和iIoU_{class}$ (instance-level intersection-over-union metric)
-            <ul>
-              <li>In contrast to the standard IoU measure, the contribution of each pixel is weighted by the ratio of the class’ average instance size to the size of the respective ground truth instance.</li>
-              <li>$iIoU$ metric treats instances of any size equally and is therefore more sensitive to errors in predicting small objects compared to the $IoU$</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>Instance-Level Semantic Labeling</li>
-    </ul>
-  </li>
-</ol>
+ or copy the URL from below and put there localhost after http:// so it would be something like:
+ http://localhost:9499/?token=86c93ba16aaead7529a5da0e5e5a46be7ad8cfea35b2d49f
+ "</span>
+
+<span class="c"># load modules or conda environments here</span>
+jupyter notebook <span class="nt">--no-browser</span> <span class="nt">--port</span><span class="o">=</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="nt">--ip</span><span class="o">=</span><span class="k">${</span><span class="nv">node</span><span class="k">}</span>
+</code></pre></div></div>
+<h5 id="提交jupytergpush脚本">提交jupyterGPU.sh脚本</h5>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sbatch jupyterGPU.sh
+</code></pre></div></div>
+<h5 id="查看端口信息浏览器信息">查看端口信息/浏览器信息</h5>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>slurm.output
+</code></pre></div></div>
+
+<h4 id="本地">本地</h4>
+<h5 id="监听对应端口">监听对应端口</h5>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh <span class="nt">-N</span> <span class="nt">-L</span> <span class="k">${</span><span class="nv">port</span><span class="k">}</span>:<span class="k">${</span><span class="nv">node</span><span class="k">}</span>:<span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="k">${</span><span class="nv">user</span><span class="k">}</span>@<span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span>
+</code></pre></div></div>
+<h5 id="浏览器打开jupyter-notebook">浏览器打开jupyter notebook</h5>
+<p>前往<code class="highlighter-rouge">https://localhost:${port}</code></p>
 
 
 
@@ -302,19 +275,12 @@
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/04/15/AutoDIAL-Automatic-DomaIn-Alignment-Layers/" data-toggle="tooltip" data-placement="top" title="AutoDIAL:Automatic DomaIn Alignment Layers">
+                        <a href="/2020/07/07/Context-Encoders-Feature-Learning-by-Inpainting/" data-toggle="tooltip" data-placement="top" title="Context Encoders:_Feature Learning by Inpainting">
                         Previous<br>
-                        <span>AutoDIAL:Automatic DomaIn Alignment Layers</span>
+                        <span>Context Encoders:_Feature Learning by Inpainting</span>
                         </a>
                     </li>
                     
-                    
-                    <li class="next">
-                        <a href="/2020/04/22/Fully-Convolutional-Networks-for-Semantic-Segmentation/" data-toggle="tooltip" data-placement="top" title="Fully Convolutional Networks for Semantic Segmentation">
-                        Next<br>
-                        <span>Fully Convolutional Networks for Semantic Segmentation</span>
-                        </a>previous
-                    </li>
                     
                 </ul> -->
 

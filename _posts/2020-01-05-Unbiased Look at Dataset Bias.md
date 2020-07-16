@@ -7,7 +7,7 @@ author:     Xiaohan
 header-img: img/ice.jpg
 catalog: true
 tags:
-    - Domain Adaptation
+    - Model Generalization
 ---
 
 ### Promise and Perils of Visual Dataset

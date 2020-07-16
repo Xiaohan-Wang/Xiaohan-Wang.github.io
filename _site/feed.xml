@@ -5,9 +5,81 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 08 Jul 2020 10:45:48 -0400</pubDate>
-    <lastBuildDate>Wed, 08 Jul 2020 10:45:48 -0400</lastBuildDate>
+    <pubDate>Thu, 16 Jul 2020 18:14:21 -0400</pubDate>
+    <lastBuildDate>Thu, 16 Jul 2020 18:14:21 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>通过SLURM上在节点上启动Jupyter Notebook</title>
+        <description>&lt;p&gt;原载于 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/65130699&quot;&gt;分享脚本远程登陆 Jupyter Notebook&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;服务器端&quot;&gt;服务器端&lt;/h4&gt;
+&lt;h5 id=&quot;jupytergpush脚本&quot;&gt;jupyterGPU.sh脚本&lt;/h5&gt;
+&lt;div class=&quot;language-zsh highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#SBATCH --partition compsci-gpu&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#SBATCH --gres=gpu:2&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#SBATCH --time 100:00:00&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#SBATCH --job-name jupyterGPU&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# get tunneling info&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;shuf&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-i8000-9999&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-n1&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;hostname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-s&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;whoami&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;hostname&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-f&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;awk&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-F&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;.&quot;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'{print $2}'&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# 在这里添加你的服务器地址&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;clusterurl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;xxx&quot;&lt;/span&gt;
+
+&lt;span class=&quot;nb&quot;&gt;export &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;PATH&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$PATH&lt;/span&gt;:~/.local/bin
+
+&lt;span class=&quot;c&quot;&gt;# print tunneling instructions jupyter-log&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-e&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;
+MacOS or linux terminal command to create your ssh tunnel:
+ssh -N -L &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;clusterurl&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;
+
+ Here is the MobaXterm info:
+
+ Forwarded port:same as remote port
+ Remote server: &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;
+ Remote port: &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;
+ SSH server: &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;cluster&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;clusterurl&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;
+ SSH login: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$user&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;
+ SSH port: 22
+
+ Use a Browser on your local machine to go to:
+ localhost:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt; (prefix w/ https:// if using password)
+
+ or copy the URL from below and put there localhost after http:// so it would be something like:
+ http://localhost:9499/?token=86c93ba16aaead7529a5da0e5e5a46be7ad8cfea35b2d49f
+ &quot;&lt;/span&gt;
+
+&lt;span class=&quot;c&quot;&gt;# load modules or conda environments here&lt;/span&gt;
+jupyter notebook &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--ip&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;提交jupytergpush脚本&quot;&gt;提交jupyterGPU.sh脚本&lt;/h5&gt;
+
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;sbatch jupyterGPU.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;查看端口信息浏览器信息&quot;&gt;查看端口信息/浏览器信息&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cat &lt;/span&gt;slurm.output
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;本地&quot;&gt;本地&lt;/h4&gt;
+&lt;h5 id=&quot;监听对应端口&quot;&gt;监听对应端口&lt;/h5&gt;
+&lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;ssh &lt;span class=&quot;nt&quot;&gt;-N&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;@&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;clusterurl&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h5 id=&quot;浏览器打开jupyter-notebook&quot;&gt;浏览器打开jupyter notebook&lt;/h5&gt;
+&lt;p&gt;前往&lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost:${port}&lt;/code&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 16 Jul 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/</guid>
+        
+        <category>Configurations</category>
+        
+        
+      </item>
     
       <item>
         <title>Context Encoders:_Feature Learning by Inpainting</title>
@@ -655,37 +727,6 @@ $$
         <pubDate>Thu, 11 Jun 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</guid>
-        
-        <category>Statistics</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>从 总体 &amp; 样本 估计总体方差</title>
-        <description>&lt;h4 id=&quot;用总体估计总体方差&quot;&gt;用总体估计总体方差&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;calculating population variance and std for the whole population using all the data&lt;/li&gt;
-  &lt;li&gt;e.g. What is the standard deviation of last year’s returns of the 12 funds I have invested in? In this case, we have the data for the whole population available.&lt;/li&gt;
-  &lt;li&gt;When using the whole population to calculate population variance, &lt;strong&gt;divide&lt;/strong&gt; the sum of squared deviations from the mean &lt;strong&gt;by the number of items in the population&lt;/strong&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;用样本估计总体方差&quot;&gt;用样本估计总体方差&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;calculating population variance and std using only a sample of data&lt;/li&gt;
-  &lt;li&gt;e.g. What is the standard deviation of last year’s returns of equity funds in the world? In this case, we don’t have all the data available and we will have to estimate the population’s standard deviation from a sample.&lt;/li&gt;
-  &lt;li&gt;When using a sample to calculate population variance, &lt;strong&gt;divide it by the number of items in the sample less one&lt;/strong&gt;.&lt;/li&gt;
-  &lt;li&gt;As a result, the calculated variance (and therefore also the standard deviation) will &lt;strong&gt;be slightly higher than if we would have used the population variance formula&lt;/strong&gt;. The purpose of this little difference is to get a better and unbiased estimate of the population‘s variance (by dividing by the sample size lowered by one, we &lt;strong&gt;compensate for the fact that we are working only with a sample rather than with the whole population&lt;/strong&gt;).&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;https://www.macroption.com/population-sample-variance-standard-deviation/&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 11 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/11/population-and-sample-variance/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/11/population-and-sample-variance/</guid>
         
         <category>Statistics</category>
         
