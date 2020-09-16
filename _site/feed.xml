@@ -5,9 +5,25 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 15 Sep 2020 23:12:07 -0400</pubDate>
-    <lastBuildDate>Tue, 15 Sep 2020 23:12:07 -0400</lastBuildDate>
+    <pubDate>Wed, 16 Sep 2020 19:05:07 -0400</pubDate>
+    <lastBuildDate>Wed, 16 Sep 2020 19:05:07 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>安装tmux</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/william_munch/article/details/95764667&quot;&gt;非root用户源码安装Tmux&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://squidszyd.github.io/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/zsh/2017/08/28/zsh.html&quot;&gt;安装ncurses&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85tmux/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85tmux/</guid>
+        
+        <category>Configurations</category>
+        
+        
+      </item>
     
       <item>
         <title>安装anaconda</title>
@@ -36,7 +52,6 @@
   &lt;li&gt;&lt;a href=&quot;https://harttle.land/2016/10/25/install-oh-my-zsh-locally.html&quot;&gt;没有root权限zsh&amp;amp;oh-my-zsh安装&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://jyzhangchn.github.io/oh-my-zsh.html&quot;&gt;配置oh-my-zsh主题&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/Xiaohan-Wang/Backup/blob/master/xh-ys.zsh-theme&quot;&gt;my theme&lt;/a&gt; - modified from theme ys&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;&quot;&gt;zsh插件管理&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
@@ -544,104 +559,6 @@ $$
         <guid isPermaLink="true">http://localhost:4000/2020/06/17/MMD/</guid>
         
         <category>Statistics</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>核方法、核函数、核技巧、再生核希尔伯特空间</title>
-        <description>&lt;h4 id=&quot;核方法kernel-method&quot;&gt;核方法（kernel method）&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;理论基础: Cover’s theorem，其指出，在低维空间中线性不可分的数据，通过非线性变换将其投影到高维空间之后，大概率会变为线性可分的数据&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;将低维空间的非线性可分问题，转化为高维空间的线性可分问题&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;核技巧kernel-trick&quot;&gt;核技巧（kernel trick）&lt;/h4&gt;
-&lt;p&gt;设$\phi(x)$为映射函数，$\phi(x): \mathcal{X} \to \mathcal{H}$，其中$\mathcal{X}$为输入空间，$\mathcal{H}$为特征空间 (特征空间需要是Hilbert space，即完备的内积空间)。&lt;/p&gt;
-
-&lt;p&gt;欲求$&amp;lt;\phi(x_1), \phi(x_2)&amp;gt;$：&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;传统方法：先分别计算$\phi(x_1)$和$\phi(x_2)$，再在特征空间中计算二者的内积
-    &lt;ul&gt;
-      &lt;li&gt;缺点：当特征空间维度很大时，计算非常复杂&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;核技巧：在输入空间找到一个函数$K(x_1, x_2)$，使得$K(x_1, x_2)=&amp;lt;\phi(x_1), \phi(x_2)&amp;gt;$，从而可以直接在低维空间中计算出结果，加速核方法计算。对应的函数 $K$ 就是核函数&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;核函数kernels&quot;&gt;核函数（kernels）&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;在实际应用时，映射函数 $\phi(x)$ 不需要是已知的。换句话说，核技巧的目的就是在不需要显式地定义特征空间和映射函数的条件下，计算映射之后的内积&lt;/li&gt;
-  &lt;li&gt;核函数 $K$ 本质上需要满足的条件 (不需要$\phi(x)$已知):
-    &lt;ul&gt;
-      &lt;li&gt;对称性: $K(\mathrm{x_1},\mathrm{x_2}) = K(\mathrm{x_2},\mathrm{x_1})$&lt;/li&gt;
-      &lt;li&gt;半正定性: 对于任意 $n$ 和任意 $x_1, x_2, \cdots, x_n  \in \mathcal{X}$，由 $K(x_i, x_j)$ 定义的 Gram matrix 总是半正定的&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;只要 $K$ 是核函数，那么一定存在一个Hilbert space和一个映射函数$\phi$，使得$K(x_1, x_2)=&amp;lt;\phi(x_1), \phi(x_2)&amp;gt;$&lt;/li&gt;
-  &lt;li&gt;常见核函数&lt;br /&gt;
-  &lt;img src=&quot;/img/15923213053700.jpg&quot; width=&quot;90%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-  其它变换得到的核函数：参考资料3 $\text{P}_{17, 18}$&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;再生核希尔伯特空间reproducing-kernel-hilbert-spacesrkhs&quot;&gt;再生核希尔伯特空间（reproducing kernel Hilbert spaces，RKHS）&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;再生核希尔伯特空间
-    &lt;ul&gt;
-      &lt;li&gt;设 $\displaystyle \mathcal{H}$ 是希尔伯特空间，其元素为函数 $\displaystyle f:X\rightarrow R$。对于某个固定的 $\displaystyle x\in \mathcal{X}$，映射$\displaystyle \delta _{x} :H\rightarrow R,\delta _{x} :f\rightarrow f( x)$称为点 $x$ 的 (Dirac) evaluation functional&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;设 $\displaystyle \mathcal{H}$ 是希尔伯特空间，其元素为函数 $\displaystyle f:X\rightarrow R$。若对于任意的 $x \in \mathcal{X}$，$\delta_x$ 都是连续的，则 $\mathcal{H}$ 为RKHS&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;RKHS是一个函数空间，其中的元素 $f$ 为函数。通常情况下特征空间 $\mathcal{H}$ 为 RKHS。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;再生核
-    &lt;ul&gt;
-      &lt;li&gt;再生核 $K$ 是核函数的一种，其满足
-        &lt;ul&gt;
-          &lt;li&gt;对于任意固定的 $x_0\in\mathcal{X}$，$K(x,x_0)$作为 $x$ 的函数属于我们的函数空间$\mathcal{H}$&lt;/li&gt;
-          &lt;li&gt;对于任意 $x\in\mathcal{X}$ 和 $f(\cdot)\in\mathcal{H}$，有 $f(x) = \langle f(\cdot),K(\cdot,x)\rangle$ (再生性质 / reproducing property)&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;对于再生核 $K$，我们可以自然的定义映射函数 $\phi(x)=K(\cdot, x)$，此时，通过再生核的再生性质，可知
-  &lt;script type=&quot;math/tex&quot;&gt;\langle \phi(x_1),\phi(x_2)\rangle = \langle K(\cdot,x_1),K(\cdot,x_2)\rangle = K(x_1,x_2)&lt;/script&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;关系
-    &lt;ul&gt;
-      &lt;li&gt;一个希尔伯特空间存在至多一个再生核 (不存在 / 存在一个)&lt;/li&gt;
-      &lt;li&gt;存在再生核的希尔伯特空间就是再生核希尔伯特空间&lt;/li&gt;
-      &lt;li&gt;一个再生核对应唯一的再生核希尔伯特空间&lt;/li&gt;
-      &lt;li&gt;再生核和再生核希尔伯特空间是一一对应的&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;总结&quot;&gt;总结&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;一个核函数 $K$ 可能对应多个映射函数 $\phi$，而每个映射函数$\phi$ 有自己对应的特征空间 (i.e. 希尔伯特空间）
-    &lt;ul&gt;
-      &lt;li&gt;例子详见 参考资料6 $P_{11}$ example 35&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;任意一个核函数 $K$ 都可以作为再生核，构建其对应的唯一的再生核希尔伯特空间&lt;/li&gt;
-  &lt;li&gt;对于任意一个核函数 $K$，可以存在多个对应的特征空间 $\mathcal{H_0}$，但其作为再生核只对应唯一的RKHS。同时，RKHS是所有特征空间最为“精简”的一个，这里的精简体现在，无论在 $\mathcal{H_0}$ 中得到怎样的分类模型 $⟨w,\phi_0(x)⟩_{\mathcal{H_0}}$，在RKHS中都存在一个 $f$ 可以得到和它相同的效果，因此对于某个核函数，RKHS代表了它最本征的信息。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/61794781&quot;&gt;核方法、核技巧和核函数&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.fanyeong.com/2017/11/13/the-kernel-trick/&quot;&gt;核技巧&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.stat.berkeley.edu/~bartlett/courses/2014spring-cs281bstat241b/lectures/20-notes.pdf&quot;&gt;PPT&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cosx.org/2014/05/svm-series-add-2-kernel-ii/&quot;&gt;“支持向量机系列” 的番外篇二: Kernel II&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/54704957&quot;&gt;什么是RKHS&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.gatsby.ucl.ac.uk/~gretton/coursefiles/RKHS_Notes1.pdf&quot;&gt;课程讲义&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://murongxixi.github.io/2013/11/12/%E6%A0%B8%E5%87%BD%E6%95%B0%EF%BC%8C%E5%86%8D%E7%94%9F%E6%A0%B8Hilbert%E7%A9%BA%E9%97%B4%EF%BC%8C%E8%A1%A8%E7%A4%BA%E5%AE%9A%E7%90%86/&quot;&gt;核函数，再生核Hilbert空间，表示定理&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Tue, 16 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/16/%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%A0%B8%E5%87%BD%E6%95%B0-%E6%A0%B8%E6%8A%80%E5%B7%A7/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/16/%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%A0%B8%E5%87%BD%E6%95%B0-%E6%A0%B8%E6%8A%80%E5%B7%A7/</guid>
-        
-        <category>Math</category>
         
         
       </item>
