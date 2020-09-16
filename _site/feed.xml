@@ -5,12 +5,51 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 16 Jul 2020 18:14:21 -0400</pubDate>
-    <lastBuildDate>Thu, 16 Jul 2020 18:14:21 -0400</lastBuildDate>
+    <pubDate>Tue, 15 Sep 2020 23:12:07 -0400</pubDate>
+    <lastBuildDate>Tue, 15 Sep 2020 23:12:07 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
     
       <item>
-        <title>通过SLURM上在节点上启动Jupyter Notebook</title>
+        <title>安装anaconda</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/edaa744ea47d&quot;&gt;anaconda安装与使用&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85anaconda/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85anaconda/</guid>
+        
+        <category>Configurations</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>安装Oh My Zsh</title>
+        <description>&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://squidszyd.github.io/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/zsh/2017/08/28/zsh.html&quot;&gt;解决ncurses问题&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;解压 ncurses tar.gz 文件
+    &lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;nb&quot;&gt;mkdir &lt;/span&gt;ncurses &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;tar&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-zxf&lt;/span&gt; ncurses-6.2.tar.gz &lt;span class=&quot;nt&quot;&gt;-C&lt;/span&gt; ncurses &lt;span class=&quot;nt&quot;&gt;--strip-components&lt;/span&gt; 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://harttle.land/2016/10/25/install-oh-my-zsh-locally.html&quot;&gt;没有root权限zsh&amp;amp;oh-my-zsh安装&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jyzhangchn.github.io/oh-my-zsh.html&quot;&gt;配置oh-my-zsh主题&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/Xiaohan-Wang/Backup/blob/master/xh-ys.zsh-theme&quot;&gt;my theme&lt;/a&gt; - modified from theme ys&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;&quot;&gt;zsh插件管理&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85oh-my-zsh/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85oh-my-zsh/</guid>
+        
+        <category>Configurations</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>在SLURM节点上启动Jupyter Notebook</title>
         <description>&lt;p&gt;原载于 &lt;a href=&quot;https://zhuanlan.zhihu.com/p/65130699&quot;&gt;分享脚本远程登陆 Jupyter Notebook&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;服务器端&quot;&gt;服务器端&lt;/h4&gt;
@@ -69,7 +108,7 @@ jupyter notebook &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;
 &lt;div class=&quot;language-console highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$&lt;/span&gt;&lt;span class=&quot;w&quot;&gt; &lt;/span&gt;ssh &lt;span class=&quot;nt&quot;&gt;-N&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-L&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;node&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;:&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;@&lt;span class=&quot;k&quot;&gt;${&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;clusterurl&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;h5 id=&quot;浏览器打开jupyter-notebook&quot;&gt;浏览器打开jupyter notebook&lt;/h5&gt;
-&lt;p&gt;前往&lt;code class=&quot;highlighter-rouge&quot;&gt;https://localhost:${port}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;前往&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:${port}&lt;/code&gt;&lt;/p&gt;
 
 </description>
         <pubDate>Thu, 16 Jul 2020 00:00:00 -0400</pubDate>
@@ -603,132 +642,6 @@ $$
         <guid isPermaLink="true">http://localhost:4000/2020/06/16/%E6%A0%B8%E6%96%B9%E6%B3%95-%E6%A0%B8%E5%87%BD%E6%95%B0-%E6%A0%B8%E6%8A%80%E5%B7%A7/</guid>
         
         <category>Math</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>AWS</title>
-        <description>
-&lt;h4 id=&quot;aws简介&quot;&gt;AWS简介&lt;/h4&gt;
-&lt;p&gt;Amazon Web Services (AWS) 是全球最全面、应用最广泛的云平台。从全球数据中心提供涉及超过十二种类别的，超过 175 项功能齐全的服务：不仅包括计算、存储和数据库等基础设施技术，而且提供机器学习、人工智能、数据湖和分析以及物联网等新兴技术。&lt;/p&gt;
-
-&lt;h4 id=&quot;amazon-sagemaker&quot;&gt;Amazon SageMaker&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;面向所有开发人员和数据科学家的&lt;strong&gt;机器学习服务&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;可以帮助快速构建、训练和部署机器学习 (ML) 模型&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;amazon-ec2-amazon-elastic-compute-cloud&quot;&gt;Amazon EC2 (Amazon Elastic Compute Cloud)&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;可以在云中提供安全并且可调整大小的计算容量&lt;/li&gt;
-  &lt;li&gt;提供多种经过优化，适用于不同使用场景的实例类型以供选择。&lt;strong&gt;不同实例类型具有不同的 CPU、内存、存储和网络容量，可以灵活地为不同应用程序选择适当的资源组合&lt;/strong&gt;。每种实例类型都包括一种或多种实例大小，从而能够扩展资源以满足目标工作负载的要求。
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/cn/ec2/instance-types/&quot;&gt;实例类型&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://aws.amazon.com/cn/ec2/pricing/on-demand/&quot;&gt;定价&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;https://aws.amazon.com/cn/getting-started/fundamentals-overview/&lt;/li&gt;
-  &lt;li&gt;https://aws.amazon.com/cn/sagemaker/?nc2=h_ql_prod_ml_sm&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Fri, 12 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/12/AWS/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/12/AWS/</guid>
-        
-        <category>Tools</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>假设检验</title>
-        <description>&lt;h4 id=&quot;各种分布&quot;&gt;各种分布&lt;/h4&gt;
-&lt;h5 id=&quot;正态分布&quot;&gt;正态分布&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15919078017261.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;$\mu \pm \sigma$ 之间的概率是68%&lt;/li&gt;
-  &lt;li&gt;$\mu \pm 1.96\sigma$ 之间的概率是95%&lt;/li&gt;
-  &lt;li&gt;$\mu \pm 2.56\sigma$ 之间的概率是99%&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;其它分布&quot;&gt;其它分布&lt;/h5&gt;
-&lt;p&gt;&lt;img src=&quot;/img/15919118904133.jpg&quot; width=&quot;30%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-和正态分布不同，需要其它方法计算对应的概率范围&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h4 id=&quot;假设检验&quot;&gt;假设检验&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;原假设 (Null hypothesis)&lt;/strong&gt;：也叫零假设，用 $H_0$ 来表示，一般是希望能证明为错误的假设。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;备择假设 (Alternative hypothesis)&lt;/strong&gt;：原假设的反面，一般用 $H_1$ 来表示，是希望证明是正确的另一种可能。&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;检验统计量 (Test statistic)&lt;/strong&gt;：用于统计假设检验的统计量，是数据集的数字汇总，将数据减少到可用于执行假设检验的一个值。&lt;/li&gt;
-  &lt;li&gt;假设检验的目的在于试图找到证据拒绝原假设。当没有足够证据拒绝原假设时，不采用 “接受原假设” 的表述，而采用 “不拒绝原假设” 的表述。“不拒绝”的表述实际上意味着并未给出明确的结论，我们没有说原假设正确，也没有说它不正确。&lt;strong&gt;假设检验的主要目的是为了拒绝而不是接受。&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;思路&quot;&gt;思路&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;欲证：备择假设为真&lt;/li&gt;
-  &lt;li&gt;原理1: &lt;strong&gt;假设证明难而证伪易&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;只需证：备择假设的否命题（原假设）为假&lt;/li&gt;
-  &lt;li&gt;原理2: &lt;strong&gt;小概率事件在少量实验中是不可能出现的&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;只需：观察到“&lt;strong&gt;原假设条件下的小概率事件&lt;/strong&gt;的发生”&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h5 id=&quot;检验方法&quot;&gt;检验方法&lt;/h5&gt;
-&lt;ol&gt;
-  &lt;li&gt;首先确定“小概率事件”的概率范围，即&lt;strong&gt;显著性水平&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;e.g. 显著性水平为0.05，即发生概率小于5%的事件为“小概率事件”&lt;/li&gt;
-      &lt;li&gt;显著性水平越高，“小概率事件”发生的可能性越大，即越来越容易拒绝原假设&lt;/li&gt;
-      &lt;li&gt;“小概率事件”发生的区域对应&lt;strong&gt;拒绝域&lt;/strong&gt;，&lt;strong&gt;拒绝域&lt;/strong&gt;没有覆盖的区域为&lt;strong&gt;置信区间&lt;/strong&gt;&lt;/li&gt;
-      &lt;li&gt;如下图：设已知成绩服从正态分布，原假设为成绩均值为$\mu$，在该条件下，红色区域对应小概率事件 (发生概率为5%)，即拒绝域概率为5%，置信区间概率为95%&lt;br /&gt;
- &lt;img src=&quot;/img/15919111868762.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;检验方法1 (临界概率 to 临界值):
-    &lt;ul&gt;
-      &lt;li&gt;根据设定的显著度和对应分布找到“小概率事件”对应的临界值&lt;/li&gt;
-      &lt;li&gt;计算样本得到的统计量，判定是否越过了临界值&lt;/li&gt;
-      &lt;li&gt;若是，则进入了小概率错误域 (拒绝域)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;检验方法2 (样本值 to 样本概率)：
-    &lt;ul&gt;
-      &lt;li&gt;计算样本得到的统计量，进而在分布中找到对应的概率值，即p值&lt;/li&gt;
-      &lt;li&gt;将p值与显著度 (设定的“小概率事件”判定值) 进行比较&lt;/li&gt;
-      &lt;li&gt;如果p值比显著度小，则发生的样本属于“小概率事件”，故而拒绝原假设&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;检验方法1和2本质上是相同的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;错误类型&quot;&gt;错误类型&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;I类错误 (Type I error): 拒绝了正确的零假设&lt;/li&gt;
-  &lt;li&gt;II类错误 (Type II error): 没有拒绝错误的零假设&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/img/15920070800446.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;https://www.zhihu.com/question/20254932&lt;/li&gt;
-  &lt;li&gt;https://cosx.org/2009/03/meaning-of-failure-to-reject-h0/&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Thu, 11 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/11/%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C/</guid>
-        
-        <category>Statistics</category>
         
         
       </item>

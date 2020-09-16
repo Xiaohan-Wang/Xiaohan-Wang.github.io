@@ -10,7 +10,7 @@
     <meta name="keywords"  content="">
     <meta name="theme-color" content="#000000">
     
-    <title>在SLURM节点上启动Jupyter Notebook - Xiaohan's Blog</title>
+    <title>安装Oh My Zsh - Xiaohan's Blog</title>
 
     <!-- Web App Manifest -->
     <link rel="manifest" href="/pwa/manifest.json">
@@ -22,7 +22,7 @@
     <link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="http://localhost:4000/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/">
+    <link rel="canonical" href="http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85oh-my-zsh/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -187,10 +187,10 @@
                         <a class="tag" href="/tags/#Configurations" title="Configurations">Configurations</a>
                         
                     </div>
-                    <h2>在SLURM节点上启动Jupyter Notebook</h2>
+                    <h2>安装Oh My Zsh</h2>
                     
                     
-                    <span class="meta"> Posted on July 16, 2020</span>
+                    <span class="meta"> Posted on September 3, 2020</span>
                 </div>
             </div>
         </div>
@@ -208,66 +208,17 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-				<p>原载于 <a href="https://zhuanlan.zhihu.com/p/65130699">分享脚本远程登陆 Jupyter Notebook</a></p>
-
-<h4 id="服务器端">服务器端</h4>
-<h5 id="jupytergpush脚本">jupyterGPU.sh脚本</h5>
-<div class="language-zsh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="c">#SBATCH --partition compsci-gpu</span>
-<span class="c">#SBATCH --gres=gpu:2</span>
-<span class="c">#SBATCH --time 100:00:00</span>
-<span class="c">#SBATCH --job-name jupyterGPU</span>
-
-<span class="c"># get tunneling info</span>
-<span class="nv">port</span><span class="o">=</span><span class="si">$(</span><span class="nb">shuf</span> <span class="nt">-i8000-9999</span> <span class="nt">-n1</span><span class="si">)</span>
-<span class="nv">node</span><span class="o">=</span><span class="si">$(</span><span class="nb">hostname</span> <span class="nt">-s</span><span class="si">)</span>
-<span class="nv">user</span><span class="o">=</span><span class="si">$(</span><span class="nb">whoami</span><span class="si">)</span>
-<span class="nv">cluster</span><span class="o">=</span><span class="si">$(</span><span class="nb">hostname</span> <span class="nt">-f</span> | <span class="nb">awk</span> <span class="nt">-F</span><span class="s2">"."</span> <span class="s1">'{print $2}'</span><span class="si">)</span>
-
-<span class="c"># 在这里添加你的服务器地址</span>
-<span class="nv">clusterurl</span><span class="o">=</span><span class="s2">"xxx"</span>
-
-<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:~/.local/bin
-
-<span class="c"># print tunneling instructions jupyter-log</span>
-<span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"
-MacOS or linux terminal command to create your ssh tunnel:
-ssh -N -L </span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">node</span><span class="k">}</span><span class="s2">:</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2"> </span><span class="k">${</span><span class="nv">user</span><span class="k">}</span><span class="s2">@</span><span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span><span class="s2">
-
- Here is the MobaXterm info:
-
- Forwarded port:same as remote port
- Remote server: </span><span class="k">${</span><span class="nv">node</span><span class="k">}</span><span class="s2">
- Remote port: </span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2">
- SSH server: </span><span class="k">${</span><span class="nv">cluster</span><span class="k">}</span><span class="s2">.</span><span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span><span class="s2">
- SSH login: </span><span class="nv">$user</span><span class="s2">
- SSH port: 22
-
- Use a Browser on your local machine to go to:
- localhost:</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span><span class="s2"> (prefix w/ https:// if using password)
-
- or copy the URL from below and put there localhost after http:// so it would be something like:
- http://localhost:9499/?token=86c93ba16aaead7529a5da0e5e5a46be7ad8cfea35b2d49f
- "</span>
-
-<span class="c"># load modules or conda environments here</span>
-jupyter notebook <span class="nt">--no-browser</span> <span class="nt">--port</span><span class="o">=</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="nt">--ip</span><span class="o">=</span><span class="k">${</span><span class="nv">node</span><span class="k">}</span>
-</code></pre></div></div>
-<h5 id="提交jupytergpush脚本">提交jupyterGPU.sh脚本</h5>
-
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sbatch jupyterGPU.sh
-</code></pre></div></div>
-<h5 id="查看端口信息浏览器信息">查看端口信息/浏览器信息</h5>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat </span>slurm.output
-</code></pre></div></div>
-
-<h4 id="本地">本地</h4>
-<h5 id="监听对应端口">监听对应端口</h5>
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh <span class="nt">-N</span> <span class="nt">-L</span> <span class="k">${</span><span class="nv">port</span><span class="k">}</span>:<span class="k">${</span><span class="nv">node</span><span class="k">}</span>:<span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="k">${</span><span class="nv">user</span><span class="k">}</span>@<span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span>
-</code></pre></div></div>
-<h5 id="浏览器打开jupyter-notebook">浏览器打开jupyter notebook</h5>
-<p>前往<code class="highlighter-rouge">http://localhost:${port}</code></p>
-
+				<ol>
+  <li><a href="https://squidszyd.github.io/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/zsh/2017/08/28/zsh.html">解决ncurses问题</a></li>
+  <li>解压 ncurses tar.gz 文件
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">mkdir </span>ncurses <span class="o">&amp;&amp;</span> <span class="nb">tar</span> <span class="nt">-zxf</span> ncurses-6.2.tar.gz <span class="nt">-C</span> ncurses <span class="nt">--strip-components</span> 1
+</code></pre></div>    </div>
+  </li>
+  <li><a href="https://harttle.land/2016/10/25/install-oh-my-zsh-locally.html">没有root权限zsh&amp;oh-my-zsh安装</a></li>
+  <li><a href="https://jyzhangchn.github.io/oh-my-zsh.html">配置oh-my-zsh主题</a></li>
+  <li><a href="https://github.com/Xiaohan-Wang/Backup/blob/master/xh-ys.zsh-theme">my theme</a> - modified from theme ys</li>
+  <li><a href="">zsh插件管理</a></li>
+</ol>
 
 
                 <hr style="visibility: hidden;">
@@ -275,17 +226,17 @@ jupyter notebook <span class="nt">--no-browser</span> <span class="nt">--port</s
 <!--                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/07/07/Context-Encoders-Feature-Learning-by-Inpainting/" data-toggle="tooltip" data-placement="top" title="Context Encoders:_Feature Learning by Inpainting">
+                        <a href="/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/" data-toggle="tooltip" data-placement="top" title="在SLURM节点上启动Jupyter Notebook">
                         Previous<br>
-                        <span>Context Encoders:_Feature Learning by Inpainting</span>
+                        <span>在SLURM节点上启动Jupyter Notebook</span>
                         </a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2020/09/03/%E5%AE%89%E8%A3%85oh-my-zsh/" data-toggle="tooltip" data-placement="top" title="安装Oh My Zsh">
+                        <a href="/2020/09/03/%E5%AE%89%E8%A3%85anaconda/" data-toggle="tooltip" data-placement="top" title="安装anaconda">
                         Next<br>
-                        <span>安装Oh My Zsh</span>
+                        <span>安装anaconda</span>
                         </a>previous
                     </li>
                     

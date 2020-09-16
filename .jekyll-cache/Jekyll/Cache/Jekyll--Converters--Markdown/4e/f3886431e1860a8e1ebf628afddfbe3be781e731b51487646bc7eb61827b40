@@ -1,4 +1,4 @@
-I"M<p>原载于 <a href="https://zhuanlan.zhihu.com/p/65130699">分享脚本远程登陆 Jupyter Notebook</a></p>
+I"K<p>原载于 <a href="https://zhuanlan.zhihu.com/p/65130699">分享脚本远程登陆 Jupyter Notebook</a></p>
 
 <h4 id="服务器端">服务器端</h4>
 <h5 id="jupytergpush脚本">jupyterGPU.sh脚本</h5>
@@ -41,7 +41,7 @@ ssh -N -L </span><span class="k">${</span><span class="nv">port</span><span clas
  "</span>
 
 <span class="c"># load modules or conda environments here</span>
- jupyter notebook <span class="nt">--no-browser</span> <span class="nt">--port</span><span class="o">=</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="nt">--ip</span><span class="o">=</span><span class="k">${</span><span class="nv">node</span><span class="k">}</span>
+jupyter notebook <span class="nt">--no-browser</span> <span class="nt">--port</span><span class="o">=</span><span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="nt">--ip</span><span class="o">=</span><span class="k">${</span><span class="nv">node</span><span class="k">}</span>
 </code></pre></div></div>
 <h5 id="提交jupytergpush脚本">提交jupyterGPU.sh脚本</h5>
 
@@ -56,6 +56,6 @@ ssh -N -L </span><span class="k">${</span><span class="nv">port</span><span clas
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ssh <span class="nt">-N</span> <span class="nt">-L</span> <span class="k">${</span><span class="nv">port</span><span class="k">}</span>:<span class="k">${</span><span class="nv">node</span><span class="k">}</span>:<span class="k">${</span><span class="nv">port</span><span class="k">}</span> <span class="k">${</span><span class="nv">user</span><span class="k">}</span>@<span class="k">${</span><span class="nv">clusterurl</span><span class="k">}</span>
 </code></pre></div></div>
 <h5 id="浏览器打开jupyter-notebook">浏览器打开jupyter notebook</h5>
-<p>前往<code class="highlighter-rouge">https://localhost:${port}</code></p>
+<p>前往<code class="highlighter-rouge">http://localhost:${port}</code></p>
 
 :ET
