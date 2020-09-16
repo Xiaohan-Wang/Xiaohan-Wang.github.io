@@ -1,6 +1,6 @@
 ---
 layout:     post
-title: 通过SLURM上在节点上启动Jupyter Notebook
+title: 在SLURM节点上启动Jupyter Notebook
 subtitle:   
 date:       2020-7-16
 author:     Xiaohan
@@ -72,7 +72,9 @@ $ cat slurm.output
 $ ssh -N -L ${port}:${node}:${port} ${user}@${clusterurl}
 ```
 ##### 浏览器打开jupyter notebook
-前往`https://localhost:${port}`
+前往`http://localhost:${port}`
+
+
 
 
 
