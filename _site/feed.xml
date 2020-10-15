@@ -5,9 +5,22 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 17 Sep 2020 17:36:02 -0400</pubDate>
-    <lastBuildDate>Thu, 17 Sep 2020 17:36:02 -0400</lastBuildDate>
+    <pubDate>Thu, 15 Oct 2020 16:28:48 -0400</pubDate>
+    <lastBuildDate>Thu, 15 Oct 2020 16:28:48 -0400</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>Jupyter lab中使用anoconda环境</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/Cactus_mao/article/details/107673655&quot;&gt;在jupyter lab中如何进入python虚拟环境&lt;/a&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 15 Oct 2020 00:00:00 -0400</pubDate>
+        <link>http://localhost:4000/2020/10/15/Jupyterlab%E4%B8%AD%E4%BD%BF%E7%94%A8anaconda%E7%8E%AF%E5%A2%83/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/10/15/Jupyterlab%E4%B8%AD%E4%BD%BF%E7%94%A8anaconda%E7%8E%AF%E5%A2%83/</guid>
+        
+        <category>Configurations</category>
+        
+        
+      </item>
     
       <item>
         <title>安装tmux</title>
@@ -475,90 +488,6 @@ The performance of self-supervised methods are comparable to the supervised meth
         <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
         <link>http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</guid>
-        
-        <category>Statistics</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>MMD</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://www.aaai.org/Papers/AAAI/2007/AAAI07-262.pdf&quot;&gt;AAAI 2007 paper&lt;/a&gt; and &lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;JMLR 2012 paper&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;take-away-message&quot;&gt;Take away message&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;传统的用于衡量两个概率分布P和Q差别的方法，例如KL divergence，要求概率分布P和Q已知。也就是说，&lt;strong&gt;如果我们只有来自P和Q的样本，那么我们需要先进行概率密度估计 (density estimation)，然后才能衡量两个分布的差异&lt;/strong&gt;。&lt;/li&gt;
-  &lt;li&gt;MMD：利用来自P和Q的样本，直接获得它们对应的总体概率分布的差异，而无需density estimation这一中间步骤。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;mmd-metric&quot;&gt;MMD metric&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;Give observations $X := {x_1, \cdots , x_m}$ and $Y := {y_1, \cdots, y_n}$, which are independently and identically distributed (i.i.d.) from distribution $p$ and $q$. Let $\mathcal{F}$ be a class of functions $f : X \to \mathbb{R}$, and shorthand notation $E_x[ f(x)] :=E_{x \sim p}[ f(x)]$ and $E_y[ f(y)] := E_{y\sim q}[ f(y)]$ denote expectations with respect to $p$ and $q$, respectively, where $x \sim p$ indicates x has distribution $p$.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Maximum mean discrepancy (MMD) is defined as:&lt;/p&gt;
-
-    &lt;script type=&quot;math/tex; mode=display&quot;&gt;MMD[\mathcal{F}, p,q] := \sup_{f \in \mathcal{F}}(E_x[ f(x)]−E_y[ f(y)]) .&lt;/script&gt;
-
-    &lt;p&gt;We must therefore dentify a function class that is &lt;strong&gt;rich enough to uniquely identify whether $p = q$&lt;/strong&gt;. And since we want to obtain this discrepancy by sample $X$ and $Y$,  the function class should also be &lt;strong&gt;restrictive enough to provide useful finite sample estimates&lt;/strong&gt;.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Propose the unit ball in a reproducing kernel Hilbert space $\mathcal H$ as our MMD function class $\mathcal{F}$. Define &lt;strong&gt;mean embedding&lt;/strong&gt; $\mu_p(t) \in \mathcal{H}$ such that &lt;script type=&quot;math/tex&quot;&gt;E_x [f(x)] = \lt f, \mu_p \gt _{\mathcal{H}}&lt;/script&gt; for all $f \in \mathcal{H}$. If we set $f= \phi (t) = k(t, \cdot)$, we obtain $\mu_p(t) = &amp;lt;\mu_p, k(t, ·)&amp;gt;_\mathcal{H} =E_xk(t, x)$, in other words, the mean embedding of the distribution $p$ is the expectation under $p$ of the canonical feature map.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;We thus have
-    &lt;center&gt; 
- $$
- \begin{split}
- MMD^2 \left[ \mathcal{F}, p,q \right] &amp;amp;= \left[ \sup_{||f||_\mathcal{H} \leq 1}(E_x [ f(x)]−E_y [ f(y)])
-\right]^2\\&amp;amp;=    \left[ \sup_{||f||_\mathcal{H} \leq 1}&amp;lt;\mu_p-\mu_q,f&amp;gt;_\mathcal{H}
-\right]^2\\&amp;amp;=||\mu_p-\mu_q||_\mathcal{H}^2\\&amp;amp;=||E_x\phi(x)-E_y\phi(y)||_\mathcal{H}^2
- \end{split}
- $$
- &lt;/center&gt;
-  &lt;/li&gt;
-  &lt;li&gt;The MMD is a metric, when $\mathcal{H}$ is a universal RKHSs, defined on a compact metric space X. It can be proven that &lt;strong&gt;the Gaussian and Laplace RKHSs&lt;/strong&gt; are universal.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;finite-sample-estimate&quot;&gt;Finite sample estimate&lt;/h4&gt;
-&lt;p&gt;Given $x$ and $x^{\prime}$ independent random variables with distribution $p$, and $y$ and $y^\prime$ independent random variables with distribution $q$, the squared population MMD is&lt;/p&gt;
-&lt;center&gt;
-$$
-MMD^2 [\mathcal{F}, p,q] = E_{x,x^\prime}
-\left[k(x, x^\prime)\right] +E_{y,y^\prime}\left[ k(y, y′)\right]−2E_{x,y} \left[k(x, y)\right]
-$$
-&lt;/center&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;An unbiased empirical estimate
- &lt;img src=&quot;/img/15924519721534.jpg&quot; width=&quot;75%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;An biased empirical estimate
- &lt;img src=&quot;/img/15924520728791.jpg&quot; width=&quot;75%&quot; height=&quot;100%&quot; /&gt;&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;A linear time statistics&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;http://www.jmlr.org/papers/volume13/gretton12a/gretton12a.pdf&quot;&gt;link&lt;/a&gt; $P_{739}$ Lemma 14&lt;/li&gt;
-      &lt;li&gt;need sufficient data (many more samples than the quadratic-cost tests)&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Estimate 1 and 2 cost $O((m+n)^2)$ time to compute both statistics&lt;/li&gt;
-  &lt;li&gt;Estimate 3 can be computed in linear time&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.cnblogs.com/kailugaji/p/11004246.html&quot;&gt;MATLAB最大均值差异&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-</description>
-        <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/17/MMD/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/17/MMD/</guid>
         
         <category>Statistics</category>
         
