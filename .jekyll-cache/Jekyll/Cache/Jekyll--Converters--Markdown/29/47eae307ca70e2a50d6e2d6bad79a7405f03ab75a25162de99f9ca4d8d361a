@@ -1,0 +1,21 @@
+I"�<p>本地：</p>
+
+<p><code class="highlighter-rouge">ssh -L 5000:host_machine_ip:5000 username@jump_machine_ip</code></p>
+<ol>
+  <li>ssh到跳板机</li>
+  <li>通过跳板机监听内网ip为host_machine_ip（管理节点）的5000端口</li>
+</ol>
+
+<hr />
+
+<p>跳板机：
+opt转到host_machine_ip（管理节点）</p>
+
+<hr />
+
+<p>host machine:</p>
+
+<p><code class="highlighter-rouge">jupyter lab --port=5000 --ip=host_machine_ip</code></p>
+
+<p>jupyter_lab使用内网ip为host_machine_ip的5000端口</p>
+:ET

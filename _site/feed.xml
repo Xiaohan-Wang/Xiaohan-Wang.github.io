@@ -5,15 +5,47 @@
     <description>Do it now.</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 15 Oct 2020 16:28:48 -0400</pubDate>
-    <lastBuildDate>Thu, 15 Oct 2020 16:28:48 -0400</lastBuildDate>
+    <pubDate>Wed, 30 Dec 2020 20:28:38 +0800</pubDate>
+    <lastBuildDate>Wed, 30 Dec 2020 20:28:38 +0800</lastBuildDate>
     <generator>Jekyll v4.0.0</generator>
+    
+      <item>
+        <title>跳板机连服务器打开jupyter lab</title>
+        <description>&lt;p&gt;本地：&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ssh -L 5000:host_machine_ip:5000 username@jump_machine_ip&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;ssh到跳板机&lt;/li&gt;
+  &lt;li&gt;通过跳板机监听内网ip为host_machine_ip（管理节点）的5000端口&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;跳板机：
+opt转到host_machine_ip（管理节点）&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;host machine:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;jupyter lab --port=5000 --ip=host_machine_ip&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;jupyter_lab使用内网ip为host_machine_ip的5000端口&lt;/p&gt;
+</description>
+        <pubDate>Wed, 30 Dec 2020 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2020/12/30/%E8%B7%B3%E6%9D%BF%E6%9C%BA%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%93%E5%BC%80jupyter-lab/</link>
+        <guid isPermaLink="true">http://localhost:4000/2020/12/30/%E8%B7%B3%E6%9D%BF%E6%9C%BA%E8%BF%9E%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%89%93%E5%BC%80jupyter-lab/</guid>
+        
+        <category>Configurations</category>
+        
+        
+      </item>
     
       <item>
         <title>Jupyter lab中使用anoconda环境</title>
         <description>&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/Cactus_mao/article/details/107673655&quot;&gt;在jupyter lab中如何进入python虚拟环境&lt;/a&gt;&lt;/p&gt;
 </description>
-        <pubDate>Thu, 15 Oct 2020 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 15 Oct 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/10/15/Jupyterlab%E4%B8%AD%E4%BD%BF%E7%94%A8anaconda%E7%8E%AF%E5%A2%83/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/10/15/Jupyterlab%E4%B8%AD%E4%BD%BF%E7%94%A8anaconda%E7%8E%AF%E5%A2%83/</guid>
         
@@ -31,7 +63,7 @@
   &lt;li&gt;&lt;a href=&quot;https://github.com/Xiaohan-Wang/Backup/blob/master/.tmux.conf&quot;&gt;my config&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85tmux/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85tmux/</guid>
         
@@ -47,7 +79,7 @@
 &lt;/ol&gt;
 
 </description>
-        <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85anaconda/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85anaconda/</guid>
         
@@ -69,7 +101,7 @@
   &lt;li&gt;&lt;a href=&quot;https://github.com/Xiaohan-Wang/Backup/blob/master/xh-ys.zsh-theme&quot;&gt;my theme&lt;/a&gt; - modified from theme ys&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Thu, 03 Sep 2020 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 03 Sep 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85oh-my-zsh/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/09/03/%E5%AE%89%E8%A3%85oh-my-zsh/</guid>
         
@@ -141,7 +173,7 @@ jupyter notebook &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;
 &lt;p&gt;前往&lt;code class=&quot;highlighter-rouge&quot;&gt;http://localhost:${port}&lt;/code&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 16 Jul 2020 00:00:00 -0400</pubDate>
+        <pubDate>Thu, 16 Jul 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/07/16/%E5%9C%A8slurm%E4%B8%8A%E4%BD%BF%E7%94%A8jupyter-notebook/</guid>
         
@@ -242,7 +274,7 @@ jupyter notebook &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;
   &lt;li&gt;A. Radford, L. Metz, and S. Chintala. Unsupervised representation learning with deep convolutional generative adversarial networks. ICLR, 2016.&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Tue, 07 Jul 2020 00:00:00 -0400</pubDate>
+        <pubDate>Tue, 07 Jul 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/07/07/Context-Encoders-Feature-Learning-by-Inpainting/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/07/07/Context-Encoders-Feature-Learning-by-Inpainting/</guid>
         
@@ -324,7 +356,7 @@ jupyter notebook &lt;span class=&quot;nt&quot;&gt;--no-browser&lt;/span&gt; &lt;
 The performance of self-supervised methods are comparable to the supervised methods on some downstream tasks, especially for the object detection and semantic segmentation tasks.&lt;/p&gt;
 
 </description>
-        <pubDate>Fri, 26 Jun 2020 00:00:00 -0400</pubDate>
+        <pubDate>Fri, 26 Jun 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/06/26/self-supervised-feature-learning/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/26/self-supervised-feature-learning/</guid>
         
@@ -416,7 +448,7 @@ The performance of self-supervised methods are comparable to the supervised meth
   &lt;li&gt;&lt;a href=&quot;https://zhuanlan.zhihu.com/p/61944055&quot;&gt;交叉熵与KL散度&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 </description>
-        <pubDate>Sun, 21 Jun 2020 00:00:00 -0400</pubDate>
+        <pubDate>Sun, 21 Jun 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/06/21/Distilling-the-Knowledge-in-a-Neural-Network/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/21/Distilling-the-Knowledge-in-a-Neural-Network/</guid>
         
@@ -438,58 +470,11 @@ The performance of self-supervised methods are comparable to the supervised meth
 
 &lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
 </description>
-        <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
+        <pubDate>Wed, 17 Jun 2020 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2020/06/17/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</link>
         <guid isPermaLink="true">http://localhost:4000/2020/06/17/%E8%BF%81%E7%A7%BB%E5%AD%A6%E4%B9%A0%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0/</guid>
         
         <category>Loss</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>估计量的无偏性、有效性、一致性</title>
-        <description>&lt;h4 id=&quot;估计量&quot;&gt;估计量&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;根据样本构造一个统计量，作为总体未知参数的估计，则该统计量为估计量&lt;/li&gt;
-  &lt;li&gt;估计量可视为一个随机变量
-    &lt;ul&gt;
-      &lt;li&gt;同一个总体可以进行多次抽样，不同的抽样结果可以计算出不同的估计量取值&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;无偏性&quot;&gt;无偏性&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;无偏估计指，估计量的数学期望等于被估计参数的真实值&lt;/li&gt;
-  &lt;li&gt;例子&lt;br /&gt;
-  &lt;img src=&quot;/img/15924068989806.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;br /&gt;
-  假设圆心是被估计参数的真实值，粉色x代表每次抽样计算出的估计量。左图估计量的期望等于被估计参数的真实值，是无偏的。右图估计量的期望不等于被估计参数的真实值，是有偏的。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;有效性&quot;&gt;有效性&lt;/h4&gt;
-&lt;ul&gt;
-  &lt;li&gt;指估计量的离散程度，离散程度越小越有效&lt;/li&gt;
-  &lt;li&gt;注意，有效性和无偏性是不相关的&lt;br /&gt;
-  &lt;img src=&quot;/img/15924081407687.jpg&quot; width=&quot;60%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-  &lt;li&gt;无偏估计不一定是最好的&lt;br /&gt;
-  &lt;img src=&quot;/img/15924083443839.jpg&quot; width=&quot;50%&quot; height=&quot;100%&quot; /&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;一致性&quot;&gt;一致性&lt;/h4&gt;
-&lt;p&gt;待填…&lt;/p&gt;
-
-&lt;h4 id=&quot;参考资料&quot;&gt;参考资料&lt;/h4&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/22983179&quot;&gt;什么是无偏估计？&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/qq_40597317/article/details/80639511&quot;&gt;估计量的无偏性、有效性、一致性&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Wed, 17 Jun 2020 00:00:00 -0400</pubDate>
-        <link>http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/06/17/%E6%9C%89%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1/</guid>
-        
-        <category>Statistics</category>
         
         
       </item>
