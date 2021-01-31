@@ -1,0 +1,49 @@
+I"�<h3 id="the-ultimate-vim-configuration">the ultimate vim configuration</h3>
+<p><a href="https://github.com/amix/vimrc">github页面</a></p>
+
+<p><a href="https://www.meltycriss.com/2018/09/27/tech-vimrc/">文件框架简单介绍</a></p>
+
+<h3 id="安装nerdtree-tabs">安装nerdtree tabs</h3>
+<ol>
+  <li>安装<a href="https://github.com/jistr/vim-nerdtree-tabs">nerdtree tabs</a>，所有tab共享nerdtree</li>
+  <li>,nn 打开/关闭nerdtree （在下面配置文件中指定）</li>
+</ol>
+
+<h3 id="我的配置-my_configsvim">我的配置 my_configs.vim</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>""""""""""""""""""""""""
+" general vim configuration
+""""""""""""""""""""""""
+" 启动鼠标操作
+set mouse=a
+" 显示行号
+set number
+" 括号匹配
+set showmatch
+
+
+"""""""""""""""""""""""""""""
+"=&gt; nerdtree
+"""""""""""""""""""""""""""""
+"打开vim时自动打开nerdtree
+"autocmd VimEnter * NERDTree
+
+" 显示nerdtree行号
+"let NERDTreeShowLineNumbers=0
+"let NERDTreeAutoCenter=0
+
+"是否显示隐藏文件
+"let NERDTreeShowHidden=0
+
+"双击时默认用new tab打开文件
+autocmd VimEnter * call NERDTreeAddKeyMap({ 'key': '&lt;2-LeftMouse&gt;', 'scope': "FileNode", 'callback': "OpenInTab", 'override':1  })
+function! OpenInTab(node)
+    call a:node.activate({'reuse': 'all', 'where': 't'})
+endfunction
+
+
+"""""""""""""""""""""""""""""
+"=&gt; nerdtree tabs
+""""""""""""""""""""""""""""""
+map &lt;leader&gt;nn :NERDTreeTabsToggle&lt;cr
+</code></pre></div></div>
+:ET
