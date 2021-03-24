@@ -1,4 +1,4 @@
-I"<<h4 id="bash配置文件">bash配置文件</h4>
+I"z<h4 id="bash配置文件">bash配置文件</h4>
 
 <p>系统级的设置（default）：</p>
 
@@ -27,7 +27,7 @@
 
 <p>在.bashrc最后添加</p>
 
-<p><code class="highlighter-rouge">export PS1='\e[35m#\e[0m \e[36m\u\e[0m @ \e[32m\h\e[0m in \e[33m\w\e[0m [\t]\n\e[31m$ \e[0m'</code></p>
+<p><code class="highlighter-rouge">export PS1='\[\e[35m\]#\[\e[0m\\] \\[\\e[36m\\]\\u\\[\\e[0m\\] @ \\[\\e[32m\\]\\h\\[\\e[0m\\] in \\[\e[33m\\]\w\\[\\e[0m\\] \\n\\[\\e[31m\\]$ \[\\e[0m\\]'</code></p>
 
 <h4 id="reference">Reference</h4>
 <p><a href="https://blog.csdn.net/u010003835/article/details/52705371">Linux命令行提示符配置</a></p>
